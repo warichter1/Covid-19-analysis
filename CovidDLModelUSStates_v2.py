@@ -409,8 +409,8 @@ def statGovPlot(title, yscale, smoothed=False):
     plt.ylabel('Party in Control\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector)))
 
-# statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Ohio', 'Pennsylvania', 'Virginia', 'Wisconsin'], key='confirmedNew', smoothed=True)
-# statGovPlot('Pandemic by State Government', yscale='symlog', smoothed=True)
+# statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
+# statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)

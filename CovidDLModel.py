@@ -43,8 +43,7 @@ def importCsv(file, country, index, exclude):
 def limit(begin, day, rate):
     if day >= begin:
         return 1/(sqrt((2*pi)))*rate*day
-    else:
-        return rate
+    return rate
 
 def calcChange(values, type=None):
     if type is not None:
@@ -55,7 +54,7 @@ def calcChange(values, type=None):
         elif type == 'today':
             return [0 for i in range(len(values))]
         elif type == 'avgDiff':
-            [(sum(np.diff(values)) / len(np.diff(values))) for i in range(len(values))]
+            return [(sum(np.diff(values)) / len(np.diff(values))) for i in range(len(values))]
     return np.diff(values) - 1
     # return np.exp(np.diff(np.log(values))) - 1
 
@@ -71,7 +70,7 @@ if __name__ == "__main__":
     deathRate = []
     day = 1
     lastDay = 1
-
+    yesterday = 0
     # rateChange = 'avg2'
     # rateChange = 'avgAll'
     # rateChange = None
@@ -82,8 +81,10 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         deathRate.append(deaths[cdate] / us[cdate])
         cases.append(us[cdate])
+        today = us[cdate] - yesterday
+        yesterday = us[cdate]
         dailyDeaths.append(deaths[cdate])
-        print("Day: {} - {} Cases/Infection Rate: {}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), caseRate * 100, format(deaths[cdate], ',d'), deathRate[-1:][0] * 100))
+        print("Day: {} - {} Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), format(today, ',d'), caseRate * 100, format(deaths[cdate], ',d'), deathRate[-1:][0] * 100))
         lastDay = us[cdate]
         today = day
         day += 1
@@ -101,7 +102,10 @@ if __name__ == "__main__":
         # else:
         caseRate = abs(caseRate + grate[projDay])
         # print(grate)
-        cases.append(int(cases[-1:][0] * (1 + caseRate)))
+        current = int(cases[-1:][0] * (1 + caseRate))
+        cases.append(current)
+        today = current - yesterday
+        yesterday = current
         growthRates.append(caseRate)
         dailyDeaths.append(int(cases[-1:][0] * avgDeathRate))
         if avgDeathRate + drate[projDay] <= 0:
@@ -109,7 +113,7 @@ if __name__ == "__main__":
         avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(avgDeathRate)
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
-        print("Projected Day: {} - Cases/Infection Rate: {}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, format(cases[-1:][0], ',d'), caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), avgDeathRate* 100))
+        print("Projected Day: {} - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, format(cases[-1:][0], ',d'), format(today, ',d'),caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), avgDeathRate* 100))
 
     labelCase, = plt.plot(cases,  color='red', label='Cases')
     labelDeaths, = plt.plot(dailyDeaths, color='blue', label='Deaths')

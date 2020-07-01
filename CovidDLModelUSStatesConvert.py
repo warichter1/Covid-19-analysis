@@ -147,7 +147,10 @@ class CovidExport:
         self.buffer = [state, StateUsIndex[state]]
         for col in self.trainingKeys:
             print(state, col)
-            self.buffer.append(self.source[col][state])
+            if col == 'stateControl':
+                self.buffer.append(self.source['Virginia']['control'])
+            else:
+                self.buffer.append(self.source[col][state])
         self.writeFile.writerow(self.buffer)
 
     def fieldLen(self, state='Alabama', dataType="training"):
