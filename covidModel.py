@@ -13,7 +13,7 @@ from datetime import date
 currentDate = date.today()
 
 begin = 3774
-days = 120
+days = 365
 # baseRate = .142857
 baseRate = 1/8
 # baseRate = 0.2831  # US rate on 3/15
@@ -32,7 +32,9 @@ rateChange = {}
 # rateChange['63'] = .1445   # Reference
 # rateChange['64'] = .1445   # Reference
 # rateChange['65'] = .1445   # Reference
-mortality = 0.025
+mortality = 0.045
+maxMortality = 0.12
+changePoint = 5000000
 # mortality = 0.015156
 case = 1
 xcase = 1
@@ -47,6 +49,8 @@ for day in range(days):
         totalRate = baseRate + rateChange[str(day + 1)]
         # case = storeCase + storeCase * totalRate
         case = storeCase * (1 + totalRate)
+        if case > changePoint:
+            mortality = maxMortality
         print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
     cases.append(int(case))
     print("{}day: {} - {} -- Mortality: {} -- Infection Rate: {:2.2f}%".format(pinned, day + 1, format(int(cases[day]), ',d'),
