@@ -283,12 +283,13 @@ class CovidCountryRegion:
     def printSummary(self, region):
         control = self.dataStore[region]['control']
         print('[{}-{} - Pop: {}]'.format(region, control[:1], fmtNum(self.dataStore[region]['population'])))
-        print("\tcases/Today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
+        print("\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
                                                                 fmtNum(self.dataStore[region]['confirmedNew'][-1:][0]),
                                                                 self.dataStore[region]['caseRate'][-1:][0] * 100,
                                                                 self.dataStore[region]['maxCaseRate'] * 100,
                                                                 int(self.dataStore[region]['casesPerCapita'][-1:][0] * 1000)))
-        print("\tDeaths/rate/max: {}/{:2.2f}%/{:2.2f}%\t".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
+        print("\tDeaths/total/rate/max: {}/{}/{:2.2f}%/{:2.2f}%\t".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
+                                                               fmtNum(self.dataStore[region]['deathsNew'][-1:][0]),
                                                                self.dataStore[region]['deathRate'][-1:][0] * 100,
                                                                self.dataStore[region]['maxDeathRate'] * 100))
         print("\tIncrease Case/Death: {}/{}".format(self.dataStore[region]['increasingCases'], self.dataStore[region]['increasingDeaths']))
@@ -419,12 +420,13 @@ if __name__ == "__main__":
     #covidDf.plotResults(['currentAggregate'], yscale='symlog', num=5)
     # covidDf.plotResults(['currentCaseRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
     # covidDf.plotResults(['currentDeathRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
+    # covidDf.plotResults(['currentCaseRate'], data=['confirmed', 'deaths'], yscale='symlog', num=5, smoothed=True)
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
                         yscale='symlog', num=5, smoothed=True)
     # print('Plot Target States')
-    # statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
+    # statePlot(['Texas', 'Tennessee', 'Florida', 'South Carolina', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
     #print('Plot State Government')
     # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
     # covidDf.plotResults(['Virginia'])

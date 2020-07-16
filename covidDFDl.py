@@ -88,19 +88,6 @@ def difference(dataset, interval=1):
 def inverse_difference(history, yhat, interval=1):
     return yhat + history[-interval]
 
-# scale train and test data to [-1, 1]
-def scale(train, test):
-    # fit scaler
-    scaler = MinMaxScaler(feature_range=(-1, 1))
-    scaler = scaler.fit(train.values)
-    # transform train
-    train = train.reshape(train.shape[0], train.shape[1])
-    train_scaled = scaler.transform(train)
-    # transform test
-    test = test.reshape(test.shape[0], test.shape[1])
-    test_scaled = scaler.transform(test)
-    return scaler, train_scaled, test_scaled
-
 # inverse scaling for a forecasted value
 def invert_scale(scaler, X, yhat):
     new_row = [x for x in X] + [yhat]
@@ -117,6 +104,13 @@ def fit_lstm(train, batch_size, nb_epoch, neurons, timesteps):
     model.add(LSTM(neurons, batch_input_shape=(batch_size, X.shape[1], X.shape[2]), stateful=True))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
+
+    # design network
+    model = Sequential()
+    model.add(LSTM(50, input_shape=(train_X.shape[1], train_X.shape[2])))
+    model.add(Dense(1))
+    model.compile(loss='mae', optimizer='adam')
+
     for i in range(nb_epoch):
         model.fit(X, y, epochs=1, batch_size=batch_size, verbose=0, shuffle=False)
         model.reset_states()
@@ -127,6 +121,19 @@ def forecast_lstm(model, batch_size, X):
     X = X.reshape(1, len(X), 1)
     yhat = model.predict(X, batch_size=batch_size)
     return yhat[0,0]
+
+# scale train and test data to [-1, 1]
+def scale(train, test):
+    # fit scaler
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+    scaler = scaler.fit(train)
+    # transform train
+    train = train.reshape(train.shape[0], train.shape[1])
+    train_scaled = scaler.transform(train)
+    # transform test
+    test = test.reshape(test.shape[0], test.shape[1])
+    test_scaled = scaler.transform(test)
+    return scaler, train_scaled, test_scaled
 
 # run a repeated experiment
 def experiment(repeats, series, timesteps):
@@ -258,7 +265,8 @@ def run(exclude=[]):
     timesteps = 1
     results = DataFrame()
     # run experiment
-    results['results'] = prediction(model, test_X, test_y, repeats, timesteps)
+    results['results'] = prediction(dataset.values, model, test_X, test_y,
+                                    repeats, timesteps)
 
 # make a one-step forecast
 def forecast_lstm(model, batch_size, X):
@@ -266,18 +274,42 @@ def forecast_lstm(model, batch_size, X):
     yhat = model.predict(X, batch_size=batch_size)
     return yhat[0,0]
 
+def runTest(raw_values,repeats, timesteps, train_scaled, test_scaled, scaler):
+    error_scores = list()
+    for r in range(repeats):
+        # fit the base model
+        lstm_model = fit_lstm(train_scaled, 1, 500, 1, timesteps)
+        # forecast test dataset
+        predictions = list()
+        for i in range(len(test_scaled)):
+            # predict
+            X, y = test_scaled[i, 0:-1], test_scaled[i, -1]
+            yhat = forecast_lstm(lstm_model, 1, X)
+            # invert scaling
+            yhat = invert_scale(scaler, X, yhat)
+            # invert differencing
+            yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
+            # store forecast
+            predictions.append(yhat)
+        # report performance
+        rmse = sqrt(mean_squared_error(raw_values[-12:], predictions))
+        print('%d) Test RMSE: %.3f' % (r+1, rmse))
+        error_scores.append(rmse)
+    return error_scores
 
-def prediction(model, test_X, test_y, repeats, timesteps):
+def prediction(raw_values, model, test_X, test_y, repeats, timesteps):
     # make a prediction
     yhat = model.predict(test_X)
     test_X = test_X.reshape((test_X.shape[0], test_X.shape[2]))
+    test_y = test_y.reshape((len(test_y), 1))
+    runTest(raw_values,repeats, timesteps, train_scaled, test_scaled, scaler)
     # invert scaling for forecast
     inv_yhat = concatenate((yhat, test_X[:, 1:]), axis=1)
     scaler = MinMaxScaler(feature_range=(0, 1)).fit(inv_yhat)
     inv_yhat = scaler.inverse_transform(inv_yhat)
     inv_yhat = inv_yhat[:,0]
     # invert scaling for actual
-    test_y = test_y.reshape((len(test_y), 1))
+
     inv_y = concatenate((test_y, test_X[:, 1:]), axis=1)
     scaler = MinMaxScaler(feature_range=(0, 1)).fit(inv_y)
     inv_y = scaler.inverse_transform(inv_y)
