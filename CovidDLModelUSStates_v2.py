@@ -120,7 +120,7 @@ class CovidCountryRegion:
                 self.dataStore['testsPerCapita'][region] = 0
             if region in self.dataStore['currentDeathRate'].keys():
                 # self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region] * self.dataStore['casesPerCapita'][region] * (1 - self.dataStore['testsPerCapita'][region]) * 10000
-                self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region]  # * (1 - self.dataStore['testsPerCapita'][region]) * 10000
+                self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region] * self.dataStore['casesPerCapita'][region] * 1000
         self.sortTopDict('currentAggregate')
 
     def sortTopDict(self, key, reverse=True):
