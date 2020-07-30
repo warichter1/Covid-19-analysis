@@ -106,18 +106,9 @@ class GrowthAndMortality:
         self.birthRate = births
         self.deathRate = deaths
 
-    def run(self, days, caseType='limits'):
-        changePoint = 5000000
-        mortality = self.baseMortality
-        print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
-        self.herdPoints = {'base': totalPop * .42, 'baseFound': False, 'baseDay': 0,
-              'floor': totalPop * .60, 'floorFound': False, 'floorDay': 0,
-              'ceiling': totalPop * .80, 'ceilingFound': False, 'ceilingDay': 0}
-
+    def initLists(self):
         self.status()
         self.popData = False
-        case = 1
-        xcase = 1
         self.cases = []
         self.caseGrowth = []
         self.deaths = []
@@ -126,6 +117,17 @@ class GrowthAndMortality:
         self.growthRate = []
         self.overflow = []
         self.recovered = []
+
+    def run(self, days, totalPop, caseType='limits'):
+        changePoint = 5000000
+        case = 1
+        mortality = self.baseMortality
+        print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
+        self.herdPoints = {'base': totalPop * .42, 'baseFound': False, 'baseDay': 0,
+              'floor': totalPop * .60, 'floorFound': False, 'floorDay': 0,
+              'ceiling': totalPop * .80, 'ceilingFound': False, 'ceilingDay': 0}
+        self.initLists()
+
         for day in range(days):
             pinned = ""
             surge = 0
@@ -162,8 +164,9 @@ class GrowthAndMortality:
             self.recovered.append(recover)
             print("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
                                                    float(totalRate * 100),
-                                                   format(int(self.cases[day] * mortality), ',d'),
                                                    format(int(self.deaths[day]), ',d'),
+                                                   format(int(self.cases[day] * mortality), ',d'),
+
                                                    adjustedMortality * 100))
                                                    # mortality * 100))
             if self.cases[day] > totalPop:
@@ -187,18 +190,25 @@ class GrowthAndMortality:
         return day, totalRate, mortality
         # cases, growthRate, caseGrowth, deaths
 
+    def setModifier(self, protection, rate):
+        self.protection = protection
+        self.rateAdjust = rate
+
 if __name__ == "__main__":
-    # mortality = 0.015156
+    totalPop = 331000000
+    protectionMultiplier = {'mask': 1 - 0.65, 'eyeLow': 0.06, 'eyeHigh': 0.16}
+    rateModifier = {'directContact': 0.15 - baseRate,
+                    'distanceOneMeter': 0.13 - baseRate,
+                'distanceTwoMeter': 0.03 - baseRate}
     mortality = 0.045
     maxMortality = 0.12
-    totalPop = 331000000
     popDeathRate = 10.542/1000/365
     popBirthRate = 11.08/1000/365
     hospitalizedDays = 16  # Average days in hospital
     icuDays = 11  # Average days in the ICU
-    requireHospital = .2
-    bedOccupancy = .6
-    requireIcu = .42 * requireHospital  # Number hospitized that will require ICU
+    requireHospital = 0.2
+    bedOccupancy = 0.6
+    requireIcu = .42 * requireHospital  # hospitized that will require ICU
     totalBeds = 924000
     covidBedsTotal = totalBeds * (1 - bedOccupancy)
 
@@ -208,9 +218,10 @@ if __name__ == "__main__":
     hp = GrowthAndMortality(totalPop, mortality, maxMortality)
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
+    hp.setModifier(protectionMultiplier, rateModifier)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
     # day, cases, growthRate, caseGrowth, deaths =
-    day, totalRate, mortality = hp.run(days, caseType)
+    day, totalRate, mortality = hp.run(days, totalPop, caseType)
     # plt.plot(hp.cases, label='Infected population')
     handles = []
     label, = plt.plot(hp.caseGrowth, label='Daily Infected')
