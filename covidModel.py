@@ -9,6 +9,7 @@ Created on Sat Mar 14 18:29:19 2020
 from copy import deepcopy
 import matplotlib.pyplot as plt
 from datetime import date
+import random
 
 currentDate = date.today()
 
@@ -49,6 +50,8 @@ class GrowthAndMortality:
         self.maxMortality = maxMortality
         self.baseMortality = mortality
         self.survival = survival  # rate of survival for those hospitalized
+        self.popData = False
+        self.modifier = False
 
     def initializeQueues(self, availableBeds, inHospital, requireHospital, inIcu,
                          requireIcu):
@@ -108,7 +111,6 @@ class GrowthAndMortality:
 
     def initLists(self):
         self.status()
-        self.popData = False
         self.cases = []
         self.caseGrowth = []
         self.deaths = []
@@ -190,16 +192,58 @@ class GrowthAndMortality:
         return day, totalRate, mortality
         # cases, growthRate, caseGrowth, deaths
 
-    def setModifier(self, protection, rate):
+    def setModifier(self, protection, rate, curve):
+        self.mod = Modifiers(protection, rate, curve)
+
+class Modifiers:
+    def __init__(self, protection, rate, curve):
         self.protection = protection
         self.rateAdjust = rate
+        self.curvAdjust = curve
+        self.rise = True
+        self.fall = False
+        self.riseDays = 0
+        self.fallDays = 0
+        self.changeDays = 10
+
+    def checkDirection(self, growth):
+        days = len(growth)
+        change = None
+        if self.rise is True:
+            self.riseDay += 1
+        if growth > 1:
+            direction = growth[-2:]
+            if direction[0] > direction[1]:
+                self.fallDays += 1
+                self.riseDays = 0
+                if self.fallDays > self.changeDays and self.checkTolerance():
+                    self.rise = False
+                    self.fall = True
+                    change = 'rise'
+            else:
+                self.fallDays = 0
+                self.riseDay += 1
+                if self.riseDays > self.changeDays and self.checkTolerance():
+                    self.rise = True
+                    self.Fall = False
+                    change = 'fall'
+        return change
+
+
+    def checkTolerance(self):
+        if  random.randint(0, 10) > self.rateAdjust['tolerance']:
+            return True
+        else:
+            return False
+
 
 if __name__ == "__main__":
     totalPop = 331000000
     protectionMultiplier = {'mask': 1 - 0.65, 'eyeLow': 0.06, 'eyeHigh': 0.16}
-    rateModifier = {'directContact': 0.15 - baseRate,
+    rateModifier = {'base': baseRate, 'directContact': 0.15 - baseRate,
                     'distanceOneMeter': 0.13 - baseRate,
-                'distanceTwoMeter': 0.03 - baseRate}
+                    'distanceTwoMeter': 0.03 - baseRate, "tolerance": 5}
+    curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 45}
     mortality = 0.045
     maxMortality = 0.12
     popDeathRate = 10.542/1000/365
@@ -218,7 +262,7 @@ if __name__ == "__main__":
     hp = GrowthAndMortality(totalPop, mortality, maxMortality)
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
-    hp.setModifier(protectionMultiplier, rateModifier)
+    hp.setModifier(protectionMultiplier, rateModifier, curveAdjust)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
     # day, cases, growthRate, caseGrowth, deaths =
     day, totalRate, mortality = hp.run(days, totalPop, caseType)
