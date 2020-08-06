@@ -10,6 +10,7 @@ from copy import deepcopy
 import matplotlib.pyplot as plt
 from datetime import date
 import random
+import benfordslaw as bl
 
 currentDate = date.today()
 
@@ -46,7 +47,7 @@ def growthLimit(rMax, K, N):
 
 class GrowthAndMortality:
     def __init__(self, pop, mortality, maxMortality, survival=.9):
-        self.Population = pop
+        # self.population = pop
         self.maxMortality = maxMortality
         self.baseMortality = mortality
         self.survival = survival  # rate of survival for those hospitalized
@@ -157,6 +158,7 @@ class GrowthAndMortality:
             deaths *= .5
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
+            self.mod.check(self.cases)
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(dailyDeaths)
             self.staticDeaths.append(staticDeaths)
@@ -193,10 +195,11 @@ class GrowthAndMortality:
         # cases, growthRate, caseGrowth, deaths
 
     def setModifier(self, protection, rate, curve):
-        self.mod = Modifiers(protection, rate, curve)
+        self.mod = Modifiers(self.totalPop, protection, rate, curve)
 
 class Modifiers:
-    def __init__(self, protection, rate, curve):
+    def __init__(self, population, protection, rate, curve):
+        self.population = population
         self.protection = protection
         self.rateAdjust = rate
         self.curvAdjust = curve
@@ -205,13 +208,14 @@ class Modifiers:
         self.riseDays = 0
         self.fallDays = 0
         self.changeDays = 10
+        self.calcModifiers()
 
     def checkDirection(self, growth):
         days = len(growth)
         change = None
-        if self.rise is True:
-            self.riseDay += 1
-        if growth > 1:
+        # if self.rise is True:
+        #    self.riseDays += 1
+        if days > 2:
             direction = growth[-2:]
             if direction[0] > direction[1]:
                 self.fallDays += 1
@@ -220,13 +224,15 @@ class Modifiers:
                     self.rise = False
                     self.fall = True
                     change = 'rise'
+                    print('Fall:', self.fallDays)
             else:
                 self.fallDays = 0
-                self.riseDay += 1
+                self.riseDays += 1
                 if self.riseDays > self.changeDays and self.checkTolerance():
                     self.rise = True
                     self.Fall = False
                     change = 'fall'
+                    print('Rise:', self.riseDays)
         return change
 
 
@@ -236,13 +242,61 @@ class Modifiers:
         else:
             return False
 
+    def check(self, growth):
+        direction = self.checkDirection(growth)
+        if direction == 'rise':
+            self.checkRise()
+        elif direction == 'fall':
+            self.checkFall()
+
+    def checkRise(self):
+        # add changes here for rise
+        x = 1
+
+    def checkFall(self):
+        x = 2
+
+    def calcModifiers(self):
+        pop = self.population
+        self.party = {}
+        self.party['d'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][0]}
+        self.party['r'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][1]}
+
+        hs = self.rateAdjust['education']['highSchool'] * pop
+        hsw = hs * self.rateAdjust['education']['whiteHS']
+        hhm = hs - hsw
+        p = self.rateAdjust['eduPartyDR']['highSchool'][0]
+        self.party['d']['hs'] = {'white': hsw * p, 'minority': hhm * p}
+        p = self.rateAdjust['eduPartyDR']['highSchool'][1]
+        self.party['r']['hs'] = {'white': hsw * p, 'minority': hhm * p}
+        p = self.rateAdjust['eduPartyDR']['highSchool'][0]
+        c = self.rateAdjust['education']['someCollege'] * pop
+        self.party['d']['college'] = c * p
+        p = self.rateAdjust['eduPartyDR']['someCollege'][1]
+        self.party['r']['college'] = c * p
+        p = self.rateAdjust['eduPartyDR']['postGrad'][0]
+        c = (self.rateAdjust['education']['masters'] + self.rateAdjust['education']['phd'] + self.rateAdjust['education']['professional'])* pop
+        self.party['d']['postGrad'] = c * p
+        p = self.rateAdjust['eduPartyDR']['postGrad'][1]
+        self.party['r']['postGrad'] = c * p
 
 if __name__ == "__main__":
     totalPop = 331000000
     protectionMultiplier = {'mask': 1 - 0.65, 'eyeLow': 0.06, 'eyeHigh': 0.16}
     rateModifier = {'base': baseRate, 'directContact': 0.15 - baseRate,
                     'distanceOneMeter': 0.13 - baseRate,
-                    'distanceTwoMeter': 0.03 - baseRate, "tolerance": 5}
+                    'distanceTwoMeter': 0.03 - baseRate, "tolerance": 5,
+                    'sciTrustRD': [.53, .31],
+                    'education': {'highSchool': (1 - .6128), 'whiteHS': .601,
+                                  'someCollege': .6128,
+                                  'associate': .1018, 'bachelors': .3498,
+                                  'masters': .0957, 'professional': .0144,
+                                  'phd': .0203},
+                    'eduPartyDR': {'highSchool': [.46, .45],
+                                   'whiteHS': [.59, .33],
+                                   'someCollege': [.47, .39],
+                                   'postGrad': [.57, .35]},
+                    }
     curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 45}
     mortality = 0.045
     maxMortality = 0.12
@@ -262,8 +316,8 @@ if __name__ == "__main__":
     hp = GrowthAndMortality(totalPop, mortality, maxMortality)
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
-    hp.setModifier(protectionMultiplier, rateModifier, curveAdjust)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
+    hp.setModifier(protectionMultiplier, rateModifier, curveAdjust)
     # day, cases, growthRate, caseGrowth, deaths =
     day, totalRate, mortality = hp.run(days, totalPop, caseType)
     # plt.plot(hp.cases, label='Infected population')
