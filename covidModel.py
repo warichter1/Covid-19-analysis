@@ -97,16 +97,17 @@ class GrowthAndMortality:
 
     # add Population deaths and births to the model
     def adjustPop(self, cases):
-        births = self.totalPop * self.birthRate
-        deaths = self.totalPop * self.deathRate
-        self.totalPop -= deaths + births
-        caseDeaths = cases / self.totalPop * deaths
+        births = self.workingPop * self.birthRate
+        deaths = self.workingPop * self.deathRate
+        self.workingPop -= deaths + births
+        caseDeaths = cases / self.workingPop * deaths
         # print(caseDeaths, births, deaths)
         return cases - caseDeaths
 
     def setPopStats(self, totalPop, births, deaths):
         self.popData = True
         self.totalPop = totalPop
+        self.workingPop = totalPop
         self.birthRate = births
         self.deathRate = deaths
 
@@ -121,14 +122,15 @@ class GrowthAndMortality:
         self.overflow = []
         self.recovered = []
 
-    def run(self, days, totalPop, caseType='limits'):
+    def run(self, days, caseType='limits'):
+        self.workingRate = baseRate
         changePoint = 5000000
         case = 1
         mortality = self.baseMortality
         print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
-        self.herdPoints = {'base': totalPop * .42, 'baseFound': False, 'baseDay': 0,
-              'floor': totalPop * .60, 'floorFound': False, 'floorDay': 0,
-              'ceiling': totalPop * .80, 'ceilingFound': False, 'ceilingDay': 0}
+        self.herdPoints = {'base': self.workingPop * .42, 'baseFound': False, 'baseDay': 0,
+              'floor': self.workingPop * .60, 'floorFound': False, 'floorDay': 0,
+              'ceiling': self.workingPop * .80, 'ceilingFound': False, 'ceilingDay': 0}
         self.initLists()
 
         for day in range(days):
@@ -136,17 +138,17 @@ class GrowthAndMortality:
             surge = 0
             storeCase = deepcopy(case)
             if caseType == 'exponential':
-                growth = (case * baseRate)
+                growth = (case * self.workingRate)
                 case = case + growth
                 if str(day + 1) in rateChange.keys():
                     print("Adjust Curve: {}".format(day + 1, case, ))
-                    totalRate = baseRate + rateChange[str(day + 1)]
+                    totalRate = self.workingRate + rateChange[str(day + 1)]
                     case = storeCase * (1 + totalRate)
                     if case > changePoint:
                         mortality = maxMortality
                     print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
             else:
-                growth = growthLimit(baseRate, totalPop, case)
+                growth = growthLimit(self.workingRate, self.workingPop, case)
                 totalRate = growth / case
                 case = case + growth
             case = self.adjustPop(case)
@@ -217,7 +219,7 @@ class Modifiers:
         #    self.riseDays += 1
         if days > 2:
             direction = growth[-2:]
-            if direction[0] > direction[1]:
+            if direction[0] > direction[1]:  # cases have hit a daily peak
                 self.fallDays += 1
                 self.riseDays = 0
                 if self.fallDays > self.changeDays and self.checkTolerance():
@@ -225,7 +227,7 @@ class Modifiers:
                     self.fall = True
                     change = 'rise'
                     print('Fall:', self.fallDays)
-            else:
+            else:  # Change in behavior as peak has occured
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.changeDays and self.checkTolerance():
@@ -250,53 +252,67 @@ class Modifiers:
             self.checkFall()
 
     def checkRise(self):
-        # add changes here for rise
+        # add changes here rising rate here
         x = 1
 
     def checkFall(self):
+        # add changes to falling rate here
         x = 2
 
     def calcModifiers(self):
         pop = self.population
+        edu = self.rateAdjust['education']
         self.party = {}
         self.party['d'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][0]}
         self.party['r'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][1]}
-
-        hs = self.rateAdjust['education']['highSchool'] * pop
-        hsw = hs * self.rateAdjust['education']['whiteHS']
+        self.party['d']['level'] = {}
+        self.party['r']['level'] = {}
+        hs = edu['highSchool'] * pop
+        hsw = hs * edu['whiteHS']
         hhm = hs - hsw
         p = self.rateAdjust['eduPartyDR']['highSchool'][0]
-        self.party['d']['hs'] = {'white': hsw * p, 'minority': hhm * p}
+        self.party['d']['level']['hswhite'] = [hsw * p, p]
+        self.party['d']['level']['hsminority'] = [hhm * p, p]
         p = self.rateAdjust['eduPartyDR']['highSchool'][1]
-        self.party['r']['hs'] = {'white': hsw * p, 'minority': hhm * p}
+        self.party['r']['level']['hswhite'] = [hsw * p, p]
+        self.party['r']['level']['hsminority'] = [hhm * p, p]
         p = self.rateAdjust['eduPartyDR']['highSchool'][0]
-        c = self.rateAdjust['education']['someCollege'] * pop
-        self.party['d']['college'] = c * p
+        c = edu['someCollege'] * pop
+        self.party['d']['level']['college'] = [c * p, p]
         p = self.rateAdjust['eduPartyDR']['someCollege'][1]
-        self.party['r']['college'] = c * p
+        self.party['r']['level']['college'] = [c * p, p]
         p = self.rateAdjust['eduPartyDR']['postGrad'][0]
-        c = (self.rateAdjust['education']['masters'] + self.rateAdjust['education']['phd'] + self.rateAdjust['education']['professional'])* pop
-        self.party['d']['postGrad'] = c * p
+        c = (edu['masters'] + edu['phd'] + edu['professional'])* pop
+        self.party['d']['level']['postGrad'] = [c * p, p]
         p = self.rateAdjust['eduPartyDR']['postGrad'][1]
-        self.party['r']['postGrad'] = c * p
+        self.party['r']['level']['postGrad'] = [c * p, p]
+
+    def countParty(self, party):
+        return sum([i[0] for i in hp.mod.party[party]['level'].values()])
 
 if __name__ == "__main__":
     totalPop = 331000000
-    protectionMultiplier = {'mask': 1 - 0.65, 'eyeLow': 0.06, 'eyeHigh': 0.16}
-    rateModifier = {'base': baseRate, 'directContact': 0.15 - baseRate,
-                    'distanceOneMeter': 0.13 - baseRate,
-                    'distanceTwoMeter': 0.03 - baseRate, "tolerance": 5,
-                    'sciTrustRD': [.53, .31],
-                    'education': {'highSchool': (1 - .6128), 'whiteHS': .601,
+    protection = {}
+    protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
+                              'eyeHigh': 0.16}
+    protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
+    rateModifier = {'base': baseRate, "tolerance": 2,'sciTrustRD': [.53, .31]}
+    rateModifier['distance'] = {}
+    rateModifier['distance']['modifier'] =  {'contact': 0.15 - baseRate,
+                    'oneMeter': 0.13 - baseRate,
+                    'twoMeter': 0.03 - baseRate}
+    rateModifier['distance']['active'] = {'contact': False,
+                                          'oneMeter': False, 'owoMeter': False}
+    rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
                                   'someCollege': .6128,
                                   'associate': .1018, 'bachelors': .3498,
                                   'masters': .0957, 'professional': .0144,
-                                  'phd': .0203},
-                    'eduPartyDR': {'highSchool': [.46, .45],
-                                   'whiteHS': [.59, .33],
-                                   'someCollege': [.47, .39],
-                                   'postGrad': [.57, .35]},
-                    }
+                                  'phd': .0203}
+    rateModifier['eduPartyDR'] = {'highSchool': [.46, .45],
+                                  'whiteHS': [.59, .33],
+                                  'someCollege': [.47, .39],
+                                  'postGrad': [.57, .35]}
+    rateModifier['cognitive'] = {'hs': .4324, 'college': .6508}
     curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 45}
     mortality = 0.045
     maxMortality = 0.12
@@ -317,9 +333,9 @@ if __name__ == "__main__":
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
-    hp.setModifier(protectionMultiplier, rateModifier, curveAdjust)
+    hp.setModifier(protection, rateModifier, curveAdjust)
     # day, cases, growthRate, caseGrowth, deaths =
-    day, totalRate, mortality = hp.run(days, totalPop, caseType)
+    day, totalRate, mortality = hp.run(days, caseType)
     # plt.plot(hp.cases, label='Infected population')
     handles = []
     label, = plt.plot(hp.caseGrowth, label='Daily Infected')
