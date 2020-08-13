@@ -97,9 +97,10 @@ class GrowthAndMortality:
 
     # add Population deaths and births to the model
     def adjustPop(self, cases):
-        births = self.workingPop * self.birthRate
-        deaths = self.workingPop * self.deathRate
+        births = self.totalPop * self.birthRate
+        deaths = self.totalPop * self.deathRate
         self.workingPop -= deaths + births
+        self.totalPop -= deaths + births
         caseDeaths = cases / self.workingPop * deaths
         # print(caseDeaths, births, deaths)
         return cases - caseDeaths
@@ -121,6 +122,7 @@ class GrowthAndMortality:
         self.growthRate = []
         self.overflow = []
         self.recovered = []
+        self.modifiedCases = []
 
     def run(self, days, caseType='limits'):
         self.workingRate = baseRate
@@ -160,7 +162,7 @@ class GrowthAndMortality:
             deaths *= .5
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
-            self.mod.check(self.cases)
+            self.modifiedCases.append(self.mod.check(self.cases))
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(dailyDeaths)
             self.staticDeaths.append(staticDeaths)
@@ -204,12 +206,13 @@ class Modifiers:
         self.population = population
         self.protection = protection
         self.rateAdjust = rate
-        self.curvAdjust = curve
+        self.curve = curve
         self.rise = True
         self.fall = False
         self.riseDays = 0
         self.fallDays = 0
         self.changeDays = 10
+        self.rateMod = 0
         self.calcModifiers()
 
     def checkDirection(self, growth):
@@ -222,60 +225,78 @@ class Modifiers:
             if direction[0] > direction[1]:  # cases have hit a daily peak
                 self.fallDays += 1
                 self.riseDays = 0
-                if self.fallDays > self.changeDays and self.checkTolerance():
-                    self.rise = False
-                    self.fall = True
+                if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
+                    self.rise = True
+                    self.fall = False
+                    self.fallDays = 0
                     change = 'rise'
-                    print('Fall:', self.fallDays)
+                    # print('Reset - Fall:', self.fallDays)
             else:  # Change in behavior as peak has occured
                 self.fallDays = 0
                 self.riseDays += 1
-                if self.riseDays > self.changeDays and self.checkTolerance():
-                    self.rise = True
-                    self.Fall = False
+                if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
+                    self.rise = False
+                    self.Fall = True
+                    self.riseDays = 0
                     change = 'fall'
-                    print('Rise:', self.riseDays)
+                    # print('Reset - Rise:', self.riseDays)
         return change
 
 
-    def checkTolerance(self):
-        if  random.randint(0, 10) > self.rateAdjust['tolerance']:
+    def checkRisk(self):
+        if  random.randint(0, 10) > self.rateAdjust['risk']:
+            print('Risk:', self.rateAdjust['risk'], True)
             return True
         else:
+            print('Risk:', self.rateAdjust['risk'], False)
             return False
 
     def check(self, growth):
+        check = 0.0
         direction = self.checkDirection(growth)
         if direction == 'rise':
-            self.checkRise()
+            check = self.checkRise()
         elif direction == 'fall':
-            self.checkFall()
+            change = self.checkFall()
+        return check
 
     def checkRise(self):
         # add changes here rising rate here
-        x = 1
+        if False not in self.protection['active'].values():
+            return 0.0
+        for key in self.protection['modifier']:
+            if self.protection['active'][key] is False:
+                return self.protection['modifier'][key]
 
     def checkFall(self):
         # add changes to falling rate here
-        x = 2
+        if True not in self.protection['active'].values():
+            return 0.0
+        for key in reversed(self.protection['modifier']):
+            if self.protection['active'][key] is False:
+                return -self.protection['modifier'][key]
 
     def calcModifiers(self):
         pop = self.population
         edu = self.rateAdjust['education']
         self.party = {}
-        self.party['d'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][0]}
-        self.party['r'] = {'sciTrust': pop * self.rateAdjust['sciTrustRD'][1]}
+        self.party['d'] = {'sciTrust': [pop * self.rateAdjust['sciTrustRD'][0],
+                                        self.rateAdjust['sciTrustRD'][0]]}
+        self.party['r'] = {'sciTrust': [pop * self.rateAdjust['sciTrustRD'][1],
+                                        self.rateAdjust['sciTrustRD'][1]]}
         self.party['d']['level'] = {}
         self.party['r']['level'] = {}
         hs = edu['highSchool'] * pop
         hsw = hs * edu['whiteHS']
-        hhm = hs - hsw
+        hsm = hs - hsw
+        hwAvg = hsw / hs
+        hmAvg = hsm / hs
         p = self.rateAdjust['eduPartyDR']['highSchool'][0]
-        self.party['d']['level']['hswhite'] = [hsw * p, p]
-        self.party['d']['level']['hsminority'] = [hhm * p, p]
+        self.party['d']['level']['hswhite'] = [hsw * p, p * hwAvg]
+        self.party['d']['level']['hsminority'] = [hsm * p, p * hmAvg]
         p = self.rateAdjust['eduPartyDR']['highSchool'][1]
-        self.party['r']['level']['hswhite'] = [hsw * p, p]
-        self.party['r']['level']['hsminority'] = [hhm * p, p]
+        self.party['r']['level']['hswhite'] = [hsw * p, p * hwAvg]
+        self.party['r']['level']['hsminority'] = [hsm * p, p * hmAvg]
         p = self.rateAdjust['eduPartyDR']['highSchool'][0]
         c = edu['someCollege'] * pop
         self.party['d']['level']['college'] = [c * p, p]
@@ -286,9 +307,12 @@ class Modifiers:
         self.party['d']['level']['postGrad'] = [c * p, p]
         p = self.rateAdjust['eduPartyDR']['postGrad'][1]
         self.party['r']['level']['postGrad'] = [c * p, p]
+        self.party['d']['percentage'], total = self.countParty('d')
+        self.party['r']['percentage'], total = self.countParty('r')
 
     def countParty(self, party):
-        return sum([i[0] for i in hp.mod.party[party]['level'].values()])
+        total =  sum([i[0] for i in self.party[party]['level'].values()])
+        return total/self.population, total
 
 if __name__ == "__main__":
     totalPop = 331000000
@@ -296,7 +320,7 @@ if __name__ == "__main__":
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
-    rateModifier = {'base': baseRate, "tolerance": 2,'sciTrustRD': [.53, .31]}
+    rateModifier = {'base': baseRate, "risk": 2,'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
     rateModifier['distance']['modifier'] =  {'contact': 0.15 - baseRate,
                     'oneMeter': 0.13 - baseRate,
@@ -313,7 +337,7 @@ if __name__ == "__main__":
                                   'someCollege': [.47, .39],
                                   'postGrad': [.57, .35]}
     rateModifier['cognitive'] = {'hs': .4324, 'college': .6508}
-    curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 45}
+    curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 60}
     mortality = 0.045
     maxMortality = 0.12
     popDeathRate = 10.542/1000/365
