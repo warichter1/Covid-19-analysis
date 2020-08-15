@@ -327,7 +327,7 @@ if __name__ == "__main__":
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
     rateModifier = {'base': baseRate, "risk": 2,'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
-    rateModifier['distance']['modifier'] =  {'contact': -0.15 - baseRate,
+    rateModifier['distance']['modifier'] =  {'contact': -0.15,
                     'oneMeter': 0.13 - baseRate,
                     'twoMeter': 0.03 - baseRate}
     rateModifier['distance']['active'] = {'contact': False,
