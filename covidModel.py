@@ -213,6 +213,7 @@ class Modifiers:
         self.fallDays = 0
         self.changeDays = 10
         self.rateMod = 0
+        self.trigger = None
         self.calcModifiers()
 
     def checkDirection(self, growth):
@@ -229,7 +230,7 @@ class Modifiers:
                     self.rise = True
                     self.fall = False
                     self.fallDays = 0
-                    change = 'rise'
+                    self.trigger = change = 'rise'
                     # print('Reset - Fall:', self.fallDays)
             else:  # Change in behavior as peak has occured
                 self.fallDays = 0
@@ -238,7 +239,7 @@ class Modifiers:
                     self.rise = False
                     self.Fall = True
                     self.riseDays = 0
-                    change = 'fall'
+                    self.trigger = change = 'fall'
                     # print('Reset - Rise:', self.riseDays)
         return change
 
@@ -255,26 +256,30 @@ class Modifiers:
         check = 0.0
         direction = self.checkDirection(growth)
         if direction == 'rise':
-            check = self.checkRise()
+            self.checkRise()
         elif direction == 'fall':
-            change = self.checkFall()
-        return check
+            self.checkFall()
+        else:
+            self.checkProtect()
+        return self.rateMod
+
+    def checkProtect(self):
+        if self.trigger is not None:
+            print('pick', self.trigger)
 
     def checkRise(self):
         # add changes here rising rate here
         if False not in self.protection['active'].values():
-            return 0.0
-        for key in self.protection['modifier']:
-            if self.protection['active'][key] is False:
-                return self.protection['modifier'][key]
+            for key in self.protection['modifier']:
+                if self.protection['active'][key] is False:
+                    self.rateMod += self.protection['modifier'][key]
 
     def checkFall(self):
         # add changes to falling rate here
         if True not in self.protection['active'].values():
-            return 0.0
-        for key in reversed(self.protection['modifier']):
-            if self.protection['active'][key] is False:
-                return -self.protection['modifier'][key]
+            for key in reversed(list(self.protection['modifier'])):
+                if self.protection['active'][key] is False:
+                    self.rateMod -= self.protection['modifier'][key]
 
     def calcModifiers(self):
         pop = self.population
@@ -322,7 +327,7 @@ if __name__ == "__main__":
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
     rateModifier = {'base': baseRate, "risk": 2,'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
-    rateModifier['distance']['modifier'] =  {'contact': 0.15 - baseRate,
+    rateModifier['distance']['modifier'] =  {'contact': -0.15 - baseRate,
                     'oneMeter': 0.13 - baseRate,
                     'twoMeter': 0.03 - baseRate}
     rateModifier['distance']['active'] = {'contact': False,
