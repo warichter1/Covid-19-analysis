@@ -205,7 +205,7 @@ class Modifiers:
     def __init__(self, population, protection, rate, curve):
         self.population = population
         self.protection = protection
-        self.rateAdjust = rate
+        self.rate = rate
         self.curve = curve
         self.rise = True
         self.fall = False
@@ -214,6 +214,7 @@ class Modifiers:
         self.changeDays = 10
         self.rateMod = 0
         self.trigger = None
+        self.peak = 0
         self.calcModifiers()
 
     def checkDirection(self, growth):
@@ -230,8 +231,10 @@ class Modifiers:
                     self.rise = True
                     self.fall = False
                     self.fallDays = 0
+                    self.peak += 1
+                    self.checkPeak()
                     self.trigger = change = 'rise'
-                    # print('Reset - Fall:', self.fallDays)
+                    print('Reset - Fall:', self.fallDays, self.peak)
             else:  # Change in behavior as peak has occured
                 self.fallDays = 0
                 self.riseDays += 1
@@ -240,17 +243,17 @@ class Modifiers:
                     self.Fall = True
                     self.riseDays = 0
                     self.trigger = change = 'fall'
-                    # print('Reset - Rise:', self.riseDays)
+                    print('Reset - Rise:', self.riseDays)
         return change
 
-
-    def checkRisk(self):
-        if  random.randint(0, 10) > self.rateAdjust['risk']:
-            print('Risk:', self.rateAdjust['risk'], True)
-            return True
-        else:
-            print('Risk:', self.rateAdjust['risk'], False)
-            return False
+    def checkPeak(self):
+        if self.peak > 1:
+            print('')
+            toleranceIncrease = random.uniform(0, self.rate['riskRise'])
+            self.rate['risk'] += toleranceIncrease
+            print('Additional Peak detected, tolerance:', toleranceIncrease)
+    def checkRisk(self, max=10):
+        return True if random.randint(0, max) > self.rate['risk'] else False
 
     def check(self, growth):
         check = 0.0
@@ -265,7 +268,7 @@ class Modifiers:
 
     def checkProtect(self):
         if self.trigger is not None:
-            print('pick', self.trigger)
+            print('pick', self.trigger, str(self.rate['risk']))
 
     def checkRise(self):
         # add changes here rising rate here
@@ -283,60 +286,62 @@ class Modifiers:
 
     def calcModifiers(self):
         pop = self.population
-        edu = self.rateAdjust['education']
+        edu = self.rate['education']
         self.party = {}
-        self.party['d'] = {'sciTrust': [pop * self.rateAdjust['sciTrustRD'][0],
-                                        self.rateAdjust['sciTrustRD'][0]]}
-        self.party['r'] = {'sciTrust': [pop * self.rateAdjust['sciTrustRD'][1],
-                                        self.rateAdjust['sciTrustRD'][1]]}
+        self.party['d'] = {'sciTrust': [pop * self.rate['sciTrustRD'][0],
+                                        self.rate['sciTrustRD'][0]]}
+        self.party['r'] = {'sciTrust': [pop * self.rate['sciTrustRD'][1],
+                                        self.rate['sciTrustRD'][1]]}
         self.party['d']['level'] = {}
         self.party['r']['level'] = {}
         hs = edu['highSchool'] * pop
         hsw = hs * edu['whiteHS']
         hsm = hs - hsw
-        hwAvg = hsw / hs
-        hmAvg = hsm / hs
-        p = self.rateAdjust['eduPartyDR']['highSchool'][0]
-        self.party['d']['level']['hswhite'] = [hsw * p, p * hwAvg]
-        self.party['d']['level']['hsminority'] = [hsm * p, p * hmAvg]
-        p = self.rateAdjust['eduPartyDR']['highSchool'][1]
-        self.party['r']['level']['hswhite'] = [hsw * p, p * hwAvg]
-        self.party['r']['level']['hsminority'] = [hsm * p, p * hmAvg]
-        p = self.rateAdjust['eduPartyDR']['highSchool'][0]
+        # hwAvg = hsw / hs
+        # hmAvg = hsm / hs
+        p = self.rate['eduPartyDR']['highSchool'][0]
+        self.party['d']['level']['hswhite'] = [hsw * p, p]
+        self.party['d']['level']['hsminority'] = [hsm * p, p]
+        p = self.rate['eduPartyDR']['highSchool'][1]
+        self.party['r']['level']['hswhite'] = [hsw * p, p]
+        self.party['r']['level']['hsminority'] = [hsm * p, p]
+        p = self.rate['eduPartyDR']['highSchool'][0]
         c = edu['someCollege'] * pop
         self.party['d']['level']['college'] = [c * p, p]
-        p = self.rateAdjust['eduPartyDR']['someCollege'][1]
+        p = self.rate['eduPartyDR']['someCollege'][1]
         self.party['r']['level']['college'] = [c * p, p]
-        p = self.rateAdjust['eduPartyDR']['postGrad'][0]
+        p = self.rate['eduPartyDR']['postGrad'][0]
         c = (edu['masters'] + edu['phd'] + edu['professional'])* pop
         self.party['d']['level']['postGrad'] = [c * p, p]
-        p = self.rateAdjust['eduPartyDR']['postGrad'][1]
+        p = self.rate['eduPartyDR']['postGrad'][1]
         self.party['r']['level']['postGrad'] = [c * p, p]
         self.party['d']['percentage'], total = self.countParty('d')
         self.party['r']['percentage'], total = self.countParty('r')
 
     def countParty(self, party):
-        total =  sum([i[0] for i in self.party[party]['level'].values()])
+        total = sum([i[0] for i in self.party[party]['level'].values()])
         return total/self.population, total
 
 if __name__ == "__main__":
     totalPop = 331000000
+    riskRise = 0.25
     protection = {}
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
-    rateModifier = {'base': baseRate, "risk": 2,'sciTrustRD': [.53, .31]}
+    rateModifier = {'base': baseRate, "risk": 2, 'riskRise': .25,
+                    'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
-    rateModifier['distance']['modifier'] =  {'contact': -0.15,
-                    'oneMeter': 0.13 - baseRate,
-                    'twoMeter': 0.03 - baseRate}
+    rateModifier['distance']['modifier'] = {'contact': -0.15,
+                                            'oneMeter': 0.13 - baseRate,
+                                            'twoMeter': 0.03 - baseRate}
     rateModifier['distance']['active'] = {'contact': False,
                                           'oneMeter': False, 'owoMeter': False}
     rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
-                                  'someCollege': .6128,
-                                  'associate': .1018, 'bachelors': .3498,
-                                  'masters': .0957, 'professional': .0144,
-                                  'phd': .0203}
+                                 'someCollege': .6128,
+                                 'associate': .1018, 'bachelors': .3498,
+                                 'masters': .0957, 'professional': .0144,
+                                 'phd': .0203}
     rateModifier['eduPartyDR'] = {'highSchool': [.46, .45],
                                   'whiteHS': [.59, .33],
                                   'someCollege': [.47, .39],
