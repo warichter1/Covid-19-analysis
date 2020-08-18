@@ -252,6 +252,7 @@ class Modifiers:
             toleranceIncrease = random.uniform(0, self.rate['riskRise'])
             self.rate['risk'] += toleranceIncrease
             print('Additional Peak detected, tolerance:', toleranceIncrease)
+
     def checkRisk(self, max=10):
         return True if random.randint(0, max) > self.rate['risk'] else False
 
@@ -266,23 +267,39 @@ class Modifiers:
             self.checkProtect()
         return self.rateMod
 
-    def checkProtect(self):
+    def checkProtect(self, max=20):
         if self.trigger is not None:
+            if self.checkRisk(max=max) is True:
+                self.getProtect(True if self.trigger == 'fall' else False)
             print('pick', self.trigger, str(self.rate['risk']))
 
     def checkRise(self):
         # add changes here rising rate here
-        if False not in self.protection['active'].values():
-            for key in self.protection['modifier']:
-                if self.protection['active'][key] is False:
-                    self.rateMod += self.protection['modifier'][key]
+        self.getProtect(False)
+        # if False not in self.protection['active'].values():
+        #    for key in self.protection['modifier']:
+        #        if self.protection['active'][key] is False:
+        #            self.rateMod += self.protection['modifier'][key]
+        #            self.protection['active'][key] = True
 
     def checkFall(self):
         # add changes to falling rate here
-        if True not in self.protection['active'].values():
-            for key in reversed(list(self.protection['modifier'])):
-                if self.protection['active'][key] is False:
+        self.getProtect(True)
+        # if True not in self.protection['active'].values():
+        #    for key in reversed(list(self.protection['modifier'])):
+        #        if self.protection['active'][key] is True:
+        #            self.rateMod -= self.protection['modifier'][key]
+        #            self.protection['active'][key] = False
+
+    def getProtect(self, value):
+        modifier = self.protection['modifier']
+        if value is True:
+            modifier = reversed(list(modifier))
+        if value not in self.protection['active'].values():
+            for key in modifier:
+                if self.protection['active'][key] is value:
                     self.rateMod -= self.protection['modifier'][key]
+                    self.protection['active'][key] = not value
 
     def calcModifiers(self):
         pop = self.population
