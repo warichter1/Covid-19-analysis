@@ -15,7 +15,7 @@ import benfordslaw as bl
 currentDate = date.today()
 
 begin = 3774
-days = 365
+days = 100
 # baseRate = .142857
 baseRate = 1/8
 # caseType = 'exponential'
@@ -229,7 +229,7 @@ class Modifiers:
                 self.riseDays = 0
                 if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
                     self.rise = True
-                    self.fall = False
+                    # self.fall = False
                     self.fallDays = 0
                     self.peak += 1
                     self.checkPeak()
@@ -240,7 +240,7 @@ class Modifiers:
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
                     self.rise = False
-                    self.Fall = True
+                    # self.Fall = True
                     self.riseDays = 0
                     self.trigger = change = 'fall'
                     print('Reset - Rise:', self.riseDays)
@@ -271,34 +271,30 @@ class Modifiers:
         if self.trigger is not None:
             if self.checkRisk(max=max) is True:
                 self.getProtect(True if self.trigger == 'fall' else False)
-            print('pick', self.trigger, str(self.rate['risk']))
+                print('pick', self.trigger, self.rate['risk'], self.rateMod)
 
     def checkRise(self):
         # add changes here rising rate here
-        self.getProtect(False)
-        # if False not in self.protection['active'].values():
-        #    for key in self.protection['modifier']:
-        #        if self.protection['active'][key] is False:
-        #            self.rateMod += self.protection['modifier'][key]
-        #            self.protection['active'][key] = True
+        self.getProtect()
 
     def checkFall(self):
         # add changes to falling rate here
-        self.getProtect(True)
-        # if True not in self.protection['active'].values():
-        #    for key in reversed(list(self.protection['modifier'])):
-        #        if self.protection['active'][key] is True:
-        #            self.rateMod -= self.protection['modifier'][key]
-        #            self.protection['active'][key] = False
+        self.getProtect()
 
-    def getProtect(self, value):
+    def getProtect(self, value=None):
+        value = value if value is not None else self.rise
         modifier = self.protection['modifier']
         if value is True:
             modifier = reversed(list(modifier))
-        if value not in self.protection['active'].values():
+        print('keys:', self.protection['active'].values(), value)
+        if value in self.protection['active'].values():
             for key in modifier:
                 if self.protection['active'][key] is value:
-                    self.rateMod -= self.protection['modifier'][key]
+                    if value is True:
+                        self.rateMod -= self.protection['modifier'][key]
+                    else:
+                        self.rateMod += self.protection['modifier'][key]
+                    print('set:', self.rateMod, self.protection['modifier'][key])
                     self.protection['active'][key] = not value
 
     def calcModifiers(self):
