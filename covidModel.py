@@ -208,7 +208,7 @@ class Modifiers:
         self.rate = rate
         self.curve = curve
         self.rise = True
-        self.fall = False
+        # self.fall = False
         self.riseDays = 0
         self.fallDays = 0
         self.changeDays = 10
@@ -228,23 +228,18 @@ class Modifiers:
                 self.fallDays += 1
                 self.riseDays = 0
                 if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
-                    self.rise = True
-                    # self.fall = False
+                    self.trigger = self.rise = True
                     self.fallDays = 0
                     self.peak += 1
                     self.checkPeak()
-                    self.trigger = change = 'rise'
                     print('Reset - Fall:', self.fallDays, self.peak)
             else:  # Change in behavior as peak has occured
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
-                    self.rise = False
-                    # self.Fall = True
+                    self.trigger = self.rise = False
                     self.riseDays = 0
-                    self.trigger = change = 'fall'
                     print('Reset - Rise:', self.riseDays)
-        return change
 
     def checkPeak(self):
         if self.peak > 1:
@@ -258,10 +253,10 @@ class Modifiers:
 
     def check(self, growth):
         check = 0.0
-        direction = self.checkDirection(growth)
-        if direction == 'rise':
+        self.checkDirection(growth)
+        if self.trigger is True:
             self.checkRise()
-        elif direction == 'fall':
+        elif self.trigger is False:
             self.checkFall()
         else:
             self.checkProtect()
@@ -270,15 +265,17 @@ class Modifiers:
     def checkProtect(self, max=20):
         if self.trigger is not None:
             if self.checkRisk(max=max) is True:
-                self.getProtect(True if self.trigger == 'fall' else False)
-                print('pick', self.trigger, self.rate['risk'], self.rateMod)
+                self.getProtect()
+                print('Rise', self.rise, self.rate['risk'], self.rateMod)
 
     def checkRise(self):
         # add changes here rising rate here
+        self.trigger = None
         self.getProtect()
 
     def checkFall(self):
         # add changes to falling rate here
+        self.trigger = None
         self.getProtect()
 
     def getProtect(self, value=None):
