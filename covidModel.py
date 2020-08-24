@@ -252,13 +252,13 @@ class Modifiers:
         return True if random.randint(0, max) > self.rate['risk'] else False
 
     def check(self, growth):
-        check = 0.0
+        # check = 0.0
         self.checkDirection(growth)
         if self.trigger is True:
             self.checkRise()
         elif self.trigger is False:
             self.checkFall()
-        else:
+        elif self.checkRisk():  # determine if risk is overcome
             self.checkProtect()
         return self.rateMod
 
