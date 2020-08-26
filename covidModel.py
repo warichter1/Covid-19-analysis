@@ -162,7 +162,9 @@ class GrowthAndMortality:
             deaths *= .5
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
-            self.modifiedCases.append(self.mod.check(self.cases))
+            modifier = self.mod.check(self.cases)
+            # self.workingRate *= (1 - modifier)
+            self.modifiedCases.append(1 - modifier)
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(dailyDeaths)
             self.staticDeaths.append(staticDeaths)
@@ -224,6 +226,7 @@ class Modifiers:
         #    self.riseDays += 1
         if days > 2:
             direction = growth[-2:]
+            # print(direction)
             if direction[0] > direction[1]:  # cases have hit a daily peak
                 self.fallDays += 1
                 self.riseDays = 0
@@ -243,13 +246,15 @@ class Modifiers:
 
     def checkPeak(self):
         if self.peak > 1:
-            print('')
+            # print('')
             toleranceIncrease = random.uniform(0, self.rate['riskRise'])
             self.rate['risk'] += toleranceIncrease
             print('Additional Peak detected, tolerance:', toleranceIncrease)
 
     def checkRisk(self, max=10):
-        return True if random.randint(0, max) > self.rate['risk'] else False
+        num = random.randint(0, max)
+        # print(num, self.rate['risk'] )
+        return True if num > self.rate['risk'] else False
 
     def check(self, growth):
         # check = 0.0
@@ -259,7 +264,7 @@ class Modifiers:
         elif self.trigger is False:
             self.checkFall()
         elif self.checkRisk():  # determine if risk is overcome
-            self.checkProtect()
+            self.checkProtect(max=20)
         return self.rateMod
 
     def checkProtect(self, max=20):
@@ -293,6 +298,7 @@ class Modifiers:
                         self.rateMod += self.protection['modifier'][key]
                     print('set:', self.rateMod, self.protection['modifier'][key])
                     self.protection['active'][key] = not value
+                    return 0
 
     def calcModifiers(self):
         pop = self.population
@@ -339,7 +345,7 @@ if __name__ == "__main__":
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
-    rateModifier = {'base': baseRate, "risk": 2, 'riskRise': .25,
+    rateModifier = {'base': baseRate, "risk": 4, 'riskRise': .25,
                     'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
     rateModifier['distance']['modifier'] = {'contact': -0.15,
