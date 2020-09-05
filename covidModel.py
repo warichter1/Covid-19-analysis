@@ -347,12 +347,14 @@ if __name__ == "__main__":
     totalPop = 331000000
     riskRise = 0.25
     protection = {}
+    # change the infection rate
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
     rateModifier = {'base': baseRate, "risk": 4, 'riskRise': .25,
                     'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
+    # Change the contact rate with others in the population
     rateModifier['distance']['modifier'] = {'contact': -0.15,
                                             'oneMeter': 0.13,
                                             'twoMeter': 0.03,
@@ -360,6 +362,7 @@ if __name__ == "__main__":
     rateModifier['distance']['active'] = {'contact': False,
                                           'oneMeter': False, 'owoMeter': False,
                                           'lockdown': False}
+    # Change the risk tolerance rate
     rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
                                  'someCollege': .6128,
                                  'associate': .1018, 'bachelors': .3498,
