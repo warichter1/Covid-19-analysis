@@ -15,7 +15,7 @@ import benfordslaw as bl
 currentDate = date.today()
 
 begin = 3774
-days = 100
+days = 450
 # baseRate = .142857
 baseRate = 1/8
 # caseType = 'exponential'
@@ -162,9 +162,9 @@ class GrowthAndMortality:
             deaths *= .5
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
-            modifier = self.mod.check(self.cases)
-            # self.workingRate *= (1 - modifier)
-            self.modifiedCases.append(1 - modifier)
+            modifier = self.mod.check(self.caseGrowth)
+            self.workingRate = modifier
+            self.modifiedCases.append(modifier)
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(dailyDeaths)
             self.staticDeaths.append(staticDeaths)
@@ -172,12 +172,12 @@ class GrowthAndMortality:
             self.growthRate.append(totalRate)
             self.overflow.append(overflow)
             self.recovered.append(recover)
-            print("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
-                                                   float(totalRate * 100),
-                                                   format(int(self.deaths[day]), ',d'),
-                                                   format(int(self.cases[day] * mortality), ',d'),
-
-                                                   adjustedMortality * 100))
+            if summary is True:
+                print("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
+                                                       float(totalRate * 100),
+                                                       format(int(self.deaths[day]), ',d'),
+                                                       format(int(self.cases[day] * mortality), ',d'),
+                                                       adjustedMortality * 100))
                                                    # mortality * 100))
             if self.cases[day] > totalPop:
                 print("{}day: {} - Cases Exceed {}, simulation complete!".format(pinned, day +1, format(totalPop, ',d')))
@@ -210,7 +210,6 @@ class Modifiers:
         self.rate = rate
         self.curve = curve
         self.rise = True
-        # self.fall = False
         self.riseDays = 0
         self.fallDays = 0
         self.changeDays = 10
@@ -228,6 +227,7 @@ class Modifiers:
             direction = growth[-2:]
             # print(direction)
             if direction[0] > direction[1]:  # cases have hit a daily peak
+                # print('fall')
                 self.fallDays += 1
                 self.riseDays = 0
                 if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
@@ -235,14 +235,15 @@ class Modifiers:
                     self.fallDays = 0
                     self.peak += 1
                     self.checkPeak()
-                    print('Reset - Fall:', self.fallDays, self.peak)
+                    print('Reset - Fall:', self.fallDays, self.peak, direction)
             else:  # Change in behavior as peak has occured
+                # print('rise')
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
                     self.trigger = self.rise = False
                     self.riseDays = 0
-                    print('Reset - Rise:', self.riseDays)
+                    print('Reset - Rise:', self.riseDays, direction)
 
     def checkPeak(self):
         if self.peak > 1:
@@ -257,7 +258,8 @@ class Modifiers:
         return True if num > self.rate['risk'] else False
 
     def check(self, growth):
-        # check = 0.0
+        rate = self.rate['base']
+        rate = rate if self.rateMod == 0 else rate * self.rateMod
         self.checkDirection(growth)
         if self.trigger is True:
             self.checkRise()
@@ -265,7 +267,8 @@ class Modifiers:
             self.checkFall()
         elif self.checkRisk():  # determine if risk is overcome
             self.checkProtect(max=20)
-        return self.rateMod
+        print(self.rate['base'] - rate, rate)
+        return rate
 
     def checkProtect(self, max=20):
         if self.trigger is not None:
@@ -288,7 +291,7 @@ class Modifiers:
         modifier = self.protection['modifier']
         if value is True:
             modifier = reversed(list(modifier))
-        print('keys:', self.protection['active'].values(), value)
+        # print('keys:', self.protection['active'].values(), value)
         if value in self.protection['active'].values():
             for key in modifier:
                 if self.protection['active'][key] is value:
@@ -338,6 +341,8 @@ class Modifiers:
         total = sum([i[0] for i in self.party[party]['level'].values()])
         return total/self.population, total
 
+summary = False
+
 if __name__ == "__main__":
     totalPop = 331000000
     riskRise = 0.25
@@ -349,10 +354,12 @@ if __name__ == "__main__":
                     'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
     rateModifier['distance']['modifier'] = {'contact': -0.15,
-                                            'oneMeter': 0.13 - baseRate,
-                                            'twoMeter': 0.03 - baseRate}
+                                            'oneMeter': 0.13,
+                                            'twoMeter': 0.03,
+                                            'lockdown': 0.40}
     rateModifier['distance']['active'] = {'contact': False,
-                                          'oneMeter': False, 'owoMeter': False}
+                                          'oneMeter': False, 'owoMeter': False,
+                                          'lockdown': False}
     rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
                                  'someCollege': .6128,
                                  'associate': .1018, 'bachelors': .3498,
@@ -364,7 +371,8 @@ if __name__ == "__main__":
                                   'postGrad': [.57, .35]}
     rateModifier['cognitive'] = {'hs': .4324, 'college': .6508}
     curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 60}
-    mortality = 0.045
+    mortality = 0.0375
+    # mortality = 0.045
     maxMortality = 0.12
     popDeathRate = 10.542/1000/365
     popBirthRate = 11.08/1000/365
