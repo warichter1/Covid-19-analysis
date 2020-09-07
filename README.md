@@ -23,4 +23,7 @@ https://www.cdc.gov/mmwr/volumes/69/wr/mm6912e2.htm
 
 https://www.news-medical.net/news/20200821/DeSantis-says-COVID-is-a-lower-risk-for-school-aged-kids-than-flu.aspx
 
+https://www.webmd.com/lung/news/20200608/eye-protection-could-decrease-covid-19-spread
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7276229/
 
