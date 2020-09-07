@@ -29,7 +29,7 @@ index = 'Country/Region'
 excludeFields = ['Lat', 'Long', 'Province/State']
 country = 'US'
 currentDate = date.today()
-projectionDays = 30
+projectionDays = 110
 deathDays = 3
 begin = 10
 
