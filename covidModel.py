@@ -164,6 +164,7 @@ class GrowthAndMortality:
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
             modifier = self.mod.checkSelfProt(self.caseGrowth)
+            pop = self.mod.checkDistance(self.workingPop)
             self.workingRate = modifier
             self.modifiedCases.append(modifier)
             self.deaths.append(int(deaths))
@@ -238,7 +239,7 @@ if __name__ == "__main__":
                                   'postGrad': [.57, .35]}
     rateModifier['cognitive'] = {'hs': .4324, 'college': .6508}
     curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 60}
-    mortality = 0.0375
+    mortality = 0.0305
     # mortality = 0.045
     maxMortality = 0.12
     popDeathRate = 10.542/1000/365

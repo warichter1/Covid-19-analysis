@@ -19,6 +19,7 @@ class Modifiers:
         self.fallDays = 0
         self.changeDays = 10
         self.rateMod = 0
+        self.distanceMod = 0
         self.trigger = None
         self.peak = 0
         self.calcModifiers()
@@ -62,7 +63,8 @@ class Modifiers:
         # print(num, self.rate['risk'] )
         return True if num > self.rate['risk'] else False
 
-    def checkSelfProt(self, growth):
+    def checkSelfProt(self, growth, distance=True):
+        self.distance = distance
         rate = self.rate['base']
         rate = rate if self.rateMod == 0 else rate * self.rateMod
         self.checkDirection(growth)
@@ -83,12 +85,14 @@ class Modifiers:
 
     def checkRise(self):
         # add changes here rising rate here
-        self.trigger = None
+        if self.distance is False:
+            self.trigger = None
         self.getProtect()
 
     def checkFall(self):
         # add changes to falling rate here
-        self.trigger = None
+        if self.distance is False:
+            self.trigger = None
         self.getProtect()
 
     def getProtect(self, value=None):
@@ -107,6 +111,32 @@ class Modifiers:
                     print('set:', self.rateMod, self.protection['modifier'][key])
                     self.protection['active'][key] = not value
                     return 0
+
+    def checkDistance(self, currentPop):
+        print("Check Distance:", currentPop, self.trigger)
+        distance = list(self.rate['distance']['modifier'].keys())
+        if self.trigger is True:
+            self.distanceModifier( currentPop, list(distance)[1:])
+            print('hit peak')
+            self.trigger = None
+        elif self.trigger is False:
+            self.distanceModifier( currentPop, list(reversed(distance)))
+            print('Hit a trough')
+            self.trigger = None
+        else:
+            self.checkDistanceModifier(currentPop)
+
+    def checkDistanceModifier(self, pop):
+        print('Non-Trigger', self.rise)
+
+    def distanceModifier(self, pop, distance):
+        if self.checkRisk() is True:
+            print('-> Modify Distance', distance)
+            for modifier in distance:
+                if not self.rate['distance']['active'][modifier] == self.rise:
+                    self.rate['distance']['active'][modifier] = self.rise
+                    self.distanceMod = self.rate['distance']['modifier'][modifier]
+
 
     def calcModifiers(self):
         pop = self.population
