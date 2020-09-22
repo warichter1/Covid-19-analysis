@@ -27,13 +27,9 @@ class Modifiers:
     def checkDirection(self, growth):
         days = len(growth)
         change = None
-        # if self.rise is True:
-        #    self.riseDays += 1
         if days > 2:
             direction = growth[-2:]
-            # print(direction)
             if direction[0] > direction[1]:  # cases have hit a daily peak
-                # print('fall')
                 self.fallDays += 1
                 self.riseDays = 0
                 if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
@@ -43,7 +39,6 @@ class Modifiers:
                     self.checkPeak()
                     print('Reset - Fall:', self.fallDays, self.peak, direction)
             else:  # Change in behavior as peak has occured
-                # print('rise')
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
@@ -53,16 +48,15 @@ class Modifiers:
 
     def checkPeak(self):
         if self.peak > 1:
-            # print('')
             toleranceIncrease = random.uniform(0, self.rate['riskRise'])
             self.rate['risk'] += toleranceIncrease
             print('Additional Peak detected, tolerance:', toleranceIncrease)
 
     def checkRisk(self, max=10):
         num = random.randint(0, max)
-        # print(num, self.rate['risk'] )
         return True if num > self.rate['risk'] else False
 
+    # Caller for PPE canculation of spread rate
     def checkSelfProt(self, growth, distance=True):
         self.distance = distance
         rate = self.rate['base']
@@ -112,6 +106,7 @@ class Modifiers:
                     self.protection['active'][key] = not value
                     return 0
 
+    # Caller for self distancing calculations for spreading to otherts in a population
     def checkDistance(self, currentPop):
         print("Check Distance:", currentPop, self.trigger)
         distance = list(self.rate['distance']['modifier'].keys())
@@ -123,7 +118,7 @@ class Modifiers:
             self.distanceModifier( currentPop, list(reversed(distance)))
             print('Hit a trough')
             self.trigger = None
-        else:
+        elif self.checkRisk():  # determine if risk is overcome
             self.checkDistanceModifier(currentPop)
 
     def checkDistanceModifier(self, pop):
