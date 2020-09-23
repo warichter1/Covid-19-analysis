@@ -119,9 +119,12 @@ class Modifiers:
             print('Hit a trough')
             self.trigger = None
         elif self.checkRisk():  # determine if risk is overcome
-            self.checkDistanceModifier(currentPop)
+            self.checkDistanceModifier(currentPop, distance)
 
-    def checkDistanceModifier(self, pop):
+    def checkDistanceModifier(self, pop, distance):
+        if self.rise is False:
+            distance = list(reversed(distance))
+        self.distanceModifier(pop, distance)
         print('Non-Trigger', self.rise)
 
     def distanceModifier(self, pop, distance):

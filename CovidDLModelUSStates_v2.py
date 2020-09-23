@@ -428,6 +428,7 @@ if __name__ == "__main__":
     # print('Plot Target States')
     # statePlot(['Texas', 'Arizona', 'Tennessee', 'Florida', 'South Carolina', 'Georgia', 'California', 'Pennsylvania', 'Virginia', 'Maryland'], key='confirmedNew', smoothed=True)
     # statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah', 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin'], key='confirmedNew', smoothed=True)
+    # statePlot(['New York', 'New Jersey', 'California'], key='confirmedNew', smoothed=True)
     # print('Plot State Government')
     # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
     # covidDf.plotResults(['Virginia'])
