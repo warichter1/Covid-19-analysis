@@ -68,7 +68,7 @@ class Modifiers:
             self.checkFall()
         elif self.checkRisk():  # determine if risk is overcome
             self.checkProtect(max=20)
-        print(self.rate['base'] - rate, rate)
+        # print(self.rate['base'] - rate, rate)
         return rate
 
     def checkProtect(self, max=20):
@@ -102,23 +102,20 @@ class Modifiers:
                         self.rateMod -= self.protection['modifier'][key]
                     else:
                         self.rateMod += self.protection['modifier'][key]
-                    print('set:', self.rateMod, self.protection['modifier'][key])
+                    # print('set:', self.rateMod, self.protection['modifier'][key])
                     self.protection['active'][key] = not value
                     return 0
 
     # Caller for self distancing calculations for spreading to otherts in a population
     def checkDistance(self, currentPop):
-        print("Check Distance:", currentPop, self.trigger)
+        # print("Check Distance:", currentPop, self.trigger)
         distance = list(self.rate['distance']['modifier'].keys())
-        if self.trigger is True:
-            self.distanceModifier( currentPop, list(distance)[1:])
-            print('hit peak')
+        if not self.trigger is None:
+            print('hit', 'Peak' if self.trigger is True else "Trough")
+            self.checkDistanceModifier(currentPop, list(distance))
             self.trigger = None
-        elif self.trigger is False:
-            self.distanceModifier( currentPop, list(reversed(distance)))
-            print('Hit a trough')
-            self.trigger = None
-        elif self.checkRisk():  # determine if risk is overcome
+        # elif self.checkRisk():  # determine if risk is overcome
+        else:
             self.checkDistanceModifier(currentPop, list(distance))
 
     def checkDistanceModifier(self, pop, distance):
@@ -127,7 +124,7 @@ class Modifiers:
         else:
             distance = list(reversed(distance))
         self.distanceModifier(pop, distance)
-        print('Non-Trigger', self.rise)
+        # print('Non-Trigger', self.rise)
 
     def distanceModifier(self, pop, distance):
         if self.checkRisk() is True:

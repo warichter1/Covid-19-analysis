@@ -22,22 +22,8 @@ baseRate = 1/8
 # caseType = 'exponential'
 caseType = 'limits'
 
-# baseRate = 0.2831  # US rate on 3/15
-# baseRate = 0.1143 # World Rate 4/18
-# baseRate = .16478  # at Day 54
 totalRate = baseRate
 rateChange = {}
-# rateChange['55'] = .0694  # 03162020
-# rateChange['56'] = .2132  # 03172020
-# rateChange['57'] = .04465  # 03182020
-# rateChange['58'] = .5961  # 03192020 - Testing jump day 1???
-# rateChange['59'] = .2393  # 03202020 - Testing jump day 2???
-# rateChange['60'] = .1624   # 03212020
-# rateChange['61'] = .1445  # 03222020
-# rateChange['62'] = .1445   # Reference
-# rateChange['63'] = .1445   # Reference
-# rateChange['64'] = .1445   # Reference
-# rateChange['65'] = .1445   # Reference
 
 # rMax = Maximum growth rate
 # K = Carrying Capacity
