@@ -123,6 +123,7 @@ class GrowthAndMortality:
         self.initLists()
 
         for day in range(days):
+            print('Day:', day)
             pinned = ""
             surge = 0
             storeCase = deepcopy(case)
@@ -208,7 +209,7 @@ if __name__ == "__main__":
     # Change the contact rate with others in the population
     rateModifier['distance']['modifier'] = {'contact': -0.15, 'lockdown': 0.40,
                                             'oneMeter': 0.13,
-                                            'twoMeter': 0.03,}
+                                            'twoMeter': 0.30,}
     rateModifier['distance']['active'] = {'contact': False, 'lockdown': False,
                                           'oneMeter': False,
                                           'twoMeter': False}

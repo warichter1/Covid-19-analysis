@@ -127,12 +127,15 @@ class Modifiers:
         # print('Non-Trigger', self.rise)
 
     def distanceModifier(self, pop, distance):
+        # print(not self.rise, self.rate['distance']['active'].values())
         if self.checkRisk() is True:
-            print('-> Modify Distance', distance)
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     self.rate['distance']['active'][modifier] = self.rise
                     self.distanceMod = self.rate['distance']['modifier'][modifier]
+                    print("Match", modifier, self.rate['distance']['active'][modifier], self.rise, self.distanceMod)
+                    return 0
+            # print('-> Modify Distance', self.rise, distance, self.rate['distance']['active'].values(), self.rate['distance']['modifier'], self.distanceMod)
 
 
     def calcModifiers(self):
