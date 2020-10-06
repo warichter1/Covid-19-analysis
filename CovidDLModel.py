@@ -125,7 +125,7 @@ if __name__ == "__main__":
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
-                                                               format(int(cases[day-2] * deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
+                                                               format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
 
     result = []
     x =1
