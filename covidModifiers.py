@@ -128,6 +128,7 @@ class Modifiers:
 
     def distanceModifier(self, pop, distance):
         # print(not self.rise, self.rate['distance']['active'].values())
+        toleranceLower = self.rate['riskLower']
         if self.checkRisk() is True:
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
@@ -151,8 +152,6 @@ class Modifiers:
         hs = edu['highSchool'] * pop
         hsw = hs * edu['whiteHS']
         hsm = hs - hsw
-        # hwAvg = hsw / hs
-        # hmAvg = hsm / hs
         p = self.rate['eduPartyDR']['highSchool'][0]
         self.party['d']['level']['hswhite'] = [hsw * p, p]
         self.party['d']['level']['hsminority'] = [hsm * p, p]

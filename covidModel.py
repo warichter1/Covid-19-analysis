@@ -203,8 +203,8 @@ if __name__ == "__main__":
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
     protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
-    rateModifier = {'base': baseRate, "risk": 4, 'riskRise': .25,
-                    'sciTrustRD': [.53, .31]}
+    rateModifier = {'base': baseRate, "risk": 7, 'riskRise': .25,
+                    'riskLower': .2, 'sciTrustRD': [.53, .31]}
     rateModifier['distance'] = {}
     # Change the contact rate with others in the population
     rateModifier['distance']['modifier'] = {'contact': -0.15, 'lockdown': 0.40,

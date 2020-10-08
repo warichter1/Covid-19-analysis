@@ -29,9 +29,10 @@ index = 'Country/Region'
 excludeFields = ['Lat', 'Long', 'Province/State']
 country = 'US'
 currentDate = date.today()
-projectionDays = 110
+projectionDays = 106
 deathDays = 3
 begin = 10
+
 
 def importCsv(file, country, index, exclude):
     cv = pd.read_csv(file, index_col=index)
@@ -40,10 +41,12 @@ def importCsv(file, country, index, exclude):
             del cv[col]
     return cv.loc[country]
 
+
 def limit(begin, day, rate):
     if day >= begin:
         return 1/(sqrt((2*pi)))*rate*day
     return rate
+
 
 def calcChange(values, type=None):
     if type is not None:
@@ -120,7 +123,8 @@ if __name__ == "__main__":
     labelGrowth, = plt.plot(growthRates, color='magenta', label='Growth Rate')
     labelDeathRate, = plt.plot(deathRate, color='blue', label='Death Rate')
     labelProject = plt.axvline(today, color='green', label='Projection->')
-    plt.legend(handles=[labelCase, labelDeaths, labelGrowth, labelDeathRate, labelProject])
+    plt.legend(handles=[labelCase, labelDeaths, labelGrowth, labelDeathRate,
+                        labelProject])
     plt.yscale('log')
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
@@ -128,7 +132,7 @@ if __name__ == "__main__":
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
 
     result = []
-    x =1
+    x = 1
     for day in range(600):
         x = 1/sqrt((2*pi))*x*1.2
         result.append(x * day)
