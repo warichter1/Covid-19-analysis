@@ -197,7 +197,7 @@ summary = False
 
 if __name__ == "__main__":
     totalPop = 331000000
-    riskRise = 0.25
+    # riskRise = 0.25
     protection = {}
     # change the infection rate
     protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,

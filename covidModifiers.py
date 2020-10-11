@@ -128,7 +128,9 @@ class Modifiers:
 
     def distanceModifier(self, pop, distance):
         # print(not self.rise, self.rate['distance']['active'].values())
+        # self.curve['daysToPeak']
         toleranceLower = self.rate['riskLower']
+        peak = self.curve['daysToPeak']
         if self.checkRisk() is True:
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
