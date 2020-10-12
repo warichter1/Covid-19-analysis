@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from datetime import date
+from datetime import datetime
 from math import sqrt
 from math import pi
 import git
@@ -29,6 +30,8 @@ index = 'Country/Region'
 excludeFields = ['Lat', 'Long', 'Province/State']
 country = 'US'
 currentDate = date.today()
+timestamp = datetime.timestamp(datetime.now())
+oneDay = 60 * 60 * 24
 projectionDays = 106
 deathDays = 3
 begin = 10
@@ -71,9 +74,9 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
         labels.append(label)
         label, = plt.plot(dailyDeaths, color='blue', label='Deaths')
         labels.append(label)
-    label, = plt.plot(deathRate, color='blue', label='Daily Death Rate')
+    label, = plt.plot(deathRate, color='blue', label='Daily Deaths')
     labels.append(label)
-    label, = plt.plot(growthRates, color='magenta', label='Daily Growth Rate')
+    label, = plt.plot(growthRates, color='magenta', label='Daily Cases')
     labels.append(label)
     label = plt.axvline(today, color='green', label='Projection->')
     labels.append(label)
@@ -111,7 +114,7 @@ if __name__ == "__main__":
         now = us[cdate] - yesterday
         yesterday = us[cdate]
         dailyDeaths.append(deaths[cdate])
-        print("Day: {} - {} Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), format(now, ',d'), caseRate * 100, format(deaths[cdate], ',d'), deathRate[-1:][0] * 100))
+        print("Day: {} ({}) - Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), format(now, ',d'), caseRate * 100, format(deaths[cdate], ',d'), deathRate[-1:][0] * 100))
         lastDay = us[cdate]
         today = day
         day += 1
@@ -140,7 +143,9 @@ if __name__ == "__main__":
         avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(avgDeathRate)
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
-        print("Projected Day: {} - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, format(cases[-1:][0], ',d'), format(now, ',d'),caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), avgDeathRate* 100))
+        pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
+        timestamp += oneDay
+        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, pdate, format(cases[-1:][0], ',d'), format(now, ',d'),caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), avgDeathRate* 100))
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate)
