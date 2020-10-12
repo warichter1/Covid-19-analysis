@@ -81,6 +81,8 @@ def brierScoreLoss(bs, bsRef):
     return 1 - (bs / bsRef)
 
 # roc curve
+# fpr: Lower curve
+# tpr: Upper curve
 def rocCurve(samples=1000, plot=False):
     # generate 2 class dataset
     X, y = make_classification(n_samples=samples, n_classes=2, random_state=1)
@@ -105,7 +107,7 @@ def rocCurve(samples=1000, plot=False):
         pyplot.show()
     return {'fpr': fpr, 'tpr': tpr}
 
-def rocAuc(samples=1000, plot=False):
+def rocAuc(samples=1000):
     # generate 2 class dataset
     X, y = make_classification(n_samples=samples, n_classes=2, random_state=1)
     # split into train/test sets
