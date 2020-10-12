@@ -62,6 +62,30 @@ def calcChange(values, type=None):
     # return np.exp(np.diff(np.log(values))) - 1
 
 
+# Ugly I know, just a simple plot
+def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
+           deaths, dailyDeaths, deathRate, showTotal=False):
+    labels = []
+    if showTotal is True:
+        label, = plt.plot(cases,  color='red', label='Cases')
+        labels.append(label)
+        label, = plt.plot(dailyDeaths, color='blue', label='Deaths')
+        labels.append(label)
+    label, = plt.plot(deathRate, color='blue', label='Daily Death Rate')
+    labels.append(label)
+    label, = plt.plot(growthRates, color='magenta', label='Daily Growth Rate')
+    labels.append(label)
+    label = plt.axvline(today, color='green', label='Projection->')
+    labels.append(label)
+    plt.legend(handles=labels)
+    plt.yscale('log')
+    plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
+    plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
+    plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
+                                                               format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
+
+
+
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
     us = importCsv(file, country, index, excludeFields)
@@ -118,18 +142,8 @@ if __name__ == "__main__":
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         print("Projected Day: {} - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, format(cases[-1:][0], ',d'), format(now, ',d'),caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), avgDeathRate* 100))
 
-    labelCase, = plt.plot(cases,  color='red', label='Cases')
-    labelDeaths, = plt.plot(dailyDeaths, color='blue', label='Deaths')
-    labelGrowth, = plt.plot(growthRates, color='magenta', label='Growth Rate')
-    labelDeathRate, = plt.plot(deathRate, color='blue', label='Death Rate')
-    labelProject = plt.axvline(today, color='green', label='Projection->')
-    plt.legend(handles=[labelCase, labelDeaths, labelGrowth, labelDeathRate,
-                        labelProject])
-    plt.yscale('log')
-    plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
-    plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
-    plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
-                                                               format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
+    plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
+           deaths, dailyDeaths, deathRate)
 
     result = []
     x = 1
