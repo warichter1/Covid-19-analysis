@@ -6,7 +6,7 @@ Created on Sun Sep  6 22:27:27 2020
 @author: wrichter
 """
 import random
-
+from goals import Svm
 
 class Modifiers:
     def __init__(self, population, protection, rate, curve):
@@ -22,6 +22,8 @@ class Modifiers:
         self.distanceMod = 0
         self.trigger = None
         self.peak = 0
+        svm = Svm()
+        self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
         self.calcModifiers()
 
     def checkDirection(self, growth):

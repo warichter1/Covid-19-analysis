@@ -130,7 +130,7 @@ def rocAuc(samples=1000):
 
 class Svm:
 # SVM reliability diagrams with uncalibrated and calibrated probabilities
-    def __init__(self, goal=30, plot=False):
+    def __init__(self, goal=10, plot=False):
         # generate 2 class dataset
         X, y = make_classification(n_samples=1000, n_classes=2, weights=[1,1], random_state=1)
         # split into train/test sets
@@ -147,11 +147,13 @@ class Svm:
         if plot is True:
             self.plot()
 
-    def getUncalibrated(self):
-        return {'fop': self.fop_uncalibrated, 'mpv': self.mpv_uncalibrated}
+    def getUncalibrated(self, expandBy=None):
+        return {'fop': listExpand(self.fop_uncalibrated, expandBy=expandBy),
+                'mpv': listExpand(self.mpv_uncalibrated,  expandBy=expandBy)}
 
-    def getCalibrated(self):
-        return {'fop': self.fop_calibrated, 'mpv': self.mpv_calibrated}
+    def getCalibrated(self, expandBy=None):
+        return {'fop': listExpand(self.fop_calibrated, expandBy=expandBy),
+                'mpv': listExpand(self.mpv_calibrated, expandBy=expandBy)}
 
     # predict uncalibrated probabilities
     def uncalibrated(self, trainX, testX, trainy):
@@ -190,7 +192,10 @@ class Svm:
         # pyplot.plot(self.mpv_isocalibrated, self.fop_isocalibrated, marker='.')
         pyplot.show()
 
-def listExpand(inList, expandBy):
+def listExpand(inList, expandBy=None):
+    print("Expand:", expandBy)
+    if expandBy is None:
+        return inList
     n0 = inList[0]
     outList = [n0]
     for num in range(1, len(inList)):
@@ -202,4 +207,5 @@ def listExpand(inList, expandBy):
             i+= 1
         outList.append(n1)
         n0 = n1
+        print(n0, n1)
     return outList
