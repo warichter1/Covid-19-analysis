@@ -58,6 +58,13 @@ class Modifiers:
         num = random.randint(0, max)
         return True if num > self.rate['risk'] else False
 
+    def checkProbableRisk(self, max=10):
+        days = self.riseDays if self.riseDays > 0 else self.fallDays
+        adjust = self.riskAdjust[days] if len(self.riskAdjust) > days else 1
+        num = random.randint(0, max) * adjust
+        print("Debug:", days, adjust, num)
+        return True if num > self.rate['risk'] else False
+
     # Caller for PPE canculation of spread rate
     def checkSelfProt(self, growth, distance=True):
         self.distance = distance
@@ -133,7 +140,8 @@ class Modifiers:
         # self.curve['daysToPeak']
         toleranceLower = self.rate['riskLower']
         peak = self.curve['daysToPeak']
-        if self.checkRisk() is True:
+        if self.checkProbableRisk() is True:
+        # if self.checkRisk() is True:
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     self.rate['distance']['active'][modifier] = self.rise
