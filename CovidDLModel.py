@@ -146,11 +146,12 @@ if __name__ == "__main__":
         dailyCases.append(now)
         yesterday = current
         growthRates.append(caseRate)
-        dailyDeaths.append(int(dailyCases[-1:][0] * avgDeathRate))
+        dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-1:][0])
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(avgDeathRate)
+        totalDeaths.append(dailyDeaths[-1:][0])
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
