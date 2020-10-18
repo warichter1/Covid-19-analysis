@@ -72,11 +72,12 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
         labels.append(label)
-        label, = plt.plot(dailyDeaths, color='blue', label='Deaths')
+        label, = plt.plot(deathRate, color='blue', label='Mortality')
+        label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
-    label, = plt.plot(deathRate, color='blue', label='Daily Deaths')
+    label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
     labels.append(label)
-    label, = plt.plot(growthRates, color='magenta', label='Daily Cases')
+    label, = plt.plot(dailyCases, color='magenta', label='Daily Cases')
     labels.append(label)
     label = plt.axvline(today, color='green', label='Projection->')
     labels.append(label)
@@ -96,11 +97,14 @@ if __name__ == "__main__":
     deaths = importCsv(file, country, index, excludeFields)
     cases = []
     growthRates = []
+    dailyCases = []
     dailyDeaths = []
     deathRate = []
+    totalDeaths = []
     day = 1
     lastDay = 1
     yesterday = 0
+    yesterdayDeaths = 0
     # rateChange = 'avg2'
     # rateChange = 'avgAll'
     # rateChange = None
@@ -112,8 +116,12 @@ if __name__ == "__main__":
         deathRate.append(deaths[cdate] / us[cdate])
         cases.append(us[cdate])
         now = us[cdate] - yesterday
+        nowDeaths = deaths[cdate] - yesterdayDeaths
+        dailyCases.append(now)
         yesterday = us[cdate]
-        dailyDeaths.append(deaths[cdate])
+        yesterdayDeaths = deaths[cdate]
+        dailyDeaths.append(nowDeaths)
+        totalDeaths.append(deaths[cdate])
         print("Day: {} ({}) - Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Rate: {}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), format(now, ',d'), caseRate * 100, format(deaths[cdate], ',d'), deathRate[-1:][0] * 100))
         lastDay = us[cdate]
         today = day
@@ -135,9 +143,10 @@ if __name__ == "__main__":
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = current - yesterday
+        dailyCases.append(now)
         yesterday = current
         growthRates.append(caseRate)
-        dailyDeaths.append(int(cases[-1:][0] * avgDeathRate))
+        dailyDeaths.append(int(dailyCases[-1:][0] * avgDeathRate))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
