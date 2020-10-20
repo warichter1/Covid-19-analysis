@@ -143,10 +143,10 @@ if __name__ == "__main__":
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = current - yesterday
-        dailyCases.append(now)
+        dailyCases.append(now + (now - dailyCases[-3:][0])*.96)
         yesterday = current
         growthRates.append(caseRate)
-        dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-1:][0])
+        dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-4:][0])
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
