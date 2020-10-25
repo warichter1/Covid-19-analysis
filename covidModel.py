@@ -110,6 +110,7 @@ class GrowthAndMortality:
         self.overflow = []
         self.recovered = []
         self.modifiedCases = []
+        self.modPop = []
 
     def run(self, days, caseType='limits'):
         self.workingRate = baseRate
@@ -152,6 +153,7 @@ class GrowthAndMortality:
             self.cases.append(int(case))
             modifier = self.mod.checkSelfProt(self.caseGrowth)
             pop = self.mod.checkDistance(self.workingPop)
+            self.modPop.append(pop)
             self.workingRate = modifier
             self.modifiedCases.append(modifier)
             self.deaths.append(int(deaths))
@@ -186,6 +188,8 @@ class GrowthAndMortality:
             if len(self.growthRate) > 5 and int(sum(self.growthRate[-5:]) * 3000) == 0 and int(recover + .75) == 0:
                 print('Asymtotic curve reached, all US residents infected!\nEnd simulation.')
                 break
+        plt.plot(self.modPop)
+        plt.show()
         return day, totalRate, mortality
         # cases, growthRate, caseGrowth, deaths
 

@@ -8,7 +8,10 @@ Created on Sun Sep  6 22:27:27 2020
 import random
 from goals import Svm
 
+
 class Modifiers:
+    """Projection modifiers for population and protection calulations."""
+
     def __init__(self, population, protection, rate, curve):
         self.population = population
         self.protection = protection
@@ -19,7 +22,7 @@ class Modifiers:
         self.fallDays = 0
         self.changeDays = 10
         self.rateMod = 0
-        self.distanceMod = 0
+        self.distanceMod = 1
         self.trigger = None
         self.peak = 0
         svm = Svm()
@@ -27,6 +30,7 @@ class Modifiers:
         self.calcModifiers()
 
     def checkDirection(self, growth):
+        """Check for increasing or decreasing infections."""
         days = len(growth)
         change = None
         if days > 2:
@@ -35,18 +39,18 @@ class Modifiers:
                 self.fallDays += 1
                 self.riseDays = 0
                 if self.fallDays > self.curve['focusLoss'] and self.checkRisk() is True:
-                    self.trigger = self.rise = True
+                    self.trigger = self.rise = False
                     self.fallDays = 0
                     self.peak += 1
                     self.checkPeak()
-                    print('Reset - Fall:', self.fallDays, self.peak, direction)
+                    print('Reset - Fall:', self.riseDays, self.fallDays, direction)
             else:  # Change in behavior as peak has occured
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
-                    self.trigger = self.rise = False
+                    self.trigger = self.rise = True
                     self.riseDays = 0
-                    print('Reset - Rise:', self.riseDays, direction)
+                    print('Reset - Rise:', self.riseDays, self.fallDays, direction)
 
     def checkPeak(self):
         if self.peak > 1:
@@ -62,11 +66,11 @@ class Modifiers:
         days = self.riseDays if self.riseDays > 0 else self.fallDays
         adjust = self.riskAdjust[days] if len(self.riskAdjust) > days else 1
         num = random.randint(0, max) * adjust
-        print("Debug:", days, adjust, num)
+        # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
         return True if num > self.rate['risk'] else False
 
-    # Caller for PPE canculation of spread rate
     def checkSelfProt(self, growth, distance=True):
+        """# Caller for PPE caculation of spread rate."""
         self.distance = distance
         rate = self.rate['base']
         rate = rate if self.rateMod == 0 else rate * self.rateMod
@@ -103,7 +107,6 @@ class Modifiers:
         modifier = self.protection['modifier']
         if value is True:
             modifier = reversed(list(modifier))
-        # print('keys:', self.protection['active'].values(), value)
         if value in self.protection['active'].values():
             for key in modifier:
                 if self.protection['active'][key] is value:
@@ -111,31 +114,33 @@ class Modifiers:
                         self.rateMod -= self.protection['modifier'][key]
                     else:
                         self.rateMod += self.protection['modifier'][key]
-                    # print('set:', self.rateMod, self.protection['modifier'][key])
                     self.protection['active'][key] = not value
                     return 0
 
-    # Caller for self distancing calculations for spreading to otherts in a population
     def checkDistance(self, currentPop):
+        """Self distancing calculations for spread in a population."""
         # print("Check Distance:", currentPop, self.trigger)
         distance = list(self.rate['distance']['modifier'].keys())
         if not self.trigger is None:
             print('hit', 'Peak' if self.trigger is True else "Trough")
-            self.checkDistanceModifier(currentPop, list(distance))
+            self.checkDistanceModifier(list(distance))
             self.trigger = None
         # elif self.checkRisk():  # determine if risk is overcome
         else:
-            self.checkDistanceModifier(currentPop, list(distance))
+            self.checkDistanceModifier(list(distance))
+        return int(self.distanceMod * currentPop)
 
-    def checkDistanceModifier(self, pop, distance):
+    def checkDistanceModifier(self, distance):
+        print(self.rise)
         if self.rise is True:
             distance = list(distance[1:])
         else:
+            print('Going Down')
             distance = list(reversed(distance))
-        self.distanceModifier(pop, distance)
+        self.distanceModifier(distance)
         # print('Non-Trigger', self.rise)
 
-    def distanceModifier(self, pop, distance):
+    def distanceModifier(self, distance):
         # print(not self.rise, self.rate['distance']['active'].values())
         # self.curve['daysToPeak']
         toleranceLower = self.rate['riskLower']
@@ -144,12 +149,11 @@ class Modifiers:
         # if self.checkRisk() is True:
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
+                    direction = 'Down' if self.rise == False else 'Up'
                     self.rate['distance']['active'][modifier] = self.rise
-                    self.distanceMod = self.rate['distance']['modifier'][modifier]
-                    print("Match", modifier, self.rate['distance']['active'][modifier], self.rise, self.distanceMod)
+                    self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
+                    print("Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
                     return 0
-            # print('-> Modify Distance', self.rise, distance, self.rate['distance']['active'].values(), self.rate['distance']['modifier'], self.distanceMod)
-
 
     def calcModifiers(self):
         pop = self.population

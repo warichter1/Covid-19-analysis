@@ -143,7 +143,7 @@ if __name__ == "__main__":
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = current - yesterday
-        dailyCases.append(now + (now - dailyCases[-3:][0])*.96)
+        dailyCases.append(now + (now - dailyCases[-3:][0])*.97)
         yesterday = current
         growthRates.append(caseRate)
         dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-4:][0])
