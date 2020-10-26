@@ -131,11 +131,11 @@ class Modifiers:
         return int(self.distanceMod * currentPop)
 
     def checkDistanceModifier(self, distance):
-        print(self.rise)
+        # print(self.rise)
         if self.rise is True:
             distance = list(distance[1:])
         else:
-            print('Going Down')
+            # print('Going Down')
             distance = list(reversed(distance))
         self.distanceModifier(distance)
         # print('Non-Trigger', self.rise)
@@ -146,7 +146,6 @@ class Modifiers:
         toleranceLower = self.rate['riskLower']
         peak = self.curve['daysToPeak']
         if self.checkProbableRisk() is True:
-        # if self.checkRisk() is True:
             for modifier in distance:
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     direction = 'Down' if self.rise == False else 'Up'
