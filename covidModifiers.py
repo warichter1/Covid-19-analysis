@@ -20,6 +20,7 @@ class Modifiers:
         self.rise = True
         self.riseDays = 0
         self.fallDays = 0
+        self.lockdown = {'day': 0, 'active': False}
         self.changeDays = 10
         self.rateMod = 0
         self.distanceMod = 1
@@ -27,6 +28,7 @@ class Modifiers:
         self.peak = 0
         svm = Svm()
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
+        self.lockdownAdjust = svm.getUncalibrated(expandBy=6)['fop']
         self.calcModifiers()
 
     def checkDirection(self, growth):
@@ -62,7 +64,7 @@ class Modifiers:
         num = random.randint(0, max)
         return True if num > self.rate['risk'] else False
 
-    def checkProbableRisk(self, max=10):
+    def checkProbableRisk(self, risk, max=10):
         days = self.riseDays if self.riseDays > 0 else self.fallDays
         adjust = self.riskAdjust[days] if len(self.riskAdjust) > days else 1
         num = random.randint(0, max) * adjust
@@ -70,7 +72,7 @@ class Modifiers:
         return True if num > self.rate['risk'] else False
 
     def checkSelfProt(self, growth, distance=True):
-        """# Caller for PPE caculation of spread rate."""
+        """Caller for PPE caculation of spread rate."""
         self.distance = distance
         rate = self.rate['base']
         rate = rate if self.rateMod == 0 else rate * self.rateMod
@@ -145,14 +147,37 @@ class Modifiers:
         # self.curve['daysToPeak']
         toleranceLower = self.rate['riskLower']
         peak = self.curve['daysToPeak']
-        if self.checkProbableRisk() is True:
+        if self.checkProbableRisk(self.riskAdjust) is True:
             for modifier in distance:
+                if self.inLockdown(modifier) is True:
+                    return 0
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     direction = 'Down' if self.rise == False else 'Up'
                     self.rate['distance']['active'][modifier] = self.rise
                     self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
                     print("Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
                     return 0
+        self.inLockdown('check')
+
+    def inLockdown(self, modifier, max=10):
+        """Activate lockdown under special conditions."""
+        if modifier == 'lockdown':
+            if self.lockdown['active'] is False and self.lockdown['day'] == 0:
+                print("Entering Lockdown")
+                self.lockdown['active'] = True
+                self.rate['distance']['active'][modifier] = True
+        elif self.lockdown['active'] is True:
+            self.lockdown['day'] += 1
+            days = self.lockdown['day']
+            adjust = self.lockdownAdjust[days] if len(self.lockdownAdjust) > days else 1
+            num = random.randint(0, max) * adjust
+            # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
+            if num > self.rate['risk']:
+                print('Exiting Lockdown')
+                self.lockdown['active'] = False
+        return self.lockdown['active']
+
+
 
     def calcModifiers(self):
         pop = self.population

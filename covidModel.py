@@ -23,7 +23,6 @@ baseRate = 1/8
 caseType = 'limits'
 
 totalRate = baseRate
-rateChange = {}
 
 # rMax = Maximum growth rate
 # K = Carrying Capacity
@@ -40,6 +39,7 @@ class GrowthAndMortality:
         self.survival = survival  # rate of survival for those hospitalized
         self.popData = False
         self.modifier = False
+        self.rateChange = {}
 
     def initializeQueues(self, availableBeds, inHospital, requireHospital, inIcu,
                          requireIcu):
@@ -128,17 +128,17 @@ class GrowthAndMortality:
             pinned = ""
             surge = 0
             storeCase = deepcopy(case)
-            if caseType == 'exponential':
+            if caseType == 'exponential': # Exponental Model
                 growth = (case * self.workingRate)
                 case = case + growth
-                if str(day + 1) in rateChange.keys():
+                if str(day + 1) in self.rateChange.keys():
                     print("Adjust Curve: {}".format(day + 1, case, ))
-                    totalRate = self.workingRate + rateChange[str(day + 1)]
+                    totalRate = self.workingRate + self.rateChange[str(day + 1)]
                     case = storeCase * (1 + totalRate)
                     if case > changePoint:
                         mortality = maxMortality
                     print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
-            else:
+            else:  # Limits to Growth Model
                 growth = growthLimit(self.workingRate, self.workingPop, case)
                 totalRate = growth / case
                 case = case + growth

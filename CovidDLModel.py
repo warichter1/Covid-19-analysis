@@ -160,9 +160,9 @@ if __name__ == "__main__":
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate)
 
-    result = []
-    x = 1
-    for day in range(600):
-        x = 1/sqrt((2*pi))*x*1.2
-        result.append(x * day)
+    # result = []
+    # x = 1
+    # for day in range(600):
+    #     x = 1/sqrt((2*pi))*x*1.2
+    #     result.append(x * day)
 
