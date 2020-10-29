@@ -144,18 +144,20 @@ if __name__ == "__main__":
         cases.append(current)
         now = current - yesterday
         dailyCases.append(now + (now - dailyCases[-3:][0])*.97)
+        # growthRates.append(caseRate)
+        growthRates.append(current / yesterday - 1)
         yesterday = current
-        growthRates.append(caseRate)
         dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-4:][0])
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
-        deathRate.append(avgDeathRate)
-        totalDeaths.append(dailyDeaths[-1:][0])
+        deathRate.append(totalDeaths[-1:][0] / current)
+        # deathRate.append(avgDeathRate)
+        totalDeaths.append(totalDeaths[-1:][0] + dailyDeaths[-1:][0])
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
-        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate, format(cases[-1:][0], ',d'), format(now, ',d'),caseRate * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), avgDeathRate* 100))
+        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate, format(cases[-1:][0], ',d'), format(now, ',d'),growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate)

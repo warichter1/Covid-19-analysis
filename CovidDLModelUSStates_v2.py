@@ -427,7 +427,7 @@ if __name__ == "__main__":
                         yscale='symlog', num=5, smoothed=True)
     # print('Plot Target States')
     # statePlot(['Arizona', 'Tennessee', 'South Carolina', 'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'], key='confirmedNew', smoothed=True)
-    # statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah', 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin'], key='confirmedNew', smoothed=True)
+    # statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah', 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'], key='confirmedNew', smoothed=True)
     # statePlot(['New York', 'New Jersey', 'California', 'Texas', 'Florida'], key='confirmedNew', smoothed=True)
     # print('Plot State Government')
     # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)

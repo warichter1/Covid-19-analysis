@@ -150,6 +150,7 @@ class Modifiers:
         if self.checkProbableRisk(self.riskAdjust) is True:
             for modifier in distance:
                 if self.inLockdown(modifier) is True:
+                    # add lockdown modifier code with week
                     return 0
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     direction = 'Down' if self.rise == False else 'Up'
