@@ -217,9 +217,10 @@ if __name__ == "__main__":
     rateModifier['distance']['active'] = {'contact': False, 'lockdown': False,
                                           'oneMeter': False,
                                           'twoMeter': False}
-    rateModifier['distance']['lockdownDuration'] = {'5': .0227, '6': .0261,
-                                                    '7': .0275, '8': .0275,
-                                                    '9': .0275}
+    rateModifier['distance']['lockdownDuration'] = {'0': 0, '1': .009, '2': .01,
+                                                    '3': .02, '2': .0205,
+                                                    '5': .0227, '6': .0261,
+                                                    'default': .0275}
 
     # Change the risk tolerance rate
     rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,

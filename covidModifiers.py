@@ -139,6 +139,7 @@ class Modifiers:
         else:
             # print('Going Down')
             distance = list(reversed(distance))
+            # print(distance)
         self.distanceModifier(distance)
         # print('Non-Trigger', self.rise)
 
@@ -149,8 +150,9 @@ class Modifiers:
         peak = self.curve['daysToPeak']
         if self.checkProbableRisk(self.riskAdjust) is True:
             for modifier in distance:
-                if self.inLockdown(modifier) is True:
-                    # add lockdown modifier code with week
+                if modifier == 'lockdown':
+                    self.inLockdown(modifier)
+                # if self.inLockdown(modifier) is True:
                     return 0
                 if not self.rate['distance']['active'][modifier] == self.rise:
                     direction = 'Down' if self.rise == False else 'Up'
@@ -158,7 +160,8 @@ class Modifiers:
                     self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
                     print("Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
                     return 0
-        self.inLockdown('check')
+        elif self.lockdown['active'] is True:
+            self.inLockdown('check')
 
     def inLockdown(self, modifier, max=10):
         """Activate lockdown under special conditions."""
@@ -169,6 +172,7 @@ class Modifiers:
                 self.rate['distance']['active'][modifier] = True
         elif self.lockdown['active'] is True:
             self.lockdown['day'] += 1
+            self.lockdownModifier()
             days = self.lockdown['day']
             adjust = self.lockdownAdjust[days] if len(self.lockdownAdjust) > days else 1
             num = random.randint(0, max) * adjust
@@ -178,6 +182,13 @@ class Modifiers:
                 self.lockdown['active'] = False
         return self.lockdown['active']
 
+    def lockdownModifier(self):
+        week = str(int(self.lockdown['day'] % 7))
+        if week in self.rate['distance']['lockdownDuration'].keys():
+            mod = self.rate['distance']['lockdownDuration'][week]
+        else:
+            mod = self.rate['distance']['lockdownDuration']['default']
+        self.distanceMod = 1 - mod + self.rate['distance']['modifier']['lockdown']
 
 
     def calcModifiers(self):
