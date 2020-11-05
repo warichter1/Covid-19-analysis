@@ -114,15 +114,20 @@ if __name__ == "__main__":
         caseRate = us[cdate] / lastDay - 1
         growthRates.append(caseRate)
         deathRate.append(deaths[cdate] / us[cdate])
-        cases.append(us[cdate])
-        now = us[cdate] - yesterday
-        nowDeaths = deaths[cdate] - yesterdayDeaths
+        cases.append(int(us[cdate]))
+        now = int(us[cdate] - yesterday)
+        nowDeaths = int(deaths[cdate]) - yesterdayDeaths
         dailyCases.append(now)
-        yesterday = us[cdate]
-        yesterdayDeaths = deaths[cdate]
+        yesterday = (us[cdate])
+        yesterdayDeaths = int(deaths[cdate])
         dailyDeaths.append(nowDeaths)
-        totalDeaths.append(deaths[cdate])
-        print("Day: {} ({}) - Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate, format(us[cdate], ',d'), format(now, ',d'), caseRate * 100, format(deaths[cdate], ',d'), format(nowDeaths, ',d'), deathRate[-1:][0] * 100))
+        totalDeaths.append(int(deaths[cdate]))
+        print("Day: {} ({}) - Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
+                                                                                                                         format(int(us[cdate]), ',d'),
+                                                                                                                         format(now, ',d'), caseRate * 100,
+                                                                                                                         format(int(deaths[cdate]), ',d'),
+                                                                                                                         format(nowDeaths, ',d'),
+                                                                                                                         deathRate[-1:][0] * 100))
         lastDay = us[cdate]
         today = day
         day += 1
@@ -142,7 +147,7 @@ if __name__ == "__main__":
         # print(grate)
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
-        now = current - yesterday
+        now = int(current - yesterday)
         dailyCases.append(now + (now - dailyCases[-3:][0])*.97)
         # growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
@@ -157,7 +162,9 @@ if __name__ == "__main__":
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
-        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate, format(cases[-1:][0], ',d'), format(now, ',d'),growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
+        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
+                                                                                                                                   format(cases[-1:][0], ',d'), format(now, ',d'),
+                                                                                                                                   growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate)

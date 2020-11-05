@@ -112,7 +112,7 @@ class GrowthAndMortality:
         self.modifiedCases = []
         self.modPop = []
 
-    def run(self, days, caseType='limits'):
+    def run(self, days, caseType='limits', distancePop=False):
         self.workingRate = baseRate
         changePoint = 5000000
         case = 1
@@ -154,6 +154,8 @@ class GrowthAndMortality:
             modifier = self.mod.checkSelfProt(self.caseGrowth)
             pop = self.mod.checkDistance(self.workingPop)
             self.modPop.append(pop)
+            if distancePop is True:
+                self.workingPop = pop
             self.workingRate = modifier
             self.modifiedCases.append(modifier)
             self.deaths.append(int(deaths))
