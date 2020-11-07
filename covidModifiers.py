@@ -24,7 +24,7 @@ class Modifiers:
         self.changeDays = 10
         self.rateMod = 0
         self.distanceMod = 1
-        self.trigger = None
+        self.trigger = None  # One Time shot, process trigger then disable
         self.peak = 0
         svm = Svm()
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
@@ -46,7 +46,7 @@ class Modifiers:
                     self.peak += 1
                     self.checkPeak()
                     print('Reset - Fall:', self.riseDays, self.fallDays, direction)
-            else:  # Change in behavior as peak has occured
+            else:  # Change in behavior as peak has occurred
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
@@ -71,7 +71,7 @@ class Modifiers:
         # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
         return True if num > self.rate['risk'] else False
 
-    def checkSelfProt(self, growth, distance=True):
+    def checkSelfProt(self, growth, distance=True):  # distabce always True, never disables trigger
         """Caller for PPE caculation of spread rate."""
         self.distance = distance
         rate = self.rate['base']
@@ -93,15 +93,15 @@ class Modifiers:
                 print('Rise', self.rise, self.rate['risk'], self.rateMod)
 
     def checkRise(self):
-        # add changes here rising rate here
-        if self.distance is False:
-            self.trigger = None
+        """add changes here rising rate here."""
+        # if self.distance is False:
+        self.trigger = None
         self.getProtect()
 
     def checkFall(self):
-        # add changes to falling rate here
-        if self.distance is False:
-            self.trigger = None
+        """add changes to falling rate here."""
+        # if self.distance is False:
+        self.trigger = None
         self.getProtect()
 
     def getProtect(self, value=None):
@@ -139,7 +139,7 @@ class Modifiers:
         if self.rise is True:
             distance = list(distance[1:])
         else:
-            # print('Going Down')
+            print('Going Down')
             distance = list(reversed(distance))
             # print(distance)
         self.distanceModifier(distance)
@@ -147,19 +147,19 @@ class Modifiers:
 
     def distanceModifier(self, distance):
         """Check Direction and assign the appropriatye population modifier."""
-        print('Direction:', not self.rise, self.rate['distance']['active'].values())
+        # print('Direction:', self.rise, distance, self.rate['distance']['active'])
         # self.curve['daysToPeak']
         # toleranceLower = self.rate['riskLower']
         # peak = self.curve['daysToPeak']
         if self.checkProbableRisk(self.riskAdjust) is True:
             for modifier in distance:
-                print('Trigger Mod:', modifier, self.rate['distance']['active'][modifier], self.rise)
+                print('-->Trigger Mod:', modifier, distance, self.rate['distance']['active'][modifier], self.rise)
                 if modifier == 'lockdown':
                     self.inLockdown(modifier)
                     return 0
                 # Determine whether infections are rising or falling and set.
                 if not self.rate['distance']['active'][modifier] == self.rise:
-                    direction = 'Down' if self.rise == False else 'Up'
+                    direction = 'Down' if self.rise is False else 'Up'
                     self.rate['distance']['active'][modifier] = self.rise
                     self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
                     print("Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
@@ -170,7 +170,7 @@ class Modifiers:
     def inLockdown(self, modifier, max=10):
         """Activate lockdown under special conditions."""
         if modifier == 'lockdown':
-            if self.lockdown['active'] is False and self.lockdown['day'] == 0:
+            if self.lockdown['active'] is False and self.lockdown['day'] < 1:
                 print("Entering Lockdown")
                 self.lockdown['active'] = True
                 self.rate['distance']['active'][modifier] = True
