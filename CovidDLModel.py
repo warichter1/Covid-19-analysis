@@ -67,7 +67,7 @@ def calcChange(values, type=None):
 
 # Ugly I know, just a simple plot
 def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate, showTotal=False):
+           deaths, dailyDeaths, deathRate, showTotal=False,yscale='log', inauguration=365):
     labels = []
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
@@ -81,8 +81,12 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     label = plt.axvline(today, color='green', label='Projection->')
     labels.append(label)
+    iCases = format(int(dailyCases[inauguration]), ',d')
+    iDeaths = format(int(dailyDeaths[365]), ',d')
+    label = plt.axvline(inauguration, color='violet', label='Inauguration Day\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
+    labels.append(label)
     plt.legend(handles=labels)
-    plt.yscale('log')
+    plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
@@ -101,6 +105,7 @@ if __name__ == "__main__":
     dailyDeaths = []
     deathRate = []
     totalDeaths = []
+    inaugurationDay = 365
     day = 1
     lastDay = 1
     yesterday = 0
@@ -167,7 +172,7 @@ if __name__ == "__main__":
                                                                                                                                    growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate)
+           deaths, dailyDeaths, deathRate,yscale='linear')
 
     # result = []
     # x = 1

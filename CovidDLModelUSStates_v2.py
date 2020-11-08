@@ -316,14 +316,14 @@ class CovidCountryRegion:
                         ysmoothed = gs1d(self.dataStore[region][field],
                                          sigma=2)
                         plot, = plt.plot(ysmoothed, color=colors[pos],
-                                         label=region + "-" + field)
+                                         label=region + "-" + field.replace("New", ""))
                     else:
                         plot, = plt.plot(self.dataStore[region][field],
                                          color=colors[pos],
-                                         label=region + "-" + field)
+                                         label=region + "-" + field.replace(('New', '')))
                     handles.append(plot)
                     pos += 1
-        plt.legend(handles=handles)
+        plt.legend(handles=handles, loc='upper left')
         plt.yscale(yscale)
         plt.title(title)
         plt.xlabel("Days\nToday: {}".format(currentDate.strftime("%B %d, %Y")))
@@ -424,7 +424,7 @@ if __name__ == "__main__":
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
-                        yscale='symlog', num=5, smoothed=True)
+                        yscale='symlog', num=7, smoothed=True)
     # print('Plot Target States')
     # statePlot(['Arizona', 'Tennessee', 'South Carolina', 'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'], key='confirmedNew', smoothed=True)
     # statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah', 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'], key='confirmedNew', smoothed=True)
