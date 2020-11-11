@@ -17,6 +17,7 @@ currentDate = date.today()
 
 begin = 3774
 days = 450
+# days = 200
 # baseRate = .142857
 baseRate = 1/8
 # caseType = 'exponential'
@@ -151,7 +152,9 @@ class GrowthAndMortality:
             deaths *= .5
             # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
+            # Add PPE modifier and apply.
             modifier = self.mod.checkSelfProt(self.caseGrowth)
+            # add a modifier based in personal distance from others.
             pop = self.mod.checkDistance(self.workingPop)
             self.modPop.append(pop)
             if distancePop is True:
@@ -258,7 +261,7 @@ if __name__ == "__main__":
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
     hp.setModifier(protection, rateModifier, curveAdjust)
     # day, cases, growthRate, caseGrowth, deaths =
-    day, totalRate, mortality = hp.run(days, caseType)
+    day, totalRate, mortality = hp.run(days, caseType, distancePop=False)
     # plt.plot(hp.cases, label='Infected population')
     handles = []
     label, = plt.plot(hp.caseGrowth, label='Daily Infected')

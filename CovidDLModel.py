@@ -32,7 +32,7 @@ country = 'US'
 currentDate = date.today()
 timestamp = datetime.timestamp(datetime.now())
 oneDay = 60 * 60 * 24
-projectionDays = 106
+projectionDays = 100
 deathDays = 3
 begin = 10
 
