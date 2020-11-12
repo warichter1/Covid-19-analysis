@@ -29,7 +29,8 @@ totalRate = baseRate
 # K = Carrying Capacity
 # N = Population size
 def growthLimit(rMax, K, N):
-    return rMax * ((K - N)/K) * N
+    growth = rMax * ((K - N)/K) * N
+    return growth if growth > -1 else 0
 
 
 class GrowthAndMortality:
@@ -141,6 +142,8 @@ class GrowthAndMortality:
                     print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
             else:  # Limits to Growth Model
                 growth = growthLimit(self.workingRate, self.workingPop, case)
+                # if growth < 0:
+                #     growth = 0
                 totalRate = growth / case
                 case = case + growth
             case = self.adjustPop(case)

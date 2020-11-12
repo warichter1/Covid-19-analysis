@@ -37,7 +37,7 @@ class Modifiers:
         change = None
         if days > 2:
             direction = growth[-2:]
-            print('Rise:', self.rise, "Fall:", self.fallDays, "Trigger:", self.trigger)
+            print('Rise:', self.rise, self.riseDays,"Fall:", self.fallDays, "Direction:", direction)
             if direction[0] > direction[1]:  # cases have hit a daily peak
                 self.fallDays += 1
                 self.riseDays = 0
@@ -49,6 +49,7 @@ class Modifiers:
                     self.checkPeak()
                     print('Reset - Fall:', self.riseDays, self.fallDays, direction)
             else:  # Change in behavior as peak has occurred
+                self.rise = True
                 self.fallDays = 0
                 self.riseDays += 1
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
