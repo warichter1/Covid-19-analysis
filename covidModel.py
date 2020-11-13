@@ -118,6 +118,7 @@ class GrowthAndMortality:
         self.workingRate = baseRate
         changePoint = 5000000
         case = 1
+        cachePop = totalPop
         mortality = self.baseMortality
         print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
         self.herdPoints = {'base': self.workingPop * .42, 'baseFound': False, 'baseDay': 0,
@@ -142,8 +143,6 @@ class GrowthAndMortality:
                     print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
             else:  # Limits to Growth Model
                 growth = growthLimit(self.workingRate, self.workingPop, case)
-                # if growth < 0:
-                #     growth = 0
                 totalRate = growth / case
                 case = case + growth
             case = self.adjustPop(case)
@@ -153,10 +152,10 @@ class GrowthAndMortality:
             staticDeaths = growth*mortality
             adjustedMortality = 0.0 if int(deaths)  == 0 else deaths / case
             deaths *= .5
-            # print(int(case), int(deaths), int(growth*mortality + .5), overflow, adjustedMortality * 100)
             self.cases.append(int(case))
             # Add PPE modifier and apply.
             modifier = self.mod.checkSelfProt(self.caseGrowth)
+            cachePop = self.workingPop
             # add a modifier based in personal distance from others.
             pop = self.mod.checkDistance(self.workingPop)
             self.modPop.append(pop)

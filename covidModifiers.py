@@ -37,7 +37,7 @@ class Modifiers:
         change = None
         if days > 2:
             direction = growth[-2:]
-            print('Rise:', self.rise, self.riseDays,"Fall:", self.fallDays, "Direction:", direction)
+            # print('Rise:', self.rise, self.riseDays,"Fall:", self.fallDays, "Direction:", direction)
             if direction[0] > direction[1]:  # cases have hit a daily peak
                 self.fallDays += 1
                 self.riseDays = 0
@@ -147,8 +147,7 @@ class Modifiers:
         """Check Direction and assign the appropriate population modifier."""
         if self.checkProbableRisk(self.riskAdjust) is True:
             for modifier in distance:
-                if modifier == 'lockdown':
-                    self.inLockdown(modifier)
+                if modifier == 'lockdown' and self.inLockdown(modifier) is True:
                     return 0
                 print('-->Trigger Mod:', modifier, distance, self.rate['distance']['active'], self.rate['distance']['active'][modifier] , self.rise)
                 # Determine whether infections are rising or falling and set.
@@ -165,9 +164,10 @@ class Modifiers:
         """Activate lockdown under special conditions."""
         if modifier == 'lockdown':
             if self.lockdown['active'] is False and self.lockdown['day'] < 1:
-                print("Entering Lockdown")
+                print("--> Entering Lockdown")
                 self.lockdown['active'] = True
                 self.rate['distance']['active'][modifier] = True
+                self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
         elif self.lockdown['active'] is True:
             self.lockdown['day'] += 1
             self.lockdownModifier()
@@ -176,7 +176,7 @@ class Modifiers:
             num = random.randint(0, max) * adjust
             # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
             if num > self.rate['risk']:
-                print('Exiting Lockdown')
+                print('Exiting Lockdown <--')
                 self.lockdown['active'] = False
         return self.lockdown['active']
 
