@@ -28,8 +28,10 @@ from collections import OrderedDict
 import operator
 # import random
 
+from multiprocessing import Pool
 from multiprocessing import Manager
 from multiprocessing import Process
+from multiprocessing import cpu_count
 from multiprocessing.managers import DictProxy, ListProxy
 
 manager = Manager()
@@ -67,7 +69,6 @@ currentDate = date.today()
 projectionDays = 30
 deathDays = 3
 begin = 10
-
 
 class CovidCountryRegion:
     def __init__(self, config={}):
@@ -115,7 +116,8 @@ class CovidCountryRegion:
                                       'negative': [], 'pending': [],
                                       'hospitalizedCumulative': [],
                                       'onVentilatorCumulative': [],
-                                      'inIcuCumulative': []}
+                                      'inIcuCumulative': [],
+                                      'testsPerCapita': 0}
             self.dataStore['casesPerCapita'][region] = 0
             self.dataStore['testsPerCapita'][region] = 0
             for key in self.trackingList:
@@ -125,74 +127,8 @@ class CovidCountryRegion:
         self.index = self.defaultIndex
         self.exclude = self.defaultExclude
 
-    def processing(self, printStatus=True):
-        process = {}
-        dataStore = manager.dict()
-        self.printStatus=printStatus
-        self.importData()
-        self.setRegionKeys()
-        self.daysIndex = self.confirmed.keys()
-        # self.daysIndex = [day for  day in self.confirmed.keys() if not day in self.exclude + ['Province_State']]
-        print("Current Date:", self.daysIndex[-1:][0], "Processing:")
-        print("Build Regions")
-        dataStore.update(self.dataStore)
-        self.regions = ['Virginia']
-        # print(dataStore['Virginia'])
-        for region in self.regions:
-            process[region] = Process(target=self.processRegionResults, args=[region, dataStore])
-        print("Start Regions")
-        for region in self.regions:
-            process[region].start()
-        print("Join Regions")
-        for region in self.regions:
-            process[region].join()
-        print("Complete Regions")
-        self.dataStore = dict(dataStore)
-        for region in self.regions:
-             self.summarizeRegion(region)
-        self.getAggregate()
-        if printStatus:
-            for region in self.regions:
-                self.printSummary(region)
-            self.sortTopDict('currentCaseRate')
-            self.sortTopDict('currentDeathRate')
-            self.sortTopDict('casesPerCapita')
-            self.sortTopDict('testsPerCapita', reverse=False)
-            self.printTop(['currentAggregate', 'currentCaseRate', 'casesPerCapita', 'currentDeathRate', 'testsPerCapita'], 5)
-
-    def getAggregate(self):
-        for region in dict(self.dataStore['currentCaseRate']).keys():
-            if not region in self.dataStore['testsPerCapita'].keys():
-                self.dataStore['testsPerCapita'][region] = 0
-            if region in self.dataStore['currentDeathRate'].keys():
-                # self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region] * self.dataStore['casesPerCapita'][region] * (1 - self.dataStore['testsPerCapita'][region]) * 10000
-                self.dataStore['currentAggregate'][region] = (self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region]) * 100 + self.dataStore['casesPerCapita'][region] * 1000
-        self.sortTopDict('currentAggregate')
-
-    def sortTopDict(self, key, reverse=True):
-        self.dataStore[key] = OrderedDict(sorted(self.dataStore[key].items(), key=operator.itemgetter(1), reverse=reverse))
-
-    def importData(self, path=None, confirmed=None, deathFile=None):
-        filePath = self.config['jhuPath'] if path is None else path
-        file = self.config['jhuConfirmed'] if confirmed is None else confirmed
-        self.confirmed = self.importCsv(filePath + '/' + file)
-        self.confirmed.fillna(0, inplace=True)
-        self.regions = sorted(set(self.confirmed.index))
-        file = self.config['jhuDeaths'] if deathFile is None else deathFile
-        self.deaths = self.importCsv(filePath + '/' + file)
-        self.deaths.fillna(0, inplace=True)
-        self.tracking = self.downloadJson(self.config['medUrl'], self.config['medIndex'])
-        self.censusPop = self.importCsv(self.config['censusData'],
-                                        index=self.config['censusIndex'],
-                                        exclude=self.config['censusExclude'])
-        self.censusPop = self.censusPop[self.config['censusPopKey']]
-        self.stateGov = self.importCsv(self.config['stateGovData'],
-                                        index=self.config['stateGovIndex'],
-                                        exclude=self.config['stateGovExclude'])
-
-    def processRegionResults(self, region, store):
+    def processRegionResults(self, region, store, summary=False):
         """Build the results per region for various parameters."""
-        print('Processing Region', region, 'Results')
         dataStore = dict(store)
         previousDay = ""
         for day in self.daysIndex:
@@ -231,8 +167,8 @@ class CovidCountryRegion:
                     dataStore[region]['casesPerCapita'].append(0)
                 new = dataStore[region]['confirmed'][-2:]
                 dataStore[region]['confirmedNew'].append(abs(new[1] - new[0]))
-                if dataStore[region]['deaths'][-2:][0]  > 0:
-                    deathRate = dataStore[region]['deaths'][-2:][0]  / confirmed
+                if dataStore[region]['deaths'][-2:][0] > 0:
+                    deathRate = dataStore[region]['deaths'][-2:][0] / confirmed
                     dataStore[region]['deathRate'].append(deathRate)
                     if deathRate >= dataStore[region]['maxDeathRate']:
                         dataStore[region]['maxDeathRate'] = deathRate
@@ -245,8 +181,89 @@ class CovidCountryRegion:
                 new = dataStore[region]['deaths'][-2:]
                 dataStore[region]['deathsNew'].append(abs(new[1] - new[0]))
             previousDay = day
-        # self.summarizeRegion(region, dataStore)
+        if summary is True:
+            print('Region', region, 'Complete')
         return store.update(dataStore)
+
+    def processing(self, printStatus=True):
+        dataStore = manager.dict()
+        self.printStatus=printStatus
+        self.importData()
+        self.setRegionKeys()
+        self.daysIndex = self.confirmed.keys()
+        # self.daysIndex = [day for  day in self.confirmed.keys() if not day in self.exclude + ['Province_State']]
+        print("Current Date:", self.daysIndex[-1:][0], "Processing:")
+        print("Build Regions")
+        dataStore.update(self.dataStore)
+        # self.regions = ['Virginia']
+        # print(dataStore['Virginia'])
+        self.parallelPool(dataStore)
+        # self.parallelProcess(dataStore)
+        # print(self.dataStore)
+        for region in self.regions:
+             self.summarizeRegion(region)
+        self.getAggregate()
+        if printStatus:
+            for region in self.regions:
+                self.printSummary(region)
+            self.sortTopDict('currentCaseRate')
+            self.sortTopDict('currentDeathRate')
+            self.sortTopDict('casesPerCapita')
+            self.sortTopDict('testsPerCapita', reverse=False)
+            self.printTop(['currentAggregate', 'currentCaseRate', 'casesPerCapita', 'currentDeathRate', 'testsPerCapita'], 5)
+
+    def parallelPool(self, dataStore, summary=False):
+        # data = []
+        # for region in self.regions:
+        #     data.append((dataStore, region))
+        pool = Pool(processes=len(self.regions))
+        print("Start Regions")
+        pool.map(self.processRegionResults, dataStore, self.regions)
+        pool.close()
+        print("Complete Regions")
+        self.dataStore = dict(dataStore)
+
+    def parallelProcess(self, dataStore, summary=False):
+        process = {}
+        for region in self.regions:
+            process[region] = Process(target=self.processRegionResults, args=[region, dataStore, summary])
+        print("Start Regions")
+        for region in self.regions:
+            process[region].start()
+            process[region].join()
+        print("Complete Regions")
+        self.dataStore = dict(dataStore)
+
+    def getAggregate(self):
+        for region in dict(self.dataStore['currentCaseRate']).keys():
+            if not region in self.dataStore['testsPerCapita'].keys():
+                self.dataStore['testsPerCapita'][region] = 0
+            if region in self.dataStore['currentDeathRate'].keys():
+                # self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region] * self.dataStore['casesPerCapita'][region] * (1 - self.dataStore['testsPerCapita'][region]) * 10000
+                self.dataStore['currentAggregate'][region] = (self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region]) * 100 + self.dataStore['casesPerCapita'][region] * 1000
+        self.sortTopDict('currentAggregate')
+
+    def sortTopDict(self, key, reverse=True):
+        self.dataStore[key] = OrderedDict(sorted(self.dataStore[key].items(), key=operator.itemgetter(1), reverse=reverse))
+
+    def importData(self, path=None, confirmed=None, deathFile=None):
+        filePath = self.config['jhuPath'] if path is None else path
+        file = self.config['jhuConfirmed'] if confirmed is None else confirmed
+        self.confirmed = self.importCsv(filePath + '/' + file)
+        self.confirmed.fillna(0, inplace=True)
+        self.regions = sorted(set(self.confirmed.index))
+        file = self.config['jhuDeaths'] if deathFile is None else deathFile
+        self.deaths = self.importCsv(filePath + '/' + file)
+        self.deaths.fillna(0, inplace=True)
+        self.tracking = self.downloadJson(self.config['medUrl'], self.config['medIndex'])
+        self.censusPop = self.importCsv(self.config['censusData'],
+                                        index=self.config['censusIndex'],
+                                        exclude=self.config['censusExclude'])
+        self.censusPop = self.censusPop[self.config['censusPopKey']]
+        self.stateGov = self.importCsv(self.config['stateGovData'],
+                                        index=self.config['stateGovIndex'],
+                                        exclude=self.config['stateGovExclude'])
+
 
     def summarizeRegion(self, region):
         self.getParty(region)
@@ -321,8 +338,10 @@ class CovidCountryRegion:
 
     def printSummary(self, region):
         control = self.dataStore[region]['control']
+        confirm = self.dataStore[region]['confirmed'][-1:]
+        # print(confirm)
         print('[{}-{} - Pop: {}]'.format(region, control[:1], fmtNum(self.dataStore[region]['population'])))
-        print("\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
+        print("\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(confirm,
                                                                 fmtNum(self.dataStore[region]['confirmedNew'][-1:][0]),
                                                                 self.dataStore[region]['caseRate'][-1:][0] * 100,
                                                                 self.dataStore[region]['maxCaseRate'] * 100,
@@ -455,7 +474,11 @@ def statGovPlot(title, yscale, smoothed=False):
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
+    startTime = datetime.today()
     covidDf.processing()
+    endTime = datetime.today()
+    print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
+    print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
     #covidDf.plotResults(['currentAggregate'], yscale='symlog', num=5)
     # covidDf.plotResults(['currentCaseRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
     # covidDf.plotResults(['currentDeathRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)

@@ -127,7 +127,7 @@ if __name__ == "__main__":
         yesterdayDeaths = int(deaths[cdate])
         dailyDeaths.append(nowDeaths)
         totalDeaths.append(int(deaths[cdate]))
-        print("Day: {} ({}) - Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
+        print("Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
                                                                                                                          format(now, ',d'), caseRate * 100,
                                                                                                                          format(int(deaths[cdate]), ',d'),
@@ -167,7 +167,7 @@ if __name__ == "__main__":
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
-        print("Projected Day: {} ({}) - Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
+        print("Projected: {} ({}) Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
                                                                                                                                    format(cases[-1:][0], ',d'), format(now, ',d'),
                                                                                                                                    growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 

@@ -416,7 +416,11 @@ def statGovPlot(title, yscale, smoothed=False):
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
+    startTime = datetime.today()
     covidDf.processing()
+    endTime = datetime.today()
+    print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
+    print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
     #covidDf.plotResults(['currentAggregate'], yscale='symlog', num=5)
     # covidDf.plotResults(['currentCaseRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
     # covidDf.plotResults(['currentDeathRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
