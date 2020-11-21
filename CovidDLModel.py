@@ -17,6 +17,7 @@ from datetime import datetime
 from math import sqrt
 from math import pi
 import git
+import copy
 
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
@@ -79,6 +80,9 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     label, = plt.plot(dailyCases, color='magenta', label='Daily Cases')
     labels.append(label)
+    for i in range(scenarioNumber):
+        label, = plt.plot(scenario[i], label='Scenario #' + str(i))
+        labels.append(label)
     label = plt.axvline(today, color='green', label='Projection->')
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
@@ -105,6 +109,9 @@ if __name__ == "__main__":
     dailyDeaths = []
     deathRate = []
     totalDeaths = []
+    scenario = []
+    scenarioNumber = 7
+    scenarioAverage = 0
     inaugurationDay = 365
     day = 1
     lastDay = 1
@@ -142,6 +149,12 @@ if __name__ == "__main__":
     grate = calcChange(growthRates[-deathDays:], rateChange)
     projDay = 0
 
+    for i in range(scenarioNumber):
+        scenario.append(copy.deepcopy(dailyCases))
+    weekRates = growthRates[-scenarioNumber:]
+    # average of last 7 days
+    weekRates.append(sum(weekRates) / len(weekRates))
+
     print("Projection: {} days".format(projectionDays))
     for day in range(day, day + projectionDays):
         if caseRate + grate[projDay] <= 0:
@@ -154,7 +167,12 @@ if __name__ == "__main__":
         cases.append(current)
         now = int(current - yesterday)
         dailyCases.append(now + (now - dailyCases[-3:][0])*.97)
-        # growthRates.append(caseRate)
+        for i in range(scenarioNumber):
+            total = sum(scenario[i])
+            currentScenario = total * (1 + weekRates[i])
+            nowScenario = currentScenario - total
+            scenario[i].append(nowScenario + (now - scenario[i][-3:][0])*.97)
+        growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
         dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-4:][0])
