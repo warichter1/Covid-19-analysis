@@ -114,7 +114,7 @@ class GrowthAndMortality:
         self.modifiedCases = []
         self.modPop = []
 
-    def run(self, days, caseType='limits', distancePop=False):
+    def run(self, days, caseType='limits', distancePop=True):
         self.workingRate = baseRate
         changePoint = 5000000
         case = 1

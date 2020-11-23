@@ -78,12 +78,17 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
         labels.append(label)
     label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
     labels.append(label)
-    label, = plt.plot(dailyCases, color='magenta', label='Daily Cases')
+    label, = plt.plot(dailyCases, color='magenta', label='Current cases: {:2.2f}%'.format(100 * growthRates[today], ',d'))
     labels.append(label)
     for i in range(scenarioNumber):
-        label, = plt.plot(scenario[i], label='Scenario #' + str(i))
+        if i == scenarioNumber -1:
+             text = 'Week Average: {:2.2f}%'.format(100 * weekRates[i], ',d')
+        else:
+            text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i], ',d')
+
+        label, = plt.plot(scenario[i], label=text)
         labels.append(label)
-    label = plt.axvline(today, color='green', label='Projection->')
+    label = plt.axvline(today, color='green', label='Projection days ({})->'.format(projectionDays))
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
