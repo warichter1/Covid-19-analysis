@@ -85,10 +85,10 @@ class GrowthAndMortality:
         return pop * self.birthRate / 365
 
     # add Population deaths and births to the model
-    def adjustPop(self, cases):
+    def adjustTotalPop(self, cases):
         births = self.totalPop * self.birthRate
         deaths = self.totalPop * self.deathRate
-        self.workingPop -= deaths + births
+        # self.workingPop -= deaths + births
         self.totalPop -= deaths + births
         caseDeaths = cases / self.workingPop * deaths
         # print(caseDeaths, births, deaths)
@@ -118,7 +118,7 @@ class GrowthAndMortality:
         self.workingRate = baseRate
         changePoint = 5000000
         case = 1
-        cachePop = totalPop
+        overflow = 0
         mortality = self.baseMortality
         print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
         self.herdPoints = {'base': self.workingPop * .42, 'baseFound': False, 'baseDay': 0,
@@ -142,27 +142,24 @@ class GrowthAndMortality:
                         mortality = maxMortality
                     print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
             else:  # Limits to Growth Model
+                # Add PPE modifier and apply.
+                self.workingRate  = self.mod.checkSelfProt(self.caseGrowth)
+                # add a modifier based in personal distance from others.
+                pop = self.mod.checkDistance(self.workingPop)
+                if distancePop is True:
+                    self.workingPop = pop
                 growth = growthLimit(self.workingRate, self.workingPop, case)
                 totalRate = growth / case
-                case = case + growth
-            case = self.adjustPop(case)
-            overflow, recover = self.updateBeds(growth)
+                case = self.adjustTotalPop(case + growth)
+                overflow, recover = self.updateBeds(growth)
             deaths = case*mortality + overflow
             dailyDeaths = growth*mortality + overflow
             staticDeaths = growth*mortality
             adjustedMortality = 0.0 if int(deaths)  == 0 else deaths / case
             deaths *= .5
             self.cases.append(int(case))
-            # Add PPE modifier and apply.
-            modifier = self.mod.checkSelfProt(self.caseGrowth)
-            cachePop = self.workingPop
-            # add a modifier based in personal distance from others.
-            pop = self.mod.checkDistance(self.workingPop)
             self.modPop.append(pop)
-            if distancePop is True:
-                self.workingPop = pop
-            self.workingRate = modifier
-            self.modifiedCases.append(modifier)
+            self.modifiedCases.append(self.workingRate)
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(dailyDeaths)
             self.staticDeaths.append(staticDeaths)
@@ -195,8 +192,9 @@ class GrowthAndMortality:
             if len(self.growthRate) > 5 and int(sum(self.growthRate[-5:]) * 3000) == 0 and int(recover + .75) == 0:
                 print('Asymtotic curve reached, all US residents infected!\nEnd simulation.')
                 break
-        plt.plot(self.modPop)
-        plt.show()
+        if len(self.modPop) > 0:
+            plt.plot(self.modPop)
+            plt.show()
         return day, totalRate, mortality
         # cases, growthRate, caseGrowth, deaths
 

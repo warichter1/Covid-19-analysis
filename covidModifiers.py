@@ -151,14 +151,21 @@ class Modifiers:
                     return 0
                 print('-->Trigger Mod:', modifier, distance, self.rate['distance']['active'], self.rate['distance']['active'][modifier] , self.rise)
                 # Determine whether infections are rising or falling and set.
-                if not self.rate['distance']['active'][modifier] is self.rise:
-                    direction = 'Down' if self.rise is False else 'Up'
-                    self.rate['distance']['active'][modifier] = self.rise
-                    self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
-                    print("XXXXXX-Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
+                if self.rise is True and self.rate['distance']['active'][modifier] is False:
+                    self.rate['distance']['active'][modifier] = True
+                    self.changeDistance(modifier)
+                    return 0
+                elif self.rise is False and self.rate['distance']['active'][modifier] is True:
+                    self.rate['distance']['active'][modifier] = False
+                    self.changeDistance(modifier)
                     return 0
         elif self.lockdown['active'] is True:
             self.inLockdown('check')
+
+    def changeDistance(self, modifier):
+        direction = 'Down' if self.rise is False else 'Up'
+        self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
+        print("XXXXXX-Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
 
     def inLockdown(self, modifier, max=10):
         """Activate lockdown under special conditions."""
