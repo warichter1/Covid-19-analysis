@@ -167,6 +167,7 @@ class GrowthAndMortality:
             self.growthRate.append(totalRate)
             self.overflow.append(overflow)
             self.recovered.append(recover)
+            self.workingPop = self.totalPop
             if summary is True:
                 print("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
                                                        float(totalRate * 100),
