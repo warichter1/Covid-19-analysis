@@ -37,7 +37,6 @@ projectionDays = 120
 deathDays = 3
 begin = 10
 
-
 def importCsv(file, country, index, exclude):
     cv = pd.read_csv(file, index_col=index)
     if len(exclude) > 0:
