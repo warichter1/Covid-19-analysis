@@ -38,21 +38,25 @@ projectionDays = 120
 deathDays = 3
 begin = 10
 
-def importCsv(file, country, index, exclude):
-    cv = pd.read_csv(file, index_col=index)
-    if len(exclude) > 0:
-        for col in exclude:
+
+def importCsv(infile, incountry, indexin, inexclude):
+    """Import the JHU data files based on the index and exclude list."""
+    cv = pd.read_csv(infile, index_col=indexin)
+    if len(inexclude) > 0:
+        for col in inexclude:
             del cv[col]
-    return cv.loc[country]
+    return cv.loc[incountry]
 
 
 def limit(begin, day, rate):
+    """Limits to growth calculation."""
     if day >= begin:
         return 1/(sqrt((2*pi)))*rate*day
     return rate
 
 
 def calcChange(values, type=None):
+    """Multiple methods of adjusting projected trends."""
     if type is not None:
         if type == 'avg2':
             return [(values[-1:][0] - values[-2:][0]) for i in range(len(values))]
@@ -63,12 +67,12 @@ def calcChange(values, type=None):
         elif type == 'avgDiff':
             return [(sum(np.diff(values)) / len(np.diff(values))) for i in range(len(values))]
     return np.diff(values) - 1
-    # return np.exp(np.diff(np.log(values))) - 1
 
 
-# Ugly I know, just a simple plot
 def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate, showTotal=False,yscale='log', inauguration=365):
+           deaths, dailyDeaths, deathRate, showTotal=False, yscale='log',
+           inauguration=365):
+    """# Ugly I know, just a simple plot."""
     labels = []
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
@@ -78,21 +82,24 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
         labels.append(label)
     label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
     labels.append(label)
-    label, = plt.plot(dailyCases, color='magenta', label='Current: {:2.2f}%'.format(100 * growthRates[today], ',d'))
+    label, = plt.plot(dailyCases, color='magenta',
+                      label='Current: {:2.2f}%'.format(100*growthRates[today]))
     labels.append(label)
     for i in range(scenarioNumber):
-        if i == scenarioNumber -1:
-             text = 'Week Average: {:2.2f}%'.format(100 * weekRates[i], ',d')
+        if i == scenarioNumber - 1:
+            text = 'Week Average: {:2.2f}%'.format(100 * weekRates[i])
         else:
-            text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i], ',d')
+            text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
 
         label, = plt.plot(scenario[i], label=text)
         labels.append(label)
-    label = plt.axvline(today, color='green', label='Projection days ({})->'.format(projectionDays))
+    label = plt.axvline(today, color='green',
+                        label='Projection days ({})->'.format(projectionDays))
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
-    label = plt.axvline(inauguration, color='violet', label='Inauguration Day\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
+    label = plt.axvline(inauguration, color='violet',
+                        label='Inauguration Day\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
     labels.append(label)
     plt.legend(handles=labels)
     plt.yscale(yscale)
@@ -100,7 +107,6 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
-
 
 
 if __name__ == "__main__":
@@ -195,11 +201,4 @@ if __name__ == "__main__":
                                                                                                                                    growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate,yscale='linear')
-
-    # result = []
-    # x = 1
-    # for day in range(600):
-    #     x = 1/sqrt((2*pi))*x*1.2
-    #     result.append(x * day)
-
+           deaths, dailyDeaths, deathRate, yscale='linear')
