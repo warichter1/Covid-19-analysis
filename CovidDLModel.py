@@ -9,16 +9,16 @@ Created on Sun Mar 22 16:18:30 2020
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+import copy
 from datetime import date
 from datetime import datetime
 from math import sqrt
 from math import pi
-import git
-import copy
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
+import git
 
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
@@ -48,28 +48,28 @@ def importCsv(infile, incountry, indexin, inexclude):
     return cv.loc[incountry]
 
 
-def limit(begin, day, rate):
+def limit(daybegin, dayLimit, rate):
     """Limits to growth calculation."""
-    if day >= begin:
-        return 1/(sqrt((2*pi)))*rate*day
+    if dayLimit >= daybegin:
+        return 1 / (sqrt((2 * pi))) * rate * dayLimit
     return rate
 
 
-def calcChange(values, type=None):
+def calcChange(values, projectType=None):
     """Multiple methods of adjusting projected trends."""
-    if type is not None:
-        if type == 'avg2':
+    if projectType is not None:
+        if projectType == 'avg2':
             return [(values[-1:][0] - values[-2:][0]) for i in range(len(values))]
-        elif type == 'avgAll':
+        elif projectType == 'avgAll':
             return [(sum(values) / len(values)) for i in range(len(values))]
-        elif type == 'today':
+        elif projectType == 'today':
             return [0 for i in range(len(values))]
-        elif type == 'avgDiff':
+        elif projectType == 'avgDiff':
             return [(sum(np.diff(values)) / len(np.diff(values))) for i in range(len(values))]
     return np.diff(values) - 1
 
 
-def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
+def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, showTotal=False, yscale='log',
            inauguration=365):
     """# Ugly I know, just a simple plot."""
@@ -83,7 +83,7 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
     labels.append(label)
     label, = plt.plot(dailyCases, color='magenta',
-                      label='Current: {:2.2f}%'.format(100*growthRates[today]))
+                      label='Current: {:2.2f}%'.format(100*growthRates[intoday]))
     labels.append(label)
     for i in range(scenarioNumber):
         if i == scenarioNumber - 1:
@@ -93,7 +93,7 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
 
         label, = plt.plot(scenario[i], label=text)
         labels.append(label)
-    label = plt.axvline(today, color='green',
+    label = plt.axvline(intoday, color='green',
                         label='Projection days ({})->'.format(projectionDays))
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
@@ -104,7 +104,7 @@ def plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
     plt.legend(handles=labels)
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
-    plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(day, caseRate * 100, currentDate.strftime("%B %d, %Y")))
+    plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
 

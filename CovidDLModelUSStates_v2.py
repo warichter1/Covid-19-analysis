@@ -8,13 +8,15 @@ Created on Fri Mar 27 18:16:15 2020
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
 
+from datetime import date
+from datetime import datetime
+from collections import OrderedDict
+import operator
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy
+# import scipy
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
-from datetime import date
-from datetime import datetime
 # from math import sqrt
 # from math import pi
 import git
@@ -23,9 +25,7 @@ import git
 # import sys
 # import glob
 # from pprint import pprint
-from copy import deepcopy
-from collections import OrderedDict
-import operator
+# from copy import deepcopy
 # import random
 
 from us_state_abbrev import us_state_abbrev
@@ -64,7 +64,10 @@ begin = 10
 
 
 class CovidCountryRegion:
+    """Class to parse and analize by country and region."""
+
     def __init__(self, config={}):
+        """Initialize default variabled in class CovidCountryRegion."""
         self.dataStore = OrderedDict()
         self.dataStore['currentAggregate'] = {}
         self.dataStore['currentCaseRate'] = {}
@@ -90,19 +93,28 @@ class CovidCountryRegion:
                              'hospitalizedCumulative',
                              'onVentilatorCumulative', 'inIcuCumulative']
         self.rename = {'Province_State': 'Province/State',
-                       'Country_Region': 'Country/Region',}
+                       'Country_Region': 'Country/Region'}
         self.regionKey = 'Province/State'
         self.subkeys = {'Confirmed': {}, 'Deaths': {}}
+        self.printStatus = False
+        self.daysIndex = []
+        self.regions = []
+        self.confirmed = []
+        self.deaths = []
+        self.censusPop = None
+        self.tracking = None
+        self.stateGov = {}
 
     def resetImportDefs(self):
+        """Reset import to defaults."""
         self.index = self.defaultIndex
         self.exclude = self.defaultExclude
 
     def processing(self, printStatus=True):
-        self.printStatus=printStatus
+        """All import and configuration is complete, process the data."""
+        self.printStatus = printStatus
         self.importData()
         self.daysIndex = self.confirmed.keys()
-        # self.daysIndex = [day for  day in self.confirmed.keys() if not day in self.exclude + ['Province_State']]
         print("Current Date:", self.daysIndex[-1:][0], "Processing:")
         for region in self.regions:
             self.processRegionResults(region)
@@ -112,21 +124,27 @@ class CovidCountryRegion:
             self.sortTopDict('currentDeathRate')
             self.sortTopDict('casesPerCapita')
             self.sortTopDict('testsPerCapita', reverse=False)
-            self.printTop(['currentAggregate', 'currentCaseRate', 'casesPerCapita', 'currentDeathRate', 'testsPerCapita'], 5)
+            self.printTop(['currentAggregate', 'currentCaseRate',
+                           'casesPerCapita',
+                           'currentDeathRate', 'testsPerCapita'], 5)
 
     def getAggregate(self):
+        """Evauate the current values of each region for high rates."""
         for region in self.dataStore['currentCaseRate'].keys():
-            if not region in self.dataStore['testsPerCapita'].keys():
+            if region not in self.dataStore['testsPerCapita'].keys():
                 self.dataStore['testsPerCapita'][region] = 0
             if region in self.dataStore['currentDeathRate'].keys():
-                # self.dataStore['currentAggregate'][region] = self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region] * self.dataStore['casesPerCapita'][region] * (1 - self.dataStore['testsPerCapita'][region]) * 10000
                 self.dataStore['currentAggregate'][region] = (self.dataStore['currentCaseRate'][region] * self.dataStore['currentDeathRate'][region]) * 100 + self.dataStore['casesPerCapita'][region] * 1000
         self.sortTopDict('currentAggregate')
 
     def sortTopDict(self, key, reverse=True):
-        self.dataStore[key] = OrderedDict(sorted(self.dataStore[key].items(), key=operator.itemgetter(1), reverse=reverse))
+        """Order by key, reverse (low/high)."""
+        self.dataStore[key] = OrderedDict(sorted(self.dataStore[key].items(),
+                                                 key=operator.itemgetter(1),
+                                                 reverse=reverse))
 
     def importData(self, path=None, confirmed=None, deathFile=None):
+        """Import JHU data."""
         filePath = self.config['jhuPath'] if path is None else path
         file = self.config['jhuConfirmed'] if confirmed is None else confirmed
         self.confirmed = self.importCsv(filePath + '/' + file)
@@ -135,16 +153,18 @@ class CovidCountryRegion:
         file = self.config['jhuDeaths'] if deathFile is None else deathFile
         self.deaths = self.importCsv(filePath + '/' + file)
         self.deaths.fillna(0, inplace=True)
-        self.tracking = self.downloadJson(self.config['medUrl'], self.config['medIndex'])
+        self.tracking = self.downloadJson(self.config['medUrl'],
+                                          self.config['medIndex'])
         self.censusPop = self.importCsv(self.config['censusData'],
                                         index=self.config['censusIndex'],
                                         exclude=self.config['censusExclude'])
         self.censusPop = self.censusPop[self.config['censusPopKey']]
         self.stateGov = self.importCsv(self.config['stateGovData'],
-                                        index=self.config['stateGovIndex'],
-                                        exclude=self.config['stateGovExclude'])
+                                       index=self.config['stateGovIndex'],
+                                       exclude=self.config['stateGovExclude'])
 
     def processRegionResults(self, region):
+        """Process the results of a region."""
         # print('Processing Region Results')
         self.dataStore[region] = {'confirmed': [], 'deaths': [],
                                   'confirmedNew': [], 'deathsNew': [],
@@ -171,7 +191,7 @@ class CovidCountryRegion:
                 self.dataStore[region]['confirmedNew'].append(confirmed)
                 self.dataStore[region]['deathsNew'].append(self.deaths.loc[region][day].sum())
             else:
-                if self.dataStore[region]['confirmed'][-2:][0]  > 0:
+                if self.dataStore[region]['confirmed'][-2:][0] > 0:
                     caseRate = abs(self.dataStore[region]['confirmed'][-2:][0] / confirmed - 1)
                     self.dataStore[region]['caseRate'].append(caseRate)
                     if region in self.censusPop.keys():
@@ -189,8 +209,8 @@ class CovidCountryRegion:
                     self.dataStore[region]['casesPerCapita'].append(0)
                 new = self.dataStore[region]['confirmed'][-2:]
                 self.dataStore[region]['confirmedNew'].append(abs(new[1] - new[0]))
-                if self.dataStore[region]['deaths'][-2:][0]  > 0:
-                    deathRate = self.dataStore[region]['deaths'][-2:][0]  / confirmed
+                if self.dataStore[region]['deaths'][-2:][0] > 0:
+                    deathRate = self.dataStore[region]['deaths'][-2:][0] / confirmed
                     self.dataStore[region]['deathRate'].append(deathRate)
                     if deathRate >= self.dataStore[region]['maxDeathRate']:
                         self.dataStore[region]['maxDeathRate'] = deathRate
@@ -206,6 +226,7 @@ class CovidCountryRegion:
         self.summarizeRegion(region)
 
     def summarizeRegion(self, region):
+        """Create a region summary."""
         self.getParty(region)
         self.dataStore['currentCaseRate'][region] = self.dataStore[region]['caseRate'][-1:][0]
         self.dataStore['currentDeathRate'][region] = self.dataStore[region]['deathRate'][-1:][0]
@@ -216,6 +237,7 @@ class CovidCountryRegion:
             self.printSummary(region)
 
     def getPop(self, region):
+        """Get data for a rgion population."""
         self.dataStore[region]['population'] = 0
         self.dataStore[region]['testsPerCapita'] = 0
         self.dataStore['casesPerCapita'][region] = 0
@@ -226,6 +248,7 @@ class CovidCountryRegion:
             self.dataStore['casesPerCapita'][region] = self.dataStore[region]['confirmed'][-1:][0] / self.censusPop[region]
 
     def getStateGovStats(self, region):
+        """Get statistics for the the region by ruling party."""
         state = {'Republican': 0.0, 'Democratic': 0.0, 'Independent': 0.0,
                  'Coalition': 0.0, 'Unicameral': 0.0}
         if region in self.stateGov.index:
@@ -241,6 +264,7 @@ class CovidCountryRegion:
         return state['control']
 
     def getParty(self, region):
+        """Get the party in charge of a region."""
         control = self.getStateGovStats(region)
         self.dataStore[region]['control'] = control
         if control is None:
@@ -260,10 +284,11 @@ class CovidCountryRegion:
             buffer = self.dataStore['stateControl'][control]['deathsNew']
             buffer = np.add(buffer, deathsNew)
             self.dataStore['stateControl'][control]['deathsNew'] = buffer
+        return 1
 
     def getTrack(self, region, day, columns):
+        """Get the results for a region by day."""
         result = {}
-        total = 0
         tday = datetime.strptime(day, '%m/%d/%y').strftime('%m/%d/%Y')
         code = us_state_abbrev[region]
         for col in columns:
@@ -273,7 +298,8 @@ class CovidCountryRegion:
                 result[col] = 0
         return result
 
-    def printTop(self, keys, num, title=None):
+    def printTop(self, keys, num):
+        """Get top cases by key."""
         for key in keys:
             topCases = OrderedDict(list(self.dataStore[key].items())[0:num])
             print("\nSummary of", key, "Regions")
@@ -281,6 +307,7 @@ class CovidCountryRegion:
                 self.printSummary(region)
 
     def printSummary(self, region):
+        """Print a summary for the region."""
         control = self.dataStore[region]['control']
         print('[{}-{} - Pop: {}]'.format(region, control[:1], fmtNum(self.dataStore[region]['population'])))
         print("\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
@@ -303,6 +330,7 @@ class CovidCountryRegion:
                     yscale='log',
                     title='Covid-19 - Patient 0: January 21, 2020',
                     smoothed=False):
+        """Plot the results for the period."""
         handles = []
         pos = 0
         colors = ['red', 'magenta', 'blue', 'green', 'cyan', 'yellow', 'black',
@@ -330,6 +358,7 @@ class CovidCountryRegion:
         plt.ylabel("US Cases - Aggregated Growth\nTop {} Regions ({})".format(num, yscale))
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
+        """Import csv data based on index, column(s) to rename/exclude."""
         index = index if len(index) > 0 else self.index
         df = pd.read_csv(file, index_col=index)
         exclude = exclude if len(exclude) > 0 else self.exclude
@@ -344,10 +373,11 @@ class CovidCountryRegion:
                 for col in rename:
                     df.rename({col: rename[col]}, axis='columns')
             except:
-                print('Missing:', col)
+                print('Missing:', rename)
         return df
 
     def downloadJson(self, url, index):
+        """Download data in json format, store as a Pandas dataframe."""
         df = pd.read_json(url)
         if len(self.trackingExclude) > 0:
             for col in self.trackingExclude:
@@ -361,6 +391,7 @@ class CovidCountryRegion:
         return df.fillna(0).set_index(index)
 
     def addListColsDf(self, state, keys=[]):
+        """Modify columns in a Pandas Dataframe."""
         if len(keys) < 1:
             return 0
         result = np.array(self.dataStore[state]['positive'])
@@ -370,31 +401,38 @@ class CovidCountryRegion:
 
 
 def fmtNum(num):
+    """Formatter to convert int to number with commas by thousand."""
     return format(int(num), ',d')
 
 
 def statePlot(states=[], key='confirmedNew', smoothed=False):
+    """Plot data by state."""
     handles = []
     total = None
     for state in states:
         if 'confirmed' in key:
-            total = format(int(covidDf.dataStore[state]['confirmed'][-1:][0]), ',d')
+            total = format(int(covidDf.dataStore[state]['confirmed'][-1:][0]),
+                           ',d')
             rate = covidDf.dataStore[state]['caseRate'][-1:][0]
         else:
-            total = format(int(covidDf.dataStore[state]['deaths'][-1:][0]), ',d')
+            total = format(int(covidDf.dataStore[state]['deaths'][-1:][0]),
+                           ',d')
             rate = covidDf.dataStore[state]['deathRate'][-1:][0]
         if smoothed is False:
             vector = covidDf.dataStore[state][key]
         else:
             vector = gs1d(covidDf.dataStore[state][key], sigma=2)
-        label, = plt.plot(vector, label="{}: {}/{:2.2f}%".format(state, total, rate * 100))
+        label, = plt.plot(vector, label="{}: {}/{:2.2f}%".format(state, total,
+                                                                 rate * 100))
         handles.append(label)
     plt.legend(handles=handles)
     plt.title(key.capitalize().replace('new', ' By Day'))
     plt.ylabel('Growth\nRegion: Cases/Rate')
     plt.xlabel('Days: {}'.format(len(covidDf.dataStore[state][key])))
 
+
 def statGovPlot(title, yscale, smoothed=False):
+    """Plot summary by state goverment."""
     handles = []
     for party in ['Republican', 'Democratic']:
         for key in ['confirmedNew', 'deathsNew']:
@@ -402,7 +440,8 @@ def statGovPlot(title, yscale, smoothed=False):
             if smoothed is False:
                 vector = covidDf.dataStore['stateControl'][party][key]
             else:
-                vector = gs1d(covidDf.dataStore['stateControl'][party][key], sigma=2)
+                vector = gs1d(covidDf.dataStore['stateControl'][party][key],
+                              sigma=2)
             label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', ''), party[:1], fmtNum(total)))
             handles.append(label)
     plt.legend(handles=handles)
@@ -413,6 +452,7 @@ def statGovPlot(title, yscale, smoothed=False):
 
 # statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
 # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
+
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
@@ -436,7 +476,3 @@ if __name__ == "__main__":
     # print('Plot State Government')
     # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
     # covidDf.plotResults(['Virginia'])
-
-
-
-
