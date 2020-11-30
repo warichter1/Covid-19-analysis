@@ -87,7 +87,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     for i in range(scenarioNumber):
         if i == scenarioNumber - 1:
-            text = 'Week Average: {:2.2f}%'.format(100 * weekRates[i])
+            text = 'Weekly Average: {:2.2f}%'.format(100 * weekRates[i])
         else:
             text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
 
