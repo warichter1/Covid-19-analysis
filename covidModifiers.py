@@ -220,7 +220,7 @@ class Modifiers:
         p = self.rate['eduPartyDR']['someCollege'][1]
         self.party['r']['level']['college'] = [c * p, p]
         p = self.rate['eduPartyDR']['postGrad'][0]
-        c = (edu['masters'] + edu['phd'] + edu['professional'])* pop
+        c = (edu['masters'] + edu['phd'] + edu['professional']) * pop
         self.party['d']['level']['postGrad'] = [c * p, p]
         p = self.rate['eduPartyDR']['postGrad'][1]
         self.party['r']['level']['postGrad'] = [c * p, p]
