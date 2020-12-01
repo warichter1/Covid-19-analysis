@@ -15,10 +15,44 @@ class CovidData:
         self.population = 331000000
         self.protection = {}
         self.rate = {}
+        self.ageDeathRate = {}
+        self.raceDeathRate = {}
+        self.infectionByAge = {}
         self.curve = {}
         self.human = {}
         self.addHumanity()
-        self.addData()
+        self.addRiskData()
+        self.calcModifiers()
+        self.addAgeDeathRate()
+        self.addRaceDeathRate()
+        self.infectionsByAgeRate()
+
+    def addAgeDeathRate(self):
+        self.ageDeathRate['0-1'] = 0.00008
+        self.ageDeathRate['1-4'] = 0.00005
+        self.ageDeathRate['5-14'] = 0.00013
+        self.ageDeathRate['14-34'] = 0.00121
+        self.ageDeathRate['34-44'] = 0.00676
+        self.ageDeathRate['45-54'] = 0.04815
+        self.ageDeathRate['55-64'] = 0.11909
+        self.ageDeathRate['65-74'] = 0.20769
+        self.ageDeathRate['75-84'] = 0.26640
+        self.ageDeathRate['85-plus'] = 0.33322
+
+    def addRaceDeathRate(self):
+        self.raceDeathRate['white'] = 0.533
+        self.raceDeathRate['black'] = 0.23
+        self.raceDeathRate['Native American'] = 0.006
+        self.raceDeathRate['hispanic'] = 0.051
+        self.raceDeathRate['Asian'] = 0.165
+        self.raceDeathRate['other'] = 0.014
+
+    def infectionsByAgeRate(self):
+        self.infectionByAge['5-9'] = 0.000016
+        self.infectionByAge['10-19'] = 0.0000039
+        self.infectionByAge['20-49'] = 0.000092
+        self.infectionByAge['50-64'] = 0.0014
+        self.infectionByAge['65-plus'] = 0.0056
 
     def addHumanity(self):
         self.human['mortality'] = 0.0305
@@ -37,7 +71,7 @@ class CovidData:
         self.human['totalBeds'] = totalBeds
         self.human['covidBedsTotal'] = totalBeds * (1 - bedOccupancy)
 
-    def addData(self):
+    def addRiskData(self):
         self.protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
         self.protection['active'] = {'mask': False, 'eyeLow': False,
@@ -103,12 +137,18 @@ class CovidData:
         self.party['d']['percentage'], total = self.countParty('d')
         self.party['r']['percentage'], total = self.countParty('r')
 
+    def countParty(self, party):
+        total = sum([i[0] for i in self.party[party]['level'].values()])
+        return total/self.population, total
 
 if __name__ == "__main__":
     cd = CovidData()
     print('Data:')
-    print(cd.rate)
-    print(cd.curve)
-    print(cd.human)
-    print(cd.party)
+    print('Rates:', cd.rate)
+    print('Curve:', cd.curve)
+    print('Human:', cd.human)
+    print('Party', cd.party)
+    print('Death By Age', cd.ageDeathRate)
+    print('Death by Race', cd.raceDeathRate)
+    print('Infections by Age', cd.infectionByAge)
 

@@ -27,3 +27,5 @@ https://www.webmd.com/lung/news/20200608/eye-protection-could-decrease-covid-19-
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7276229/
 
+https://www.acsh.org/news/2020/06/23/coronavirus-covid-deaths-us-age-race-14863
+
