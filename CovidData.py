@@ -160,6 +160,9 @@ class CovidData:
         print('Total infections: {}, Deaths: {}'.format(infected,
                                                         deaths))
 
+    def formatPrint(self, input):
+        header = input.keys()
+
 
 def fmtNum(num):
     """Formatter to convert int to number with commas by thousand."""
