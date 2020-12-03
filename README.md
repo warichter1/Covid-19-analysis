@@ -29,3 +29,11 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7276229/
 
 https://www.acsh.org/news/2020/06/23/coronavirus-covid-deaths-us-age-race-14863
 
+https://www.theatlantic.com/health/archive/2020/08/long-haulers-covid-19-recognition-support-groups-symptoms/615382/
+
+https://health.ucdavis.edu/coronavirus/covid-19-information/covid-19-long-haulers.html
+
+https://www.pewtrusts.org/en/research-and-analysis/blogs/stateline/2020/10/09/covid-19-long-haulers-worry-about-coverage-costs
+
+Stats:
+https://www.advisory.com/daily-briefing/2020/10/22/long-covid

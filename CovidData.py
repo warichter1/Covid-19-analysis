@@ -8,7 +8,10 @@ Created on Sun Nov 29 21:07:52 2020
 
 
 class CovidData:
+    """Data for various details of Covid."""
+
     def __init__(self):
+        """Covid data class initializers."""
         self.baseRate = 1/8
         self.rate = {}
         self.party = {}
@@ -20,6 +23,9 @@ class CovidData:
         self.infectionByAge = {}
         self.curve = {}
         self.human = {}
+        self.severity = {'asymptomatic': 0.42, 'hospitalization': 0.2}
+        self.severity['symtomtic'] = 1 - self.severity['asymptomatic']
+        self.severity['symtomtic'] -= self.severity['hospitalization']
         self.addHumanity()
         self.addRiskData()
         self.calcModifiers()
@@ -28,6 +34,7 @@ class CovidData:
         self.infectionsByAgeRate()
 
     def addAgeDeathRate(self):
+        """Death rate by age range."""
         self.ageDeathRate['0-1'] = 0.00008
         self.ageDeathRate['1-4'] = 0.00005
         self.ageDeathRate['5-14'] = 0.00013
@@ -40,6 +47,7 @@ class CovidData:
         self.ageDeathRate['85-plus'] = 0.33322
 
     def addRaceDeathRate(self):
+        """Death rate by race."""
         self.raceDeathRate['white'] = 0.533
         self.raceDeathRate['black'] = 0.23
         self.raceDeathRate['Native American'] = 0.006
@@ -48,6 +56,7 @@ class CovidData:
         self.raceDeathRate['other'] = 0.014
 
     def infectionsByAgeRate(self):
+        """Infection rate by age range."""
         self.infectionByAge['5-9'] = 0.000016
         self.infectionByAge['10-19'] = 0.0000039
         self.infectionByAge['20-49'] = 0.000092
@@ -55,6 +64,7 @@ class CovidData:
         self.infectionByAge['65-plus'] = 0.0056
 
     def addHumanity(self):
+        """Variables that affect ability to control Covid."""
         self.human['mortality'] = 0.0305
         self.human['maxMortality'] = 0.12
         self.human['popDeathRate'] = 10.542/1000/365
@@ -72,6 +82,7 @@ class CovidData:
         self.human['covidBedsTotal'] = totalBeds * (1 - bedOccupancy)
 
     def addRiskData(self):
+        """Risks."""
         self.protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
                               'eyeHigh': 0.16}
         self.protection['active'] = {'mask': False, 'eyeLow': False,
@@ -107,6 +118,7 @@ class CovidData:
         self.curve['focusLoss'] = 60
 
     def calcModifiers(self):
+        """Parse data to create scientific trust and education with party."""
         pop = self.population
         edu = self.rate['education']
         self.party['d'] = {'sciTrust': [pop * self.rate['sciTrustRD'][0],
@@ -138,8 +150,21 @@ class CovidData:
         self.party['r']['percentage'], total = self.countParty('r')
 
     def countParty(self, party):
+        """Calculate policial party."""
         total = sum([i[0] for i in self.party[party]['level'].values()])
         return total/self.population, total
+
+    def summary(self, day, infected, deaths, dataType="Current"):
+        """Summarize the data based on the current day, infections, deaths."""
+        print("{} summary for day {}:".format(dataType, fmtNum(day)))
+        print('Total infections: {}, Deaths: {}'.format(infected,
+                                                        deaths))
+
+
+def fmtNum(num):
+    """Formatter to convert int to number with commas by thousand."""
+    return format(int(num), ',d')
+
 
 if __name__ == "__main__":
     cd = CovidData()
@@ -151,4 +176,4 @@ if __name__ == "__main__":
     print('Death By Age', cd.ageDeathRate)
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
-
+    print('Severity of Infection', cd.severity)

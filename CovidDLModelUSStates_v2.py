@@ -356,6 +356,7 @@ class CovidCountryRegion:
         plt.title(title)
         plt.xlabel("Days\nToday: {}".format(currentDate.strftime("%B %d, %Y")))
         plt.ylabel("US Cases - Aggregated Growth\nTop {} Regions ({})".format(num, yscale))
+        plt.plot()
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
         """Import csv data based on index, column(s) to rename/exclude."""
@@ -429,6 +430,7 @@ def statePlot(states=[], key='confirmedNew', smoothed=False):
     plt.title(key.capitalize().replace('new', ' By Day'))
     plt.ylabel('Growth\nRegion: Cases/Rate')
     plt.xlabel('Days: {}'.format(len(covidDf.dataStore[state][key])))
+    plt.plot()
 
 
 def statGovPlot(title, yscale, smoothed=False):
@@ -449,6 +451,7 @@ def statGovPlot(title, yscale, smoothed=False):
     plt.title(title)
     plt.ylabel('Party in Control\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector)))
+    plt.plot()
 
 # statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
 # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
