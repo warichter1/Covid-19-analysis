@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 
 import git
 
+from CovidData import CovidData
+
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
 
@@ -202,3 +204,6 @@ if __name__ == "__main__":
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear')
+    cd = CovidData()
+    cd.summary(today, dailyCases[today], dailyDeaths[today], dataType="Current")
+    cd.summary(day, int(dailyCases[len(dailyCases) -1]), int(dailyDeaths[len(dailyDeaths) - 1]), dataType="Forecast")

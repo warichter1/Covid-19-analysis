@@ -175,6 +175,8 @@ class CovidData:
             line += str(fmtNum(input[col] * num)) + '\t'
             if len(col) > 7:
                 line += '\t'
+            if len(col) > 14:
+                line += '\t'
         print("       {}".format(title))
         print('=================================================================================')
         print(header)
