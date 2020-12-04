@@ -156,12 +156,28 @@ class CovidData:
 
     def summary(self, day, infected, deaths, dataType="Current"):
         """Summarize the data based on the current day, infections, deaths."""
+        print('=================================================================================')
         print("{} summary for day {}:".format(dataType, fmtNum(day)))
-        print('Total infections: {}, Deaths: {}'.format(infected,
-                                                        deaths))
+        print('Total infections: {}, Deaths: {}'.format(fmtNum(infected),
+                                                        fmtNum(deaths)))
+        self.formatPrint(self.infectionByAge, infected, 'Infections by Age')
+        self.formatPrint(self.severity, infected, 'Infections by severity')
+        self.formatPrint(self.ageDeathRate, deaths, 'Death Rate by Age Range')
+        self.formatPrint(self.raceDeathRate, deaths, 'Death Rate by Race')
+        print('=================================================================================')
 
-    def formatPrint(self, input):
-        header = input.keys()
+    def formatPrint(self, input, num, title):
+        header = ""
+        line = ""
+        for col in input.keys():
+            # print(input[col])
+            header += col + '\t'
+            line += str(fmtNum(input[col] * num)) + '\t'
+        print("       {}".format(title))
+        print('=================================================================================')
+        print(header)
+        print('---------------------------------------------------------------------------------')
+        print(line)
 
 
 def fmtNum(num):
@@ -180,3 +196,5 @@ if __name__ == "__main__":
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
     print('Severity of Infection', cd.severity)
+    cd.summary(120, 13921374, 273446, dataType="Current")
+    # cd.formatPrint(cd.ageDeathRate, 273446, 'Death Rate by Age Range')

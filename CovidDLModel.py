@@ -94,7 +94,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(scenario[i], label=text)
         labels.append(label)
     label = plt.axvline(intoday, color='green',
-                        label='Projection days ({})->'.format(projectionDays))
+                        label='Forecast: {} Days->'.format(projectionDays))
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
@@ -166,7 +166,7 @@ if __name__ == "__main__":
     # average of last 7 days
     weekRates[len(weekRates)-1] = (sum(weekRates) / len(weekRates))
 
-    print("Projection: {} days".format(projectionDays))
+    print("Forecast Details: {} days".format(projectionDays))
     for day in range(day, day + projectionDays):
         if caseRate + grate[projDay] <= 0:
             grate = calcChange(growthRates[-deathDays:], rateChange)
@@ -196,7 +196,7 @@ if __name__ == "__main__":
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
-        print("Projected: {} ({}) Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
+        print("Forecast: {} ({}) Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
                                                                                                                                    format(cases[-1:][0], ',d'), format(now, ',d'),
                                                                                                                                    growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
 
