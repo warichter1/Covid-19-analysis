@@ -24,8 +24,8 @@ class CovidData:
         self.curve = {}
         self.human = {}
         self.severity = {'asymptomatic': 0.42, 'hospitalization': 0.2}
-        self.severity['symtomtic'] = 1 - self.severity['asymptomatic']
-        self.severity['symtomtic'] -= self.severity['hospitalization']
+        self.severity['symtomatic'] = 1 - self.severity['asymptomatic']
+        self.severity['symtomatic'] -= self.severity['hospitalization']
         self.addHumanity()
         self.addRiskData()
         self.calcModifiers()
@@ -50,10 +50,10 @@ class CovidData:
         """Death rate by race."""
         self.raceDeathRate['white'] = 0.533
         self.raceDeathRate['black'] = 0.23
-        self.raceDeathRate['Native American'] = 0.006
         self.raceDeathRate['hispanic'] = 0.051
         self.raceDeathRate['Asian'] = 0.165
         self.raceDeathRate['other'] = 0.014
+        self.raceDeathRate['Native American'] = 0.006
 
     def infectionsByAgeRate(self):
         """Infection rate by age range."""
@@ -173,6 +173,8 @@ class CovidData:
             # print(input[col])
             header += col + '\t'
             line += str(fmtNum(input[col] * num)) + '\t'
+            if len(col) > 7:
+                line += '\t'
         print("       {}".format(title))
         print('=================================================================================')
         print(header)
