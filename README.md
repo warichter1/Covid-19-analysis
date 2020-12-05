@@ -35,5 +35,7 @@ https://health.ucdavis.edu/coronavirus/covid-19-information/covid-19-long-hauler
 
 https://www.pewtrusts.org/en/research-and-analysis/blogs/stateline/2020/10/09/covid-19-long-haulers-worry-about-coverage-costs
 
+https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/
+
 Stats:
 https://www.advisory.com/daily-briefing/2020/10/22/long-covid

@@ -23,28 +23,24 @@ class CovidData:
         self.infectionByAge = {}
         self.curve = {}
         self.human = {}
-        self.severity = {'asymptomatic': 0.42, 'hospitalization': 0.2}
+        self.severity = {'asymptomatic': 0.42, 'hospitalized': 0.2}
         self.severity['symtomatic'] = 1 - self.severity['asymptomatic']
-        self.severity['symtomatic'] -= self.severity['hospitalization']
+        self.severity['symtomatic'] -= self.severity['hospitalized']
         self.addHumanity()
         self.addRiskData()
         self.calcModifiers()
         self.addAgeDeathRate()
         self.addRaceDeathRate()
         self.infectionsByAgeRate()
+        self.deathsSex()
 
     def addAgeDeathRate(self):
         """Death rate by age range."""
-        self.ageDeathRate['0-1'] = 0.00008
-        self.ageDeathRate['1-4'] = 0.00005
-        self.ageDeathRate['5-14'] = 0.00013
-        self.ageDeathRate['14-34'] = 0.00121
-        self.ageDeathRate['34-44'] = 0.00676
-        self.ageDeathRate['45-54'] = 0.04815
-        self.ageDeathRate['55-64'] = 0.11909
-        self.ageDeathRate['65-74'] = 0.20769
-        self.ageDeathRate['75-84'] = 0.26640
-        self.ageDeathRate['85-plus'] = 0.33322
+        self.ageDeathRate['0-17'] = 0.0006
+        self.ageDeathRate['18-44'] = 0.039
+        self.ageDeathRate['45-64'] = 0.224
+        self.ageDeathRate['65-74'] = 0.249
+        self.ageDeathRate['75-plus'] = 0.487
 
     def addRaceDeathRate(self):
         """Death rate by race."""
@@ -57,11 +53,14 @@ class CovidData:
 
     def infectionsByAgeRate(self):
         """Infection rate by age range."""
-        self.infectionByAge['5-9'] = 0.000016
-        self.infectionByAge['10-19'] = 0.0000039
-        self.infectionByAge['20-49'] = 0.000092
-        self.infectionByAge['50-64'] = 0.0014
-        self.infectionByAge['65-plus'] = 0.0056
+        self.infectionByAge['5-9'] = 0.0016
+        self.infectionByAge['10-19'] = 0.00039
+        self.infectionByAge['20-49'] = 0.0092
+        self.infectionByAge['50-64'] = 0.14
+        self.infectionByAge['65-plus'] = 0.56
+
+    def deathsSex(self):
+        self.deathsBySex = {'male': 0.618, 'female': 0.382}
 
     def addHumanity(self):
         """Variables that affect ability to control Covid."""
@@ -156,7 +155,7 @@ class CovidData:
 
     def summary(self, day, infected, deaths, dataType="Current"):
         """Summarize the data based on the current day, infections, deaths."""
-        print('=================================================================================')
+        print('\n=================================================================================')
         print("{} summary for day {}:".format(dataType, fmtNum(day)))
         print('Total infections: {}, Deaths: {}'.format(fmtNum(infected),
                                                         fmtNum(deaths)))
@@ -164,6 +163,7 @@ class CovidData:
         self.formatPrint(self.severity, infected, 'Infections by severity')
         self.formatPrint(self.ageDeathRate, deaths, 'Death Rate by Age Range')
         self.formatPrint(self.raceDeathRate, deaths, 'Death Rate by Race')
+        self.formatPrint(self.deathsBySex, deaths, 'Death Rate by Sex')
         print('=================================================================================')
 
     def formatPrint(self, input, num, title):
@@ -175,9 +175,10 @@ class CovidData:
             line += str(fmtNum(input[col] * num)) + '\t'
             if len(col) > 7:
                 line += '\t'
-            if len(col) > 14:
-                line += '\t'
-        print("       {}".format(title))
+            # if len(col) > 18:
+            #     line += '\t'
+        print('_________________________________________________________________________________')
+        print(">> {} <<".format(title))
         print('=================================================================================')
         print(header)
         print('---------------------------------------------------------------------------------')
