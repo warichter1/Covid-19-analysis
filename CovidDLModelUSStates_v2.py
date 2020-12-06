@@ -15,18 +15,8 @@ import operator
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-# import scipy
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
-# from math import sqrt
-# from math import pi
 import git
-# from os import listdir
-# from os.path import isfile, join
-# import sys
-# import glob
-# from pprint import pprint
-# from copy import deepcopy
-# import random
 
 from us_state_abbrev import us_state_abbrev
 
@@ -85,7 +75,7 @@ class CovidCountryRegion:
                         'Last Update', 'Latitude', 'Lat_', 'Lat', 'Longitude',
                         'Long_', 'Active', 'Combined_Key', 'FIPS', 'code3',
                         'Population', 'Admin2']
-        self.defaultExclude = self.exclude  # + ['Province_State']
+        self.defaultExclude = self.exclude
         self.defaultIndex = self.index
         self.trackingExclude = ['hash', 'fips', 'total', 'lastUpdateEt',
                                 'dateChecked', ]
@@ -165,7 +155,6 @@ class CovidCountryRegion:
 
     def processRegionResults(self, region):
         """Process the results of a region."""
-        # print('Processing Region Results')
         self.dataStore[region] = {'confirmed': [], 'deaths': [],
                                   'confirmedNew': [], 'deathsNew': [],
                                   'totalTests': [], 'casesPerCapita': [],
@@ -177,7 +166,6 @@ class CovidCountryRegion:
         for key in self.trackingList:
             self.dataStore[region][key] = []
         for day in self.daysIndex:
-            # print(day)
             results = self.getTrack(region, day, self.trackingList)
             for key in self.trackingList:
                 self.dataStore[region][key].append(results[key])
@@ -232,7 +220,6 @@ class CovidCountryRegion:
         self.dataStore['currentDeathRate'][region] = self.dataStore[region]['deathRate'][-1:][0]
         self.dataStore[region]['totalTests'] = list(self.addListColsDf(region, keys=['positive', 'negative', 'pending']))
         self.getPop(region)
-
         if self.printStatus:
             self.printSummary(region)
 
@@ -256,11 +243,9 @@ class CovidCountryRegion:
             state[self.stateGov.loc[region]['State Senate']] += 1
             state[self.stateGov.loc[region]['State House']] += 1
             state['control'] = 'Democratic' if state['Democratic'] > state['Republican'] else 'Republican'
-            # print(state)
         else:
             state['control']  = None
         self.dataStore[region]['government'] = state
-        # print(region, state)
         return state['control']
 
     def getParty(self, region):
@@ -270,10 +255,8 @@ class CovidCountryRegion:
         if control is None:
             self.dataStore[region]['control'] = 'None'
             return 0
-        # print(region, control)
         confirmedNew = np.array(self.dataStore[region]['confirmedNew'])
         deathsNew = np.array(self.dataStore[region]['deathsNew'])
-        # print(confirmedNew)
         if self.dataStore['stateControl'][control]['confirmedNew'] is None:
             self.dataStore['stateControl'][control]['confirmedNew'] = confirmedNew
             self.dataStore['stateControl'][control]['deathsNew'] = deathsNew
@@ -329,7 +312,7 @@ class CovidCountryRegion:
     def plotResults(self, keys, data=['confirmed', 'deaths'], num=5,
                     yscale='log',
                     title='Covid-19 - Patient 0: January 21, 2020',
-                    smoothed=False):
+                    smoothed=False, legendText='Aggregated Growth', filterLabel='New'):
         """Plot the results for the period."""
         handles = []
         pos = 0
@@ -343,20 +326,22 @@ class CovidCountryRegion:
                     if smoothed is True:
                         ysmoothed = gs1d(self.dataStore[region][field],
                                          sigma=2)
+                        label=region + "-" + field
                         plot, = plt.plot(ysmoothed, color=colors[pos],
-                                         label=region + "-" + field.replace("New", ""))
+                                         label=label.replace(filterLabel, ""))
                     else:
+                        label = region + "-" + field
                         plot, = plt.plot(self.dataStore[region][field],
                                          color=colors[pos],
-                                         label=region + "-" + field.replace(('New', '')))
+                                         label=label.replace((filterLabel, '')))
                     handles.append(plot)
                     pos += 1
         plt.legend(handles=handles, loc='upper left')
         plt.yscale(yscale)
         plt.title(title)
         plt.xlabel("Days\nToday: {}".format(currentDate.strftime("%B %d, %Y")))
-        plt.ylabel("US Cases - Aggregated Growth\nTop {} Regions ({})".format(num, yscale))
-        plt.plot()
+        plt.ylabel("US Cases - {}\nTop {} Regions ({})".format(legendText, num, yscale))
+        plt.show()
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
         """Import csv data based on index, column(s) to rename/exclude."""
@@ -430,11 +415,11 @@ def statePlot(states=[], key='confirmedNew', smoothed=False):
     plt.title(key.capitalize().replace('new', ' By Day'))
     plt.ylabel('Growth\nRegion: Cases/Rate')
     plt.xlabel('Days: {}'.format(len(covidDf.dataStore[state][key])))
-    plt.plot()
+    plt.show()
 
 
 def statGovPlot(title, yscale, smoothed=False):
-    """Plot summary by state goverment."""
+    """Plot summary by state government."""
     handles = []
     for party in ['Republican', 'Democratic']:
         for key in ['confirmedNew', 'deathsNew']:
@@ -451,10 +436,7 @@ def statGovPlot(title, yscale, smoothed=False):
     plt.title(title)
     plt.ylabel('Party in Control\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector)))
-    plt.plot()
-
-# statePlot(['Texas', 'Tennessee', 'Florida', 'Michigan', 'Georgia', 'Pennsylvania', 'Virginia', 'California', 'Oregon'], key='confirmedNew', smoothed=True)
-# statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
+    plt.show()
 
 
 if __name__ == "__main__":
@@ -464,18 +446,24 @@ if __name__ == "__main__":
     endTime = datetime.today()
     print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
     print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
-    #covidDf.plotResults(['currentAggregate'], yscale='symlog', num=5)
-    # covidDf.plotResults(['currentCaseRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
-    # covidDf.plotResults(['currentDeathRate'], data=['confirmedNew', 'deathsNew'], yscale='symlog', num=5, smoothed=True)
-    # covidDf.plotResults(['currentCaseRate'], data=['confirmed', 'deaths'], yscale='symlog', num=5, smoothed=True)
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
                         yscale='symlog', num=7, smoothed=True)
-    # print('Plot Target States')
-    # statePlot(['Arizona', 'Tennessee', 'South Carolina', 'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'], key='confirmedNew', smoothed=True)
-    # statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah', 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'], key='confirmedNew', smoothed=True)
-    # statePlot(['New York', 'New Jersey', 'California', 'Texas', 'Florida'], key='confirmedNew', smoothed=True)
-    # print('Plot State Government')
-    # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog', smoothed=True)
-    # covidDf.plotResults(['Virginia'])
+    covidDf.plotResults(['casesPerCapita'],
+                        data=['confirmedNew'],
+                        yscale='symlog', num=14, smoothed=True,
+                        legendText="Cases Per Capita",
+                        filterLabel='-confirmedNew')
+    print('Plot Target States')
+    statePlot(['Arizona', 'New Jersey', 'Tennessee', 'South Carolina',
+               'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'],
+              key='confirmedNew', smoothed=True)
+    statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah',
+               'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'],
+              key='confirmedNew', smoothed=True)
+    statePlot(['New York', 'California', 'Texas', 'Florida'],
+              key='confirmedNew', smoothed=True)
+    print('Plot State Government')
+    statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
+                smoothed=True)
