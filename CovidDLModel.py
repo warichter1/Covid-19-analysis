@@ -205,5 +205,11 @@ if __name__ == "__main__":
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear')
     cd = CovidData()
-    cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
-    cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
+    days = {cdate: today, pdate: len(cases)}
+    totalCases = {'Current': cases[today - 1],
+                  'Forecast': int(cases[len(cases) -1])}
+    totalDead = {'Current': totalDeaths[today - 1],
+                   'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
+    cd.summary(days, totalCases, totalDead)
+    # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
+    # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")

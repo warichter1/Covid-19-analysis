@@ -6,6 +6,8 @@ Created on Sun Nov 29 21:07:52 2020
 @author: wrichter
 """
 
+from prettytable import PrettyTable
+
 
 class CovidData:
     """Data for various details of Covid."""
@@ -153,36 +155,55 @@ class CovidData:
         total = sum([i[0] for i in self.party[party]['level'].values()])
         return total/self.population, total
 
-    def summary(self, day, infected, deaths, dataType="Current"):
+    def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
         print('\n=================================================================================')
-        print("{} summary for day {}:".format(dataType, fmtNum(day)))
-        print('Total infections: {}, Deaths: {}'.format(fmtNum(infected),
-                                                        fmtNum(deaths)))
-        self.formatPrint(self.infectionByAge, infected, 'Infections by Age')
-        self.formatPrint(self.severity, infected, 'Infections by severity')
-        self.formatPrint(self.ageDeathRate, deaths, 'Death Rate by Age Range')
-        self.formatPrint(self.raceDeathRate, deaths, 'Death Rate by Race')
-        self.formatPrint(self.deathsBySex, deaths, 'Death Rate by Sex')
+        dates = list(days.keys())
+        number = list(days.values())
+        for i in range(len(dates)):
+            print("{} summary for day {} ({}):".format(list(caseTotals.keys())[i],
+                                                        fmtNum(number[i]),
+                                                        dates[i]))
+            infected = list(caseTotals.values())
+            dead = list(deathTotals.values())
+            print('Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
+                                                            fmtNum(dead[i])))
         print('=================================================================================')
+        # self.formatPrint(days, self.infectionByAge, infected, 'Infections by Age')
+        # self.formatPrint(days, self.severity, infected, 'Infections by severity')
+        # self.formatPrint(days, self.ageDeathRate, deaths, 'Death Rate by Age Range')
+        # self.formatPrint(days, self.raceDeathRate, deaths, 'Death Rate by Race')
+        # self.formatPrint(days, self.deathsBySex, deaths, 'Death Rate by Sex')
+        # print('=================================================================================')
 
-    def formatPrint(self, input, num, title):
-        header = ""
-        line = ""
-        for col in input.keys():
-            # print(input[col])
-            header += col + '\t'
-            line += str(fmtNum(input[col] * num)) + '\t'
-            if len(col) > 7:
-                line += '\t'
-            # if len(col) > 18:
-            #     line += '\t'
-        print('_________________________________________________________________________________')
-        print(">> {} <<".format(title))
-        print('=================================================================================')
-        print(header)
-        print('---------------------------------------------------------------------------------')
-        print(line)
+    def formatPrint(self, dayTotals, template, title):
+        keyType = list(dayTotals.keys())
+        totals = list(dayTotals.values())
+        table = PrettyTable()
+        table.field_names = [title] + list(template[0].keys())
+        for j in range():
+            row = [keyType[j]]
+            for i in range(template):
+                row.append(template[i] * totals[j])
+        table.add_row(row)
+
+    # def oldPrint(self):
+        # header = ""
+        # line = ""
+        # for col in input.keys():
+        #     # print(input[col])
+        #     header += col + '\t'
+        #     line += str(fmtNum(input[col] * num)) + '\t'
+        #     if len(col) > 7:
+        #         line += '\t'
+        #     # if len(col) > 18:
+        #     #     line += '\t'
+        # print('_________________________________________________________________________________')
+        # print(">> {} <<".format(title))
+        # print('=================================================================================')
+        # print(header)
+        # print('---------------------------------------------------------------------------------')
+        # print(line)
 
 
 def fmtNum(num):
