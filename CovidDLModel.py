@@ -73,7 +73,7 @@ def calcChange(values, projectType=None):
 
 def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, showTotal=False, yscale='log',
-           inauguration=365):
+           inauguration=365, plotType='cases'):
     """# Ugly I know, just a simple plot."""
     labels = []
     if showTotal is True:
@@ -82,19 +82,22 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(deathRate, color='blue', label='Mortality')
         label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
-    label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
-    labels.append(label)
-    label, = plt.plot(dailyCases, color='magenta',
-                      label='Current: {:2.2f}%'.format(100*growthRates[intoday]))
-    labels.append(label)
-    for i in range(scenarioNumber):
-        if i == scenarioNumber - 1:
-            text = 'Weekly Average: {:2.2f}%'.format(100 * weekRates[i])
-        else:
-            text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
-
-        label, = plt.plot(scenario[i], label=text)
+    if plotType == 'deaths':
+        label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
         labels.append(label)
+    else:
+        label, = plt.plot(dailyCases, color='magenta',
+                          label='Current: {:2.2f}%'.format(100*growthRates[intoday]))
+        labels.append(label)
+
+        for i in range(scenarioNumber):
+            if i == scenarioNumber - 1:
+                text = 'Weekly Average: {:2.2f}%'.format(100 * weekRates[i])
+            else:
+                text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
+
+            label, = plt.plot(scenario[i], label=text)
+            labels.append(label)
     label = plt.axvline(intoday, color='green',
                         label='Forecast: {} Days->'.format(projectionDays))
     labels.append(label)
@@ -109,7 +112,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
-
+    plt.show()
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
@@ -204,6 +207,8 @@ if __name__ == "__main__":
 
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear')
+    plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
+           deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],

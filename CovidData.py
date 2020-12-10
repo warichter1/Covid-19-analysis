@@ -157,7 +157,7 @@ class CovidData:
 
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
-        print('\n=================================================================================')
+        print('\n===========================================================================')
         dates = list(days.keys())
         number = list(days.values())
         for i in range(len(dates)):
@@ -168,42 +168,24 @@ class CovidData:
             dead = list(deathTotals.values())
             print('Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
                                                             fmtNum(dead[i])))
-        print('=================================================================================')
-        # self.formatPrint(days, self.infectionByAge, infected, 'Infections by Age')
-        # self.formatPrint(days, self.severity, infected, 'Infections by severity')
-        # self.formatPrint(days, self.ageDeathRate, deaths, 'Death Rate by Age Range')
-        # self.formatPrint(days, self.raceDeathRate, deaths, 'Death Rate by Race')
-        # self.formatPrint(days, self.deathsBySex, deaths, 'Death Rate by Sex')
-        # print('=================================================================================')
+        self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
+        self.formatPrint(caseTotals, self.severity, 'Infections by severity')
+        self.formatPrint(deathTotals, self.ageDeathRate, 'Death Rate by Age Range')
+        self.formatPrint(deathTotals, self.raceDeathRate, 'Death Rate by Race')
+        self.formatPrint(deathTotals, self.deathsBySex, 'Death Rate by Sex')
 
     def formatPrint(self, dayTotals, template, title):
         keyType = list(dayTotals.keys())
         totals = list(dayTotals.values())
+        rates = list(template.values())
         table = PrettyTable()
-        table.field_names = [title] + list(template[0].keys())
-        for j in range():
+        table.field_names = [title] + list(template.keys())
+        for j in range(len(keyType)):
             row = [keyType[j]]
-            for i in range(template):
-                row.append(template[i] * totals[j])
-        table.add_row(row)
-
-    # def oldPrint(self):
-        # header = ""
-        # line = ""
-        # for col in input.keys():
-        #     # print(input[col])
-        #     header += col + '\t'
-        #     line += str(fmtNum(input[col] * num)) + '\t'
-        #     if len(col) > 7:
-        #         line += '\t'
-        #     # if len(col) > 18:
-        #     #     line += '\t'
-        # print('_________________________________________________________________________________')
-        # print(">> {} <<".format(title))
-        # print('=================================================================================')
-        # print(header)
-        # print('---------------------------------------------------------------------------------')
-        # print(line)
+            for i in range(len(rates)):
+                row.append(fmtNum(rates[i] * totals[j]))
+            table.add_row(row)
+        print(table)
 
 
 def fmtNum(num):
@@ -222,5 +204,5 @@ if __name__ == "__main__":
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
     print('Severity of Infection', cd.severity)
-    cd.summary(120, 13921374, 273446, dataType="Current")
+    # cd.summary(120, 13921374, 273446, dataType="Current")
     # cd.formatPrint(cd.ageDeathRate, 273446, 'Death Rate by Age Range')
