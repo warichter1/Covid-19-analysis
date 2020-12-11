@@ -23,6 +23,7 @@ class CovidData:
         self.ageDeathRate = {}
         self.raceDeathRate = {}
         self.infectionByAge = {}
+        self.infectionByLength = {}
         self.curve = {}
         self.human = {}
         self.severity = {'asymptomatic': 0.42, 'hospitalized': 0.2}
@@ -35,6 +36,16 @@ class CovidData:
         self.addRaceDeathRate()
         self.infectionsByAgeRate()
         self.deathsSex()
+        self.infectionLength()
+
+    def infectionLength(self):
+        """Length of illness, inclusing Long Haulers"""
+        self.infectionByLength['0-1'] = 0.42
+        self.infectionByLength['2-3'] = 0.35
+        self.infectionByLength['4'] = 0.133
+        self.infectionByLength['5-8'] = 0.045
+        self.infectionByLength['9-12'] = 0.023
+        self.infectionByLength['13-plus'] = 1- sum(self.infectionByLength.values())
 
     def addAgeDeathRate(self):
         """Death rate by age range."""
@@ -157,19 +168,21 @@ class CovidData:
 
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
-        print('\n===========================================================================')
+        # print('\n===========================================================================')
+        print('\n+--------------------------------------------------------------------------+')
         dates = list(days.keys())
         number = list(days.values())
         for i in range(len(dates)):
-            print("{} summary for day {} ({}):".format(list(caseTotals.keys())[i],
+            print("| {} summary for day {} ({}):".format(list(caseTotals.keys())[i],
                                                         fmtNum(number[i]),
                                                         dates[i]))
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())
-            print('Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
+            print('| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
                                                             fmtNum(dead[i])))
         self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
         self.formatPrint(caseTotals, self.severity, 'Infections by severity')
+        self.formatPrint(caseTotals, self.infectionByLength, 'Infection Length (Wk)')
         self.formatPrint(deathTotals, self.ageDeathRate, 'Death Rate by Age Range')
         self.formatPrint(deathTotals, self.raceDeathRate, 'Death Rate by Race')
         self.formatPrint(deathTotals, self.deathsBySex, 'Death Rate by Sex')
