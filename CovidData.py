@@ -169,17 +169,23 @@ class CovidData:
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
         # print('\n===========================================================================')
-        print('\n+--------------------------------------------------------------------------+')
+        top = '\n+--------------------------------------------------------------------------+'
+        totalPad = len(top)
+        print(top)
+        lenStr = len(top) - 2
         dates = list(days.keys())
         number = list(days.values())
         for i in range(len(dates)):
-            print("| {} summary for day {} ({}):".format(list(caseTotals.keys())[i],
+            text = "| {} summary for day {} ({}):".format(list(caseTotals.keys())[i],
                                                         fmtNum(number[i]),
-                                                        dates[i]))
+                                                        dates[i])
+            print(text + " "*(lenStr - len(text)) + '|')
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())
-            print('| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
-                                                            fmtNum(dead[i])))
+            text = '| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
+                                                            fmtNum(dead[i]))
+            print(text + " "*(lenStr - len(text)) + '|')
+
         self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
         self.formatPrint(caseTotals, self.severity, 'Infections by severity')
         self.formatPrint(caseTotals, self.infectionByLength, 'Infection Length (Wk)')
