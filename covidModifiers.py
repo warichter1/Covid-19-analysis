@@ -7,12 +7,13 @@ Created on Sun Sep  6 22:27:27 2020
 """
 import random
 from goals import Svm
-
+from CovidData import CovidData
 
 class Modifiers:
     """Projection modifiers for population and protection calulations."""
 
     def __init__(self, population, protection, rate, curve):
+        cd = CovidData()
         self.population = population
         self.protection = protection
         self.rate = rate
@@ -29,7 +30,8 @@ class Modifiers:
         svm = Svm()
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
         self.lockdownAdjust = svm.getUncalibrated(expandBy=6)['fop']
-        self.calcModifiers()
+        self.party = cd.party
+        # self.calcModifiers()
 
     def checkDirection(self, growth):
         """Check for increasing or decreasing infections."""
