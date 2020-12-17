@@ -12,12 +12,12 @@ from prettytable import PrettyTable
 class CovidData:
     """Data for various details of Covid."""
 
-    def __init__(self):
+    def __init__(self, population=331000000):
         """Covid data class initializers."""
         self.baseRate = 1/8
         self.rate = {}
         self.party = {}
-        self.population = 331000000
+        self.population = population
         self.protection = {}
         self.rate = {}
         self.ageDeathRate = {}
@@ -223,5 +223,4 @@ if __name__ == "__main__":
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
     print('Severity of Infection', cd.severity)
-    # cd.summary(120, 13921374, 273446, dataType="Current")
-    # cd.formatPrint(cd.ageDeathRate, 273446, 'Death Rate by Age Range')
+

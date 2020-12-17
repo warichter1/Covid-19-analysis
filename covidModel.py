@@ -34,8 +34,7 @@ def growthLimit(rMax, K, N):
 
 
 class GrowthAndMortality:
-    def __init__(self, pop, mortality, maxMortality, survival=.9):
-        # self.population = pop
+    def __init__(self, mortality, maxMortality, survival=.9):
         self.maxMortality = maxMortality
         self.baseMortality = mortality
         self.survival = survival  # rate of survival for those hospitalized
@@ -59,7 +58,6 @@ class GrowthAndMortality:
         for bed in self.beds:
             recover = 0
             overflow = 0
-            # self.cases = cases
             patients = cases * self.beds[bed]['require']
             if len(self.beds[bed]['queue']) > self.beds[bed]['days']:
                 recover = self.beds[bed]['queue'].pop(0)
@@ -97,6 +95,7 @@ class GrowthAndMortality:
     def setPopStats(self, totalPop, births, deaths):
         self.popData = True
         self.totalPop = totalPop
+        self.mod = Modifiers(self.totalPop)
         self.workingPop = totalPop
         self.birthRate = births
         self.deathRate = deaths
@@ -199,47 +198,14 @@ class GrowthAndMortality:
         return day, totalRate, mortality
         # cases, growthRate, caseGrowth, deaths
 
-    def setModifier(self, protection, rate, curve):
-        self.mod = Modifiers(self.totalPop, protection, rate, curve)
+    # def setModifier(self):
+    #     self.mod = Modifiers(self.totalPop)
 
 
 summary = False
 
 if __name__ == "__main__":
     totalPop = 331000000
-    # riskRise = 0.25
-    protection = {}
-    # change the infection rate
-    protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
-                              'eyeHigh': 0.16}
-    protection['active'] = {'mask': False, 'eyeLow': False, 'eyeHigh': False}
-    rateModifier = {'base': baseRate, "risk": 7, 'riskRise': .25,
-                    'riskLower': .2, 'sciTrustRD': [.53, .31]}
-    rateModifier['distance'] = {}
-    # Change the contact rate with others in the population
-    rateModifier['distance']['modifier'] = {'contact': -0.15, 'lockdown': 0.40,
-                                            'oneMeter': 0.13,
-                                            'twoMeter': 0.30,}
-    rateModifier['distance']['active'] = {'contact': False, 'lockdown': False,
-                                          'oneMeter': False,
-                                          'twoMeter': False}
-    rateModifier['distance']['lockdownDuration'] = {'0': 0, '1': .009, '2': .01,
-                                                    '3': .02, '2': .0205,
-                                                    '5': .0227, '6': .0261,
-                                                    'default': .0275}
-
-    # Change the risk tolerance rate
-    rateModifier['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
-                                 'someCollege': .6128,
-                                 'associate': .1018, 'bachelors': .3498,
-                                 'masters': .0957, 'professional': .0144,
-                                 'phd': .0203}
-    rateModifier['eduPartyDR'] = {'highSchool': [.46, .45],
-                                  'whiteHS': [.59, .33],
-                                  'someCollege': [.47, .39],
-                                  'postGrad': [.57, .35]}
-    rateModifier['cognitive'] = {'hs': .4324, 'college': .6508}
-    curveAdjust = {'daysToPeak': 30, 'declineRate': 1.5, 'focusLoss': 60}
     mortality = 0.0305
     # mortality = 0.045
     maxMortality = 0.12
@@ -260,7 +226,7 @@ if __name__ == "__main__":
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
-    hp.setModifier(protection, rateModifier, curveAdjust)
+    # hp.setModifier()
     # day, cases, growthRate, caseGrowth, deaths =
     day, totalRate, mortality = hp.run(days, caseType, distancePop=False)
     # plt.plot(hp.cases, label='Infected population')

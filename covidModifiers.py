@@ -9,15 +9,18 @@ import random
 from goals import Svm
 from CovidData import CovidData
 
+
 class Modifiers:
     """Projection modifiers for population and protection calulations."""
 
-    def __init__(self, population, protection, rate, curve):
-        cd = CovidData()
+    def __init__(self, population):
+        cd = CovidData(population)
         self.population = population
-        self.protection = protection
-        self.rate = rate
-        self.curve = curve
+        self.protection = cd.protection
+        # self.protection = protection
+        # self.rate = rate
+        self.rate = cd.rate
+        self.curve = cd.curve
         self.rise = True
         self.riseDays = 0
         self.fallDays = 0
