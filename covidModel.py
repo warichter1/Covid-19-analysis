@@ -34,7 +34,7 @@ def growthLimit(rMax, K, N):
 
 
 class GrowthAndMortality:
-    def __init__(self, mortality, maxMortality, survival=.9):
+    def __init__(self, pop, mortality, maxMortality, survival=.9):
         self.maxMortality = maxMortality
         self.baseMortality = mortality
         self.survival = survival  # rate of survival for those hospitalized
@@ -58,6 +58,7 @@ class GrowthAndMortality:
         for bed in self.beds:
             recover = 0
             overflow = 0
+            # self.cases = cases
             patients = cases * self.beds[bed]['require']
             if len(self.beds[bed]['queue']) > self.beds[bed]['days']:
                 recover = self.beds[bed]['queue'].pop(0)
@@ -86,10 +87,8 @@ class GrowthAndMortality:
     def adjustTotalPop(self, cases):
         births = self.totalPop * self.birthRate
         deaths = self.totalPop * self.deathRate
-        # self.workingPop -= deaths + births
         self.totalPop -= deaths + births
         caseDeaths = cases / self.workingPop * deaths
-        # print(caseDeaths, births, deaths)
         return cases - caseDeaths
 
     def setPopStats(self, totalPop, births, deaths):
@@ -196,10 +195,6 @@ class GrowthAndMortality:
             plt.plot(self.modPop)
             plt.show()
         return day, totalRate, mortality
-        # cases, growthRate, caseGrowth, deaths
-
-    # def setModifier(self):
-    #     self.mod = Modifiers(self.totalPop)
 
 
 summary = False
@@ -207,7 +202,6 @@ summary = False
 if __name__ == "__main__":
     totalPop = 331000000
     mortality = 0.0305
-    # mortality = 0.045
     maxMortality = 0.12
     popDeathRate = 10.542/1000/365
     popBirthRate = 11.08/1000/365
@@ -219,15 +213,10 @@ if __name__ == "__main__":
     totalBeds = 924000
     covidBedsTotal = totalBeds * (1 - bedOccupancy)
 
-    # icuBeds = covidBedsTotal * .05
-    # generalBeds = covidBedsTotal - icuBeds
-
     hp = GrowthAndMortality(totalPop, mortality, maxMortality)
     hp.initializeQueues(covidBedsTotal, hospitalizedDays, requireHospital,
                         icuDays, requireIcu)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
-    # hp.setModifier()
-    # day, cases, growthRate, caseGrowth, deaths =
     day, totalRate, mortality = hp.run(days, caseType, distancePop=False)
     # plt.plot(hp.cases, label='Infected population')
     handles = []
