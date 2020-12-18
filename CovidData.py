@@ -12,7 +12,7 @@ from prettytable import PrettyTable
 class CovidData:
     """Data for various details of Covid."""
 
-    def __init__(self, population=331000000):
+    def __init__(self, population=331000000, summary=False):
         """Covid data class initializers."""
         self.baseRate = 1/8
         self.rate = {}
@@ -37,6 +37,8 @@ class CovidData:
         self.infectionsByAgeRate()
         self.deathsSex()
         self.infectionLength()
+        if summary is True:
+            self.summary()
 
     def infectionLength(self):
         """Length of illness, inclusing Long Haulers"""

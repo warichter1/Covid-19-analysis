@@ -17,8 +17,6 @@ class Modifiers:
         cd = CovidData(population)
         self.population = population
         self.protection = cd.protection
-        # self.protection = protection
-        # self.rate = rate
         self.rate = cd.rate
         self.curve = cd.curve
         self.rise = True
@@ -34,7 +32,6 @@ class Modifiers:
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
         self.lockdownAdjust = svm.getUncalibrated(expandBy=6)['fop']
         self.party = cd.party
-        # self.calcModifiers()
 
     def checkDirection(self, growth):
         """Check for increasing or decreasing infections."""
@@ -199,39 +196,3 @@ class Modifiers:
         else:
             mod = self.rate['distance']['lockdownDuration']['default']
         self.distanceMod = 1 - (mod + self.rate['distance']['modifier']['lockdown'])
-
-    def calcModifiers(self):
-        pop = self.population
-        edu = self.rate['education']
-        self.party = {}
-        self.party['d'] = {'sciTrust': [pop * self.rate['sciTrustRD'][0],
-                                        self.rate['sciTrustRD'][0]]}
-        self.party['r'] = {'sciTrust': [pop * self.rate['sciTrustRD'][1],
-                                        self.rate['sciTrustRD'][1]]}
-        self.party['d']['level'] = {}
-        self.party['r']['level'] = {}
-        hs = edu['highSchool'] * pop
-        hsw = hs * edu['whiteHS']
-        hsm = hs - hsw
-        p = self.rate['eduPartyDR']['highSchool'][0]
-        self.party['d']['level']['hswhite'] = [hsw * p, p]
-        self.party['d']['level']['hsminority'] = [hsm * p, p]
-        p = self.rate['eduPartyDR']['highSchool'][1]
-        self.party['r']['level']['hswhite'] = [hsw * p, p]
-        self.party['r']['level']['hsminority'] = [hsm * p, p]
-        p = self.rate['eduPartyDR']['highSchool'][0]
-        c = edu['someCollege'] * pop
-        self.party['d']['level']['college'] = [c * p, p]
-        p = self.rate['eduPartyDR']['someCollege'][1]
-        self.party['r']['level']['college'] = [c * p, p]
-        p = self.rate['eduPartyDR']['postGrad'][0]
-        c = (edu['masters'] + edu['phd'] + edu['professional']) * pop
-        self.party['d']['level']['postGrad'] = [c * p, p]
-        p = self.rate['eduPartyDR']['postGrad'][1]
-        self.party['r']['level']['postGrad'] = [c * p, p]
-        self.party['d']['percentage'], total = self.countParty('d')
-        self.party['r']['percentage'], total = self.countParty('r')
-
-    def countParty(self, party):
-        total = sum([i[0] for i in self.party[party]['level'].values()])
-        return total/self.population, total
