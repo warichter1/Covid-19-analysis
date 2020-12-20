@@ -194,6 +194,8 @@ class GrowthAndMortality:
         if len(self.modPop) > 0:
             plt.plot(self.modPop)
             plt.show()
+            plt.plot(self.mod.riskAdjust)
+            plt.show()
         return day, totalRate, mortality
 
 

@@ -72,8 +72,10 @@ class Modifiers:
     def checkProbableRisk(self, risk, max=10):
         days = self.riseDays if self.riseDays > 0 else self.fallDays
         adjust = self.riskAdjust[days] if len(self.riskAdjust) > days else 1
-        num = random.randint(0, max) * adjust
-        # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
+        # num = random.randint(0, max) * adjust
+        guess = random.randint(0, max)
+        num = guess * adjust
+        print("Debug:", days, 'Rand', guess, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
         return True if num > self.rate['risk'] else False
 
     def checkSelfProt(self, growth, distance=True):  # distabce always True, never disables trigger

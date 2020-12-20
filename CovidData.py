@@ -98,34 +98,36 @@ class CovidData:
     def addRiskData(self):
         """Risks."""
         self.protection['modifier'] = {'mask': 1 - 0.65, 'eyeLow': 0.06,
-                              'eyeHigh': 0.16}
+                                       'eyeHigh': 0.16}
         self.protection['active'] = {'mask': False, 'eyeLow': False,
                                      'eyeHigh': False}
         self.rate = {'base': self.baseRate, "risk": 7, 'riskRise': .25,
-                        'riskLower': .2, 'sciTrustRD': [.53, .31]}
+                     'riskLower': .2, 'sciTrustRD': [.53, .31]}
         self.rate['distance'] = {}
         # Change the contact rate with others in the population
-        self.rate['distance']['modifier'] = {'contact': -0.15, 'lockdown': 0.40,
-                                                'oneMeter': 0.13,
-                                                'twoMeter': 0.30,}
+        self.rate['distance']['modifier'] = {'contact': -0.15,
+                                             'lockdown': 0.40,
+                                             'oneMeter': 0.13,
+                                             'twoMeter': 0.30}
         self.rate['distance']['active'] = {'contact': False, 'lockdown': False,
-                                              'oneMeter': False,
-                                              'twoMeter': False}
-        self.rate['distance']['lockdownDuration'] = {'0': 0, '1': .009, '2': .01,
-                                                        '3': .02, '2': .0205,
-                                                        '5': .0227, '6': .0261,
-                                                        'default': .0275}
+                                           'oneMeter': False,
+                                           'twoMeter': False}
+        self.rate['distance']['lockdownDuration'] = {'0': 0, '1': .009,
+                                                     '2': .01,
+                                                     '3': .02, '4': .0205,
+                                                     '5': .0227, '6': .0261,
+                                                     'default': .0275}
 
         # Change the risk tolerance rate
         self.rate['education'] = {'highSchool': (1 - .6128), 'whiteHS': .601,
-                                     'someCollege': .6128,
-                                     'associate': .1018, 'bachelors': .3498,
-                                     'masters': .0957, 'professional': .0144,
-                                     'phd': .0203}
+                                  'someCollege': .6128,
+                                  'associate': .1018, 'bachelors': .3498,
+                                  'masters': .0957, 'professional': .0144,
+                                  'phd': .0203}
         self.rate['eduPartyDR'] = {'highSchool': [.46, .45],
-                                      'whiteHS': [.59, .33],
-                                      'someCollege': [.47, .39],
-                                      'postGrad': [.57, .35]}
+                                   'whiteHS': [.59, .33],
+                                   'someCollege': [.47, .39],
+                                   'postGrad': [.57, .35]}
         self.rate['cognitive'] = {'hs': .4324, 'college': .6508}
         self.curve['daysToPeak'] = 30
         self.curve['declineRate'] = 1.5
@@ -170,7 +172,6 @@ class CovidData:
 
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
-        # print('\n===========================================================================')
         top = '\n+--------------------------------------------------------------------------+'
         totalPad = len(top)
         print(top)
@@ -179,8 +180,8 @@ class CovidData:
         number = list(days.values())
         for i in range(len(dates)):
             text = "| {} summary for day {} ({}):".format(list(caseTotals.keys())[i],
-                                                        fmtNum(number[i]),
-                                                        dates[i])
+                                                          fmtNum(number[i]),
+                                                          dates[i])
             print(text + " "*(lenStr - len(text)) + '|')
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())
@@ -190,12 +191,15 @@ class CovidData:
 
         self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
         self.formatPrint(caseTotals, self.severity, 'Infections by severity')
-        self.formatPrint(caseTotals, self.infectionByLength, 'Infection Length (Wk)')
-        self.formatPrint(deathTotals, self.ageDeathRate, 'Death Rate by Age Range')
+        self.formatPrint(caseTotals, self.infectionByLength,
+                         'Infection Length (Wk)')
+        self.formatPrint(deathTotals, self.ageDeathRate,
+                         'Death Rate by Age Range')
         self.formatPrint(deathTotals, self.raceDeathRate, 'Death Rate by Race')
         self.formatPrint(deathTotals, self.deathsBySex, 'Death Rate by Sex')
 
     def formatPrint(self, dayTotals, template, title):
+        """Create a formatted string from a list, display as a table."""
         keyType = list(dayTotals.keys())
         totals = list(dayTotals.values())
         rates = list(template.values())
@@ -225,4 +229,3 @@ if __name__ == "__main__":
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
     print('Severity of Infection', cd.severity)
-

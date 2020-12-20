@@ -104,7 +104,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
     label = plt.axvline(inauguration, color='violet',
-                        label='Inauguration Day\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
+                        label='Inauguration Day 2021\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
     labels.append(label)
     plt.legend(handles=labels)
     plt.yscale(yscale)
