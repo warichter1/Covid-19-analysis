@@ -17,6 +17,7 @@ from math import pi
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 
 import git
 
@@ -76,6 +77,14 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            inauguration=365, plotType='cases'):
     """# Ugly I know, just a simple plot."""
     labels = []
+    ecBiden270 = 291
+    ecSafeHarbor = 322
+    ecStateConfirm = 328
+    ecCongressConfirm = 351
+    font = FontProperties(family='sans-serif',
+                          weight='normal',
+                          style='oblique', size=8)
+
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
         labels.append(label)
@@ -83,7 +92,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
     if plotType == 'deaths':
-        label, = plt.plot(dailyDeaths, color='blue', label='Daily Deaths')
+        label, = plt.plot(dailyDeaths, color='black', label='Daily Deaths', linewidth=1)
         labels.append(label)
     else:
         label, = plt.plot(dailyCases, color='magenta',
@@ -96,17 +105,26 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
             else:
                 text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
 
-            label, = plt.plot(scenario[i], label=text)
+            label, = plt.plot(scenario[i], label=text, linewidth=1)
             labels.append(label)
     label = plt.axvline(intoday, color='green',
-                        label='Forecast: {} Days->'.format(projectionDays))
+                        label='Forecast: {} Days->'.format(projectionDays), linewidth=1)
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
-    label = plt.axvline(inauguration, color='violet',
-                        label='Inauguration Day 2021\nCases: {}\nDeaths: {}'.format(iCases, iDeaths))
+    label = plt.axvline(ecBiden270, color='blue', label='EC Biden Passes 270: 11/7', linewidth=1)
     labels.append(label)
-    plt.legend(handles=labels)
+    label = plt.axvline(ecSafeHarbor, color='cyan', label='EC Safe Harbor: 12/8', linewidth=1)
+    labels.append(label)
+    label = plt.axvline(ecStateConfirm, color='purple', label='EC States Confirm Biden: 12/14', linewidth=1)
+    labels.append(label)
+    label = plt.axvline(ecCongressConfirm, color='crimson', label='EC Congress Confirms Biden: 1/6', linewidth=1)
+    labels.append(label)
+    label = plt.axvline(inauguration, color='violet',
+                        label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=1)
+    labels.append(label)
+    # plt.legend(handles=labels, prop={'size': 7})
+    plt.legend(handles=labels, prop=font)
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
