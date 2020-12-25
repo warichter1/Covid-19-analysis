@@ -24,9 +24,11 @@ import git
 from CovidData import CovidData
 
 g = git.cmd.Git('./COVID-19')
+gp = git.cmd.Git('./')
 print(g.pull())
 
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
+plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
 confirmedCases = 'time_series_covid19_confirmed_global.csv'
 deathsFile = 'time_series_covid19_deaths_global.csv'
@@ -129,6 +131,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
+    plt.savefig(plotPath + 'daily_{}.png'.format(plotType))
     plt.show()
 
 if __name__ == "__main__":
@@ -226,6 +229,9 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
+    gp.add('./plots/*')
+    gp.commit('-m', "Upload Daily")
+    gp.push()
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],
