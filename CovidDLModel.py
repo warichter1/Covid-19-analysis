@@ -8,7 +8,7 @@ Created on Sun Mar 22 16:18:30 2020
 
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
-
+import sys
 import copy
 from datetime import date
 from datetime import datetime
@@ -22,6 +22,11 @@ import random
 import git
 
 from CovidData import CovidData
+
+plotResults = True
+if len(sys.argv) > 1:
+    print('Command Line run')
+    plotResults = False
 
 g = git.cmd.Git('./COVID-19')
 gp = git.cmd.Git('./')
@@ -134,7 +139,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show()
+    if plotResults is True:
+        plt.show()
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)

@@ -8,6 +8,7 @@ Created on Fri Mar 27 18:16:15 2020
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
 
+import sys
 from datetime import date
 from datetime import datetime
 from collections import OrderedDict
@@ -20,6 +21,11 @@ import git
 import random
 
 from us_state_abbrev import us_state_abbrev
+
+plotResults = True
+if len(sys.argv) > 1:
+    print('Command Line run')
+    plotResults = False
 
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
@@ -347,7 +353,8 @@ class CovidCountryRegion:
         plt.savefig(plotPath + 'daily_State{}.png'.format(legendText.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-        plt.show()
+        if plotResults is True:
+            plt.show()
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
         """Import csv data based on index, column(s) to rename/exclude."""
@@ -424,7 +431,8 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show()
+    if plotResults is True:
+        plt.show()
 
 
 def statGovPlot(title, yscale, smoothed=False, name='Gov'):
@@ -448,7 +456,8 @@ def statGovPlot(title, yscale, smoothed=False, name='Gov'):
     plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show()
+    if plotResults is True:
+        plt.show()
 
 
 if __name__ == "__main__":
