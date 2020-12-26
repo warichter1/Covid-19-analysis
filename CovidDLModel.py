@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
-
+import random
 import git
 
 from CovidData import CovidData
@@ -131,7 +131,9 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
     plt.ylabel(" US Cases (Mil): {}\nMortality: {} (Rate: {:2.2f}%)".format(format(int(cases[day-2]), ',d'),
                                                                format(int(deaths[cdate]), ',d'), float(deathRate[-1:][0] * 100)))
-    plt.savefig(plotPath + 'daily_{}.png'.format(plotType))
+    plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
     plt.show()
 
 if __name__ == "__main__":
