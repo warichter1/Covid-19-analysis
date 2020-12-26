@@ -17,6 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import git
+import random
 
 from us_state_abbrev import us_state_abbrev
 
@@ -24,6 +25,7 @@ g = git.cmd.Git('./COVID-19')
 print(g.pull())
 
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series'
+plotPath = './plots/'
 trackingUrl = "https://covidtracking.com/api/v1/states/daily.json"
 trackingIndex = ['state', 'dates']
 confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -340,7 +342,11 @@ class CovidCountryRegion:
         plt.yscale(yscale)
         plt.title(title)
         plt.xlabel("Days\nToday: {}".format(currentDate.strftime("%B %d, %Y")))
-        plt.ylabel("US Cases - {}\nTop {} Regions ({})".format(legendText, num, yscale))
+        plt.ylabel("US Cases - {}\nTop {} Regions ({})".format(legendText,
+                                                               num, yscale))
+        plt.savefig(plotPath + 'daily_State{}.png'.format(legendText.replace(' ', '')),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
         plt.show()
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
@@ -391,7 +397,7 @@ def fmtNum(num):
     return format(int(num), ',d')
 
 
-def statePlot(states=[], key='confirmedNew', smoothed=False):
+def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     """Plot data by state."""
     handles = []
     total = None
@@ -415,10 +421,13 @@ def statePlot(states=[], key='confirmedNew', smoothed=False):
     plt.title(key.capitalize().replace('new', ' By Day'))
     plt.ylabel('Growth\nRegion: Cases/Rate')
     plt.xlabel('Days: {}'.format(len(covidDf.dataStore[state][key])))
+    plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
     plt.show()
 
 
-def statGovPlot(title, yscale, smoothed=False):
+def statGovPlot(title, yscale, smoothed=False, name='Gov'):
     """Plot summary by state government."""
     handles = []
     for party in ['Republican', 'Democratic']:
@@ -436,6 +445,9 @@ def statGovPlot(title, yscale, smoothed=False):
     plt.title(title)
     plt.ylabel('Party in Control\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector)))
+    plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
     plt.show()
 
 
@@ -443,6 +455,7 @@ if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
     startTime = datetime.today()
     covidDf.processing()
+    gp = git.cmd.Git('./')
     endTime = datetime.today()
     print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
     print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
@@ -458,12 +471,15 @@ if __name__ == "__main__":
     print('Plot Target States')
     statePlot(['Arizona', 'New Jersey', 'Tennessee', 'South Carolina',
                'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'],
-              key='confirmedNew', smoothed=True)
+              key='confirmedNew', smoothed=True, name='Focused')
     statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah',
                'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'],
-              key='confirmedNew', smoothed=True)
+              key='confirmedNew', smoothed=True, name='Midwest')
     statePlot(['New York', 'California', 'Texas', 'Florida'],
-              key='confirmedNew', smoothed=True)
+              key='confirmedNew', smoothed=True, name='High')
     print('Plot State Government')
     statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
                 smoothed=True)
+    gp.add('./plots/*')
+    gp.commit('-m', "Upload Daily")
+    gp.push()
