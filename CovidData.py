@@ -15,6 +15,7 @@ class CovidData:
     def __init__(self, population=331000000, summary=False):
         """Covid data class initializers."""
         self.baseRate = 1/8
+        self.summaryText = ""
         self.rate = {}
         self.party = {}
         self.population = population
@@ -187,7 +188,11 @@ class CovidData:
             dead = list(deathTotals.values())
             text = '| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
                                                             fmtNum(dead[i]))
-            print(text + " "*(lenStr - len(text)) + '|')
+            text += " "*(lenStr - len(text))
+            text += '|'
+            print(text)
+            self.summaryText += (text + '\n')
+            # print(text + " "*(lenStr - len(text)) + '|')
 
         self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
         self.formatPrint(caseTotals, self.severity, 'Infections by severity')
@@ -210,6 +215,8 @@ class CovidData:
             for i in range(len(rates)):
                 row.append(fmtNum(rates[i] * totals[j]))
             table.add_row(row)
+        data = table.get_string() + '\n'
+        self.summaryText += data
         print(table)
 
 
