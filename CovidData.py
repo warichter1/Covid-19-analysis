@@ -7,15 +7,17 @@ Created on Sun Nov 29 21:07:52 2020
 """
 
 from prettytable import PrettyTable
+import os
 
 
 class CovidData:
     """Data for various details of Covid."""
 
-    def __init__(self, population=331000000, summary=False):
+    def __init__(self, population=331000000, summary=False, textPath='./data'):
         """Covid data class initializers."""
         self.baseRate = 1/8
         self.summaryText = ""
+        self.textPath = textPath
         self.rate = {}
         self.party = {}
         self.population = population
@@ -176,6 +178,7 @@ class CovidData:
         top = '\n+--------------------------------------------------------------------------+'
         totalPad = len(top)
         print(top)
+        self.summaryText += (top + '\n')
         lenStr = len(top) - 2
         dates = list(days.keys())
         number = list(days.values())
@@ -183,7 +186,11 @@ class CovidData:
             text = "| {} summary for day {} ({}):".format(list(caseTotals.keys())[i],
                                                           fmtNum(number[i]),
                                                           dates[i])
-            print(text + " "*(lenStr - len(text)) + '|')
+            text += " "*(lenStr - len(text))
+            text += '|'
+            print(text)
+            self.summaryText += (text + '\n')
+            # print(text + " "*(lenStr - len(text)) + '|')
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())
             text = '| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
@@ -202,6 +209,12 @@ class CovidData:
                          'Death Rate by Age Range')
         self.formatPrint(deathTotals, self.raceDeathRate, 'Death Rate by Race')
         self.formatPrint(deathTotals, self.deathsBySex, 'Death Rate by Sex')
+        self.writeData('DailySummary.txt', self.summaryText)
+
+    def writeData(self, filename, text):
+
+        with open(os.path.join(self.textPath, filename), "w") as writeToFile:
+            writeToFile.writelines(text)
 
     def formatPrint(self, dayTotals, template, title):
         """Create a formatted string from a list, display as a table."""
