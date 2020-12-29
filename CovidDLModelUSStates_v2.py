@@ -441,7 +441,7 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.cla()
     plt.close('all')
 
-def statGovPlot(title, yscale, smoothed=False, name='Gov'):
+def statGovPlot(title, yscale, smoothed=False, gname='Gov'):
     """Plot summary by state government."""
     handles = []
     for party in ['Republican', 'Democratic']:
@@ -459,7 +459,7 @@ def statGovPlot(title, yscale, smoothed=False, name='Gov'):
     plt.title(title)
     plt.ylabel('Party in Control\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector)))
-    plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
+    plt.savefig(plotPath + 'daily_State{}.png'.format(gname.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
     plt.show(block=False)
