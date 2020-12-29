@@ -241,8 +241,8 @@ if __name__ == "__main__":
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
     gp.add('./plots/*')
-    # gp.commit('-m', "Upload Daily")
-    # gp.push()
+    gp.commit('-m', "Upload Daily")
+    gp.push()
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],
@@ -254,5 +254,5 @@ if __name__ == "__main__":
     gp.commit('-m', "Upload Daily")
     gp.push()
 
-    # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
-    # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
+    cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
+    cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")

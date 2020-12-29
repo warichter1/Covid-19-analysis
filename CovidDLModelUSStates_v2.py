@@ -22,11 +22,6 @@ import random
 
 from us_state_abbrev import us_state_abbrev
 
-plotUiResults = True
-if len(sys.argv) > 1:
-    print('Command Line run')
-    plotUiResults = False
-
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
 
@@ -354,7 +349,6 @@ class CovidCountryRegion:
         plt.savefig(plotPath + 'daily_State{}.png'.format(legendText.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-        # if plotUiResults is True:
         plt.show(block=False)
         plt.clf()
         plt.cla()
@@ -435,13 +429,12 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    # if plotUiResults is True:
     plt.show(block=False)
     plt.clf()
     plt.cla()
     plt.close('all')
 
-def statGovPlot(title, yscale, smoothed=False, gname='Gov'):
+def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     """Plot summary by state government."""
     handles = []
     for party in ['Republican', 'Democratic']:
@@ -475,9 +468,12 @@ if __name__ == "__main__":
     endTime = datetime.today()
     print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
     print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
-    # print('Plot State Government')
-    # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
-    #             smoothed=True)
+    print('Plot State Government')
+    statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
+                smoothed=True)
+    gp.add('./plots/*')
+    gp.commit('-m', "Upload Daily")
+    gp.push()
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
