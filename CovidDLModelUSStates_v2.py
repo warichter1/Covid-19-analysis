@@ -22,10 +22,10 @@ import random
 
 from us_state_abbrev import us_state_abbrev
 
-plotResults = True
+plotUiResults = True
 if len(sys.argv) > 1:
     print('Command Line run')
-    plotResults = False
+    plotUiResults = False
 
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
@@ -320,7 +320,8 @@ class CovidCountryRegion:
     def plotResults(self, keys, data=['confirmed', 'deaths'], num=5,
                     yscale='log',
                     title='Covid-19 - Patient 0: January 21, 2020',
-                    smoothed=False, legendText='Aggregated Growth', filterLabel='New'):
+                    smoothed=False, legendText='Aggregated Growth',
+                    filterLabel='New'):
         """Plot the results for the period."""
         handles = []
         pos = 0
@@ -353,8 +354,11 @@ class CovidCountryRegion:
         plt.savefig(plotPath + 'daily_State{}.png'.format(legendText.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-        if plotResults is True:
-            plt.show()
+        # if plotUiResults is True:
+        plt.show(block=False)
+        plt.clf()
+        plt.cla()
+        plt.close('all')
 
     def importCsv(self, file, index=[], rename=[], exclude=[]):
         """Import csv data based on index, column(s) to rename/exclude."""
@@ -431,9 +435,11 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    if plotResults is True:
-        plt.show()
-
+    # if plotUiResults is True:
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close('all')
 
 def statGovPlot(title, yscale, smoothed=False, name='Gov'):
     """Plot summary by state government."""
@@ -456,9 +462,10 @@ def statGovPlot(title, yscale, smoothed=False, name='Gov'):
     plt.savefig(plotPath + 'daily_State{}.png'.format(name.replace(' ', '')),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    if plotResults is True:
-        plt.show()
-
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close('all')
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
@@ -468,6 +475,9 @@ if __name__ == "__main__":
     endTime = datetime.today()
     print("Start:", startTime.strftime("%d/%m/%Y %H:%M:%S"))
     print("End:", endTime.strftime("%d/%m/%Y %H:%M:%S"))
+    # print('Plot State Government')
+    # statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
+    #             smoothed=True)
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
@@ -479,16 +489,13 @@ if __name__ == "__main__":
                         filterLabel='-confirmedNew')
     print('Plot Target States')
     statePlot(['Arizona', 'New Jersey', 'Tennessee', 'South Carolina',
-               'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'],
+                'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'],
               key='confirmedNew', smoothed=True, name='Focused')
     statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah',
-               'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'],
+                'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'],
               key='confirmedNew', smoothed=True, name='Midwest')
     statePlot(['New York', 'California', 'Texas', 'Florida'],
               key='confirmedNew', smoothed=True, name='High')
-    print('Plot State Government')
-    statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
-                smoothed=True)
     gp.add('./plots/*')
     gp.commit('-m', "Upload Daily")
     gp.push()

@@ -23,10 +23,10 @@ import git
 
 from CovidData import CovidData
 
-plotResults = True
+plotUiResults = True
 if len(sys.argv) > 1:
     print('Command Line run')
-    plotResults = False
+    plotUiResults = False
 
 g = git.cmd.Git('./COVID-19')
 gp = git.cmd.Git('./')
@@ -139,8 +139,11 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    if plotResults is True:
-        plt.show()
+    # if plotUiResults is True:
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close()
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
