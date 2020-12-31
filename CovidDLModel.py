@@ -191,7 +191,6 @@ if __name__ == "__main__":
         today = day
         day += 1
     avgDeathRate = deathRate[-1:][0]
-    # avgDeathRate = sum(deathRate[-deathDays:]) / deathDays
     drate = calcChange(deathRate[-deathDays:], rateChange)
     grate = calcChange(growthRates[-deathDays:], rateChange)
     projDay = 0
@@ -227,7 +226,6 @@ if __name__ == "__main__":
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(totalDeaths[-1:][0] / current)
-        # deathRate.append(avgDeathRate)
         totalDeaths.append(totalDeaths[-1:][0] + dailyDeaths[-1:][0])
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
@@ -240,9 +238,9 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
-    gp.add('./plots/*')
-    gp.commit('-m', "Upload Daily")
-    gp.push()
+    print(gp.add('./plots/*'))
+    # gp.commit('-m', "Upload Daily")
+    # gp.push()
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],
@@ -250,9 +248,8 @@ if __name__ == "__main__":
     totalDead = {'Current': totalDeaths[today - 1],
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
-    gp.add('./data/*')
-    gp.commit('-m', "Upload Daily")
-    gp.push()
-
-    cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
-    cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
+    # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
+    # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
+    print(gp.add('./data/*'))
+    print(gp.commit('-m', "Upload Daily"))
+    print(gp.push())

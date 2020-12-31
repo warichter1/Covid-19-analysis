@@ -7,6 +7,7 @@ Created on Fri Mar 27 18:16:15 2020
 """
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
+# git rm --cached filename
 
 import sys
 from datetime import date
@@ -471,9 +472,9 @@ if __name__ == "__main__":
     print('Plot State Government')
     statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
                 smoothed=True)
-    gp.add('./plots/*')
-    gp.commit('-m', "Upload Daily")
-    gp.push()
+    print(gp.add('./plots/*'))
+    print(gp.commit('-m', "Upload Daily"))
+    print(gp.push())
     print('Plot Aggregate')
     covidDf.plotResults(['currentAggregate'],
                         data=['confirmedNew', 'deathsNew'],
@@ -492,6 +493,6 @@ if __name__ == "__main__":
               key='confirmedNew', smoothed=True, name='Midwest')
     statePlot(['New York', 'California', 'Texas', 'Florida'],
               key='confirmedNew', smoothed=True, name='High')
-    gp.add('./plots/*')
-    gp.commit('-m', "Upload Daily")
-    gp.push()
+    print(gp.add('./plots/*'))
+    print(gp.commit('-m', "Upload Daily"))
+    print(gp.push())
