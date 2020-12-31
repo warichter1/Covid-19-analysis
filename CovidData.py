@@ -212,7 +212,7 @@ class CovidData:
         self.writeData('DailySummary.txt', self.summaryText)
 
     def writeData(self, filename, text):
-
+        print('Writing:', os.path.join(self.textPath, filename))
         with open(os.path.join(self.textPath, filename), "w") as writeToFile:
             writeToFile.writelines(text)
 

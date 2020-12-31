@@ -98,6 +98,7 @@ class CovidCountryRegion:
         self.censusPop = None
         self.tracking = None
         self.stateGov = {}
+        self.fileText = ''
 
     def resetImportDefs(self):
         """Reset import to defaults."""
@@ -109,7 +110,9 @@ class CovidCountryRegion:
         self.printStatus = printStatus
         self.importData()
         self.daysIndex = self.confirmed.keys()
-        print("Current Date:", self.daysIndex[-1:][0], "Processing:")
+        printText = "Current Date: {} Processing:".format(self.daysIndex[-1:][0])
+        print(printText)
+        self.fileText += (printText + '\n')
         for region in self.regions:
             self.processRegionResults(region)
         self.getAggregate()
@@ -289,29 +292,33 @@ class CovidCountryRegion:
         """Get top cases by key."""
         for key in keys:
             topCases = OrderedDict(list(self.dataStore[key].items())[0:num])
-            print("\nSummary of", key, "Regions")
+            printText = "\nSummary of {} Regions".format(key)
+            print(printText)
+            self.fileText += (printText + '\n')
             for region in topCases.keys():
                 self.printSummary(region)
 
     def printSummary(self, region):
         """Print a summary for the region."""
         control = self.dataStore[region]['control']
-        print('[{}-{} - Pop: {}]'.format(region, control[:1], fmtNum(self.dataStore[region]['population'])))
-        print("\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
+        printText = '[{}-{} - Pop: {}]\n'.format(region, control[:1], fmtNum(self.dataStore[region]['population']))
+        printText += "\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t\n".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
                                                                 fmtNum(self.dataStore[region]['confirmedNew'][-1:][0]),
                                                                 self.dataStore[region]['caseRate'][-1:][0] * 100,
                                                                 self.dataStore[region]['maxCaseRate'] * 100,
-                                                                int(self.dataStore[region]['casesPerCapita'][-1:][0] * 1000)))
-        print("\tDeaths/total/rate/max: {}/{}/{:2.2f}%/{:2.2f}%\t".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
+                                                                int(self.dataStore[region]['casesPerCapita'][-1:][0] * 1000))
+        printText += "\tDeaths/total/rate/max: {}/{}/{:2.2f}%/{:2.2f}%\t\n".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
                                                                fmtNum(self.dataStore[region]['deathsNew'][-1:][0]),
                                                                self.dataStore[region]['deathRate'][-1:][0] * 100,
-                                                               self.dataStore[region]['maxDeathRate'] * 100))
-        print("\tIncrease Case/Death: {}/{}".format(self.dataStore[region]['increasingCases'], self.dataStore[region]['increasingDeaths']))
-        print("\tTested/Per1000/Hospitalized/Icu/Recovered: {}/{}/{}/{}/{}".format(fmtNum(self.dataStore[region]['totalTests'][-1:][0]),
+                                                               self.dataStore[region]['maxDeathRate'] * 100)
+        printText += "\tIncrease Case/Death: {}/{}\n".format(self.dataStore[region]['increasingCases'], self.dataStore[region]['increasingDeaths'])
+        printText += "\tTested/Per1000/Hospitalized/Icu/Recovered: {}/{}/{}/{}/{}".format(fmtNum(self.dataStore[region]['totalTests'][-1:][0]),
                                                                         int(self.dataStore[region]['testsPerCapita'] * 1000),
                                                                         fmtNum(self.dataStore[region]['hospitalizedCumulative'][-1:][0]),
                                                                         fmtNum(self.dataStore[region]['onVentilatorCumulative'][-1:][0] + self.dataStore[region]['inIcuCumulative'][-1:][0]),
-                                                                        fmtNum(self.dataStore[region]['recovered'][-1:][0])))
+                                                                        fmtNum(self.dataStore[region]['recovered'][-1:][0]))
+        print(printText)
+        self.fileText += (printText + '\n')
 
     def plotResults(self, keys, data=['confirmed', 'deaths'], num=5,
                     yscale='log',
