@@ -7,6 +7,7 @@ Created on Sun Nov 29 21:07:52 2020
 """
 
 from prettytable import PrettyTable
+from prettytable import MSWORD_FRIENDLY
 import os
 
 
@@ -190,7 +191,6 @@ class CovidData:
             text += '|'
             print(text)
             self.summaryText += (text + '\n')
-            # print(text + " "*(lenStr - len(text)) + '|')
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())
             text = '| Total infections: {}, Deaths: {}'.format(fmtNum(infected[i]),
@@ -199,7 +199,6 @@ class CovidData:
             text += '|'
             print(text)
             self.summaryText += (text + '\n')
-            # print(text + " "*(lenStr - len(text)) + '|')
 
         self.formatPrint(caseTotals, self.infectionByAge, 'Infections by Age')
         self.formatPrint(caseTotals, self.severity, 'Infections by severity')
@@ -222,6 +221,9 @@ class CovidData:
         totals = list(dayTotals.values())
         rates = list(template.values())
         table = PrettyTable()
+        # table.set_style(MSWORD_FRIENDLY)
+        table.border = True
+        table.header = True
         table.field_names = [title] + list(template.keys())
         for j in range(len(keyType)):
             row = [keyType[j]]

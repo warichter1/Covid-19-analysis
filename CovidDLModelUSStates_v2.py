@@ -10,6 +10,7 @@ Created on Fri Mar 27 18:16:15 2020
 # git rm --cached filename
 
 import sys
+import os
 from datetime import date
 from datetime import datetime
 from collections import OrderedDict
@@ -99,6 +100,7 @@ class CovidCountryRegion:
         self.tracking = None
         self.stateGov = {}
         self.fileText = ''
+        self.textPath = './data'
 
     def resetImportDefs(self):
         """Reset import to defaults."""
@@ -124,6 +126,7 @@ class CovidCountryRegion:
             self.printTop(['currentAggregate', 'currentCaseRate',
                            'casesPerCapita',
                            'currentDeathRate', 'testsPerCapita'], 5)
+            self.writeData('stateDetails.txt', self.fileText)
 
     def getAggregate(self):
         """Evauate the current values of each region for high rates."""
@@ -395,6 +398,11 @@ class CovidCountryRegion:
         del df['date']
         return df.fillna(0).set_index(index)
 
+    def writeData(self, filename, text):
+        print('Writing:', os.path.join(self.textPath, filename))
+        with open(os.path.join(self.textPath, filename), "w") as writeToFile:
+            writeToFile.writelines(text)
+
     def addListColsDf(self, state, keys=[]):
         """Modify columns in a Pandas Dataframe."""
         if len(keys) < 1:
@@ -501,5 +509,6 @@ if __name__ == "__main__":
     statePlot(['New York', 'California', 'Texas', 'Florida'],
               key='confirmedNew', smoothed=True, name='High')
     print(gp.add('./plots/*'))
+    print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
