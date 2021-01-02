@@ -164,7 +164,7 @@ if __name__ == "__main__":
     lastDay = 1
     yesterday = 0
     yesterdayDeaths = 0
-    printText = ''
+    printText = 'Daily Details for US Cases, Mortaility and Rates\n'
     # rateChange = 'avg2'
     # rateChange = 'avgAll'
     # rateChange = None
