@@ -358,8 +358,8 @@ class CovidCountryRegion:
         plt.ylabel("US Cases - {}\nTop {} Regions ({})".format(legendText,
                                                                num, yscale))
         plt.savefig(plotPath + 'daily_State{}.png'.format(legendText.replace(' ', '')),
-                bbox_inches="tight",
-                pad_inches=0.5 + random.uniform(0.0, 0.25))
+                    bbox_inches="tight",
+                    pad_inches=0.5 + random.uniform(0.0, 0.25))
         plt.show(block=False)
         plt.clf()
         plt.cla()
@@ -399,6 +399,7 @@ class CovidCountryRegion:
         return df.fillna(0).set_index(index)
 
     def writeData(self, filename, text):
+        """Write the results of a run in Text to Filename."""
         print('Writing:', os.path.join(self.textPath, filename))
         with open(os.path.join(self.textPath, filename), "w") as writeToFile:
             writeToFile.writelines(text)

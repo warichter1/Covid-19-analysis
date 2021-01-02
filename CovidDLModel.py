@@ -164,6 +164,7 @@ if __name__ == "__main__":
     lastDay = 1
     yesterday = 0
     yesterdayDeaths = 0
+    printText = ''
     # rateChange = 'avg2'
     # rateChange = 'avgAll'
     # rateChange = None
@@ -181,12 +182,14 @@ if __name__ == "__main__":
         yesterdayDeaths = int(deaths[cdate])
         dailyDeaths.append(nowDeaths)
         totalDeaths.append(int(deaths[cdate]))
-        print("Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
+        text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
                                                                                                                          format(now, ',d'), caseRate * 100,
                                                                                                                          format(int(deaths[cdate]), ',d'),
                                                                                                                          format(nowDeaths, ',d'),
-                                                                                                                         deathRate[-1:][0] * 100))
+                                                                                                                         deathRate[-1:][0] * 100)
+        print(text)
+        printText += (text + '\n')
         lastDay = us[cdate]
         today = day
         day += 1
@@ -201,7 +204,9 @@ if __name__ == "__main__":
     # average of last 7 days
     weekRates[len(weekRates)-1] = (sum(weekRates) / len(weekRates))
 
-    print("Forecast Details: {} days".format(projectionDays))
+    text = "Forecast Details: {} days".format(projectionDays)
+    print(text)
+    printText += ('\n' + text + '\n')
     for day in range(day, day + projectionDays):
         if caseRate + grate[projDay] <= 0:
             grate = calcChange(growthRates[-deathDays:], rateChange)
@@ -230,10 +235,11 @@ if __name__ == "__main__":
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
-        print("Forecast: {} ({}) Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
+        text = "Forecast: {} ({}) Cases/Today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, pdate,
                                                                                                                                    format(cases[-1:][0], ',d'), format(now, ',d'),
-                                                                                                                                   growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100))
-
+                                                                                                                                   growthRates[-1:][0] * 100, format(int(cases[-1:][0] * avgDeathRate), ',d'), format(dailyDeaths[-1:][0], ',d'), deathRate[-1:][0]* 100)
+        print(text)
+        printText += (text + '\n')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
@@ -248,6 +254,7 @@ if __name__ == "__main__":
     totalDead = {'Current': totalDeaths[today - 1],
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
+    cd.writeData('DailyDetailsProjection.txt', printText)
     # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
     # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
     print(gp.add('./data/*'))
