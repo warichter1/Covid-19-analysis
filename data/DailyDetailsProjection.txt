@@ -1,3 +1,4 @@
+Daily Details for cases, Mortaility and Rates
 Day: 1 (1/22/20) Cases/today/Infection Rate: 1/1/0.00% - Mortality/Today/Rate: 0/0/0.00% 
 Day: 2 (1/23/20) Cases/today/Infection Rate: 1/0/0.00% - Mortality/Today/Rate: 0/0/0.00% 
 Day: 3 (1/24/20) Cases/today/Infection Rate: 2/1/100.00% - Mortality/Today/Rate: 0/0/0.00% 
