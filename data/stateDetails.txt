@@ -173,7 +173,7 @@ Current Date: 1/4/21 Processing:
 	cases/today/rate/max/per1000: 493,102/1,060/0.21%/66.67%/55	
 	Deaths/total/rate/max: 19,225/17/3.90%/8.88%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 7,804,170/878/48,770/0/57,168
+	Tested/Per1000/Hospitalized/Icu/Recovered: 7,855,001/884/48,770/0/57,168
 [New Mexico-D - Pop: 2,096,829]
 	cases/today/rate/max/per1000: 147,315/921/0.63%/50.00%/70	
 	Deaths/total/rate/max: 2,574/23/1.73%/4.56%	
@@ -376,7 +376,7 @@ Summary of currentDeathRate Regions
 	cases/today/rate/max/per1000: 493,102/1,060/0.21%/66.67%/55	
 	Deaths/total/rate/max: 19,225/17/3.90%/8.88%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 7,804,170/878/48,770/0/57,168
+	Tested/Per1000/Hospitalized/Icu/Recovered: 7,855,001/884/48,770/0/57,168
 [New York-D - Pop: 19,453,561]
 	cases/today/rate/max/per1000: 1,035,139/11,242/1.09%/90.00%/53	
 	Deaths/total/rate/max: 38,599/184/3.71%/8.30%	
