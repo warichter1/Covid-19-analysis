@@ -41,18 +41,24 @@ class GrowthAndMortality:
         self.popData = False
         self.modifier = False
         self.rateChange = {}
+        self.textLog = ''
+
+    def logging(self, text, out=True):
+        self.textLog += (text + '\n')
+        if out is True:
+            print(out)
 
     def initializeQueues(self, availableBeds, inHospital, requireHospital, inIcu,
                          requireIcu):
         self.beds = {}
-        print("initializing {} total ICU Beds for {} days.".format(availableBeds * .05, inIcu))
+        self.logging("initializing {} total ICU Beds for {} days.".format(availableBeds * .05, inIcu))
         self.beds['icu'] = {'name': 'icu', 'days': inIcu, 'beds': availableBeds * .05,
-                        'require': requireIcu, 'queue': [],
-                        'overflow': 0}
-        print("initializing {} total hospital Beds for {} days.".format(availableBeds * .95, inHospital))
+                            'require': requireIcu, 'queue': [],
+                            'overflow': 0}
+        self.logging("initializing {} total hospital Beds for {} days.".format(availableBeds * .95, inHospital))
         self.beds['general'] = {'name': 'general', 'days': inHospital,
                                 'beds': availableBeds * .95,
-                            'require': requireHospital, 'queue': []}
+                                'require': requireHospital, 'queue': []}
 
     def updateBeds(self, cases):
         for bed in self.beds:
@@ -73,9 +79,9 @@ class GrowthAndMortality:
         return overflow, recover
 
     def status(self):
-        print("Status Enabled")
-        print(self.beds['general'])
-        print(self.beds['icu'])
+        self.logging("Status Enabled")
+        self.logging(str(self.beds['general']))
+        self.logging(str(self.beds['icu']))
 
     def deathsPerDay(self, pop):
         return pop * self.deathRate / 365
@@ -118,7 +124,9 @@ class GrowthAndMortality:
         case = 1
         overflow = 0
         mortality = self.baseMortality
-        print("Total Days:", days, "Mortality:", mortality, "Type:", caseType)
+        self.logging("Total Days: {} Mortality: {} Type:".format(days,
+                                                                 mortality,
+                                                                 caseType))
         self.herdPoints = {'base': self.workingPop * .42, 'baseFound': False, 'baseDay': 0,
               'floor': self.workingPop * .60, 'floorFound': False, 'floorDay': 0,
               'ceiling': self.workingPop * .80, 'ceilingFound': False, 'ceilingDay': 0}
@@ -133,12 +141,13 @@ class GrowthAndMortality:
                 growth = (case * self.workingRate)
                 case = case + growth
                 if str(day + 1) in self.rateChange.keys():
-                    print("Adjust Curve: {}".format(day + 1, case, ))
+                    self.logging("Adjust Curve: {}".format(day + 1, case, ))
                     totalRate = self.workingRate + self.rateChange[str(day + 1)]
                     case = storeCase * (1 + totalRate)
                     if case > changePoint:
                         mortality = maxMortality
-                    print("Adjust Curve: {} {} {}".format(day + 1, case, totalRate))
+                    self.logging("Adjust Curve: {} {} {}".format(day + 1, case,
+                                                                 totalRate))
             else:  # Limits to Growth Model
                 # Add PPE modifier and apply.
                 self.workingRate  = self.mod.checkSelfProt(self.caseGrowth)
@@ -167,29 +176,29 @@ class GrowthAndMortality:
             self.recovered.append(recover)
             self.workingPop = self.totalPop
             if summary is True:
-                print("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
+                self.logging("{}day: {} - Cases/Rate:{}/{:2.2f}%-Mortality/withOverflow:{}/{}-Rate:{:2.4f}%".format(pinned, day + 1, format(int(self.cases[day]), ',d'),
                                                        float(totalRate * 100),
                                                        format(int(self.deaths[day]), ',d'),
                                                        format(int(self.cases[day] * mortality), ',d'),
                                                        adjustedMortality * 100))
                                                    # mortality * 100))
             if self.cases[day] > totalPop:
-                print("{}day: {} - Cases Exceed {}, simulation complete!".format(pinned, day +1, format(totalPop, ',d')))
+                self.logging("{}day: {} - Cases Exceed {}, simulation complete!".format(pinned, day +1, format(totalPop, ',d')))
                 break
             elif self.herdPoints['baseFound'] == False and self.cases[day] > self.herdPoints['base']:
-                print("{}day: {} - Cases Exceed {}, base immunity achieved".format(pinned, day +1, format(int(self.herdPoints['base']), ',d')))
+                self.logging("{}day: {} - Cases Exceed {}, base immunity achieved".format(pinned, day +1, format(int(self.herdPoints['base']), ',d')))
                 self.herdPoints['baseFound'] = True
                 self.herdPoints['baseDay'] = day
             elif self.herdPoints['floorFound'] == False and self.cases[day] > self.herdPoints['floor']:
-                print("{}day: {} - Cases Exceed {}, floor immunity achieved".format(pinned, day +1, format(int(self.herdPoints['floor']), ',d')))
+                self.logging("{}day: {} - Cases Exceed {}, floor immunity achieved".format(pinned, day +1, format(int(self.herdPoints['floor']), ',d')))
                 self.herdPoints['floorFound'] = True
                 self.herdPoints['floorDay'] = day
             elif self.herdPoints['ceilingFound'] == False and self.cases[day] > self.herdPoints['ceiling']:
-                print("{}day: {} - Cases Exceed {}, ceiling immunity achieved".format(pinned, day +1, format(int(self.herdPoints['ceiling']), ',d')))
+                self.logging("{}day: {} - Cases Exceed {}, ceiling immunity achieved".format(pinned, day +1, format(int(self.herdPoints['ceiling']), ',d')))
                 self.herdPoints['ceilingFound'] = True
                 self.herdPoints['ceilingDay'] = day
             if len(self.growthRate) > 5 and int(sum(self.growthRate[-5:]) * 3000) == 0 and int(recover + .75) == 0:
-                print('Asymtotic curve reached, all US residents infected!\nEnd simulation.')
+                self.logging('Asymtotic curve reached, all US residents infected!\nEnd simulation.')
                 break
         if len(self.modPop) > 0:
             plt.plot(self.modPop)
