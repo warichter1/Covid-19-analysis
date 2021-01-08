@@ -213,7 +213,7 @@ Current Date: 1/6/21 Processing:
 	cases/today/rate/max/per1000: 120,223/735/0.61%/66.67%/28	
 	Deaths/total/rate/max: 1,558/8/1.29%/4.07%	
 	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,741,116/649/6,737/0/5,870
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,741,851/650/6,737/0/5,870
 [Pennsylvania-R - Pop: 12,801,989]
 	cases/today/rate/max/per1000: 688,398/9,400/1.37%/66.67%/53	
 	Deaths/total/rate/max: 16,915/379/2.40%/7.48%	
