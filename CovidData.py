@@ -10,6 +10,8 @@ from prettytable import PrettyTable
 from prettytable import MSWORD_FRIENDLY
 import os
 
+import globals
+
 
 class CovidData:
     """Data for various details of Covid."""
@@ -174,11 +176,17 @@ class CovidData:
         total = sum([i[0] for i in self.party[party]['level'].values()])
         return total/self.population, total
 
+    def logging(self, text, out=True):
+        # self.textLog += (text + '\n')
+        globals.textLog += (text + '\n')
+        if out is True:
+            print(text)
+
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
         top = '\n+--------------------------------------------------------------------------+'
         totalPad = len(top)
-        print(top)
+        self.logging(top)
         self.summaryText += (top + '\n')
         lenStr = len(top) - 2
         dates = list(days.keys())
@@ -189,7 +197,7 @@ class CovidData:
                                                           dates[i])
             text += " "*(lenStr - len(text))
             text += '|'
-            print(text)
+            self.logging(text)
             self.summaryText += (text + '\n')
             infected = list(caseTotals.values())
             dead = list(deathTotals.values())

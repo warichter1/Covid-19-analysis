@@ -8,12 +8,12 @@ Created on Sun Sep  6 22:27:27 2020
 import random
 from goals import Svm
 from CovidData import CovidData
-
+import globals
 
 class Modifiers:
     """Projection modifiers for population and protection calulations."""
 
-    def __init__(self, population):
+    def __init__(self, population, logging):
         cd = CovidData(population)
         self.population = population
         self.protection = cd.protection
@@ -32,6 +32,13 @@ class Modifiers:
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
         self.lockdownAdjust = svm.getUncalibrated(expandBy=6)['fop']
         self.party = cd.party
+        self.textLog = logging
+        # print(globals.textPrint)
+
+    def logging(self, text, out=True):
+        globals.textLog += (text + '\n')
+        if out is True:
+            print(text)
 
     def checkDirection(self, growth):
         """Check for increasing or decreasing infections."""
@@ -49,7 +56,9 @@ class Modifiers:
                     self.fallDays = 0
                     self.peak += 1
                     self.checkPeak()
-                    print('Reset - Fall:', self.riseDays, self.fallDays, direction)
+                    self.logging('Reset - Fall: {} {} {}'.format(self.riseDays,
+                                                                 self.fallDays,
+                                                                 direction))
             else:  # Change in behavior as peak has occurred
                 self.rise = True
                 self.fallDays = 0
@@ -57,25 +66,30 @@ class Modifiers:
                 if self.riseDays > self.curve['daysToPeak'] and self.checkRisk() is True:
                     self.trigger = self.rise = True
                     self.riseDays = 0
-                    print('Reset - Rise:', self.riseDays, self.fallDays, direction)
+                    self.logging('Reset - Rise: {} {} {}'.format(self.riseDays,
+                                                                 self.fallDays,
+                                                                 direction))
 
     def checkPeak(self):
+        """Has the current nunber of daily infections hit a peak."""
         if self.peak > 1:
             toleranceIncrease = random.uniform(0, self.rate['riskRise'])
             self.rate['risk'] += toleranceIncrease
-            print('Additional Peak detected, tolerance:', toleranceIncrease)
+            self.logging('Additional Peak detected, tolerance: {}'.format(toleranceIncrease))
 
     def checkRisk(self, max=10):
+        """Is the risk floor been reached."""
         num = random.randint(0, max)
         return True if num > self.rate['risk'] else False
 
     def checkProbableRisk(self, risk, max=10):
+        """If the risk level is met, do something."""
         days = self.riseDays if self.riseDays > 0 else self.fallDays
         adjust = self.riskAdjust[days] if len(self.riskAdjust) > days else 1
         # num = random.randint(0, max) * adjust
         guess = random.randint(0, max)
         num = guess * adjust
-        print("Debug:", days, 'Rand', guess, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
+        self.logging("[Debug] {} Rand: {} adjust: {} final: {} Risk: {} Rise: {}".format(days, guess, adjust, num, self.rate['risk'], self.rise), out=False)
         return True if num > self.rate['risk'] else False
 
     def checkSelfProt(self, growth, distance=True):  # distabce always True, never disables trigger
@@ -90,7 +104,8 @@ class Modifiers:
             self.checkFall()
         elif self.checkRisk():  # determine if risk is overcome
             self.checkProtect(max=10)
-        # print(self.rate['base'] - rate, rate)
+        self.logging('Adjusted Rate: {} {}'.format(self.rate['base'] - rate,
+                                                   rate), out=True)
         return rate
 
     def checkProtect(self, max=20):
@@ -98,7 +113,8 @@ class Modifiers:
         if self.trigger is True:
             if self.checkRisk(max=max) is True:
                 self.getProtect()
-                print('Rise', self.rise, self.rate['risk'], self.rateMod)
+                self.logging('Rise', self.rise, self.rate['risk'],
+                             self.rateMod)
 
     def checkRise(self):
         """add changes here rising rate here."""
@@ -132,7 +148,7 @@ class Modifiers:
         self.distanceMod = 1.0
         distance = list(self.rate['distance']['modifier'].keys())
         if self.trigger is True:
-            print('hit', 'Peak' if self.rise is True else "Trough")
+            self.logging('hit', 'Peak' if self.rise is True else "Trough")
             self.checkDistanceModifier(list(distance))
             self.trigger = False
         else:
@@ -143,7 +159,7 @@ class Modifiers:
         if self.rise is True:
             distance = list(distance[1:])
         else:
-            print('Going Down')
+            self.logging('Going Down', False)
             distance = list(reversed(distance))
         self.distanceModifier(distance)
 
@@ -153,7 +169,9 @@ class Modifiers:
             for modifier in distance:
                 if modifier == 'lockdown' and self.inLockdown(modifier) is True:
                     return 0
-                print('-->Trigger Mod:', modifier, distance, self.rate['distance']['active'], self.rate['distance']['active'][modifier] , self.rise)
+                self.logging('-->Trigger Mod: {} {} {} {} {}'.format(modifier,
+                                                                     distance,
+                                                                     self.rate['distance']['active'], self.rate['distance']['active'][modifier] , self.rise))
                 # Determine whether infections are rising or falling and set.
                 if self.rise is True and self.rate['distance']['active'][modifier] is False:
                     self.rate['distance']['active'][modifier] = True
@@ -169,13 +187,13 @@ class Modifiers:
     def changeDistance(self, modifier):
         direction = 'Down' if self.rise is False else 'Up'
         self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
-        print("XXXXXX-Match", modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod)
+        self.logging("XXXXXX-Match {} {} {} {}".format(modifier, self.rate['distance']['active'][modifier], direction, self.distanceMod), out=False)
 
     def inLockdown(self, modifier, max=10):
         """Activate lockdown under special conditions."""
         if modifier == 'lockdown':
             if self.lockdown['active'] is False and self.lockdown['day'] < 1:
-                print("--> Entering Lockdown")
+                self.logging("--> Entering Lockdown")
                 self.lockdown['active'] = True
                 self.rate['distance']['active'][modifier] = True
                 self.distanceMod = 1 - self.rate['distance']['modifier'][modifier]
@@ -185,9 +203,9 @@ class Modifiers:
             days = self.lockdown['day']
             adjust = self.lockdownAdjust[days] if len(self.lockdownAdjust) > days else 1
             num = random.randint(0, max) * adjust
-            # print("Debug:", days, "adjust:", adjust, "final:", num, "Risk:", self.rate['risk'], "Rise:", self.rise)
+            self.logging("Debug: {} adjust: {} final: {} Risk: {} Rise: {}".format(days, adjust, num, self.rate['risk'], self.rise))
             if num > self.rate['risk']:
-                print('Exiting Lockdown <--')
+                self.logging('Exiting Lockdown <--')
                 self.lockdown['active'] = False
         return self.lockdown['active']
 

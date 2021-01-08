@@ -12,6 +12,9 @@ from datetime import date
 # import benfordslaw as bl
 
 from covidModifiers import Modifiers
+import globals
+
+globals.initializeStore()
 
 currentDate = date.today()
 
@@ -44,9 +47,10 @@ class GrowthAndMortality:
         self.textLog = ''
 
     def logging(self, text, out=True):
-        self.textLog += (text + '\n')
+        # self.textLog += (text + '\n')
+        globals.textLog += (text + '\n')
         if out is True:
-            print(out)
+            print(text)
 
     def initializeQueues(self, availableBeds, inHospital, requireHospital, inIcu,
                          requireIcu):
@@ -100,7 +104,7 @@ class GrowthAndMortality:
     def setPopStats(self, totalPop, births, deaths):
         self.popData = True
         self.totalPop = totalPop
-        self.mod = Modifiers(self.totalPop)
+        self.mod = Modifiers(self.totalPop, self.textLog)
         self.workingPop = totalPop
         self.birthRate = births
         self.deathRate = deaths
@@ -133,7 +137,7 @@ class GrowthAndMortality:
         self.initLists()
 
         for day in range(days):
-            print('Day:', day)
+            self.logging('Day: {}'.format(day))
             pinned = ""
             surge = 0
             storeCase = deepcopy(case)
