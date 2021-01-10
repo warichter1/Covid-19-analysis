@@ -9,6 +9,7 @@ Created on Sun Mar 22 16:18:30 2020
 # data source: https://github.com/CSSEGISandData/COVID-19.git
 # use git clone to create a local copy
 import sys
+import os
 import copy
 from datetime import date
 from datetime import datetime
@@ -22,6 +23,9 @@ import random
 import git
 
 from CovidData import CovidData
+import globals
+
+globals.initializeStore()
 
 plotUiResults = True
 if len(sys.argv) > 1:
@@ -144,6 +148,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.clf()
     plt.cla()
     plt.close()
+
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)

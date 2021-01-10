@@ -232,11 +232,13 @@ class CovidData:
         # table.set_style(MSWORD_FRIENDLY)
         table.border = True
         table.header = True
-        table.field_names = [title] + list(template.keys())
+        table.field_names = [title] + list(template.keys()) + ['Total']
         for j in range(len(keyType)):
             row = [keyType[j]]
             for i in range(len(rates)):
                 row.append(fmtNum(rates[i] * totals[j]))
+            row.append(fmtNum(totals[j]))
+            # print(row)
             table.add_row(row)
         data = table.get_string() + '\n'
         self.summaryText += data

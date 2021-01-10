@@ -13,7 +13,7 @@ import globals
 class Modifiers:
     """Projection modifiers for population and protection calulations."""
 
-    def __init__(self, population, logging):
+    def __init__(self, population):
         cd = CovidData(population)
         self.population = population
         self.protection = cd.protection
@@ -32,7 +32,7 @@ class Modifiers:
         self.riskAdjust = svm.getUncalibrated(expandBy=4)['fop']
         self.lockdownAdjust = svm.getUncalibrated(expandBy=6)['fop']
         self.party = cd.party
-        self.textLog = logging
+        # self.textLog = logging
         # print(globals.textPrint)
 
     def logging(self, text, out=True):

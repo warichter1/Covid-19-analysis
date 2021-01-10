@@ -6,6 +6,7 @@ Created on Sat Mar 14 18:29:19 2020
 @author: wrichter
 """
 
+import os
 from copy import deepcopy
 import matplotlib.pyplot as plt
 from datetime import date
@@ -45,6 +46,7 @@ class GrowthAndMortality:
         self.modifier = False
         self.rateChange = {}
         self.textLog = ''
+        self.textPath = './log'
 
     def logging(self, text, out=True):
         # self.textLog += (text + '\n')
@@ -104,7 +106,7 @@ class GrowthAndMortality:
     def setPopStats(self, totalPop, births, deaths):
         self.popData = True
         self.totalPop = totalPop
-        self.mod = Modifiers(self.totalPop, self.textLog)
+        self.mod = Modifiers(self.totalPop)
         self.workingPop = totalPop
         self.birthRate = births
         self.deathRate = deaths
@@ -211,6 +213,10 @@ class GrowthAndMortality:
             plt.show()
         return day, totalRate, mortality
 
+    def writeData(self, filename, text):
+        print('Writing:', os.path.join(self.textPath, filename))
+        with open(os.path.join(self.textPath, filename), "w") as writeToFile:
+            writeToFile.writelines(text)
 
 summary = False
 
@@ -233,6 +239,7 @@ if __name__ == "__main__":
                         icuDays, requireIcu)
     hp.setPopStats(totalPop, popBirthRate, popDeathRate)
     day, totalRate, mortality = hp.run(days, caseType, distancePop=False)
+    hp.writeData('limitsToGrowth.txt', globals.textLog)
     # plt.plot(hp.cases, label='Infected population')
     handles = []
     label, = plt.plot(hp.caseGrowth, label='Daily Infected')
