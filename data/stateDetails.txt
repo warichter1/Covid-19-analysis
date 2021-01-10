@@ -25,8 +25,8 @@ Current Date: 1/9/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,204,869/730/12,087/1,289/219,887
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 2,671,031/51,202/1.92%/50.00%/67	
-	Deaths/total/rate/max: 29,627/521/1.09%/4.00%	
+	cases/today/rate/max/per1000: 2,675,262/55,433/2.07%/50.00%/67	
+	Deaths/total/rate/max: 29,707/601/1.09%/4.00%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 35,353,748/894/0/0/0
 [Colorado-D - Pop: 5,758,736]
@@ -323,16 +323,16 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 432/6/1.47%/4.90%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,173,333/872/1,158/0/11,728
+[California-D - Pop: 39,512,223]
+	cases/today/rate/max/per1000: 2,675,262/55,433/2.07%/50.00%/67	
+	Deaths/total/rate/max: 29,707/601/1.09%/4.00%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 35,353,748/894/0/0/0
 [Vermont-D - Pop: 623,989]
 	cases/today/rate/max/per1000: 8,790/171/1.95%/60.00%/14	
 	Deaths/total/rate/max: 156/0/1.77%/6.90%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 277,491/444/0/0/5,902
-[California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 2,671,031/51,202/1.92%/50.00%/67	
-	Deaths/total/rate/max: 29,627/521/1.09%/4.00%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 35,353,748/894/0/0/0
 [North Carolina-R - Pop: 10,488,084]
 	cases/today/rate/max/per1000: 614,355/11,581/1.89%/71.43%/58	
 	Deaths/total/rate/max: 7,425/97/1.19%/3.62%	
