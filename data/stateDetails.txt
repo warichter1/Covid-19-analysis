@@ -25,9 +25,9 @@ Current Date: 1/12/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,257,416/748/12,313/1,306/229,700
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 2,795,978/37,957/1.36%/50.00%/70	
-	Deaths/total/rate/max: 31,031/551/1.09%/4.00%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 2,804,663/46,642/1.66%/50.00%/70	
+	Deaths/total/rate/max: 31,157/677/1.09%/4.00%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 36,508,384/923/0/0/0
 [Colorado-D - Pop: 5,758,736]
 	cases/today/rate/max/per1000: 364,336/1,511/0.41%/75.00%/63	
@@ -165,9 +165,9 @@ Current Date: 1/12/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,250,330/405/0/0/0
 [New Hampshire-D - Pop: 1,359,711]
-	cases/today/rate/max/per1000: 52,307/0/0.00%/58.82%/38	
-	Deaths/total/rate/max: 869/0/1.66%/6.47%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 53,149/842/1.58%/58.82%/39	
+	Deaths/total/rate/max: 878/9/1.64%/6.47%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 562,848/413/937/308/46,031
 [New Jersey-D - Pop: 8,882,190]
 	cases/today/rate/max/per1000: 594,749/4,587/0.77%/66.67%/66	
@@ -333,16 +333,16 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 6,449/33/2.96%/9.33%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 4,771,175/1338/12,257/0/9,800
-[Wyoming-R - Pop: 578,759]
-	cases/today/rate/max/per1000: 48,072/677/1.41%/81.82%/83	
-	Deaths/total/rate/max: 522/33/1.02%/1.86%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 210,259/363/11,923/0/45,223
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 2,795,978/37,957/1.36%/50.00%/70	
-	Deaths/total/rate/max: 31,031/551/1.09%/4.00%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 2,804,663/46,642/1.66%/50.00%/70	
+	Deaths/total/rate/max: 31,157/677/1.09%/4.00%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 36,508,384/923/0/0/0
+[New Hampshire-D - Pop: 1,359,711]
+	cases/today/rate/max/per1000: 53,149/842/1.58%/58.82%/39	
+	Deaths/total/rate/max: 878/9/1.64%/6.47%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 562,848/413/937/308/46,031
 
 Summary of casesPerCapita Regions
 [North Dakota-R - Pop: 762,062]
