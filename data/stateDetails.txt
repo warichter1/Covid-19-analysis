@@ -25,8 +25,8 @@ Current Date: 1/15/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,299,908/762/12,598/1,340/237,729
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 2,916,309/32,610/1.12%/50.00%/73	
-	Deaths/total/rate/max: 32,851/533/1.11%/4.00%	
+	cases/today/rate/max/per1000: 2,922,690/38,991/1.33%/50.00%/73	
+	Deaths/total/rate/max: 33,002/684/1.11%/4.00%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 37,449,536/947/0/0/0
 [Colorado-D - Pop: 5,758,736]
