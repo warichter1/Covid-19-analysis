@@ -123,6 +123,7 @@ class GrowthAndMortality:
         self.recovered = []
         self.modifiedCases = []
         self.modPop = []
+        self.allPop = []
 
     def run(self, days, caseType='limits', distancePop=True):
         self.workingRate = baseRate
@@ -156,7 +157,7 @@ class GrowthAndMortality:
                                                                  totalRate))
             else:  # Limits to Growth Model
                 # Add PPE modifier and apply.
-                self.workingRate  = self.mod.checkSelfProt(self.caseGrowth)
+                self.workingRate = self.mod.checkSelfProt(self.caseGrowth)
                 # add a modifier based in personal distance from others.
                 pop = self.mod.checkDistance(self.workingPop)
                 if distancePop is True:
@@ -172,6 +173,7 @@ class GrowthAndMortality:
             deaths *= .5
             self.cases.append(int(case))
             self.modPop.append(pop)
+            self.allPop.append(self.totalPop)
             self.modifiedCases.append(self.workingRate)
             self.deaths.append(int(deaths))
             self.dailyDeaths.append(abs(int(dailyDeaths)))
@@ -208,6 +210,7 @@ class GrowthAndMortality:
                 break
         if len(self.modPop) > 0:
             plt.plot(self.modPop)
+            plt.plot(self.allPop)
             plt.show()
             plt.plot(self.mod.riskAdjust)
             plt.show()

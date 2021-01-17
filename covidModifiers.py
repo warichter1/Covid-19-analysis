@@ -92,11 +92,11 @@ class Modifiers:
         self.logging("[Debug] {} Rand: {} adjust: {} final: {} Risk: {} Rise: {}".format(days, guess, adjust, num, self.rate['risk'], self.rise), out=False)
         return True if num > self.rate['risk'] else False
 
-    def checkSelfProt(self, growth, distance=True):  # distabce always True, never disables trigger
+    def checkSelfProt(self, growth, distance=True):  # distance always True, never disables trigger
         """Caller for PPE caculation of spread rate."""
         self.distance = distance
         rate = self.rate['base']
-        rate = rate if self.rateMod == 0 else rate * self.rateMod
+        rate = rate if self.rateMod == 0 else rate + self.rateMod
         self.checkDirection(growth)
         if self.rise is True:
             self.checkRise()
