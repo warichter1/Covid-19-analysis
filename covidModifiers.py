@@ -96,7 +96,7 @@ class Modifiers:
         """Caller for PPE caculation of spread rate."""
         self.distance = distance
         rate = self.rate['base']
-        rate = rate if self.rateMod == 0 else rate + self.rateMod
+        rate = rate if self.rateMod == 0 else rate * self.rateMod
         self.checkDirection(growth)
         if self.rise is True:
             self.checkRise()
