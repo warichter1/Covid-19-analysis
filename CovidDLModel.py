@@ -33,9 +33,14 @@ if len(sys.argv) > 1:
     plotUiResults = False
 
 g = git.cmd.Git('./COVID-19')
-gp = git.cmd.Git('./')
+print(g.pull())
+g = git.cmd.Git('covid-19-data')
 print(g.pull())
 
+gp = git.cmd.Git('./')
+
+
+vaccine = 'covid-19-data/public/data/vaccinations/us_state_vaccinations.csv'
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -60,6 +65,15 @@ def importCsv(infile, incountry, indexin, inexclude):
         for col in inexclude:
             del cv[col]
     return cv.loc[incountry]
+
+
+def importVaccine(infile, indexin, inexclude):
+    """Import the Owid data files based on the index and exclude list."""
+    cv = pd.read_csv(infile, index_col=indexin)
+    if len(inexclude) > 0:
+        for col in inexclude:
+            del cv[col]
+    return cv
 
 
 def limit(daybegin, dayLimit, rate):
@@ -231,7 +245,7 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
-        dailyDeaths.append(int(now * avgDeathRate) - dailyDeaths[-4:][0])
+        dailyDeaths.append(abs(int(now * avgDeathRate) - dailyDeaths[-4:][0]))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
