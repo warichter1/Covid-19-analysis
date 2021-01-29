@@ -41,6 +41,13 @@ gp = git.cmd.Git('./')
 
 
 vaccine = 'covid-19-data/public/data/vaccinations/us_state_vaccinations.csv'
+vaccineExclude = ['total_distributed', 'total_vaccinations',
+                  'distributed_per_hundred', 'total_vaccinations_per_hundred',
+                  'people_vaccinated', 'people_vaccinated_per_hundred',
+                  'people_fully_vaccinated',
+                  'people_fully_vaccinated_per_hundred',
+                  'daily_vaccinations_raw', 'daily_vaccinations_per_million',
+                  'share_doses_used']
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -67,13 +74,15 @@ def importCsv(infile, incountry, indexin, inexclude):
     return cv.loc[incountry]
 
 
-def importVaccine(infile, indexin, inexclude):
+def importVaccine(infile, indexin, inexclude=[]):
     """Import the Owid data files based on the index and exclude list."""
-    cv = pd.read_csv(infile, index_col=indexin)
+    cv = pd.read_csv(infile)
+    cv['date'] = pd.to_datetime(cv.date.astype(str),
+                        format="%Y/%m/%d").dt.strftime('%m/%d/%y')
     if len(inexclude) > 0:
         for col in inexclude:
             del cv[col]
-    return cv
+    return cv.fillna(0).set_index(indexin)
 
 
 def limit(daybegin, dayLimit, rate):
@@ -167,6 +176,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
     us = importCsv(file, country, index, excludeFields)
+    vacUS = importVaccine(vaccine, 'date', inexclude=vaccineExclude)
     file = "{}/{}".format(dataPath, deathsFile)
     deaths = importCsv(file, country, index, excludeFields)
     cases = []
