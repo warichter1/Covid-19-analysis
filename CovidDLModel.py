@@ -172,8 +172,11 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.cla()
     plt.close()
 
+
 def padStrDate(date):
+    """If a date/Month is not appended with a leading 0, add."""
     return '0' + date if date[1] == '/' else date
+
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
