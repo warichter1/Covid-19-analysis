@@ -172,6 +172,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.cla()
     plt.close()
 
+def padStrDate(date):
+    return '0' + date if date[1] == '/' else date
 
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
@@ -186,6 +188,7 @@ if __name__ == "__main__":
     deathRate = []
     totalDeaths = []
     scenario = []
+    totalVaccine = []
     scenarioNumber = 7
     scenarioAverage = 0
     inaugurationDay = 365
@@ -211,6 +214,11 @@ if __name__ == "__main__":
         yesterdayDeaths = int(deaths[cdate])
         dailyDeaths.append(nowDeaths)
         totalDeaths.append(int(deaths[cdate]))
+        vacToday = 0
+        padDate = padStrDate(cdate)
+        if padDate in vacUS.index:
+            vacToday = int(sum(vacUS.loc[padDate].daily_vaccinations))
+        totalVaccine.append(vacToday)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
                                                                                                                          format(now, ',d'), caseRate * 100,
