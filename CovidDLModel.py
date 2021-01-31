@@ -41,13 +41,11 @@ gp = git.cmd.Git('./')
 
 
 vaccine = 'covid-19-data/public/data/vaccinations/us_state_vaccinations.csv'
-vaccineExclude = ['total_distributed', 'total_vaccinations',
+vaccineExclude = ['total_vaccinations',
                   'distributed_per_hundred', 'total_vaccinations_per_hundred',
                   'people_vaccinated', 'people_vaccinated_per_hundred',
-                  'people_fully_vaccinated',
                   'people_fully_vaccinated_per_hundred',
-                  'daily_vaccinations_raw', 'daily_vaccinations_per_million',
-                  'share_doses_used']
+                  'daily_vaccinations_raw', 'share_doses_used']
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -192,6 +190,7 @@ if __name__ == "__main__":
     totalDeaths = []
     scenario = []
     totalVaccine = []
+    vacDistributed = []
     scenarioNumber = 7
     scenarioAverage = 0
     inaugurationDay = 365
@@ -218,9 +217,12 @@ if __name__ == "__main__":
         dailyDeaths.append(nowDeaths)
         totalDeaths.append(int(deaths[cdate]))
         vacToday = 0
+        distToday = 0
         padDate = padStrDate(cdate)
         if padDate in vacUS.index:
             vacToday = int(sum(vacUS.loc[padDate].daily_vaccinations))
+            distToday = int(sum(vacUS.loc[padDate].total_distributed))
+        vacDistributed.append(distToday)
         totalVaccine.append(vacToday)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
