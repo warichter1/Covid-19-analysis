@@ -171,6 +171,31 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.close()
 
 
+def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
+    """Plot Vaccine deployment."""
+    labels = []
+    font = FontProperties(family='sans-serif',
+                      weight='normal',
+                      style='oblique', size=8)
+    for num in range(len(sources)):
+        print(num, plotLabels)
+        # label, = plt.plot(sources[num], label=plotLabels[num])
+        label, = plt.plot(sources[num], label="test")
+        labels.append(label)
+    plt.xlabel("Time ({} Days)\nVaccine per Last Period".format(len(sources[0])))
+    plt.ylabel("Covid Vaccine Doses")
+    plt.legend(handles=labels, prop=font)
+    plt.yscale(yscale)
+    plt.title(title)
+    plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close()
+
+
 def padStrDate(date):
     """If a date/Month is not appended with a leading 0, add."""
     return '0' + date if date[1] == '/' else date
