@@ -179,8 +179,7 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
                       style='oblique', size=8)
     for num in range(len(sources)):
         print(num, plotLabels)
-        # label, = plt.plot(sources[num], label=plotLabels[num])
-        label, = plt.plot(sources[num], label="test")
+        label, = plt.plot(sources[num], label=plotLabels[num])
         labels.append(label)
     plt.xlabel("Time ({} Days)\nVaccine per Last Period".format(len(sources[0])))
     plt.ylabel("Covid Vaccine Doses")
@@ -196,9 +195,22 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
     plt.close()
 
 
+def fmtInt(num):
+    """Format an integer to thousands."""
+    return format(int(num), ',d')
+
+
 def padStrDate(date):
     """If a date/Month is not appended with a leading 0, add."""
     return '0' + date if date[1] == '/' else date
+
+
+def stripZeros(theList):
+    """Remove leading 0 from Strings List using lstrip() + list comprehension."""
+    length = len(theList)
+    npArray = np.array(theList)
+    npArray = np.trim_zeros(npArray, 'f')
+    return [npArray, length - len(npArray)]
 
 
 if __name__ == "__main__":
@@ -311,6 +323,10 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
+    vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
+                [totalVaccine, vacDistributed],
+                ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
+                 "Total Vaccine Distributed ({})".format(fmtInt(vacDistributed[-1:][0]))])
     print(gp.add('./plots/*'))
     # gp.commit('-m', "Upload Daily")
     # gp.push()
