@@ -181,6 +181,7 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
         print(num, plotLabels)
         label, = plt.plot(sources[num], label=plotLabels[num])
         labels.append(label)
+    # plt.axis.Axis.set_xlim((100))
     plt.xlabel("Time ({} Days)\nVaccine per Last Period".format(len(sources[0])))
     plt.ylabel("Covid Vaccine Doses")
     plt.legend(handles=labels, prop=font)
@@ -206,11 +207,9 @@ def padStrDate(date):
 
 
 def stripZeros(theList):
-    """Remove leading 0 from Strings List using lstrip() + list comprehension."""
-    length = len(theList)
-    npArray = np.array(theList)
-    npArray = np.trim_zeros(npArray, 'f')
-    return [npArray, length - len(npArray)]
+    """Remove leading 0 from using numpy array and trim_zeros."""
+    npArray = np.trim_zeros(np.array(theList), 'f')
+    return npArray, len(theList) - len(npArray)
 
 
 if __name__ == "__main__":
