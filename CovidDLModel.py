@@ -106,7 +106,7 @@ def calcChange(values, projectType=None):
 
 def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, showTotal=False, yscale='log',
-           inauguration=365, plotType='cases'):
+           inauguration=365, plotType='cases', scenarios=True):
     """# Ugly I know, just a simple plot."""
     labels = []
     ecBiden270 = 291
@@ -132,13 +132,14 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         labels.append(label)
 
         for i in range(scenarioNumber):
+            text = None
             if i == scenarioNumber - 1:
                 text = 'Weekly Average: {:2.2f}%'.format(100 * weekRates[i])
-            else:
+            elif scenarios is True:
                 text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
-
-            label, = plt.plot(scenario[i], label=text, linewidth=1)
-            labels.append(label)
+            if text is not None:
+                label, = plt.plot(scenario[i], label=text, linewidth=1)
+                labels.append(label)
     label = plt.axvline(intoday, color='green',
                         label='Forecast: {} Days->'.format(projectionDays), linewidth=1)
     labels.append(label)
@@ -304,7 +305,9 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
-        dailyDeaths.append(abs(int(now * avgDeathRate) - dailyDeaths[-4:][0]))
+        # dailyDeaths.append(abs(int(now * avgDeathRate) + int(now/10) - dailyDeaths[-3:][0]))
+        dailyDeaths.append(int(now * avgDeathRate + (now * avgDeathRate - dailyDeaths[-3:][0])*.95))
+        # dailyDeaths.append(int(sum(dailyDeaths[-3:])/3))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
@@ -319,7 +322,7 @@ if __name__ == "__main__":
         print(text)
         printText += (text + '\n')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate, yscale='linear')
+           deaths, dailyDeaths, deathRate, yscale='linear', scenarios=False)
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
     vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
