@@ -213,6 +213,21 @@ def stripZeros(theList):
     return npArray, len(theList) - len(npArray)
 
 
+def returnDaily(theList):
+    """Calculate the daily results from the total."""
+    npArray = np.trim_zeros(np.array(theList), 'f')
+    dailyList = []
+    for daily in npArray:
+        buffer = 0
+        if len(dailyList) > 0:
+            if daily > 0:
+                buffer = daily - dailyList[-1:][0]
+        else:
+            buffer = daily
+        dailyList.append(abs(buffer))
+    return dailyList
+
+
 if __name__ == "__main__":
     file = "{}/{}".format(dataPath, confirmedCases)
     us = importCsv(file, country, index, excludeFields)
@@ -276,7 +291,8 @@ if __name__ == "__main__":
     drate = calcChange(deathRate[-deathDays:], rateChange)
     grate = calcChange(growthRates[-deathDays:], rateChange)
     projDay = 0
-
+    vacDisributedDaily = returnDaily(vacDistributed)
+    totalVaccine = totalVaccine[-len(vacDisributedDaily):]
     for i in range(scenarioNumber):
         scenario.append(copy.deepcopy(dailyCases))
     weekRates = growthRates[-scenarioNumber:]
@@ -325,10 +341,10 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear', scenarios=False)
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
-    vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
-                [totalVaccine, vacDistributed],
+    vaccinePlot("Covid-19 Vaccine Deployment - Unfinished", "Vaccine",
+                [totalVaccine, vacDisributedDaily],
                 ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
-                 "Total Vaccine Distributed ({})".format(fmtInt(vacDistributed[-1:][0]))])
+                 "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDisributedDaily)))])
     print(gp.add('./plots/*'))
     # gp.commit('-m', "Upload Daily")
     # gp.push()
