@@ -46,6 +46,24 @@ vaccineExclude = ['total_vaccinations',
                   'people_vaccinated', 'people_vaccinated_per_hundred',
                   'people_fully_vaccinated_per_hundred',
                   'daily_vaccinations_raw', 'share_doses_used']
+# cdcRename = {'doses_allocated_for_week_of_02_01': '02-01-21',
+#              'doses_allocated_for_week_of_02_08': '02-08-21',
+#        'doses_allocated_week_01_04': ,
+#        'doses_allocated_week_12_21', 'doses_allocated_week_12_28',
+#        'doses_allocated_week_of_01_04', 'doses_allocated_week_of_01_10',
+#        'doses_allocated_week_of_01_25', 'doses_allocated_week_of_02_01',
+#        'doses_allocated_week_of_02_08', 'doses_allocated_week_of_12_21',
+#        'doses_allocated_week_of_12_28', 'doses_distribution_week_of_01_18',
+#        'first_doses_12_14', 'hhs_region', 'jurisdiction',
+#        'second_dose_shipment_01_04', 'second_dose_shipment_12_17',
+#        'second_dose_shipment_12_21', 'second_dose_shipment_12_28',
+#        'second_dose_shipment_week_of_01_10',
+#        'second_dose_shipment_week_of_01_18',
+#        'second_dose_shipment_week_of_01_25',
+#        'second_dose_shipment_week_of_02_01',
+#        'second_dose_shipment_week_of_02_08',
+#        'second_dose_shipment_week_of_02_21', 'second_dose_week_of_01_18',
+       'second_dose_week_of_01_25', 'second_doses_shipment_12_14',}
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -81,6 +99,29 @@ def importVaccine(infile, indexin, inexclude=[]):
         for col in inexclude:
             del cv[col]
     return cv.fillna(0).set_index(indexin)
+
+def importVaccineDose(indexin, renameKeys=[], inexcludes=[]):
+    cv = pd.read_json('https://data.cdc.gov/resource/saz5-9hgg.json')
+    cv += pd.read_json('https://data.cdc.gov/resource/b7pe-5nws.json')
+    changeKey = {}
+    deleteKey = []
+    for cvKey in cv.keys():
+        for rename in renameKeys:
+            if rename in cvKey:
+                date = cvKey.replace(rename, "").replace('_', '-').replace('of-', '')
+                date += '-20' if date[:+2] == '12' else '-21'
+                changeKey[cvKey] = date
+        for exclude in inexcludes:
+            if exclude in cvKey:
+                # date = cvKey.replace(exclude, "").replace('_', '-')
+                # date += '-20' if date[:+2] == '12' else '-21'
+                deleteKey.append(cvKey)
+    # print(deleteKey)
+    cv.rename(changeKey, axis=1, inplace=True)
+    for col in deleteKey:
+        del cv[col]
+    return cv.fillna(0)
+
 
 
 def limit(daybegin, dayLimit, rate):
@@ -291,8 +332,8 @@ if __name__ == "__main__":
     drate = calcChange(deathRate[-deathDays:], rateChange)
     grate = calcChange(growthRates[-deathDays:], rateChange)
     projDay = 0
-    vacDisributedDaily = returnDaily(vacDistributed)
-    totalVaccine = totalVaccine[-len(vacDisributedDaily):]
+    vacDistributedDaily = returnDaily(vacDistributed)
+    totalVaccine = totalVaccine[-len(vacDistributedDaily):]
     for i in range(scenarioNumber):
         scenario.append(copy.deepcopy(dailyCases))
     weekRates = growthRates[-scenarioNumber:]
@@ -342,9 +383,9 @@ if __name__ == "__main__":
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
     vaccinePlot("Covid-19 Vaccine Deployment - Unfinished", "Vaccine",
-                [totalVaccine, vacDisributedDaily],
+                [totalVaccine], #vacDistributedDaily],
                 ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
-                 "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDisributedDaily)))])
+                 "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDistributedDaily)))])
     print(gp.add('./plots/*'))
     # gp.commit('-m', "Upload Daily")
     # gp.push()
@@ -361,3 +402,5 @@ if __name__ == "__main__":
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
+
+# cvb = importVaccineDose("", renameKeys=['doses_allocated_week_of_', 'doses_distribution_week_of_', 'doses_allocated_for_week_'], inexcludes=['second_dose_shipment_', 'second_doses_shipment_', 'first_doses_'])
