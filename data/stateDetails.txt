@@ -91,7 +91,7 @@ Current Date: 2/8/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 16,683,795/1316/0/0/0
 [Indiana-R - Pop: 6,732,219]
 	cases/today/rate/max/per1000: 640,744/1,033/0.16%/50.00%/95	
-	Deaths/total/rate/max: 11,875/58/1.84%/6.29%	
+	Deaths/total/rate/max: 11,875/58/1.84%/7.89%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 3,011,185/447/41,109/7,190/416,754
 [Iowa-R - Pop: 3,155,070]
