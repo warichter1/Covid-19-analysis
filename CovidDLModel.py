@@ -63,7 +63,7 @@ vaccineExclude = ['total_vaccinations',
 #        'second_dose_shipment_week_of_02_01',
 #        'second_dose_shipment_week_of_02_08',
 #        'second_dose_shipment_week_of_02_21', 'second_dose_week_of_01_18',
-       'second_dose_week_of_01_25', 'second_doses_shipment_12_14',}
+#       'second_dose_week_of_01_25', 'second_doses_shipment_12_14',}
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
@@ -296,6 +296,7 @@ if __name__ == "__main__":
     # rateChange = 'avgAll'
     # rateChange = None
     # rateChange = 'avgDiff'
+    vaxDates = list(set(list(vacUS.index)))  # Remove dupes
     rateChange = 'today'
     for cdate in us.keys():
         caseRate = us[cdate] / lastDay - 1
@@ -312,9 +313,14 @@ if __name__ == "__main__":
         vacToday = 0
         distToday = 0
         padDate = padStrDate(cdate)
-        if padDate in vacUS.index:
-            vacToday = int(sum(vacUS.loc[padDate].daily_vaccinations))
-            distToday = int(sum(vacUS.loc[padDate].total_distributed))
+        if padDate in vaxDates:
+            print(padDate)
+            vacToday = 0
+            distToday = 0
+        #     if int(vacUS.loc[padDate].daily_vaccinations) > 0:
+        #         vacToday = int(vacUS.loc[padDate].daily_vaccinations)
+        #     if int(vacUS.loc[padDate].total_distributed) > 0:
+        #         distToday = int(vacUS.loc[padDate].total_distributed)
         vacDistributed.append(distToday)
         totalVaccine.append(vacToday)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
