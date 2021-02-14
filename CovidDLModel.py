@@ -213,7 +213,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.close()
 
 
-def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
+def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', dates=[None, None, None]):
     """Plot Vaccine deployment."""
     labels = []
     font = FontProperties(family='sans-serif',
@@ -224,7 +224,7 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log'):
         label, = plt.plot(sources[num], label=plotLabels[num])
         labels.append(label)
     # plt.axis.Axis.set_xlim((100))
-    plt.xlabel("Time ({} Days)\nVaccine per Last Period".format(len(sources[0])))
+    plt.xlabel("Time ({} Days)\nVaccine start: {}\nBeginning: {}, Current: {}".format(len(sources[0]),1,1,1))
     plt.ylabel("Covid Vaccine Doses")
     plt.legend(handles=labels, prop=font)
     plt.yscale(yscale)
@@ -287,6 +287,9 @@ if __name__ == "__main__":
     scenarioNumber = 7
     scenarioAverage = 0
     inaugurationDay = 365
+    vaxBegin = None
+    vaxLast = None
+    vaxDay = None
     day = 1
     lastDay = 1
     yesterday = 0
@@ -314,13 +317,23 @@ if __name__ == "__main__":
         distToday = 0
         padDate = padStrDate(cdate)
         if padDate in vaxDates:
-            print(padDate)
-            vacToday = 0
-            distToday = 0
-        #     if int(vacUS.loc[padDate].daily_vaccinations) > 0:
-        #         vacToday = int(vacUS.loc[padDate].daily_vaccinations)
-        #     if int(vacUS.loc[padDate].total_distributed) > 0:
-        #         distToday = int(vacUS.loc[padDate].total_distributed)
+            if vaxBegin is None:
+                vaxBegin = cdate
+                vaxDay = len(dailyCases)
+            vaxLast = cdate
+            # vacToday = 0
+            # distToday = 0
+            vacToday = vacUS.loc[[padDate]].daily_vaccinations
+            distToday = vacUS.loc[[padDate]].total_distributed
+            print(padDate, vacToday.values, distToday.values)
+            if len(vacToday) == 1:
+                vacToday = int(vacToday[0])
+            else:
+                vacToday = int(sum(vacToday))
+            if len(distToday) == 1:
+                distToday = int(distToday[0])
+            else:
+                distToday = int(sum(distToday))
         vacDistributed.append(distToday)
         totalVaccine.append(vacToday)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
@@ -388,10 +401,11 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear', scenarios=False)
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
-    vaccinePlot("Covid-19 Vaccine Deployment - Unfinished", "Vaccine",
-                [totalVaccine], #vacDistributedDaily],
-                ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
-                 "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDistributedDaily)))])
+    # vaccinePlot("Covid-19 Vaccine Deployment - Unfinished", "Vaccine",
+    #             [totalVaccine, vacDistributedDaily],
+    #             ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
+    #               "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDistributedDaily)))],
+    #             [vaxDay, vaxBegin, vaxLast])
     print(gp.add('./plots/*'))
     # gp.commit('-m', "Upload Daily")
     # gp.push()
