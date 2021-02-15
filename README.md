@@ -37,5 +37,14 @@ https://www.pewtrusts.org/en/research-and-analysis/blogs/stateline/2020/10/09/co
 
 https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/
 
+
 Stats:
 https://www.advisory.com/daily-briefing/2020/10/22/long-covid
+
+
+Vaccine:
+Vaccinations (first and second dose): https://ourworldindata.org/coronavirus
+
+Vaccine Distribution:
+https://data.cdc.gov/resource/saz5-9hgg.json
+https://data.cdc.gov/resource/b7pe-5nws.json
