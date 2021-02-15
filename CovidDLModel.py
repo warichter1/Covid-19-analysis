@@ -220,12 +220,12 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', dates=
                       weight='normal',
                       style='oblique', size=8)
     for num in range(len(sources)):
-        print(num, plotLabels)
+        # print(num, plotLabels)
         label, = plt.plot(sources[num], label=plotLabels[num])
         labels.append(label)
     # plt.axis.Axis.set_xlim((100))
-    plt.xlabel("Time ({} Days)\nVaccine start: {}\nBeginning: {}, Current: {}".format(len(sources[0]),1,1,1))
-    plt.ylabel("Covid Vaccine Doses")
+    plt.xlabel("Time ({} Days)\nVaccine shipments started on day: {}\nBeginning: {}, Current: {}".format(len(sources[0]),dates[0],dates[1],dates[2]))
+    plt.ylabel("Covid Vaccine Doses - unfinished")
     plt.legend(handles=labels, prop=font)
     plt.yscale(yscale)
     plt.title(title)
@@ -283,6 +283,7 @@ if __name__ == "__main__":
     totalDeaths = []
     scenario = []
     totalVaccine = []
+    totalVacFull = []
     vacDistributed = []
     scenarioNumber = 7
     scenarioAverage = 0
@@ -315,27 +316,33 @@ if __name__ == "__main__":
         totalDeaths.append(int(deaths[cdate]))
         vacToday = 0
         distToday = 0
+        fullToday = 0
         padDate = padStrDate(cdate)
         if padDate in vaxDates:
             if vaxBegin is None:
                 vaxBegin = cdate
                 vaxDay = len(dailyCases)
             vaxLast = cdate
-            # vacToday = 0
-            # distToday = 0
             vacToday = vacUS.loc[[padDate]].daily_vaccinations
             distToday = vacUS.loc[[padDate]].total_distributed
-            print(padDate, vacToday.values, distToday.values)
+            fullToday = vacUS.loc[[padDate]].people_fully_vaccinated
+            # print(padDate, vacToday.values, distToday.values)
             if len(vacToday) == 1:
                 vacToday = int(vacToday[0])
             else:
                 vacToday = int(sum(vacToday))
+            if len(fullToday) == 1:
+                fullToday = int(fullToday[0])
+            else:
+                fullToday = int(sum(fullToday))
             if len(distToday) == 1:
                 distToday = int(distToday[0])
             else:
                 distToday = int(sum(distToday))
-        vacDistributed.append(distToday)
-        totalVaccine.append(vacToday)
+        if vaxBegin is not None:
+            totalVacFull.append(fullToday)
+            vacDistributed.append(distToday)
+            totalVaccine.append(vacToday)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
                                                                                                                          format(now, ',d'), caseRate * 100,
@@ -352,6 +359,7 @@ if __name__ == "__main__":
     grate = calcChange(growthRates[-deathDays:], rateChange)
     projDay = 0
     vacDistributedDaily = returnDaily(vacDistributed)
+    VacFullDaily = returnDaily(totalVacFull)
     totalVaccine = totalVaccine[-len(vacDistributedDaily):]
     for i in range(scenarioNumber):
         scenario.append(copy.deepcopy(dailyCases))
@@ -365,10 +373,7 @@ if __name__ == "__main__":
     for day in range(day, day + projectionDays):
         if caseRate + grate[projDay] <= 0:
             grate = calcChange(growthRates[-deathDays:], rateChange)
-            # print('reset')
-        # else:
         caseRate = abs(caseRate + grate[projDay])
-        # print(grate)
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = int(current - yesterday)
@@ -381,9 +386,7 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
-        # dailyDeaths.append(abs(int(now * avgDeathRate) + int(now/10) - dailyDeaths[-3:][0]))
         dailyDeaths.append(int(now * avgDeathRate + (now * avgDeathRate - dailyDeaths[-3:][0])*.95))
-        # dailyDeaths.append(int(sum(dailyDeaths[-3:])/3))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
@@ -401,14 +404,13 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear', scenarios=False)
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
-    # vaccinePlot("Covid-19 Vaccine Deployment - Unfinished", "Vaccine",
-    #             [totalVaccine, vacDistributedDaily],
-    #             ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
-    #               "Total Vaccine Distributed ({})".format(fmtInt(sum(vacDistributedDaily)))],
-    #             [vaxDay, vaxBegin, vaxLast])
+    vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
+                [totalVaccine, VacFullDaily, vacDistributedDaily],
+                ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
+                 "Daily Fully Vacinated ({})".format(fmtInt(totalVacFull[-1:][0])),
+                 "Vaccine Distributed ({})".format(fmtInt(vacDistributed[-1:][0]))],
+                dates=[vaxDay, vaxBegin, vaxLast])
     print(gp.add('./plots/*'))
-    # gp.commit('-m', "Upload Daily")
-    # gp.push()
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],
