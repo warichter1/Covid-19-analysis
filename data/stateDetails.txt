@@ -1,402 +1,402 @@
-Current Date: 2/16/21 Processing:
+Current Date: 2/17/21 Processing:
 [Alabama-R - Pop: 4,903,185]
-	cases/today/rate/max/per1000: 482,488/883/0.18%/50.00%/98	
-	Deaths/total/rate/max: 9,257/13/1.92%/4.12%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,339,576/477/44,541/4,086/264,621
+	cases/today/rate/max/per1000: 483,167/679/0.14%/50.00%/98	
+	Deaths/total/rate/max: 9,346/89/1.92%/4.12%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,342,683/477/44,541/4,088/264,621
 [Alaska-R - Pop: 731,545]
-	cases/today/rate/max/per1000: 56,905/500/0.88%/75.00%/77	
-	Deaths/total/rate/max: 287/5/0.50%/3.11%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 54,736/74/1,233/0/0
+	cases/today/rate/max/per1000: 56,968/63/0.11%/75.00%/77	
+	Deaths/total/rate/max: 288/1/0.50%/3.11%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 54,799/74/1,238/0/0
 [American Samoa-D - Pop: 0]
 	cases/today/rate/max/per1000: 0/0/0.00%/0.00%/0	
 	Deaths/total/rate/max: 0/0/0.00%/0.00%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,140/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
-	cases/today/rate/max/per1000: 799,740/1,132/0.14%/50.00%/109	
-	Deaths/total/rate/max: 14,981/3/1.87%/4.89%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,696,384/507/55,865/0/112,430
+	cases/today/rate/max/per1000: 801,055/1,315/0.16%/50.00%/110	
+	Deaths/total/rate/max: 15,063/82/1.87%/4.89%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,702,291/508/55,983/0/112,868
 [Arkansas-R - Pop: 3,017,804]
-	cases/today/rate/max/per1000: 313,525/177/0.06%/300.00%/103	
-	Deaths/total/rate/max: 5,287/12/1.68%/2.35%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,654,088/879/14,392/1,480/299,107
+	cases/today/rate/max/per1000: 314,192/667/0.21%/300.00%/104	
+	Deaths/total/rate/max: 5,313/26/1.68%/2.35%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,658,768/881/14,392/1,480/300,613
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 3,499,871/8,479/0.24%/50.00%/88	
-	Deaths/total/rate/max: 47,510/391/1.35%/3.97%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,412,057/86/0/0/0
-[Colorado-D - Pop: 5,758,736]
-	cases/today/rate/max/per1000: 415,037/668/0.16%/75.00%/72	
-	Deaths/total/rate/max: 5,828/2/1.40%/5.60%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,527,536/438/22,837/0/22,017
-[Connecticut-D - Pop: 3,565,287]
-	cases/today/rate/max/per1000: 270,822/580/0.21%/66.67%/75	
-	Deaths/total/rate/max: 7,449/2/2.75%/9.33%	
+	cases/today/rate/max/per1000: 3,506,402/6,531/0.19%/50.00%/88	
+	Deaths/total/rate/max: 47,936/426/1.35%/3.97%	
 	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,332,752/1776/12,257/0/9,800
-[Delaware-D - Pop: 973,764]
-	cases/today/rate/max/per1000: 83,369/130/0.16%/75.00%/85	
-	Deaths/total/rate/max: 1,291/8/1.54%/5.30%	
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,416,147/86/0/0/0
+[Colorado-D - Pop: 5,758,736]
+	cases/today/rate/max/per1000: 416,174/1,137/0.27%/75.00%/72	
+	Deaths/total/rate/max: 5,838/10/1.40%/5.60%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,532,781/439/22,922/0/22,071
+[Connecticut-D - Pop: 3,565,287]
+	cases/today/rate/max/per1000: 271,356/534/0.20%/66.67%/76	
+	Deaths/total/rate/max: 7,476/27/2.75%/9.33%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 609,758/626/0/0/0
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,366,768/1785/12,257/0/9,800
+[Delaware-D - Pop: 973,764]
+	cases/today/rate/max/per1000: 83,581/212/0.25%/75.00%/85	
+	Deaths/total/rate/max: 1,316/25/1.54%/5.30%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 611,203/627/0/0/0
 [Diamond Princess-N - Pop: 0]
 	cases/today/rate/max/per1000: 49/0/0.00%/4.08%/0	
 	Deaths/total/rate/max: 0/0/0.00%/0.00%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [District of Columbia-D - Pop: 705,749]
-	cases/today/rate/max/per1000: 39,131/130/0.33%/43.66%/55	
-	Deaths/total/rate/max: 982/2/2.50%/5.35%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 39,131/55/0/0/27,930
+	cases/today/rate/max/per1000: 39,180/49/0.13%/43.66%/55	
+	Deaths/total/rate/max: 985/3/2.51%/5.35%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 39,180/55/0/0/27,930
 [Florida-R - Pop: 21,477,737]
-	cases/today/rate/max/per1000: 1,837,285/6,297/0.34%/57.14%/85	
-	Deaths/total/rate/max: 29,154/220/1.57%/15.38%	
+	cases/today/rate/max/per1000: 1,844,627/7,342/0.40%/57.14%/85	
+	Deaths/total/rate/max: 29,311/157/1.58%/15.38%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 10,692,955/497/77,686/0/0
+	Tested/Per1000/Hospitalized/Icu/Recovered: 10,728,945/499/77,994/0/0
 [Georgia-R - Pop: 10,617,423]
-	cases/today/rate/max/per1000: 969,702/2,895/0.30%/50.00%/91	
-	Deaths/total/rate/max: 16,174/246/1.64%/4.34%	
+	cases/today/rate/max/per1000: 973,247/3,545/0.36%/50.00%/91	
+	Deaths/total/rate/max: 16,273/99/1.66%/4.34%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 969,702/91/53,658/8,801/0
+	Tested/Per1000/Hospitalized/Icu/Recovered: 973,247/91/53,880/8,838/0
 [Grand Princess-N - Pop: 0]
 	cases/today/rate/max/per1000: 103/0/0.00%/72.82%/0	
 	Deaths/total/rate/max: 3/0/2.91%/4.35%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Guam-D - Pop: 0]
-	cases/today/rate/max/per1000: 7,701/2/0.03%/58.33%/0	
+	cases/today/rate/max/per1000: 7,703/2/0.03%/58.33%/0	
 	Deaths/total/rate/max: 130/0/1.69%/4.30%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 113,454/0/0/0/7,500
+	Tested/Per1000/Hospitalized/Icu/Recovered: 113,934/0/0/0/7,523
 [Hawaii-D - Pop: 1,415,872]
-	cases/today/rate/max/per1000: 27,105/16/0.06%/66.67%/19	
-	Deaths/total/rate/max: 425/0/1.57%/2.74%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 27,623/19/2,174/0/0
+	cases/today/rate/max/per1000: 27,132/27/0.10%/66.67%/19	
+	Deaths/total/rate/max: 426/1/1.57%/2.74%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 27,652/19/2,174/0/0
 [Idaho-R - Pop: 1,787,065]
-	cases/today/rate/max/per1000: 167,945/462/0.28%/60.87%/93	
-	Deaths/total/rate/max: 1,806/3/1.07%/3.11%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 653,687/365/6,890/1,206/89,410
+	cases/today/rate/max/per1000: 168,353/408/0.24%/60.87%/94	
+	Deaths/total/rate/max: 1,817/11/1.07%/3.11%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 656,751/367/6,933/1,206/90,300
 [Illinois-D - Pop: 12,671,821]
-	cases/today/rate/max/per1000: 1,164,922/1,348/0.12%/52.00%/91	
-	Deaths/total/rate/max: 22,199/33/1.90%/4.86%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 17,270,877/1362/0/0/0
+	cases/today/rate/max/per1000: 1,166,717/1,795/0.15%/52.00%/92	
+	Deaths/total/rate/max: 22,224/25/1.90%/4.86%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 17,320,814/1366/0/0/0
 [Indiana-R - Pop: 6,732,219]
-	cases/today/rate/max/per1000: 650,530/878/0.13%/50.00%/96	
-	Deaths/total/rate/max: 12,231/40/1.87%/7.89%	
+	cases/today/rate/max/per1000: 651,453/923/0.14%/50.00%/96	
+	Deaths/total/rate/max: 12,250/19/1.88%/7.89%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,057,498/454/41,840/7,312/424,155
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,062,008/454/42,086/7,336/425,451
 [Iowa-R - Pop: 3,155,070]
-	cases/today/rate/max/per1000: 330,318/592/0.18%/62.50%/104	
-	Deaths/total/rate/max: 5,263/26/1.59%/2.77%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,290,933/409/0/0/303,697
+	cases/today/rate/max/per1000: 330,906/588/0.18%/62.50%/104	
+	Deaths/total/rate/max: 5,306/43/1.59%/2.77%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,293,332/409/0/0/305,238
 [Kansas-R - Pop: 2,913,314]
-	cases/today/rate/max/per1000: 289,843/15/0.01%/75.00%/99	
-	Deaths/total/rate/max: 4,370/0/1.51%/12.50%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,224,232/420/8,923/2,832/6,087
+	cases/today/rate/max/per1000: 291,093/1,250/0.43%/75.00%/99	
+	Deaths/total/rate/max: 4,482/112/1.50%/12.50%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,229,298/421/9,002/2,843/6,137
 [Kentucky-R - Pop: 4,467,673]
-	cases/today/rate/max/per1000: 390,762/1,241/0.32%/75.00%/87	
-	Deaths/total/rate/max: 4,318/27/1.10%/5.66%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 390,762/87/18,183/3,814/46,074
+	cases/today/rate/max/per1000: 391,772/1,010/0.26%/75.00%/87	
+	Deaths/total/rate/max: 4,336/18/1.10%/5.66%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 391,772/87/18,289/3,834/46,225
 [Louisiana-R - Pop: 4,648,794]
-	cases/today/rate/max/per1000: 420,394/0/0.00%/73.68%/90	
-	Deaths/total/rate/max: 9,325/0/2.22%/7.31%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 5,345,798/1149/0/0/380,673
+	cases/today/rate/max/per1000: 421,018/624/0.15%/73.68%/90	
+	Deaths/total/rate/max: 9,391/66/2.21%/7.31%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 5,367,092/1154/0/0/396,834
 [Maine-D - Pop: 1,344,212]
-	cases/today/rate/max/per1000: 42,773/96/0.22%/88.24%/31	
-	Deaths/total/rate/max: 651/2/1.52%/4.90%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,497,287/1113/1,487/0/12,663
+	cases/today/rate/max/per1000: 42,877/104/0.24%/88.24%/31	
+	Deaths/total/rate/max: 654/3/1.52%/4.90%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,534,948/1141/1,490/0/12,693
 [Maryland-D - Pop: 6,045,680]
-	cases/today/rate/max/per1000: 372,221/516/0.14%/42.86%/61	
-	Deaths/total/rate/max: 7,612/32/2.04%/5.05%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,305,802/546/33,980/0/9,571
+	cases/today/rate/max/per1000: 372,980/759/0.20%/42.86%/61	
+	Deaths/total/rate/max: 7,630/18/2.04%/5.05%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,311,396/547/34,078/0/9,571
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 560,576/1,226/0.22%/61.11%/81	
-	Deaths/total/rate/max: 15,567/50/2.77%/7.79%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 4,803,542/696/18,859/0/453,740
+	cases/today/rate/max/per1000: 561,936/1,360/0.24%/61.11%/81	
+	Deaths/total/rate/max: 15,623/56/2.77%/7.79%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 4,811,568/698/19,176/0/453,740
 [Michigan-R - Pop: 9,986,857]
-	cases/today/rate/max/per1000: 631,532/1,124/0.18%/87.50%/63	
-	Deaths/total/rate/max: 16,149/19/2.55%/9.50%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 9,908,523/992/0/0/517,991
+	cases/today/rate/max/per1000: 632,772/1,240/0.20%/87.50%/63	
+	Deaths/total/rate/max: 16,160/11/2.55%/9.50%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 9,936,972/995/0/0/517,991
 [Minnesota-D - Pop: 5,639,632]
-	cases/today/rate/max/per1000: 474,621/452/0.10%/60.38%/84	
-	Deaths/total/rate/max: 6,448/2/1.36%/7.14%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,395,576/602/25,243/5,206/461,406
+	cases/today/rate/max/per1000: 475,379/758/0.16%/60.38%/84	
+	Deaths/total/rate/max: 6,458/10/1.36%/7.14%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,400,724/603/25,287/5,212/462,502
 [Mississippi-R - Pop: 2,976,149]
-	cases/today/rate/max/per1000: 288,714/734/0.25%/83.33%/97	
-	Deaths/total/rate/max: 6,501/37/2.24%/4.73%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,682,097/565/8,978/0/264,456
-[Missouri-R - Pop: 6,137,428]
-	cases/today/rate/max/per1000: 488,301/526/0.11%/66.67%/79	
-	Deaths/total/rate/max: 7,782/7/1.59%/6.27%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,296,003/374/0/0/0
-[Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 97,666/127/0.13%/80.00%/91	
-	Deaths/total/rate/max: 1,331/3/1.36%/3.53%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,028,286/962/4,461/0/93,669
-[Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 197,447/119/0.06%/66.67%/102	
-	Deaths/total/rate/max: 2,004/1/1.01%/2.22%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 949,134/490/5,964/0/142,335
-[Nevada-D - Pop: 3,080,156]
-	cases/today/rate/max/per1000: 289,029/290/0.10%/55.56%/93	
-	Deaths/total/rate/max: 4,733/13/1.63%/5.13%	
+	cases/today/rate/max/per1000: 289,398/684/0.24%/83.33%/97	
+	Deaths/total/rate/max: 6,524/23/2.25%/4.73%	
 	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,379,860/447/0/0/0
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,682,781/565/8,978/0/264,456
+[Missouri-R - Pop: 6,137,428]
+	cases/today/rate/max/per1000: 488,981/680/0.14%/66.67%/79	
+	Deaths/total/rate/max: 7,819/37/1.59%/6.27%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,298,502/374/0/0/0
+[Montana-R - Pop: 1,068,778]
+	cases/today/rate/max/per1000: 97,900/234/0.24%/80.00%/91	
+	Deaths/total/rate/max: 1,334/3/1.36%/3.53%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,032,328/965/4,477/0/94,034
+[Nebraska-R - Pop: 1,934,408]
+	cases/today/rate/max/per1000: 197,746/299/0.15%/66.67%/102	
+	Deaths/total/rate/max: 2,018/14/1.01%/2.22%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 950,953/491/5,981/0/142,335
+[Nevada-D - Pop: 3,080,156]
+	cases/today/rate/max/per1000: 289,392/363/0.13%/55.56%/93	
+	Deaths/total/rate/max: 4,774/41/1.64%/5.13%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,383,924/449/0/0/0
 [New Hampshire-D - Pop: 1,359,711]
-	cases/today/rate/max/per1000: 71,215/198/0.28%/58.82%/52	
-	Deaths/total/rate/max: 1,136/1/1.59%/6.47%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 71,965/750/1.04%/58.82%/52	
+	Deaths/total/rate/max: 1,148/12/1.58%/6.47%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 637,531/468/1,080/336/67,222
 [New Jersey-D - Pop: 8,882,190]
-	cases/today/rate/max/per1000: 751,065/3,633/0.48%/66.67%/84	
-	Deaths/total/rate/max: 22,497/31/2.99%/8.79%	
+	cases/today/rate/max/per1000: 755,174/4,109/0.54%/66.67%/85	
+	Deaths/total/rate/max: 22,632/135/2.98%/8.79%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 10,084,780/1135/62,591/0/72,336
+	Tested/Per1000/Hospitalized/Icu/Recovered: 10,164,436/1144/62,718/0/72,798
 [New Mexico-D - Pop: 2,096,829]
-	cases/today/rate/max/per1000: 181,060/299/0.17%/50.00%/86	
-	Deaths/total/rate/max: 3,550/12/1.95%/4.56%	
-	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,556,514/1219/12,757/0/123,507
+	cases/today/rate/max/per1000: 181,332/272/0.15%/50.00%/86	
+	Deaths/total/rate/max: 3,562/12/1.96%/4.56%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,567,877/1224/12,790/0/125,064
 [New York-D - Pop: 19,453,561]
-	cases/today/rate/max/per1000: 1,553,117/6,709/0.43%/90.00%/79	
-	Deaths/total/rate/max: 46,141/141/2.96%/8.30%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,542,887/79/89,995/0/138,975
+	cases/today/rate/max/per1000: 1,559,042/5,925/0.38%/90.00%/80	
+	Deaths/total/rate/max: 46,267/126/2.96%/8.30%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,548,979/79/89,995/0/139,544
 [North Carolina-R - Pop: 10,488,084]
-	cases/today/rate/max/per1000: 826,340/1,988/0.24%/71.43%/78	
-	Deaths/total/rate/max: 10,562/61/1.27%/3.62%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 9,788,733/933/0/0/765,456
-[North Dakota-R - Pop: 762,062]
-	cases/today/rate/max/per1000: 98,781/138/0.14%/68.42%/129	
-	Deaths/total/rate/max: 1,461/0/1.48%/2.52%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 399,872/524/3,845/559/96,564
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 135/1/0.74%/66.67%/0	
-	Deaths/total/rate/max: 2/0/1.48%/18.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 17,563/0/4/0/29
-[Ohio-R - Pop: 11,689,100]
-	cases/today/rate/max/per1000: 943,291/2,026/0.21%/58.33%/80	
-	Deaths/total/rate/max: 16,453/59/1.74%/6.86%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 943,291/80/48,739/6,949/867,627
-[Oklahoma-R - Pop: 3,956,971]
-	cases/today/rate/max/per1000: 414,780/508/0.12%/61.36%/104	
-	Deaths/total/rate/max: 4,061/20/0.97%/5.99%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,375,658/853/23,270/0/391,156
-[Oregon-D - Pop: 4,217,737]
-	cases/today/rate/max/per1000: 150,875/411/0.27%/66.67%/35	
-	Deaths/total/rate/max: 2,138/1/1.42%/4.07%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 150,464/35/8,185/0/0
-[Pennsylvania-R - Pop: 12,801,989]
-	cases/today/rate/max/per1000: 901,876/3,222/0.36%/66.67%/70	
-	Deaths/total/rate/max: 23,100/14/2.56%/7.48%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 4,682,336/365/0/0/791,328
-[Puerto Rico-D - Pop: 3,193,694]
-	cases/today/rate/max/per1000: 98,317/480/0.49%/64.29%/30	
-	Deaths/total/rate/max: 1,924/4/1.95%/11.03%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 404,289/126/0/0/88,084
-[Rhode Island-D - Pop: 1,059,361]
-	cases/today/rate/max/per1000: 122,072/285/0.23%/75.00%/115	
-	Deaths/total/rate/max: 2,344/10/1.91%/5.81%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 773,099/729/8,786/0/7,607
-[South Carolina-R - Pop: 5,148,714]
-	cases/today/rate/max/per1000: 490,453/1,435/0.29%/57.89%/95	
-	Deaths/total/rate/max: 8,055/21/1.64%/4.42%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 4,718,931/916/19,452/0/221,360
-[South Dakota-R - Pop: 884,659]
-	cases/today/rate/max/per1000: 110,593/217/0.20%/33.33%/125	
-	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 414,511/468/6,461/0/106,545
-[Tennessee-R - Pop: 6,829,174]
-	cases/today/rate/max/per1000: 759,523/962/0.13%/66.67%/111	
-	Deaths/total/rate/max: 10,954/17/1.44%/2.17%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,746,930/987/18,063/0/726,910
-[Texas-R - Pop: 28,995,881]
-	cases/today/rate/max/per1000: 2,570,958/2,914/0.11%/50.00%/88	
-	Deaths/total/rate/max: 41,386/50/1.61%/3.08%	
+	cases/today/rate/max/per1000: 829,507/3,167/0.38%/71.43%/79	
+	Deaths/total/rate/max: 10,670/108/1.27%/3.62%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,567,297/88/0/0/2,257,030
-[Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 362,347/591/0.16%/66.67%/113	
-	Deaths/total/rate/max: 1,797/1/0.50%/1.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,855,032/578/14,239/3,010/336,460
-[Vermont-D - Pop: 623,989]
-	cases/today/rate/max/per1000: 13,917/55/0.40%/60.00%/22	
-	Deaths/total/rate/max: 191/1/1.37%/6.90%	
+	Tested/Per1000/Hospitalized/Icu/Recovered: 9,820,207/936/0/0/765,456
+[North Dakota-R - Pop: 762,062]
+	cases/today/rate/max/per1000: 98,901/120/0.12%/68.42%/129	
+	Deaths/total/rate/max: 1,461/0/1.48%/2.52%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 400,464/525/3,850/560/96,673
+[Northern Mariana Islands-R - Pop: 0]
+	cases/today/rate/max/per1000: 135/0/0.00%/66.67%/0	
+	Deaths/total/rate/max: 2/0/1.48%/18.18%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 17,564/0/4/0/29
+[Ohio-R - Pop: 11,689,100]
+	cases/today/rate/max/per1000: 945,107/1,816/0.19%/58.33%/80	
+	Deaths/total/rate/max: 16,513/60/1.74%/6.86%	
 	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 319,894/512/0/0/10,803
+	Tested/Per1000/Hospitalized/Icu/Recovered: 945,107/80/48,888/6,974/872,282
+[Oklahoma-R - Pop: 3,956,971]
+	cases/today/rate/max/per1000: 415,858/1,078/0.26%/61.36%/105	
+	Deaths/total/rate/max: 4,089/28/0.98%/5.99%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,400,708/859/23,392/0/393,169
+[Oregon-D - Pop: 4,217,737]
+	cases/today/rate/max/per1000: 151,257/382/0.25%/66.67%/35	
+	Deaths/total/rate/max: 2,143/5/1.41%/4.07%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 150,875/35/8,298/0/0
+[Pennsylvania-R - Pop: 12,801,989]
+	cases/today/rate/max/per1000: 905,370/3,494/0.39%/66.67%/70	
+	Deaths/total/rate/max: 23,284/184/2.55%/7.48%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 4,693,671/366/0/0/794,332
+[Puerto Rico-D - Pop: 3,193,694]
+	cases/today/rate/max/per1000: 98,428/111/0.11%/64.29%/30	
+	Deaths/total/rate/max: 1,930/6/1.95%/11.03%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 404,400/126/0/0/88,381
+[Rhode Island-D - Pop: 1,059,361]
+	cases/today/rate/max/per1000: 122,440/368/0.30%/75.00%/115	
+	Deaths/total/rate/max: 2,352/8/1.91%/5.81%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 775,240/731/8,811/0/7,633
+[South Carolina-R - Pop: 5,148,714]
+	cases/today/rate/max/per1000: 492,369/1,916/0.39%/57.89%/95	
+	Deaths/total/rate/max: 8,117/62/1.64%/4.42%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 4,729,746/918/19,572/0/223,251
+[South Dakota-R - Pop: 884,659]
+	cases/today/rate/max/per1000: 110,685/92/0.08%/33.33%/125	
+	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 414,889/468/6,466/0/106,769
+[Tennessee-R - Pop: 6,829,174]
+	cases/today/rate/max/per1000: 760,303/780/0.10%/66.67%/111	
+	Deaths/total/rate/max: 10,985/31/1.44%/2.17%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,755,133/989/18,120/0/729,629
+[Texas-R - Pop: 28,995,881]
+	cases/today/rate/max/per1000: 2,576,098/5,140/0.20%/50.00%/88	
+	Deaths/total/rate/max: 41,496/110/1.61%/3.08%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,571,063/88/0/0/2,268,067
+[Utah-R - Pop: 3,205,958]
+	cases/today/rate/max/per1000: 363,248/901/0.25%/66.67%/113	
+	Deaths/total/rate/max: 1,806/9/0.49%/1.18%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,859,745/580/14,294/3,032/338,469
+[Vermont-D - Pop: 623,989]
+	cases/today/rate/max/per1000: 13,996/79/0.56%/60.00%/22	
+	Deaths/total/rate/max: 191/0/1.36%/6.90%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 321,195/514/0/0/11,072
 [Virgin Islands-N - Pop: 0]
-	cases/today/rate/max/per1000: 2,542/0/0.00%/58.82%/0	
+	cases/today/rate/max/per1000: 2,545/3/0.12%/58.82%/0	
 	Deaths/total/rate/max: 25/0/0.98%/8.70%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 45,233/0/0/0/2,412
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 45,390/0/0/0/2,441
 [Virginia-D - Pop: 8,535,519]
-	cases/today/rate/max/per1000: 553,308/1,770/0.32%/75.00%/64	
-	Deaths/total/rate/max: 7,037/21/1.27%/3.50%	
+	cases/today/rate/max/per1000: 555,592/2,284/0.41%/75.00%/65	
+	Deaths/total/rate/max: 7,075/38/1.27%/3.50%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 553,499/64/23,042/0/43,305
+	Tested/Per1000/Hospitalized/Icu/Recovered: 555,794/65/23,179/0/44,595
 [Washington-D - Pop: 7,614,893]
-	cases/today/rate/max/per1000: 329,746/1,699/0.52%/85.71%/43	
-	Deaths/total/rate/max: 4,709/34/1.42%/22.22%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 328,047/43/18,643/0/0
+	cases/today/rate/max/per1000: 330,807/1,061/0.32%/85.71%/43	
+	Deaths/total/rate/max: 4,759/50/1.42%/22.22%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 329,746/43/18,764/0/0
 [West Virginia-R - Pop: 1,792,147]
-	cases/today/rate/max/per1000: 128,117/228/0.18%/75.00%/71	
-	Deaths/total/rate/max: 2,216/4/1.73%/4.53%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 2,097,955/1170/0/0/114,932
+	cases/today/rate/max/per1000: 128,405/288/0.22%/75.00%/71	
+	Deaths/total/rate/max: 2,225/9/1.73%/4.53%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 2,106,202/1175/0/0/115,658
 [Wisconsin-R - Pop: 5,822,434]
-	cases/today/rate/max/per1000: 608,418/779/0.13%/57.89%/104	
-	Deaths/total/rate/max: 6,788/39/1.11%/5.73%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 3,179,259/546/25,422/2,231/539,657
+	cases/today/rate/max/per1000: 609,189/771/0.13%/57.89%/104	
+	Deaths/total/rate/max: 6,798/10/1.11%/5.73%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 3,184,251/546/25,498/2,236/540,524
 [Wyoming-R - Pop: 578,759]
-	cases/today/rate/max/per1000: 53,351/215/0.40%/81.82%/92	
-	Deaths/total/rate/max: 662/15/1.21%/1.86%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 231,166/399/1,361/0/52,000
+	cases/today/rate/max/per1000: 53,450/99/0.19%/81.82%/92	
+	Deaths/total/rate/max: 662/0/1.24%/1.86%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 231,492/399/1,363/0/52,039
 
 Summary of currentAggregate Regions
 [North Dakota-R - Pop: 762,062]
-	cases/today/rate/max/per1000: 98,781/138/0.14%/68.42%/129	
+	cases/today/rate/max/per1000: 98,901/120/0.12%/68.42%/129	
 	Deaths/total/rate/max: 1,461/0/1.48%/2.52%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 399,872/524/3,845/559/96,564
-[South Dakota-R - Pop: 884,659]
-	cases/today/rate/max/per1000: 110,593/217/0.20%/33.33%/125	
-	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 414,511/468/6,461/0/106,545
-[Rhode Island-D - Pop: 1,059,361]
-	cases/today/rate/max/per1000: 122,072/285/0.23%/75.00%/115	
-	Deaths/total/rate/max: 2,344/10/1.91%/5.81%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 773,099/729/8,786/0/7,607
-[Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 362,347/591/0.16%/66.67%/113	
-	Deaths/total/rate/max: 1,797/1/0.50%/1.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,855,032/578/14,239/3,010/336,460
-[Tennessee-R - Pop: 6,829,174]
-	cases/today/rate/max/per1000: 759,523/962/0.13%/66.67%/111	
-	Deaths/total/rate/max: 10,954/17/1.44%/2.17%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,746,930/987/18,063/0/726,910
+	Tested/Per1000/Hospitalized/Icu/Recovered: 400,464/525/3,850/560/96,673
+[South Dakota-R - Pop: 884,659]
+	cases/today/rate/max/per1000: 110,685/92/0.08%/33.33%/125	
+	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 414,889/468/6,466/0/106,769
+[Rhode Island-D - Pop: 1,059,361]
+	cases/today/rate/max/per1000: 122,440/368/0.30%/75.00%/115	
+	Deaths/total/rate/max: 2,352/8/1.91%/5.81%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 775,240/731/8,811/0/7,633
+[Utah-R - Pop: 3,205,958]
+	cases/today/rate/max/per1000: 363,248/901/0.25%/66.67%/113	
+	Deaths/total/rate/max: 1,806/9/0.49%/1.18%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,859,745/580/14,294/3,032/338,469
+[Tennessee-R - Pop: 6,829,174]
+	cases/today/rate/max/per1000: 760,303/780/0.10%/66.67%/111	
+	Deaths/total/rate/max: 10,985/31/1.44%/2.17%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,755,133/989/18,120/0/729,629
 
 Summary of currentCaseRate Regions
-[Alaska-R - Pop: 731,545]
-	cases/today/rate/max/per1000: 56,905/500/0.88%/75.00%/77	
-	Deaths/total/rate/max: 287/5/0.50%/3.11%	
+[New Hampshire-D - Pop: 1,359,711]
+	cases/today/rate/max/per1000: 71,965/750/1.04%/58.82%/52	
+	Deaths/total/rate/max: 1,148/12/1.58%/6.47%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 54,736/74/1,233/0/0
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 135/1/0.74%/66.67%/0	
-	Deaths/total/rate/max: 2/0/1.48%/18.18%	
+	Tested/Per1000/Hospitalized/Icu/Recovered: 637,531/468/1,080/336/67,222
+[Vermont-D - Pop: 623,989]
+	cases/today/rate/max/per1000: 13,996/79/0.56%/60.00%/22	
+	Deaths/total/rate/max: 191/0/1.36%/6.90%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 17,563/0/4/0/29
-[Washington-D - Pop: 7,614,893]
-	cases/today/rate/max/per1000: 329,746/1,699/0.52%/85.71%/43	
-	Deaths/total/rate/max: 4,709/34/1.42%/22.22%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 328,047/43/18,643/0/0
-[Puerto Rico-D - Pop: 3,193,694]
-	cases/today/rate/max/per1000: 98,317/480/0.49%/64.29%/30	
-	Deaths/total/rate/max: 1,924/4/1.95%/11.03%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 404,289/126/0/0/88,084
+	Tested/Per1000/Hospitalized/Icu/Recovered: 321,195/514/0/0/11,072
 [New Jersey-D - Pop: 8,882,190]
-	cases/today/rate/max/per1000: 751,065/3,633/0.48%/66.67%/84	
-	Deaths/total/rate/max: 22,497/31/2.99%/8.79%	
+	cases/today/rate/max/per1000: 755,174/4,109/0.54%/66.67%/85	
+	Deaths/total/rate/max: 22,632/135/2.98%/8.79%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 10,084,780/1135/62,591/0/72,336
+	Tested/Per1000/Hospitalized/Icu/Recovered: 10,164,436/1144/62,718/0/72,798
+[Kansas-R - Pop: 2,913,314]
+	cases/today/rate/max/per1000: 291,093/1,250/0.43%/75.00%/99	
+	Deaths/total/rate/max: 4,482/112/1.50%/12.50%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,229,298/421/9,002/2,843/6,137
+[Virginia-D - Pop: 8,535,519]
+	cases/today/rate/max/per1000: 555,592/2,284/0.41%/75.00%/65	
+	Deaths/total/rate/max: 7,075/38/1.27%/3.50%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 555,794/65/23,179/0/44,595
 
 Summary of casesPerCapita Regions
 [North Dakota-R - Pop: 762,062]
-	cases/today/rate/max/per1000: 98,781/138/0.14%/68.42%/129	
+	cases/today/rate/max/per1000: 98,901/120/0.12%/68.42%/129	
 	Deaths/total/rate/max: 1,461/0/1.48%/2.52%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 399,872/524/3,845/559/96,564
-[South Dakota-R - Pop: 884,659]
-	cases/today/rate/max/per1000: 110,593/217/0.20%/33.33%/125	
-	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 414,511/468/6,461/0/106,545
-[Rhode Island-D - Pop: 1,059,361]
-	cases/today/rate/max/per1000: 122,072/285/0.23%/75.00%/115	
-	Deaths/total/rate/max: 2,344/10/1.91%/5.81%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 773,099/729/8,786/0/7,607
-[Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 362,347/591/0.16%/66.67%/113	
-	Deaths/total/rate/max: 1,797/1/0.50%/1.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,855,032/578/14,239/3,010/336,460
-[Tennessee-R - Pop: 6,829,174]
-	cases/today/rate/max/per1000: 759,523/962/0.13%/66.67%/111	
-	Deaths/total/rate/max: 10,954/17/1.44%/2.17%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,746,930/987/18,063/0/726,910
+	Tested/Per1000/Hospitalized/Icu/Recovered: 400,464/525/3,850/560/96,673
+[South Dakota-R - Pop: 884,659]
+	cases/today/rate/max/per1000: 110,685/92/0.08%/33.33%/125	
+	Deaths/total/rate/max: 1,844/0/1.67%/14.29%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 414,889/468/6,466/0/106,769
+[Rhode Island-D - Pop: 1,059,361]
+	cases/today/rate/max/per1000: 122,440/368/0.30%/75.00%/115	
+	Deaths/total/rate/max: 2,352/8/1.91%/5.81%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 775,240/731/8,811/0/7,633
+[Utah-R - Pop: 3,205,958]
+	cases/today/rate/max/per1000: 363,248/901/0.25%/66.67%/113	
+	Deaths/total/rate/max: 1,806/9/0.49%/1.18%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,859,745/580/14,294/3,032/338,469
+[Tennessee-R - Pop: 6,829,174]
+	cases/today/rate/max/per1000: 760,303/780/0.10%/66.67%/111	
+	Deaths/total/rate/max: 10,985/31/1.44%/2.17%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,755,133/989/18,120/0/729,629
 
 Summary of currentDeathRate Regions
 [New Jersey-D - Pop: 8,882,190]
-	cases/today/rate/max/per1000: 751,065/3,633/0.48%/66.67%/84	
-	Deaths/total/rate/max: 22,497/31/2.99%/8.79%	
+	cases/today/rate/max/per1000: 755,174/4,109/0.54%/66.67%/85	
+	Deaths/total/rate/max: 22,632/135/2.98%/8.79%	
 	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 10,084,780/1135/62,591/0/72,336
+	Tested/Per1000/Hospitalized/Icu/Recovered: 10,164,436/1144/62,718/0/72,798
 [New York-D - Pop: 19,453,561]
-	cases/today/rate/max/per1000: 1,553,117/6,709/0.43%/90.00%/79	
-	Deaths/total/rate/max: 46,141/141/2.96%/8.30%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 1,542,887/79/89,995/0/138,975
+	cases/today/rate/max/per1000: 1,559,042/5,925/0.38%/90.00%/80	
+	Deaths/total/rate/max: 46,267/126/2.96%/8.30%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 1,548,979/79/89,995/0/139,544
 [Grand Princess-N - Pop: 0]
 	cases/today/rate/max/per1000: 103/0/0.00%/72.82%/0	
 	Deaths/total/rate/max: 3/0/2.91%/4.35%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 560,576/1,226/0.22%/61.11%/81	
-	Deaths/total/rate/max: 15,567/50/2.77%/7.79%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 4,803,542/696/18,859/0/453,740
+	cases/today/rate/max/per1000: 561,936/1,360/0.24%/61.11%/81	
+	Deaths/total/rate/max: 15,623/56/2.77%/7.79%	
+	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 4,811,568/698/19,176/0/453,740
 [Connecticut-D - Pop: 3,565,287]
-	cases/today/rate/max/per1000: 270,822/580/0.21%/66.67%/75	
-	Deaths/total/rate/max: 7,449/2/2.75%/9.33%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,332,752/1776/12,257/0/9,800
+	cases/today/rate/max/per1000: 271,356/534/0.20%/66.67%/76	
+	Deaths/total/rate/max: 7,476/27/2.75%/9.33%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,366,768/1785/12,257/0/9,800
 
 Summary of testsPerCapita Regions
 [American Samoa-D - Pop: 0]
@@ -415,12 +415,12 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Guam-D - Pop: 0]
-	cases/today/rate/max/per1000: 7,701/2/0.03%/58.33%/0	
+	cases/today/rate/max/per1000: 7,703/2/0.03%/58.33%/0	
 	Deaths/total/rate/max: 130/0/1.69%/4.30%	
 	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 113,454/0/0/0/7,500
+	Tested/Per1000/Hospitalized/Icu/Recovered: 113,934/0/0/0/7,523
 [Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 135/1/0.74%/66.67%/0	
+	cases/today/rate/max/per1000: 135/0/0.00%/66.67%/0	
 	Deaths/total/rate/max: 2/0/1.48%/18.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 17,563/0/4/0/29
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 17,564/0/4/0/29
