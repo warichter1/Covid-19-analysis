@@ -243,7 +243,7 @@ Current Date: 2/23/21 Processing:
 	cases/today/rate/max/per1000: 767,315/1,226/0.16%/66.67%/112	
 	Deaths/total/rate/max: 11,198/45/1.45%/2.17%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 6,804,207/996/18,311/0/738,731
+	Tested/Per1000/Hospitalized/Icu/Recovered: 6,817,032/998/18,363/0/741,057
 [Texas-R - Pop: 28,995,881]
 	cases/today/rate/max/per1000: 2,617,096/10,583/0.40%/50.00%/90	
 	Deaths/total/rate/max: 42,521/220/1.62%/3.08%	
