@@ -50,9 +50,9 @@ Current Date: 3/5/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [District of Columbia-D - Pop: 705,749]
-	cases/today/rate/max/per1000: 41,014/0/0.00%/43.66%/58	
-	Deaths/total/rate/max: 1,024/0/2.50%/5.35%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 41,122/108/0.26%/43.66%/58	
+	Deaths/total/rate/max: 1,027/3/2.49%/5.35%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 41,122/58/0/0/29,417
 [Florida-R - Pop: 21,477,737]
 	cases/today/rate/max/per1000: 1,936,207/5,975/0.31%/57.14%/90	
@@ -125,9 +125,9 @@ Current Date: 3/5/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 3,410,627/564/35,378/0/9,701
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 586,310/0/0.00%/61.11%/85	
-	Deaths/total/rate/max: 16,296/0/2.78%/7.79%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 588,209/1,899/0.32%/61.11%/85	
+	Deaths/total/rate/max: 16,322/26/2.77%/7.79%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 4,977,147/722/19,713/0/508,745
 [Michigan-R - Pop: 9,986,857]
 	cases/today/rate/max/per1000: 654,380/1,791/0.27%/87.50%/65	
@@ -250,9 +250,9 @@ Current Date: 3/5/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,678,295/92/0/0/2,470,308
 [Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 372,708/0/0.00%/66.67%/116	
-	Deaths/total/rate/max: 1,955/0/0.52%/1.18%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 373,868/1,160/0.31%/66.67%/116	
+	Deaths/total/rate/max: 1,970/15/0.52%/1.18%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,927,401/601/14,841/3,159/357,312
 [Vermont-D - Pop: 623,989]
 	cases/today/rate/max/per1000: 15,819/133/0.84%/60.00%/25	
@@ -307,9 +307,9 @@ Summary of currentAggregate Regions
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 802,636/757/9,020/0/0
 [Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 372,708/0/0.00%/66.67%/116	
-	Deaths/total/rate/max: 1,955/0/0.52%/1.18%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 373,868/1,160/0.31%/66.67%/116	
+	Deaths/total/rate/max: 1,970/15/0.52%/1.18%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,927,401/601/14,841/3,159/357,312
 [Tennessee-R - Pop: 6,829,174]
 	cases/today/rate/max/per1000: 780,894/1,445/0.19%/66.67%/114	
@@ -361,9 +361,9 @@ Summary of casesPerCapita Regions
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 802,636/757/9,020/0/0
 [Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 372,708/0/0.00%/66.67%/116	
-	Deaths/total/rate/max: 1,955/0/0.52%/1.18%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 373,868/1,160/0.31%/66.67%/116	
+	Deaths/total/rate/max: 1,970/15/0.52%/1.18%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,927,401/601/14,841/3,159/357,312
 [Tennessee-R - Pop: 6,829,174]
 	cases/today/rate/max/per1000: 780,894/1,445/0.19%/66.67%/114	
@@ -388,9 +388,9 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 1,666,733/85/89,995/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 586,310/0/0.00%/61.11%/85	
-	Deaths/total/rate/max: 16,296/0/2.78%/7.79%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 588,209/1,899/0.32%/61.11%/85	
+	Deaths/total/rate/max: 16,322/26/2.77%/7.79%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 4,977,147/722/19,713/0/508,745
 [Connecticut-D - Pop: 3,565,287]
 	cases/today/rate/max/per1000: 285,330/830/0.29%/66.67%/80	
