@@ -25,8 +25,8 @@ Current Date: 3/7/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,805,534/929/14,926/1,533/315,517
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 3,599,689/2,929/0.08%/50.00%/91	
-	Deaths/total/rate/max: 54,225/91/1.50%/3.97%	
+	cases/today/rate/max/per1000: 3,599,250/2,490/0.07%/50.00%/91	
+	Deaths/total/rate/max: 54,220/86/1.50%/3.97%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 3,501,394/88/0/0/0
 [Colorado-D - Pop: 5,758,736]
@@ -150,8 +150,8 @@ Current Date: 3/7/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 2,359,226/384/0/0/0
 [Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 106,438/5,782/5.43%/80.00%/99	
-	Deaths/total/rate/max: 1,381/2/1.30%/3.53%	
+	cases/today/rate/max/per1000: 100,914/258/0.26%/80.00%/94	
+	Deaths/total/rate/max: 1,381/2/1.37%/3.53%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 100,914/94/4,630/0/97,943
 [Nebraska-R - Pop: 1,934,408]
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 782,206/114/18,870/0/756,793
 
 Summary of currentCaseRate Regions
-[Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 106,438/5,782/5.43%/80.00%/99	
-	Deaths/total/rate/max: 1,381/2/1.30%/3.53%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 100,914/94/4,630/0/97,943
 [Vermont-D - Pop: 623,989]
 	cases/today/rate/max/per1000: 16,083/119/0.74%/60.00%/25	
 	Deaths/total/rate/max: 208/0/1.29%/6.90%	
@@ -343,6 +338,11 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 1,030/0/2.49%/5.35%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 41,419/58/0/0/29,570
+[Maine-D - Pop: 1,344,212]
+	cases/today/rate/max/per1000: 45,794/155/0.34%/88.24%/34	
+	Deaths/total/rate/max: 706/2/1.54%/4.90%	
+	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 45,794/34/1,570/0/12,840
 
 Summary of casesPerCapita Regions
 [North Dakota-R - Pop: 762,062]
