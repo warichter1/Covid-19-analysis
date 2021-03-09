@@ -25,8 +25,8 @@ Current Date: 3/8/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 3,603,716/4,466/0.12%/50.00%/91	
-	Deaths/total/rate/max: 54,380/160/1.50%/3.97%	
+	cases/today/rate/max/per1000: 3,602,380/3,130/0.09%/50.00%/91	
+	Deaths/total/rate/max: 54,316/96/1.51%/3.97%	
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Colorado-D - Pop: 5,758,736]
@@ -150,9 +150,9 @@ Current Date: 3/8/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 106,438/5,524/5.19%/80.00%/99	
-	Deaths/total/rate/max: 1,381/0/1.30%/3.53%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 100,959/45/0.04%/80.00%/94	
+	Deaths/total/rate/max: 1,381/0/1.37%/3.53%	
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nebraska-R - Pop: 1,934,408]
 	cases/today/rate/max/per1000: 203,027/1/0.00%/66.67%/104	
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 106,438/5,524/5.19%/80.00%/99	
-	Deaths/total/rate/max: 1,381/0/1.30%/3.53%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Virgin Islands-N - Pop: 0]
 	cases/today/rate/max/per1000: 2,744/30/1.09%/58.82%/0	
 	Deaths/total/rate/max: 25/0/0.91%/8.70%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 146/1/0.68%/66.67%/0	
 	Deaths/total/rate/max: 2/0/1.37%/18.18%	
 	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Rhode Island-D - Pop: 1,059,361]
+	cases/today/rate/max/per1000: 128,981/860/0.67%/75.00%/121	
+	Deaths/total/rate/max: 2,549/8/1.97%/5.81%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 3,603,716/4,466/0.12%/50.00%/91	
-	Deaths/total/rate/max: 54,380/160/1.50%/3.97%	
+	cases/today/rate/max/per1000: 3,602,380/3,130/0.09%/50.00%/91	
+	Deaths/total/rate/max: 54,316/96/1.51%/3.97%	
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
