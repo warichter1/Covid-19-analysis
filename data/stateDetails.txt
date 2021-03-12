@@ -145,7 +145,7 @@ Current Date: 3/11/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Missouri-R - Pop: 6,137,428]
-	cases/today/rate/max/per1000: 568,918/12,571/2.21%/66.67%/92	
+	cases/today/rate/max/per1000: 568,918/477/0.08%/66.67%/92	
 	Deaths/total/rate/max: 8,647/10/1.52%/6.31%	
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Missouri-R - Pop: 6,137,428]
-	cases/today/rate/max/per1000: 568,918/12,571/2.21%/66.67%/92	
-	Deaths/total/rate/max: 8,647/10/1.52%/6.31%	
-	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Delaware-D - Pop: 973,764]
 	cases/today/rate/max/per1000: 89,680/789/0.88%/75.00%/92	
 	Deaths/total/rate/max: 1,494/2/1.66%/5.29%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [New York-D - Pop: 19,453,561]
 	cases/today/rate/max/per1000: 1,720,199/7,169/0.42%/90.00%/88	
 	Deaths/total/rate/max: 48,690/117/2.82%/8.30%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Rhode Island-D - Pop: 1,059,361]
+	cases/today/rate/max/per1000: 130,120/525/0.40%/75.00%/122	
+	Deaths/total/rate/max: 2,563/4/1.97%/5.81%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
