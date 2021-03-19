@@ -205,9 +205,9 @@ Current Date: 3/18/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Oklahoma-R - Pop: 3,956,971]
-	cases/today/rate/max/per1000: 432,793/0/0.00%/61.36%/109	
-	Deaths/total/rate/max: 4,788/0/1.11%/5.99%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 434,075/559/0.13%/61.36%/109	
+	Deaths/total/rate/max: 4,788/0/1.10%/5.99%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Oregon-D - Pop: 4,217,737]
 	cases/today/rate/max/per1000: 160,622/334/0.21%/66.67%/38	
