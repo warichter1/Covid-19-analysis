@@ -201,7 +201,7 @@ Current Date: 3/29/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Ohio-R - Pop: 11,689,100]
 	cases/today/rate/max/per1000: 1,013,119/1,497/0.15%/58.33%/86	
-	Deaths/total/rate/max: 18,525/0/1.83%/6.03%	
+	Deaths/total/rate/max: 18,526/0/1.83%/6.03%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Oklahoma-R - Pop: 3,956,971]
