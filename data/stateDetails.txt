@@ -5,9 +5,9 @@ Current Date: 3/31/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Alaska-R - Pop: 731,545]
-	cases/today/rate/max/per1000: 62,409/388/0.62%/75.00%/85	
+	cases/today/rate/max/per1000: 62,797/0/0.00%/75.00%/85	
 	Deaths/total/rate/max: 313/0/0.50%/3.11%	
-	Increase Case/Death: False/True
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [American Samoa-D - Pop: 0]
 	cases/today/rate/max/per1000: 0/0/0.00%/0.00%/0	
@@ -328,11 +328,6 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 227/2/1.17%/6.90%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Alaska-R - Pop: 731,545]
-	cases/today/rate/max/per1000: 62,409/388/0.62%/75.00%/85	
-	Deaths/total/rate/max: 313/0/0.50%/3.11%	
-	Increase Case/Death: False/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New Hampshire-D - Pop: 1,359,711]
 	cases/today/rate/max/per1000: 84,176/462/0.55%/58.82%/61	
 	Deaths/total/rate/max: 1,238/1/1.47%/6.47%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 50,504/251/0.50%/88.24%/37	
 	Deaths/total/rate/max: 743/5/1.46%/4.90%	
 	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Pennsylvania-R - Pop: 12,801,989]
+	cases/today/rate/max/per1000: 1,027,678/4,686/0.46%/66.67%/80	
+	Deaths/total/rate/max: 25,074/45/2.44%/7.48%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
@@ -405,9 +405,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Alaska-R - Pop: 731,545]
-	cases/today/rate/max/per1000: 62,409/388/0.62%/75.00%/85	
+	cases/today/rate/max/per1000: 62,797/0/0.00%/75.00%/85	
 	Deaths/total/rate/max: 313/0/0.50%/3.11%	
-	Increase Case/Death: False/True
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
 	cases/today/rate/max/per1000: 841,811/733/0.09%/50.00%/115	
