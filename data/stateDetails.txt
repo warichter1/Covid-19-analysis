@@ -70,7 +70,7 @@ Current Date: 4/12/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Guam-D - Pop: 0]
-	cases/today/rate/max/per1000: 7,842/9/0.11%/58.33%/0	
+	cases/today/rate/max/per1000: 7,842/5/0.06%/58.33%/0	
 	Deaths/total/rate/max: 136/0/1.73%/4.30%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
