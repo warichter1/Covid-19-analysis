@@ -265,9 +265,9 @@ Current Date: 4/28/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Virginia-D - Pop: 8,535,519]
-	cases/today/rate/max/per1000: 656,055/35/0.01%/75.00%/76	
-	Deaths/total/rate/max: 10,724/2/1.63%/3.50%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 657,154/1,134/0.17%/75.00%/76	
+	Deaths/total/rate/max: 10,735/13/1.63%/3.50%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Washington-D - Pop: 7,614,893]
 	cases/today/rate/max/per1000: 400,149/1,640/0.41%/85.71%/52	
