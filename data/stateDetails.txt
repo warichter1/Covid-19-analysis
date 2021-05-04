@@ -101,7 +101,7 @@ Current Date: 5/3/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Kansas-R - Pop: 2,913,314]
 	cases/today/rate/max/per1000: 311,108/508/0.16%/75.00%/106	
-	Deaths/total/rate/max: 4,948/3/1.59%/12.50%	
+	Deaths/total/rate/max: 4,986/3/1.60%/12.50%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Kentucky-R - Pop: 4,467,673]
@@ -175,9 +175,9 @@ Current Date: 5/3/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New Mexico-D - Pop: 2,096,829]
-	cases/today/rate/max/per1000: 197,733/0/0.00%/50.00%/94	
-	Deaths/total/rate/max: 4,067/0/2.06%/4.56%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 198,372/639/0.32%/50.00%/94	
+	Deaths/total/rate/max: 4,073/6/2.05%/4.56%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New York-D - Pop: 19,453,561]
 	cases/today/rate/max/per1000: 2,057,276/2,428/0.12%/90.00%/105	
