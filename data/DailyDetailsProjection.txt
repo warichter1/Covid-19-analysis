@@ -463,8 +463,8 @@ Day: 461 (4/26/21) Cases/today/Infection Rate: 32,124,869/47,691/0.15% - Mortali
 Day: 462 (4/27/21) Cases/today/Infection Rate: 32,175,725/50,856/0.16% - Mortality/Today/Rate: 573,515/642/1.78% 
 Day: 463 (4/28/21) Cases/today/Infection Rate: 32,230,850/55,125/0.17% - Mortality/Today/Rate: 574,474/959/1.78% 
 Day: 464 (4/29/21) Cases/today/Infection Rate: 32,289,049/58,199/0.18% - Mortality/Today/Rate: 575,328/854/1.78% 
-Day: 465 (4/30/21) Cases/today/Infection Rate: 32,346,971/57,922/0.18% - Mortality/Today/Rate: 576,366/1,038/1.78% 
-Day: 466 (5/1/21) Cases/today/Infection Rate: 32,392,274/45,303/0.14% - Mortality/Today/Rate: 576,760/394/1.78% 
+Day: 465 (4/30/21) Cases/today/Infection Rate: 32,346,971/57,922/0.18% - Mortality/Today/Rate: 576,056/728/1.78% 
+Day: 466 (5/1/21) Cases/today/Infection Rate: 32,392,274/45,303/0.14% - Mortality/Today/Rate: 576,760/704/1.78% 
 Day: 467 (5/2/21) Cases/today/Infection Rate: 32,421,641/29,367/0.09% - Mortality/Today/Rate: 577,083/323/1.78% 
 Day: 468 (5/3/21) Cases/today/Infection Rate: 32,472,201/50,560/0.16% - Mortality/Today/Rate: 577,566/483/1.78% 
 Day: 469 (5/4/21) Cases/today/Infection Rate: 32,512,934/40,733/0.13% - Mortality/Today/Rate: 578,499/933/1.78% 
