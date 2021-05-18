@@ -125,9 +125,9 @@ Current Date: 5/17/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 727,169/25,130/3.46%/61.11%/105	
-	Deaths/total/rate/max: 17,772/19/2.44%/7.79%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 702,306/267/0.04%/61.11%/101	
+	Deaths/total/rate/max: 17,775/22/2.53%/7.79%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Michigan-R - Pop: 9,986,857]
 	cases/today/rate/max/per1000: 978,915/2,576/0.26%/87.50%/98	
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 727,169/25,130/3.46%/61.11%/105	
-	Deaths/total/rate/max: 17,772/19/2.44%/7.79%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Maine-D - Pop: 1,344,212]
 	cases/today/rate/max/per1000: 65,915/199/0.30%/88.24%/49	
 	Deaths/total/rate/max: 803/1/1.22%/4.90%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [Michigan-R - Pop: 9,986,857]
 	cases/today/rate/max/per1000: 978,915/2,576/0.26%/87.50%/98	
 	Deaths/total/rate/max: 19,812/22/2.02%/9.50%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Wyoming-R - Pop: 578,759]
+	cases/today/rate/max/per1000: 59,222/143/0.24%/81.82%/102	
+	Deaths/total/rate/max: 712/0/1.20%/1.86%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
@@ -388,9 +388,9 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 727,169/25,130/3.46%/61.11%/105	
-	Deaths/total/rate/max: 17,772/19/2.44%/7.79%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 702,306/267/0.04%/61.11%/101	
+	Deaths/total/rate/max: 17,775/22/2.53%/7.79%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Connecticut-D - Pop: 3,565,287]
 	cases/today/rate/max/per1000: 345,639/662/0.19%/66.67%/96	
