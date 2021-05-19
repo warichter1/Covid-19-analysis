@@ -125,8 +125,8 @@ Current Date: 5/18/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 702,776/470/0.07%/61.11%/101	
-	Deaths/total/rate/max: 17,779/4/2.53%/7.79%	
+	cases/today/rate/max/per1000: 702,776/438/0.06%/61.11%/101	
+	Deaths/total/rate/max: 17,779/7/2.53%/7.79%	
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Michigan-R - Pop: 9,986,857]
@@ -201,7 +201,7 @@ Current Date: 5/18/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Ohio-R - Pop: 11,689,100]
 	cases/today/rate/max/per1000: 1,092,616/993/0.09%/58.33%/93	
-	Deaths/total/rate/max: 19,628/100/1.79%/inf%	
+	Deaths/total/rate/max: 19,628/0/1.80%/inf%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Oklahoma-R - Pop: 3,956,971]
@@ -388,8 +388,8 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today/rate/max/per1000: 702,776/470/0.07%/61.11%/101	
-	Deaths/total/rate/max: 17,779/4/2.53%/7.79%	
+	cases/today/rate/max/per1000: 702,776/438/0.06%/61.11%/101	
+	Deaths/total/rate/max: 17,779/7/2.53%/7.79%	
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Connecticut-D - Pop: 3,565,287]
