@@ -155,9 +155,9 @@ Current Date: 6/3/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 223,434/0/0.00%/66.67%/115	
+	cases/today/rate/max/per1000: 223,517/83/0.04%/66.67%/115	
 	Deaths/total/rate/max: 2,249/0/1.01%/2.22%	
-	Increase Case/Death: False/False
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nevada-D - Pop: 3,080,156]
 	cases/today/rate/max/per1000: 325,031/350/0.11%/55.56%/105	
