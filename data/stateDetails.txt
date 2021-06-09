@@ -245,7 +245,7 @@ Current Date: 6/8/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Texas-R - Pop: 28,995,881]
-	cases/today/rate/max/per1000: 2,966,038/1,929/0.07%/50.00%/102	
+	cases/today/rate/max/per1000: 2,968,177/4,068/0.14%/50.00%/102	
 	Deaths/total/rate/max: 51,777/41/1.74%/3.08%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
@@ -333,15 +333,15 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 2,700/6/1.32%/4.07%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Texas-R - Pop: 28,995,881]
+	cases/today/rate/max/per1000: 2,968,177/4,068/0.14%/50.00%/102	
+	Deaths/total/rate/max: 51,777/41/1.74%/3.08%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Kentucky-R - Pop: 4,467,673]
 	cases/today/rate/max/per1000: 461,119/599/0.13%/75.00%/103	
 	Deaths/total/rate/max: 7,109/6/1.54%/5.66%	
 	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Montana-R - Pop: 1,068,778]
-	cases/today/rate/max/per1000: 112,518/137/0.12%/80.00%/105	
-	Deaths/total/rate/max: 1,634/1/1.45%/3.53%	
-	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
