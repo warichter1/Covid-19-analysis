@@ -55,9 +55,9 @@ Current Date: 6/19/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Florida-R - Pop: 21,477,737]
-	cases/today/rate/max/per1000: 2,354,416/13,300/0.56%/57.14%/109	
+	cases/today/rate/max/per1000: 2,354,416/0/0.00%/57.14%/109	
 	Deaths/total/rate/max: 37,555/0/1.60%/15.38%	
-	Increase Case/Death: True/True
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Georgia-R - Pop: 10,617,423]
 	cases/today/rate/max/per1000: 1,130,845/377/0.03%/50.00%/106	
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Florida-R - Pop: 21,477,737]
-	cases/today/rate/max/per1000: 2,354,416/13,300/0.56%/57.14%/109	
-	Deaths/total/rate/max: 37,555/0/1.60%/15.38%	
-	Increase Case/Death: True/True
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Hawaii-D - Pop: 1,415,872]
 	cases/today/rate/max/per1000: 37,284/70/0.19%/66.67%/26	
 	Deaths/total/rate/max: 511/1/1.37%/2.74%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 617,006/616/0.10%/66.67%/100	
 	Deaths/total/rate/max: 9,648/2/1.56%/6.31%	
 	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Arkansas-R - Pop: 3,017,804]
+	cases/today/rate/max/per1000: 345,472/251/0.07%/300.00%/114	
+	Deaths/total/rate/max: 5,874/0/1.70%/2.35%	
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
