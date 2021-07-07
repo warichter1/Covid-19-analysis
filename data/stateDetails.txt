@@ -26,7 +26,7 @@ Current Date: 7/6/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
 	cases/today/rate/max/per1000: 3,824,369/2,797/0.07%/50.00%/96	
-	Deaths/total/rate/max: 63,722/72/1.66%/3.97%	
+	Deaths/total/rate/max: 63,722/67/1.66%/3.97%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Colorado-D - Pop: 5,758,736]
@@ -155,9 +155,9 @@ Current Date: 7/6/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 224,488/194/0.09%/66.67%/116	
-	Deaths/total/rate/max: 2,261/0/1.01%/2.22%	
-	Increase Case/Death: True/True
+	cases/today/rate/max/per1000: 224,873/191/0.08%/66.67%/116	
+	Deaths/total/rate/max: 2,262/1/1.01%/2.22%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nevada-D - Pop: 3,080,156]
 	cases/today/rate/max/per1000: 336,109/1,346/0.40%/55.56%/109	
@@ -421,6 +421,6 @@ Summary of testsPerCapita Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
 	cases/today/rate/max/per1000: 3,824,369/2,797/0.07%/50.00%/96	
-	Deaths/total/rate/max: 63,722/72/1.66%/3.97%	
+	Deaths/total/rate/max: 63,722/67/1.66%/3.97%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
