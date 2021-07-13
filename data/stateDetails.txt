@@ -20,9 +20,9 @@ Current Date: 7/12/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
-	cases/today/rate/max/per1000: 355,460/0/0.00%/300.00%/117	
-	Deaths/total/rate/max: 5,948/0/1.67%/2.35%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 357,473/2,013/0.56%/300.00%/118	
+	Deaths/total/rate/max: 5,955/7/1.66%/2.35%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
 	cases/today/rate/max/per1000: 3,840,251/4,782/0.12%/50.00%/97	
@@ -75,7 +75,7 @@ Current Date: 7/12/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Hawaii-D - Pop: 1,415,872]
-	cases/today/rate/max/per1000: 38,481/0/0.00%/66.67%/27	
+	cases/today/rate/max/per1000: 38,544/63/0.16%/66.67%/27	
 	Deaths/total/rate/max: 521/0/1.35%/2.74%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
@@ -285,9 +285,9 @@ Current Date: 7/12/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Wyoming-R - Pop: 578,759]
-	cases/today/rate/max/per1000: 62,966/0/0.00%/81.82%/108	
+	cases/today/rate/max/per1000: 63,138/172/0.27%/81.82%/109	
 	Deaths/total/rate/max: 751/0/1.19%/1.86%	
-	Increase Case/Death: False/False
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentAggregate Regions
@@ -323,6 +323,11 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 32/0/0.79%/8.70%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Arkansas-R - Pop: 3,017,804]
+	cases/today/rate/max/per1000: 357,473/2,013/0.56%/300.00%/118	
+	Deaths/total/rate/max: 5,955/7/1.66%/2.35%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nevada-D - Pop: 3,080,156]
 	cases/today/rate/max/per1000: 339,745/1,673/0.49%/55.56%/110	
 	Deaths/total/rate/max: 5,730/10/1.68%/5.13%	
@@ -336,11 +341,6 @@ Summary of currentCaseRate Regions
 [Washington-D - Pop: 7,614,893]
 	cases/today/rate/max/per1000: 456,709/1,606/0.35%/85.71%/59	
 	Deaths/total/rate/max: 6,000/3/1.31%/22.22%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Utah-R - Pop: 3,205,958]
-	cases/today/rate/max/per1000: 420,214/1,238/0.29%/66.67%/131	
-	Deaths/total/rate/max: 2,399/6/0.57%/1.18%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
@@ -415,9 +415,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
-	cases/today/rate/max/per1000: 355,460/0/0.00%/300.00%/117	
-	Deaths/total/rate/max: 5,948/0/1.67%/2.35%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 357,473/2,013/0.56%/300.00%/118	
+	Deaths/total/rate/max: 5,955/7/1.66%/2.35%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
 	cases/today/rate/max/per1000: 3,840,251/4,782/0.12%/50.00%/97	
