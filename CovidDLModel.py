@@ -154,6 +154,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     ecSafeHarbor = 322
     ecStateConfirm = 328
     ecCongressConfirm = 351
+    deltaBegin = 461
+    deltaDominant = 501
     font = FontProperties(family='sans-serif',
                           weight='normal',
                           style='oblique', size=8)
@@ -186,16 +188,20 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
-    label = plt.axvline(ecBiden270, color='blue', label='EC Biden Passes 270: 11/7', linewidth=1)
+    label = plt.axvline(ecBiden270, color='blue', label='Biden Passes 270: 11/7', linewidth=1)
     labels.append(label)
-    label = plt.axvline(ecSafeHarbor, color='cyan', label='EC Safe Harbor: 12/8', linewidth=1)
+    label = plt.axvline(ecSafeHarbor, color='cyan', label='Safe Harbor: 12/8', linewidth=1)
     labels.append(label)
-    label = plt.axvline(ecStateConfirm, color='coral', label='EC States Confirm Biden: 12/14', linewidth=1)
+    label = plt.axvline(ecStateConfirm, color='coral', label='States Confirm Biden: 12/14', linewidth=1)
     labels.append(label)
-    label = plt.axvline(ecCongressConfirm, color='crimson', label='EC Congress Confirms Biden: 1/6', linewidth=1)
+    label = plt.axvline(ecCongressConfirm, color='crimson', label='Congress Confirms Biden: 1/6', linewidth=1)
     labels.append(label)
     label = plt.axvline(inauguration, color='violet',
                         label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=1)
+    labels.append(label)
+    label = plt.axvline(deltaBegin, color='purple', label='Delta early spread: 4/24', linewidth=1)
+    labels.append(label)
+    label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=1)
     labels.append(label)
     plt.legend(handles=labels, prop=font)
     plt.yscale(yscale)
