@@ -37,6 +37,8 @@ https://www.pewtrusts.org/en/research-and-analysis/blogs/stateline/2020/10/09/co
 
 https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/
 
+https://covid.cdc.gov/covid-data-tracker/#variant-proportions
+
 
 Stats:
 https://www.advisory.com/daily-briefing/2020/10/22/long-covid
