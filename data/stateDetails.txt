@@ -181,7 +181,7 @@ Current Date: 8/18/21 Processing:
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New York-D - Pop: 19,453,561]
 	cases/today/rate/max/per1000: 2,217,969/4,793/0.22%/90.00%/114	
-	Deaths/total/rate/max: 53,939/13/2.43%/8.27%	
+	Deaths/total/rate/max: 53,940/14/2.43%/8.27%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [North Carolina-R - Pop: 10,488,084]
@@ -389,7 +389,7 @@ Summary of currentDeathRate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New York-D - Pop: 19,453,561]
 	cases/today/rate/max/per1000: 2,217,969/4,793/0.22%/90.00%/114	
-	Deaths/total/rate/max: 53,939/13/2.43%/8.27%	
+	Deaths/total/rate/max: 53,940/14/2.43%/8.27%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Connecticut-D - Pop: 3,565,287]
