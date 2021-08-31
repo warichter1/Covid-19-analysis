@@ -329,6 +329,14 @@ if __name__ == "__main__":
                 vaxBegin = cdate
                 vaxDay = len(dailyCases)
             vaxLast = cdate
+            vacAllUS = vacUS.loc[[padDate]]
+            # vacAllUS = vacAllUS.loc[vacAllUS['location']=='United States']
+            vacToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].daily_vaccinations
+            distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
+            fullToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].people_fully_vaccinated
+            vacToday1 = int(vacToday1[0])
+            distToday1 = int(distToday1[0])
+            fullToday1 = int(fullToday1[0])
             vacToday = vacUS.loc[[padDate]].daily_vaccinations
             distToday = vacUS.loc[[padDate]].total_distributed
             fullToday = vacUS.loc[[padDate]].people_fully_vaccinated
@@ -346,9 +354,9 @@ if __name__ == "__main__":
             else:
                 distToday = int(sum(distToday))
         if vaxBegin is not None:
-            totalVacFull.append(fullToday)
-            vacDistributed.append(distToday)
-            totalVaccine.append(vacToday)
+            totalVacFull.append(fullToday1)
+            vacDistributed.append(distToday1)
+            totalVaccine.append(vacToday1)
         text = "Day: {} ({}) Cases/today/Infection Rate: {}/{}/{:2.2f}% - Mortality/Today/Rate: {}/{}/{:2.2f}% ".format(day, cdate,
                                                                                                                          format(int(us[cdate]), ',d'),
                                                                                                                          format(now, ',d'), caseRate * 100,
@@ -412,8 +420,8 @@ if __name__ == "__main__":
            deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
     vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
                 [totalVaccine, VacFullDaily, vacDistributedDaily],
-                ["Daily Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
-                 "Daily Fully Vacinated ({})".format(fmtInt(totalVacFull[-1:][0])),
+                ["Total Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
+                 "Fully Vacinated ({})".format(fmtInt(totalVacFull[-1:][0])),
                  "Vaccine Distributed ({})".format(fmtInt(vacDistributed[-1:][0]))],
                 dates=[vaxDay, vaxBegin, vaxLast])
     print(gp.add('./plots/*'))
