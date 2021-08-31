@@ -203,7 +203,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=1)
     labels.append(label)
-    plt.legend(handles=labels, prop=font)
+    plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
     plt.xlabel("Time ({} Days)\nGrowth per Last Period: {:2.2f}%\nToday: {}".format(inday, caseRate * 100, currentDate.strftime("%B %d, %Y")))
@@ -232,7 +232,7 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', dates=
     # plt.axis.Axis.set_xlim((100))
     plt.xlabel("Time ({} Days)\nVaccine shipments started on day: {}\nBeginning: {}, Current: {}".format(len(sources[0]),dates[0],dates[1],dates[2]))
     plt.ylabel("Covid Vaccine Doses - unfinished")
-    plt.legend(handles=labels, prop=font)
+    plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
     plt.title(title)
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),

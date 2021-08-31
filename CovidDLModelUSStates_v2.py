@@ -507,7 +507,7 @@ if __name__ == "__main__":
     statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah',
                 'Arkansas', 'Missouri', 'Nebraska', 'Wisconsin', 'Kentucky'],
               key='confirmedNew', smoothed=True, name='Midwest')
-    statePlot(['New York', 'California', 'Texas', 'Florida'],
+    statePlot(['New York', 'California', 'Texas', 'Florida', 'Louisiana'],
               key='confirmedNew', smoothed=True, name='High')
     print(gp.add('./plots/*'))
     print(gp.add('./data/*'))
