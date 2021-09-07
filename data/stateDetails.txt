@@ -195,9 +195,9 @@ Current Date: 9/6/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 248/5/2.02%/66.67%/0	
+	cases/today/rate/max/per1000: 248/0/0.00%/66.67%/0	
 	Deaths/total/rate/max: 2/0/0.81%/18.18%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Ohio-R - Pop: 11,689,100]
 	cases/today/rate/max/per1000: 1,257,142/3,944/0.31%/58.33%/107	
@@ -323,11 +323,6 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 10,945/164/1.40%/4.42%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 248/5/2.02%/66.67%/0	
-	Deaths/total/rate/max: 2/0/0.81%/18.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Mississippi-R - Pop: 2,976,149]
 	cases/today/rate/max/per1000: 452,644/5,781/1.28%/83.33%/152	
 	Deaths/total/rate/max: 8,664/124/1.89%/4.73%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 68,265/756/1.11%/66.67%/48	
 	Deaths/total/rate/max: 626/2/0.91%/2.74%	
 	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Colorado-D - Pop: 5,758,736]
+	cases/today/rate/max/per1000: 627,415/5,071/0.81%/75.00%/108	
+	Deaths/total/rate/max: 7,225/31/1.15%/5.60%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
