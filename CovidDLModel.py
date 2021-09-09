@@ -156,6 +156,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     ecCongressConfirm = 351
     deltaBegin = 443
     deltaDominant = 501
+    vaccineMandate = 717
+
     font = FontProperties(family='sans-serif',
                           weight='normal',
                           style='oblique', size=8)
@@ -203,6 +205,9 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=1)
     labels.append(label)
+    label = plt.axvline(deltaDominant, color='magenta', label='Vaccine Mandate: 9/9', linewidth=1)
+    labels.append(label)
+
     plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
