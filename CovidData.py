@@ -35,6 +35,12 @@ class CovidData:
         self.severity = {'asymptomatic': 0.42, 'hospitalized': 0.2}
         self.severity['symtomatic'] = 1 - self.severity['asymptomatic']
         self.severity['symtomatic'] -= self.severity['hospitalized']
+        self.severityDelta = {'asymptomatic': 0.33, 'hospitalized': 0.4}
+        self.severityDelta['symtomatic'] = 1 - self.severityDelta['asymptomatic']
+        self.severityDelta['symtomatic'] -= self.severityDelta['hospitalized']
+        self.symtomsDelta = {'mild': 0.67, 'upperResp': 0.36, 'taste': 0.28,
+                             'fever': 0.21}
+        self.deltaDominant = 501
         self.addHumanity()
         self.addRiskData()
         self.calcModifiers()
@@ -261,3 +267,6 @@ if __name__ == "__main__":
     print('Death by Race', cd.raceDeathRate)
     print('Infections by Age', cd.infectionByAge)
     print('Severity of Infection', cd.severity)
+    print("Delta Dominant (Day: {})".format(cd.deltaDominant))
+    print('Severity of Infection (Delta Varient)', cd.severityDelta)
+    print('Symptoms (Delta)', cd.symtomsDelta)

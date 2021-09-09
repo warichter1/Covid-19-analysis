@@ -50,3 +50,5 @@ Vaccinations (first and second dose): https://ourworldindata.org/coronavirus
 Vaccine Distribution:
 https://data.cdc.gov/resource/saz5-9hgg.json
 https://data.cdc.gov/resource/b7pe-5nws.json
+
+https://apnews.com/article/fact-checking-644288348135

@@ -154,7 +154,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     ecSafeHarbor = 322
     ecStateConfirm = 328
     ecCongressConfirm = 351
-    deltaBegin = 461
+    deltaBegin = 443
     deltaDominant = 501
     font = FontProperties(family='sans-serif',
                           weight='normal',
@@ -199,7 +199,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     label = plt.axvline(inauguration, color='violet',
                         label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=1)
     labels.append(label)
-    label = plt.axvline(deltaBegin, color='purple', label='Delta early spread: 4/24', linewidth=1)
+    label = plt.axvline(deltaBegin, color='purple', label='Delta Identified: 4/24', linewidth=1)
     labels.append(label)
     label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=1)
     labels.append(label)
