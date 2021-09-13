@@ -19,6 +19,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
+from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import random
 import git
 
@@ -169,8 +170,14 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
     if plotType == 'deaths':
-        label, = plt.plot(dailyDeaths, color='black', label='Daily Deaths', linewidth=1)
+        label, = plt.plot(dailyDeaths, color='black', label='Daily Deaths',
+                          linewidth=1)
         labels.append(label)
+        average = gs1d(dailyDeaths, sigma=2)
+        label, = plt.plot(average, color='Red', label='Average',
+                          linewidth=1)
+        labels.append(label)
+
     else:
         label, = plt.plot(dailyCases, color='magenta',
                           label='Current: {:2.2f}%'.format(100*growthRates[intoday]))
@@ -185,6 +192,12 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
             if text is not None:
                 label, = plt.plot(scenario[i], label=text, linewidth=1)
                 labels.append(label)
+        average = gs1d(scenario[i], sigma=2)
+        label, = plt.plot(average, color='gold',
+                          label='Average')
+        labels.append(label)
+
+
     label = plt.axvline(intoday, color='green',
                         label='Forecast: {} Days->'.format(projectionDays), linewidth=1)
     labels.append(label)
