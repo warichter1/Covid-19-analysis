@@ -156,7 +156,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     ecCongressConfirm = 351
     deltaBegin = 443
     deltaDominant = 501
-    vaccineMandate = 717
+    vaccineMandate = 597
 
     font = FontProperties(family='sans-serif',
                           weight='normal',

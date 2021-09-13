@@ -190,7 +190,7 @@ class CovidData:
 
     def summary(self, days, caseTotals, deathTotals):
         """Summarize the data based on the current day, infections, deaths."""
-        top = '\n+----------------------------------------------------------------------------------------+'
+        top = '\n+-------------------------------------------------------------------------------------+'
         totalPad = len(top)
         self.logging(top)
         self.summaryText += (top + '\n')
