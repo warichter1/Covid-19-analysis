@@ -159,9 +159,9 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     deltaDominant = 501
     vaccineMandate = 597
 
-    font = FontProperties(family='sans-serif',
-                          weight='normal',
-                          style='oblique', size=8)
+    font = FontProperties(family='ubuntu',
+                          weight='bold',
+                          style='oblique', size=6.5)
 
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
@@ -240,9 +240,9 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
 def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', dates=[None, None, None]):
     """Plot Vaccine deployment."""
     labels = []
-    font = FontProperties(family='sans-serif',
-                      weight='normal',
-                      style='oblique', size=8)
+    font = FontProperties(family='ubuntu',
+                      weight='bold',
+                      style='normal', size=6.5)
     for num in range(len(sources)):
         # print(num, plotLabels)
         label, = plt.plot(sources[num], label=plotLabels[num])
