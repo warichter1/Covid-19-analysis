@@ -30,11 +30,13 @@ print(g.pull())
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series'
 plotPath = './plots/'
 trackingUrl = "https://covidtracking.com/api/v1/states/daily.json"
+# trackingUrl = 'https://api.covidtracking.com/v1/states/current.json'
 trackingIndex = ['state', 'dates']
 confirmedCases = 'time_series_covid19_confirmed_US.csv'
 deaths = 'time_series_covid19_deaths_US.csv'
 censusData = './nst-est2019-alldata.csv'
-stateGovDate = './stateOffices.csv'
+stateGovData = './stateOffices.csv'
+countyElectionData = './president_county_candidate.csv'
 stateGovIndex = 'Region'
 stateGovExclude = ['2016 presidential election', 'Senior U.S. Senator',
                    'Junior U.S. Senator', 'U.S. House of Representatives',
@@ -48,7 +50,8 @@ config = {'jhuPath': dataPath, 'jhuConfirmed': confirmedCases,
           'medIndex': trackingIndex,
           'censusData': censusData, 'censusIndex': censusIndex,
           'censusExclude': censusExclude, 'censusPopKey': censusPopulation,
-          'stateGovData': stateGovDate, 'stateGovIndex': stateGovIndex,
+          'stateGovData': stateGovData, 'stateGovIndex': stateGovIndex,
+          'countyElectionData': countyElectionData,
           'stateGovExclude': stateGovExclude}
 
 country = 'US'
@@ -57,6 +60,9 @@ projectionDays = 30
 deathDays = 3
 begin = 10
 
+# test = covidDf.importCsv('./' + countyElectionData,
+#                                         index=['Province_State', 'County'],
+#                                         rename={'state': 'Province_State', 'county': 'County'})
 
 class CovidCountryRegion:
     """Class to parse and analize by country and region."""
@@ -75,11 +81,12 @@ class CovidCountryRegion:
         self.dataStore['casesPerCapita'] = {}
         self.config = config
 
-        self.index = 'Province_State'
+        self.index = ['Province_State', 'Admin2']
         self.exclude = ['Country_Region', 'UID', 'iso2', 'iso3', 'Last_Update',
                         'Last Update', 'Latitude', 'Lat_', 'Lat', 'Longitude',
                         'Long_', 'Active', 'Combined_Key', 'FIPS', 'code3',
-                        'Population', 'Admin2']
+                        'Population', #'Admin2'
+                        ]
         self.defaultExclude = self.exclude
         self.defaultIndex = self.index
         self.trackingExclude = ['hash', 'fips', 'total', 'lastUpdateEt',
@@ -111,7 +118,9 @@ class CovidCountryRegion:
         """All import and configuration is complete, process the data."""
         self.printStatus = printStatus
         self.importData()
-        self.daysIndex = self.confirmed.keys()
+        self.daysIndex = list(self.confirmed.keys())
+        if 'County' in self.daysIndex:
+            self.daysIndex.remove('County')
         printText = "Current Date: {} Processing:".format(self.daysIndex[-1:][0])
         print(printText)
         self.fileText += (printText + '\n')
@@ -127,6 +136,12 @@ class CovidCountryRegion:
                            'casesPerCapita',
                            'currentDeathRate', 'testsPerCapita'], 5)
             self.writeData('stateDetails.txt', self.fileText)
+
+    def changeDfIndex(self, df, index):
+        """Change a dataframe index."""
+        df.reset_index(inplace=True)
+        df.set_index(['Province_State'], inplace=True)
+        return df
 
     def getAggregate(self):
         """Evauate the current values of each region for high rates."""
@@ -147,7 +162,9 @@ class CovidCountryRegion:
         """Import JHU data."""
         filePath = self.config['jhuPath'] if path is None else path
         file = self.config['jhuConfirmed'] if confirmed is None else confirmed
-        self.confirmed = self.importCsv(filePath + '/' + file)
+        self.confirmed = self.importCsv(filePath + '/' + file,
+                                        index=['Province_State'],
+                                        rename={'Admin2': 'County'})
         self.confirmed.fillna(0, inplace=True)
         self.regions = sorted(set(self.confirmed.index))
         file = self.config['jhuDeaths'] if deathFile is None else deathFile
@@ -365,10 +382,10 @@ class CovidCountryRegion:
         plt.cla()
         plt.close('all')
 
-    def importCsv(self, file, index=[], rename=[], exclude=[]):
+    def importCsv(self, file, index=[], rename={}, exclude=[]):
         """Import csv data based on index, column(s) to rename/exclude."""
         index = index if len(index) > 0 else self.index
-        df = pd.read_csv(file, index_col=index)
+        df = pd.read_csv(file, index_col=None)
         exclude = exclude if len(exclude) > 0 else self.exclude
         if len(exclude) > 0:
             for col in exclude:
@@ -378,10 +395,13 @@ class CovidCountryRegion:
                     continue
         if len(rename) > 0:
             try:
-                for col in rename:
-                    df.rename({col: rename[col]}, axis='columns')
+                # for col in rename:
+                #    df.rename({col: rename[col]}, axis='columns')
+                df.rename(columns=rename, inplace=True)
             except:
                 print('Missing:', rename)
+        df.set_index(index, inplace=True)
+
         return df
 
     def downloadJson(self, url, index):
