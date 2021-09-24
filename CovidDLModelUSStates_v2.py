@@ -401,6 +401,7 @@ class CovidCountryRegion:
             except:
                 print('Missing:', rename)
         df.set_index(index, inplace=True)
+        df.sort_index(inplace=True)
 
         return df
 
@@ -496,6 +497,33 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     plt.clf()
     plt.cla()
     plt.close('all')
+
+def calcWin2020(filename):
+    df = pd.read_csv(filename, index_col=None)
+    df.rename(columns={'state': 'Province_State', 'county': 'County'}, inplace=True)
+    df.set_index(['Province_State', 'County'], inplace=True)
+    df.sort_index(inplace=True)
+    index = list(dict.fromkeys(df.index.values.tolist()))
+    outDf =  pd.DataFrame(columns=['Province_State','County','Party','TotalVotes','WinningVotes'])
+    for i in range(len(index)):
+        county = df.loc[index[i]]
+        winningVotes = max(county['total_votes'])
+        totalVotes = sum(county['total_votes'])
+        print(county)
+        # winner = county.groupby('total_votes').filter(lambda votes: votes['total_votes']==winningVotes)['party'][0]
+        winner = county.where(county['total_votes']==winningVotes)['party'][0]
+        outDf = outDf.append({'Province_State': index[i][0],
+                              'County': index[i][1], 'Party': winner,
+                              'TotalVotes': totalVotes,
+                              'WinningVotes': winningVotes},
+                             ignore_index = True)
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
