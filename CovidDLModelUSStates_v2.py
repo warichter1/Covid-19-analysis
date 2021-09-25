@@ -509,7 +509,7 @@ def calcWin2020(filename):
         county = df.loc[index[i]]
         winningVotes = max(county['total_votes'])
         totalVotes = sum(county['total_votes'])
-        print(county)
+        # print(county)
         # winner = county.groupby('total_votes').filter(lambda votes: votes['total_votes']==winningVotes)['party'][0]
         winner = county.where(county['total_votes']==winningVotes)['party'][0]
         outDf = outDf.append({'Province_State': index[i][0],
@@ -517,6 +517,7 @@ def calcWin2020(filename):
                               'TotalVotes': totalVotes,
                               'WinningVotes': winningVotes},
                              ignore_index = True)
+        outDf.to_csv(filename.replace('/', '/winning_'))
 
 
 
