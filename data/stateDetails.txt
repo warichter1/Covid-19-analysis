@@ -155,8 +155,8 @@ Current Date: 9/25/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 301,631/40,551/13.44%/66.67%/155	
-	Deaths/total/rate/max: 2,405/23/0.79%/2.22%	
+	cases/today/rate/max/per1000: 262,475/1,395/0.53%/66.67%/135	
+	Deaths/total/rate/max: 2,405/23/0.91%/2.22%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nevada-D - Pop: 3,080,156]
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 301,631/40,551/13.44%/66.67%/155	
-	Deaths/total/rate/max: 2,405/23/0.79%/2.22%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Iowa-R - Pop: 3,155,070]
 	cases/today/rate/max/per1000: 445,668/4,485/1.01%/62.50%/141	
 	Deaths/total/rate/max: 6,483/0/1.45%/2.77%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 32,790/180/0.55%/60.00%/52	
 	Deaths/total/rate/max: 306/2/0.93%/6.90%	
 	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Nebraska-R - Pop: 1,934,408]
+	cases/today/rate/max/per1000: 262,475/1,395/0.53%/66.67%/135	
+	Deaths/total/rate/max: 2,405/23/0.91%/2.22%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
