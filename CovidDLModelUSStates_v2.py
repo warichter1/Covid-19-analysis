@@ -14,6 +14,7 @@ import os
 from datetime import date
 from datetime import datetime
 from collections import OrderedDict
+import copy
 import operator
 import pandas as pd
 import numpy as np
@@ -37,6 +38,7 @@ deaths = 'time_series_covid19_deaths_US.csv'
 censusData = './nst-est2019-alldata.csv'
 stateGovData = './stateOffices.csv'
 countyElectionData = './president_county_candidate.csv'
+countyElectionWinner = './winning_president_county_candidate.csv'
 stateGovIndex = 'Region'
 stateGovExclude = ['2016 presidential election', 'Senior U.S. Senator',
                    'Junior U.S. Senator', 'U.S. House of Representatives',
@@ -52,6 +54,7 @@ config = {'jhuPath': dataPath, 'jhuConfirmed': confirmedCases,
           'censusExclude': censusExclude, 'censusPopKey': censusPopulation,
           'stateGovData': stateGovData, 'stateGovIndex': stateGovIndex,
           'countyElectionData': countyElectionData,
+          'countyElectionwin': countyElectionWinner,
           'stateGovExclude': stateGovExclude}
 
 country = 'US'
@@ -74,9 +77,13 @@ class CovidCountryRegion:
         self.dataStore['currentCaseRate'] = {}
         self.dataStore['currentDeathRate'] = {}
         self.dataStore['stateControl'] = {'Republican': {'confirmedNew': None,
-                                                         'deathsNew': None},
+                                                         'deathsNew': None,
+                                                         'confirmedCounty': None,
+                                                         'deathsCounty': None},
                                           'Democratic': {'confirmedNew': None,
-                                                         'deathsNew': None}}
+                                                         'deathsNew': None,
+                                                         'confirmedCounty': None,
+                                                         'deathsCounty': None}}
         self.dataStore['testsPerCapita'] = {}
         self.dataStore['casesPerCapita'] = {}
         self.config = config
@@ -98,6 +105,7 @@ class CovidCountryRegion:
                        'Country_Region': 'Country/Region'}
         self.regionKey = 'Province/State'
         self.subkeys = {'Confirmed': {}, 'Deaths': {}}
+
         self.printStatus = False
         self.daysIndex = []
         self.regions = []
@@ -295,6 +303,15 @@ class CovidCountryRegion:
             buffer = np.add(buffer, deathsNew)
             self.dataStore['stateControl'][control]['deathsNew'] = buffer
         return 1
+
+    def countyByParty(self, filename):
+        dfWin = pd.read_csv(filename, index_col=None)
+        dfWin.set_index(['Province_State', 'County'], inplace=True)
+        dfWin.sort_index(inplace=True)
+        indexWin = list(dict.fromkeys(dfWin.index.values.tolist()))
+        confirmed = copy(self.confirmed)
+        return dfWin, indexWin
+
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
@@ -513,17 +530,12 @@ def calcWin2020(filename):
         # winner = county.groupby('total_votes').filter(lambda votes: votes['total_votes']==winningVotes)['party'][0]
         winner = county.where(county['total_votes']==winningVotes)['party'][0]
         outDf = outDf.append({'Province_State': index[i][0],
-                              'County': index[i][1], 'Party': winner,
+                              'County': index[i][1].replace(' County', '').replace(' city', ''),
+                              'Party': winner,
                               'TotalVotes': totalVotes,
                               'WinningVotes': winningVotes},
                              ignore_index = True)
         outDf.to_csv(filename.replace('/', '/winning_'))
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
