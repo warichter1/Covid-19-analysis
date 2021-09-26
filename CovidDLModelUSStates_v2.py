@@ -309,7 +309,15 @@ class CovidCountryRegion:
         dfWin.set_index(['Province_State', 'County'], inplace=True)
         dfWin.sort_index(inplace=True)
         indexWin = list(dict.fromkeys(dfWin.index.values.tolist()))
-        confirmed = copy(self.confirmed)
+        covidDf.confirmed.reset_index(inplace=True)
+        covidDf.confirmed.set_index(['Province_State', 'County'], inplace=True)
+        indexJHU = list(dict.fromkeys(covidDf.confirmed.index.values.tolist()))
+        # confirmed = copy(self.confirmed)
+        for inx in indexJHU:
+            try:
+                x = dfWin.loc[inx]
+            except:
+                print(inx, 'not found')
         return dfWin, indexWin
 
 
