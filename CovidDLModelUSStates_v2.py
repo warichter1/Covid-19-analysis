@@ -78,12 +78,12 @@ class CovidCountryRegion:
         self.dataStore['currentDeathRate'] = {}
         self.dataStore['stateControl'] = {'Republican': {'confirmedNew': None,
                                                          'deathsNew': None,
-                                                         'confirmedCounty': None,
-                                                         'deathsCounty': None},
+                                                         'confirmedCounty': [],
+                                                         'deathsCounty': []},
                                           'Democratic': {'confirmedNew': None,
                                                          'deathsNew': None,
-                                                         'confirmedCounty': None,
-                                                         'deathsCounty': None}}
+                                                         'confirmedCounty': [],
+                                                         'deathsCounty': []}}
         self.dataStore['testsPerCapita'] = {}
         self.dataStore['casesPerCapita'] = {}
         self.config = config
@@ -313,11 +313,17 @@ class CovidCountryRegion:
         covidDf.confirmed.set_index(['Province_State', 'County'], inplace=True)
         indexJHU = list(dict.fromkeys(covidDf.confirmed.index.values.tolist()))
         # confirmed = copy(self.confirmed)
+        control = 'NA'
         for inx in indexJHU:
+            if not control == inx[0]:  # Pick a new state
+                control = self.getStateGovStats(inx[0])
             try:
-                x = dfWin.loc[inx]
+                county = dfWin.loc[inx]['Party'][0]
+                county = 'Republican' if county == 'REP' else 'Democratic'
             except:
-                print(inx, 'not found')
+                print(inx, 'not found, set to state winner:', control)
+                county = control
+
         return dfWin, indexWin
 
 
