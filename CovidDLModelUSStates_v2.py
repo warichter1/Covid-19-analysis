@@ -176,7 +176,9 @@ class CovidCountryRegion:
         self.confirmed.fillna(0, inplace=True)
         self.regions = sorted(set(self.confirmed.index))
         file = self.config['jhuDeaths'] if deathFile is None else deathFile
-        self.deaths = self.importCsv(filePath + '/' + file)
+        self.deaths = self.importCsv(filePath + '/' + file,
+                                     index=['Province_State'],
+                                     rename={'Admin2': 'County'})
         self.deaths.fillna(0, inplace=True)
         self.tracking = self.downloadJson(self.config['medUrl'],
                                           self.config['medIndex'])
@@ -304,27 +306,43 @@ class CovidCountryRegion:
             self.dataStore['stateControl'][control]['deathsNew'] = buffer
         return 1
 
-    def countyByParty(self, filename):
+    def countyByParty(self):
+        filename = self.config['countyElectionwin']
         dfWin = pd.read_csv(filename, index_col=None)
         dfWin.set_index(['Province_State', 'County'], inplace=True)
         dfWin.sort_index(inplace=True)
+        dfWin['Party'].replace('REP', 'Republican', regex=True, inplace=True)
+        dfWin['Party'].replace('DEM', 'Democratic', regex=True, inplace=True)
         indexWin = list(dict.fromkeys(dfWin.index.values.tolist()))
-        covidDf.confirmed.reset_index(inplace=True)
-        covidDf.confirmed.set_index(['Province_State', 'County'], inplace=True)
-        indexJHU = list(dict.fromkeys(covidDf.confirmed.index.values.tolist()))
-        # confirmed = copy(self.confirmed)
+        self.confirmed.reset_index(inplace=True)
+        self.confirmed.set_index(['Province_State', 'County'], inplace=True)
+        self.deaths.reset_index(inplace=True)
+        self.deaths.set_index(['Province_State', 'County'], inplace=True)
+        indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         control = 'NA'
+        confirmed = {'Republican': {},'Democratic': {}}
+        deaths = {'Republican': {},'Democratic': {}}
+        for day in self.daysIndex:  # prefill by day to calculate
+            confirmed['Republican'][day] = 0
+            confirmed['Democratic'][day] = 0
+            deaths['Republican'][day] = 0
+            deaths['Democratic'][day] = 0
         for inx in indexJHU:
             if not control == inx[0]:  # Pick a new state
                 control = self.getStateGovStats(inx[0])
             try:
                 county = dfWin.loc[inx]['Party'][0]
-                county = 'Republican' if county == 'REP' else 'Democratic'
             except:
-                print(inx, 'not found, set to state winner:', control)
                 county = control
+            for day in self.daysIndex:
+                try:
+                    confirmed[county][day] += self.confirmed.loc[inx][day]
+                    deaths[county][day] += self.deaths.loc[inx][day]
+                except:
+                    continue
+                    # print('Index not Found:', inx, 'Day:', day, 'Party:', county)
 
-        return dfWin, indexWin
+        return confirmed, deaths
 
 
     def getTrack(self, region, day, columns):
@@ -540,8 +558,6 @@ def calcWin2020(filename):
         county = df.loc[index[i]]
         winningVotes = max(county['total_votes'])
         totalVotes = sum(county['total_votes'])
-        # print(county)
-        # winner = county.groupby('total_votes').filter(lambda votes: votes['total_votes']==winningVotes)['party'][0]
         winner = county.where(county['total_votes']==winningVotes)['party'][0]
         outDf = outDf.append({'Province_State': index[i][0],
                               'County': index[i][1].replace(' County', '').replace(' city', ''),
