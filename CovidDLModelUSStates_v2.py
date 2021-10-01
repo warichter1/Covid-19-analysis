@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import git
 import random
+import json
 
 from us_state_abbrev import us_state_abbrev
 
@@ -308,6 +309,7 @@ class CovidCountryRegion:
 
     def countyByParty(self):
         filename = self.config['countyElectionwin']
+        exportname = 'partyByCountry2020.json'
         dfWin = pd.read_csv(filename, index_col=None)
         dfWin.set_index(['Province_State', 'County'], inplace=True)
         dfWin.sort_index(inplace=True)
@@ -340,9 +342,19 @@ class CovidCountryRegion:
                     deaths[county][day] += self.deaths.loc[inx][day]
                 except:
                     continue
-                    # print('Index not Found:', inx, 'Day:', day, 'Party:', county)
+        partyByCounty = {}
+        partyByCounty['confirmed'] = confirmed
+        partyByCounty['deaths'] = deaths
+        exportDaysJson(partyByCounty, exportname)
 
-        return confirmed, deaths
+    def exportDaysJson(self, data, exportFile):
+        for varInx in data:  # Convert numeric totals to string
+            for inxParty in data[varInx].keys():
+                for inxDay in data[varInx][inxParty].keys():
+                    data[varInx][inxParty][inx] = str(data[varInx][inxParty][inx])
+        with open(exportFile, "w") as outfile:
+            json.dump(json.dumps(partyByCounty), outfile)
+
 
 
     def getTrack(self, region, day, columns):
