@@ -353,15 +353,17 @@ class CovidCountryRegion:
                 for inxDay in data[inxKeys][inxParty].keys():
                     data[inxKeys][inxParty][inx] = str(data[inxKeys][inxParty][inx])
         with open(exportFile, "w") as outfile:
-            json.dump(json.dumps(partyByCounty), outfile)
+            json.dump(partyByCounty, outfile)
 
-    def importDaysJson(self, data, importFile):
+    def importDaysJson(self, importFile):
         with open(importFile, "r") as infile:
-            data = json.loads(.read())
-        for inxKeys in data:  # Convert numeric totals to string
+            # jsonStr = infile.read()
+            data = json.loads(infile.read())
+        for inxKeys in data:  # Convert string totals to int
             for inxParty in data[inxKeys].keys():
                 for inxDay in data[inxKeys][inxParty].keys():
                     data[inxKeys][inxParty][inx] = int(data[inxKeys][inxParty][inx])
+        return data
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
