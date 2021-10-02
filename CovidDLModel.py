@@ -349,28 +349,40 @@ if __name__ == "__main__":
             vaxLast = cdate
             vacAllUS = vacUS.loc[[padDate]]
             # vacAllUS = vacAllUS.loc[vacAllUS['location']=='United States']
-            vacToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].daily_vaccinations
-            distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
-            fullToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].people_fully_vaccinated
-            vacToday1 = int(vacToday1[0])
-            distToday1 = int(distToday1[0])
-            fullToday1 = int(fullToday1[0])
-            vacToday = vacUS.loc[[padDate]].daily_vaccinations
-            distToday = vacUS.loc[[padDate]].total_distributed
-            fullToday = vacUS.loc[[padDate]].people_fully_vaccinated
-            # print(padDate, vacToday.values, distToday.values)
-            if len(vacToday) == 1:
-                vacToday = int(vacToday[0])
-            else:
-                vacToday = int(sum(vacToday))
-            if len(fullToday) == 1:
-                fullToday = int(fullToday[0])
-            else:
-                fullToday = int(sum(fullToday))
-            if len(distToday) == 1:
-                distToday = int(distToday[0])
-            else:
-                distToday = int(sum(distToday))
+            # distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
+            # fullToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].people_fully_vaccinated
+            try:
+                vacToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].daily_vaccinations
+                distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
+                fullToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].people_fully_vaccinated
+                vacToday1 = int(vacToday1[0])
+                distToday1 = int(distToday1[0])
+                fullToday1 = int(fullToday1[0])
+                vacToday = vacUS.loc[[padDate]].daily_vaccinations
+                distToday = vacUS.loc[[padDate]].total_distributed
+                fullToday = vacUS.loc[[padDate]].people_fully_vaccinated
+
+                # print(padDate, vacToday.values, distToday.values)
+                if len(vacToday) == 1:
+                    vacToday = int(vacToday[0])
+                else:
+                    vacToday = int(sum(vacToday))
+                if len(fullToday) == 1:
+                    fullToday = int(fullToday[0])
+                else:
+                    fullToday = int(sum(fullToday))
+                if len(distToday) == 1:
+                    distToday = int(distToday[0])
+                else:
+                    distToday = int(sum(distToday))
+            except:
+                vacToday = 0
+                vacToday1 = 0
+                distToday = 0
+                distToday1 = 0
+                fullToday= 0
+                fullToday1 = 0
+                print('Vax Error:', cdate)
         if vaxBegin is not None:
             totalVacFull.append(fullToday1)
             vacDistributed.append(distToday1)
