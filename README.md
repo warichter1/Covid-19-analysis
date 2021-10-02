@@ -11,6 +11,8 @@ https://covidtracking.com/api#swaggerWrapper
 
 https://en.wikipedia.org/wiki/List_of_United_States_state_legislatures
 
+https://www.kaggle.com/unanimad/us-election-2020?select=president_county_candidate.csv
+
 https://www.census.gov/data/tables/time-series/demo/popest/2010s-state-total.html
 
 https://github.com/jasonong/List-of-US-States/blob/master/states.csv
