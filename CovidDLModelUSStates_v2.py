@@ -40,6 +40,7 @@ censusData = './nst-est2019-alldata.csv'
 stateGovData = './stateOffices.csv'
 countyElectionData = './president_county_candidate.csv'
 countyElectionWinner = './winning_president_county_candidate.csv'
+results2020 = 'partyByCountry2020.json'
 stateGovIndex = 'Region'
 stateGovExclude = ['2016 presidential election', 'Senior U.S. Senator',
                    'Junior U.S. Senator', 'U.S. House of Representatives',
@@ -307,7 +308,8 @@ class CovidCountryRegion:
             self.dataStore['stateControl'][control]['deathsNew'] = buffer
         return 1
 
-    def countyByParty(self):
+    def countyByParty(self, indexUpdate=[]):
+        """Breakdown the JHU data by county and party."""
         filename = self.config['countyElectionwin']
         exportname = 'partyByCountry2020.json'
         dfWin = pd.read_csv(filename, index_col=None)
@@ -320,7 +322,10 @@ class CovidCountryRegion:
         self.confirmed.set_index(['Province_State', 'County'], inplace=True)
         self.deaths.reset_index(inplace=True)
         self.deaths.set_index(['Province_State', 'County'], inplace=True)
-        indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
+        if len(indexUpdate) > 0:
+            indexJHU = indexUpdate:
+        else:
+            indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         control = 'NA'
         confirmed = {'Republican': {},'Democratic': {}}
         deaths = {'Republican': {},'Democratic': {}}
@@ -351,7 +356,7 @@ class CovidCountryRegion:
         for inxKeys in data:  # Convert numeric totals to string
             for inxParty in data[inxKeys].keys():
                 for inxDay in data[inxKeys][inxParty].keys():
-                    data[inxKeys][inxParty][inx] = str(data[inxKeys][inxParty][inx])
+                    data[inxKeys][inxParty][inxDay] = str(data[inxKeys][inxParty][inxDay])
         with open(exportFile, "w") as outfile:
             json.dump(partyByCounty, outfile)
 
@@ -362,8 +367,14 @@ class CovidCountryRegion:
         for inxKeys in data:  # Convert string totals to int
             for inxParty in data[inxKeys].keys():
                 for inxDay in data[inxKeys][inxParty].keys():
-                    data[inxKeys][inxParty][inx] = int(data[inxKeys][inxParty][inx])
+                    data[inxKeys][inxParty][inxDay] = int(data[inxKeys][inxParty][inxDay])
         return data
+
+    def updateData(self, importFile):
+        data = self.importDaysJson(importFile)
+        dataInx - list(list(data['confirmed']['Republican'].keys()))
+        diffInx = diff(dataInx, self.daysIndex)
+        for day in diffInx:
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
@@ -503,6 +514,13 @@ class CovidCountryRegion:
             result += np.array(self.dataStore[state][keys[index]])
         return result
 
+def diff(li1, li2, exclude=[]):
+    """Return the difference of 2 lists, optional exclude unwanted items."""
+    result = list(set(li1) - set(li2)) + list(set(li2) - set(li1))
+    if len(exclude) > 0:
+        for item in exclude:
+            result.remove(item)
+    return result
 
 def fmtNum(num):
     """Formatter to convert int to number with commas by thousand."""

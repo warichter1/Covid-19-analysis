@@ -17,6 +17,11 @@ from math import sqrt
 from math import pi
 import pandas as pd
 import numpy as np
+import matplotlib
+# import tornado
+# import tkinter
+# matplotlib.use('TkAgg')
+# matplotlib.use('webAgg')
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
