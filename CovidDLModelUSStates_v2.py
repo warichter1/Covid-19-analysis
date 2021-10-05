@@ -107,7 +107,9 @@ class CovidCountryRegion:
                        'Country_Region': 'Country/Region'}
         self.regionKey = 'Province/State'
         self.subkeys = {'Confirmed': {}, 'Deaths': {}}
-
+        self.partyByCounty = {}
+        self.partyByCounty['confirmed'] = {'Republican': {},'Democratic': {}}
+        self.partyByCounty['deaths'] = {'Republican': {},'Democratic': {}}
         self.printStatus = False
         self.daysIndex = []
         self.regions = []
@@ -322,18 +324,16 @@ class CovidCountryRegion:
         self.confirmed.set_index(['Province_State', 'County'], inplace=True)
         self.deaths.reset_index(inplace=True)
         self.deaths.set_index(['Province_State', 'County'], inplace=True)
-        if len(indexUpdate) > 0:
-            indexJHU = indexUpdate:
-        else:
+        if len(indexUpdate) > 0:  # Unpdate existing
+            indexJHU = indexUpdate
+        else:  # Export new
             indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         control = 'NA'
-        confirmed = {'Republican': {},'Democratic': {}}
-        deaths = {'Republican': {},'Democratic': {}}
         for day in self.daysIndex:  # prefill by day to calculate
-            confirmed['Republican'][day] = 0
-            confirmed['Democratic'][day] = 0
-            deaths['Republican'][day] = 0
-            deaths['Democratic'][day] = 0
+            self.partyByCounty['confirmed']['Republican'][day] = 0
+            self.partyByCounty['confirmed']['Democratic'][day] = 0
+            self.partyByCounty['deaths']['Republican'][day] = 0
+            self.partyByCounty['deaths']['Democratic'][day] = 0
         for inx in indexJHU:
             if not control == inx[0]:  # Pick a new state
                 control = self.getStateGovStats(inx[0])
@@ -343,14 +343,11 @@ class CovidCountryRegion:
                 county = control
             for day in self.daysIndex:
                 try:
-                    confirmed[county][day] += self.confirmed.loc[inx][day]
-                    deaths[county][day] += self.deaths.loc[inx][day]
+                    self.partyByCounty['confirmed'][county][day] += self.confirmed.loc[inx][day]
+                    self.partyByCounty['deaths'][county][day] += self.deaths.loc[inx][day]
                 except:
                     continue
-        partyByCounty = {}
-        partyByCounty['confirmed'] = confirmed
-        partyByCounty['deaths'] = deaths
-        exportDaysJson(partyByCounty, exportname)
+        self.exportDaysJson(self.partyByCounty, exportname)
 
     def exportDaysJson(self, data, exportFile):
         for inxKeys in data:  # Convert numeric totals to string
@@ -358,7 +355,7 @@ class CovidCountryRegion:
                 for inxDay in data[inxKeys][inxParty].keys():
                     data[inxKeys][inxParty][inxDay] = str(data[inxKeys][inxParty][inxDay])
         with open(exportFile, "w") as outfile:
-            json.dump(partyByCounty, outfile)
+            json.dump(self.partyByCounty, outfile)
 
     def importDaysJson(self, importFile):
         with open(importFile, "r") as infile:
@@ -368,13 +365,16 @@ class CovidCountryRegion:
             for inxParty in data[inxKeys].keys():
                 for inxDay in data[inxKeys][inxParty].keys():
                     data[inxKeys][inxParty][inxDay] = int(data[inxKeys][inxParty][inxDay])
-        return data
+        self.partyByCounty = data
 
     def updateData(self, importFile):
         data = self.importDaysJson(importFile)
-        dataInx - list(list(data['confirmed']['Republican'].keys()))
+        dataInx = list(list(data['confirmed']['Republican'].keys()))
         diffInx = diff(dataInx, self.daysIndex)
-        for day in diffInx:
+        if diffInx > 0:
+            print("County days to process:", diffInx)
+        data = self.countyByParty(self, indexUpdate=diffInx)
+        return data
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
