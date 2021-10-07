@@ -376,10 +376,11 @@ class CovidCountryRegion:
         self.importDaysJson(importFile)
         dataInx = list(list(self.partyByCounty['confirmed']['Republican'].keys()))
         diffInx = diff(dataInx, self.daysIndex)
+        diffInx.sort(key=lambda date: datetime.strptime(date, '%m/%d/%y'))
         if len(diffInx) > 0:
             print("County days to process:", diffInx)
-        data = self.countyByParty(self, indexUpdate=diffInx)
-        return data
+        self.countyByParty(indexUpdate=diffInx)
+        return self.partyByCounty
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
