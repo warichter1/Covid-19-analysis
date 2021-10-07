@@ -155,7 +155,7 @@ Current Date: 10/5/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Nebraska-R - Pop: 1,934,408]
-	cases/today/rate/max/per1000: 269,131/750/0.28%/66.67%/139	
+	cases/today/rate/max/per1000: 269,138/757/0.28%/66.67%/139	
 	Deaths/total/rate/max: 2,427/0/0.90%/2.22%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
