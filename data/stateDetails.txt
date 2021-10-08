@@ -70,9 +70,9 @@ Current Date: 10/6/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Guam-D - Pop: 0]
-	cases/today/rate/max/per1000: 15,789/324/2.05%/58.33%/0	
+	cases/today/rate/max/per1000: 15,789/159/1.01%/58.33%/0	
 	Deaths/total/rate/max: 210/2/1.32%/4.30%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Hawaii-D - Pop: 1,415,872]
 	cases/today/rate/max/per1000: 80,582/168/0.21%/66.67%/56	
@@ -319,9 +319,9 @@ Summary of currentAggregate Regions
 
 Summary of currentCaseRate Regions
 [Guam-D - Pop: 0]
-	cases/today/rate/max/per1000: 15,789/324/2.05%/58.33%/0	
+	cases/today/rate/max/per1000: 15,789/159/1.01%/58.33%/0	
 	Deaths/total/rate/max: 210/2/1.32%/4.30%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Maine-D - Pop: 1,344,212]
 	cases/today/rate/max/per1000: 93,207/842/0.90%/88.24%/69	
