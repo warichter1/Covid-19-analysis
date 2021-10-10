@@ -23,6 +23,7 @@ from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import git
 import random
 import json
+from memory_profiler import profile
 
 from us_state_abbrev import us_state_abbrev
 
@@ -57,7 +58,8 @@ config = {'jhuPath': dataPath, 'jhuConfirmed': confirmedCases,
           'stateGovData': stateGovData, 'stateGovIndex': stateGovIndex,
           'countyElectionData': countyElectionData,
           'countyElectionwin': countyElectionWinner,
-          'stateGovExclude': stateGovExclude}
+          'stateGovExclude': stateGovExclude,
+          'results2020': results2020}
 
 country = 'US'
 currentDate = date.today()
@@ -126,6 +128,7 @@ class CovidCountryRegion:
         self.index = self.defaultIndex
         self.exclude = self.defaultExclude
 
+    @profile
     def processing(self, printStatus=True):
         """All import and configuration is complete, process the data."""
         self.printStatus = printStatus
@@ -352,19 +355,21 @@ class CovidCountryRegion:
                     self.partyByCounty['deaths'][county][day] += self.deaths.loc[inx][day]
                 except:
                     continue
-        # self.exportDaysJson(self.partyByCounty, exportname)
+        self.exportDaysJson(self.partyByCounty, exportname + '1')
 
     def exportDaysJson(self, data, exportFile):
+        print("Exporting counties by Party:", exportFile)
         for inxKeys in data:  # Convert numeric totals to string
             for inxParty in data[inxKeys].keys():
                 for inxDay in data[inxKeys][inxParty].keys():
                     data[inxKeys][inxParty][inxDay] = str(data[inxKeys][inxParty][inxDay])
         with open(exportFile, "w") as outfile:
             json.dump(self.partyByCounty, outfile)
+        print('Export Complete')
 
     def importDaysJson(self, importFile):
+        print("Importing counties by Party:", importFile)
         with open(importFile, "r") as infile:
-            # jsonStr = infile.read()
             data = json.loads(infile.read())
         for inxKeys in data:  # Convert string totals to int
             for inxParty in data[inxKeys].keys():
@@ -372,7 +377,9 @@ class CovidCountryRegion:
                     data[inxKeys][inxParty][inxDay] = int(data[inxKeys][inxParty][inxDay])
         self.partyByCounty = data
 
-    def updateData(self, importFile):
+    def updateCountyParties(self, importFile=None):
+        if importFile is None:
+            importFile = self.config['results2020']
         self.importDaysJson(importFile)
         dataInx = list(list(self.partyByCounty['confirmed']['Republican'].keys()))
         diffInx = diff(dataInx, self.daysIndex)
@@ -380,7 +387,10 @@ class CovidCountryRegion:
         if len(diffInx) > 0:
             print("County days to process:", diffInx)
         self.countyByParty(indexUpdate=diffInx)
-        return self.partyByCounty
+        for party in ['Republican', 'Democratic']:
+            for key in ['confirmed', 'deaths']:
+                self.dataStore['stateControl'][party][key+'County'] = self.partyByCounty[key][party]
+        # return self.partyByCounty
 
     def getTrack(self, region, day, columns):
         """Get the results for a region by day."""
