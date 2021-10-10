@@ -128,7 +128,7 @@ class CovidCountryRegion:
         self.index = self.defaultIndex
         self.exclude = self.defaultExclude
 
-    @profile
+    # @profile
     def processing(self, printStatus=True):
         """All import and configuration is complete, process the data."""
         self.printStatus = printStatus
@@ -142,6 +142,7 @@ class CovidCountryRegion:
         for region in self.regions:
             self.processRegionResults(region)
         self.getAggregate()
+        self.updateCountyParties()
         if printStatus:
             self.sortTopDict('currentCaseRate')
             self.sortTopDict('currentDeathRate')
@@ -356,6 +357,7 @@ class CovidCountryRegion:
                 except:
                     continue
         self.exportDaysJson(self.partyByCounty, exportname + '1')
+        self.importDaysJson(exportname + '1')
 
     def exportDaysJson(self, data, exportFile):
         print("Exporting counties by Party:", exportFile)
@@ -389,7 +391,7 @@ class CovidCountryRegion:
         self.countyByParty(indexUpdate=diffInx)
         for party in ['Republican', 'Democratic']:
             for key in ['confirmed', 'deaths']:
-                self.dataStore['stateControl'][party][key+'County'] = self.partyByCounty[key][party]
+                self.dataStore['stateControl'][party][key+'County'] = list(self.partyByCounty[key][party].values())
         # return self.partyByCounty
 
     def getTrack(self, region, day, columns):
@@ -491,8 +493,6 @@ class CovidCountryRegion:
                     continue
         if len(rename) > 0:
             try:
-                # for col in rename:
-                #    df.rename({col: rename[col]}, axis='columns')
                 df.rename(columns=rename, inplace=True)
             except:
                 print('Missing:', rename)
@@ -579,14 +579,16 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     """Plot summary by state government."""
     handles = []
     for party in ['Republican', 'Democratic']:
-        for key in ['confirmedNew', 'deathsNew']:
+        for key in ['confirmedNew', 'deathsNew',
+                    'confirmedCounty', 'deathsCounty']:
+            print('Processing State Party ({}): {}'.format(party, key))
             total = sum(covidDf.dataStore['stateControl'][party][key])
             if smoothed is False:
                 vector = covidDf.dataStore['stateControl'][party][key]
             else:
                 vector = gs1d(covidDf.dataStore['stateControl'][party][key],
                               sigma=2)
-            label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', ''), party[:1], fmtNum(total)))
+            label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', '').replace('County', ' by County'), party[:1], fmtNum(total)))
             handles.append(label)
     plt.legend(handles=handles)
     plt.yscale(yscale)
