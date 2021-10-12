@@ -24,6 +24,7 @@ import git
 import random
 import json
 from memory_profiler import profile
+from matplotlib.font_manager import FontProperties
 
 from us_state_abbrev import us_state_abbrev
 
@@ -337,23 +338,27 @@ class CovidCountryRegion:
             daysIndex = self.daysIndex
             # indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
-        control = 'NA'
+        targetState = 'NA'
         for day in daysIndex:  # prefill by day to calculate
             self.partyByCounty['confirmed']['Republican'][day] = 0
             self.partyByCounty['confirmed']['Democratic'][day] = 0
             self.partyByCounty['deaths']['Republican'][day] = 0
             self.partyByCounty['deaths']['Democratic'][day] = 0
         for inx in indexJHU:
-            if not control == inx[0]:  # Pick a new state
+            # print("Processing:", inx)
+            if not targetState == inx[0]:  # Pick a new state
                 control = self.getStateGovStats(inx[0])
+                targetState = inx[0] 
             try:
-                county = dfWin.loc[inx]['Party'][0]
+                countyWin = dfWin.loc[inx]['Party'][0]
             except:
-                county = control
+                countyWin = control
+                print("County: {} not found, using state default: {}".format(inx[1], countyWin))
+            print("Processing:", inx, countyWin)
             for day in daysIndex:
                 try:
-                    self.partyByCounty['confirmed'][county][day] += self.confirmed.loc[inx][day]
-                    self.partyByCounty['deaths'][county][day] += self.deaths.loc[inx][day]
+                    self.partyByCounty['confirmed'][countyWin][day] += self.confiRepairrmed.loc[inx][day]
+                    self.partyByCounty['deaths'][countyWin][day] += self.deaths.loc[inx][day]
                 except:
                     continue
         self.exportDaysJson(self.partyByCounty, exportname + '1')
@@ -388,10 +393,11 @@ class CovidCountryRegion:
         diffInx.sort(key=lambda date: datetime.strptime(date, '%m/%d/%y'))
         if len(diffInx) > 0:
             print("County days to process:", diffInx)
-        self.countyByParty(indexUpdate=diffInx)
-        for party in ['Republican', 'Democratic']:
-            for key in ['confirmed', 'deaths']:
-                self.dataStore['stateControl'][party][key+'County'] = list(self.partyByCounty[key][party].values())
+            self.countyByParty(indexUpdate=diffInx)
+            for party in ['Republican', 'Democratic']:
+                for key in ['confirmed', 'deaths']:
+                    buffer = list(self.partyByCounty[key][party].values())
+                    self.dataStore['stateControl'][party][key+'County'] = [buffer[i] - buffer[i-1] if buffer[i] - buffer[i-1] >= 0 else 0 for i in range(1,len(buffer) -1)]
         # return self.partyByCounty
 
     def getTrack(self, region, day, columns):
@@ -578,8 +584,11 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
 def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     """Plot summary by state government."""
     handles = []
+    font = FontProperties(family='ubuntu',
+                          weight='bold',
+                          style='oblique', size=6.5)
     for party in ['Republican', 'Democratic']:
-        for key in ['confirmedNew', 'deathsNew',
+        for key in ['confirmedNew', 'deathsNew',#]:
                     'confirmedCounty', 'deathsCounty']:
             print('Processing State Party ({}): {}'.format(party, key))
             total = sum(covidDf.dataStore['stateControl'][party][key])
@@ -590,7 +599,7 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
                               sigma=2)
             label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', '').replace('County', ' by County'), party[:1], fmtNum(total)))
             handles.append(label)
-    plt.legend(handles=handles)
+    plt.legend(handles=handles, prop=font)
     plt.yscale(yscale)
     plt.title(title)
     plt.ylabel('Party in Control\nCases/Deaths by Day')
