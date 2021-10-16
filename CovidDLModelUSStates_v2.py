@@ -357,7 +357,7 @@ class CovidCountryRegion:
             print("Processing:", inx, countyWin)
             for day in daysIndex:
                 try:
-                    self.partyByCounty['confirmed'][countyWin][day] += self.confiRepairrmed.loc[inx][day]
+                    self.partyByCounty['confirmed'][countyWin][day] += self.confirmed.loc[inx][day]
                     self.partyByCounty['deaths'][countyWin][day] += self.deaths.loc[inx][day]
                 except:
                     continue
