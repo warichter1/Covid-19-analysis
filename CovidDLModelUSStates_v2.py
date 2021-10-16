@@ -597,7 +597,7 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
             else:
                 vector = gs1d(covidDf.dataStore['stateControl'][party][key],
                               sigma=2)
-            label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', '').replace('County', ' by County'), party[:1], fmtNum(total)))
+            label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', ' by State').replace('County', ' by County'), party[:1], fmtNum(total)))
             handles.append(label)
     plt.legend(handles=handles, prop=font)
     plt.yscale(yscale)
