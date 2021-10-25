@@ -191,7 +191,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         for i in range(scenarioNumber):
             text = None
             if i == scenarioNumber - 1:
-                text = 'Weekly Average: {:2.2f}%'.format(100 * weekRates[i])
+                text = '7 day Raw Average: {:2.2f}%'.format(100 * weekRates[i])
             elif scenarios is True:
                 text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
             if text is not None:
@@ -199,7 +199,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
                 labels.append(label)
         average = gs1d(scenario[i], sigma=2)
         label, = plt.plot(average, color='gold',
-                          label='Average')
+                          label='7 day Average')
         labels.append(label)
 
 
