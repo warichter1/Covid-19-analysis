@@ -136,11 +136,16 @@ class CovidData:
                                   'associate': .1018, 'bachelors': .3498,
                                   'masters': .0957, 'professional': .0144,
                                   'phd': .0203}
-        #Lifetime Salary adjustment based on education level
+        # Lifetime Salary adjustment based on education level
         self.rate['educationAttainment'] = {'noHighSchool': 0.84,
                                             'highSchool': 1.00, 
                                             'bachelors': 2.00,
                                             'grad': 2.60}
+        # Risk adjusted for education
+        self.rate['educationRisk'] = {'noHighSchool': 0.396,
+                                            'highSchool': 0.315, 
+                                            'bachelors': 0.171,
+                                            'grad': 0.117}
         self.rate['eduPartyDR'] = {'highSchool': [.46, .45],
                                    'whiteHS': [.59, .33],
                                    'someCollege': [.47, .39],

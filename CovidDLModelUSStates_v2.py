@@ -27,6 +27,7 @@ from memory_profiler import profile
 from matplotlib.font_manager import FontProperties
 
 from us_state_abbrev import us_state_abbrev
+from CovidData import CovidData
 
 g = git.cmd.Git('./COVID-19')
 print(g.pull())
@@ -40,6 +41,7 @@ confirmedCases = 'time_series_covid19_confirmed_US.csv'
 deaths = 'time_series_covid19_deaths_US.csv'
 censusData = './nst-est2019-alldata.csv'
 stateGovData = './stateOffices.csv'
+educationRisk = './educational_attainment.csv'
 countyElectionData = './president_county_candidate.csv'
 countyElectionWinner = './winning_president_county_candidate.csv'
 results2020 = 'partyByCountry2020.json'
@@ -53,7 +55,7 @@ censusExclude = ['SUMLEV', 'REGION', 'DIVISION', 'STATE']
 
 config = {'jhuPath': dataPath, 'jhuConfirmed': confirmedCases,
           'jhuDeaths': deaths, 'medUrl': trackingUrl,
-          'medIndex': trackingIndex,
+          'medIndex': trackingIndex, 'educationRisk': educationRisk,
           'censusData': censusData, 'censusIndex': censusIndex,
           'censusExclude': censusExclude, 'censusPopKey': censusPopulation,
           'stateGovData': stateGovData, 'stateGovIndex': stateGovIndex,
@@ -280,6 +282,12 @@ class CovidCountryRegion:
             self.dataStore['testsPerCapita'][region] = self.dataStore[region]['testsPerCapita']
             self.dataStore['casesPerCapita'][region] = self.dataStore[region]['confirmed'][-1:][0] / self.censusPop[region]
 
+    def educationLevelState(self):
+        cd = CovidData()
+        attainmentSalary = cd.rate['educationAttainment']
+        risk = cd.rate['educationRisk']
+        education = self.importCsv(config['educationRisk'], index=['Province_State'])
+        
     def getStateGovStats(self, region):
         """Get statistics for the the region by ruling party."""
         state = {'Republican': 0.0, 'Democratic': 0.0, 'Independent': 0.0,
