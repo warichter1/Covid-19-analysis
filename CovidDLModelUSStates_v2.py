@@ -284,7 +284,7 @@ class CovidCountryRegion:
 
     def educationLevelState(self):
         cd = CovidData()
-        # attainmentSalary = cd.rate['educationAttainment']
+        self.attainmentSalary = cd.rate['educationAttainment']
         risk = cd.rate['educationRisk']
         eduRisk = self.importCsv(config['educationRisk'], 
                                  index=['Province_State'])
@@ -292,7 +292,6 @@ class CovidCountryRegion:
         eduRisk['highSchool'] = (eduRisk['High School Only'] + risk['highSchool'])/2
         eduRisk['bachelors'] = (eduRisk['Bachelor only'] + risk['bachelors'])/2
         eduRisk['grad'] = (eduRisk['Advanced only'] + risk['grad'])/2
-        eduRisk['attainmentSalary'] = cd.rate['educationAttainment']
         self.eduRisk = eduRisk
         
     def getStateGovStats(self, region):
