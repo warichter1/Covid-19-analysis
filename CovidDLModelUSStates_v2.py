@@ -115,6 +115,7 @@ class CovidCountryRegion:
         self.partyByCounty = {}
         self.partyByCounty['confirmed'] = {'Republican': {},'Democratic': {}}
         self.partyByCounty['deaths'] = {'Republican': {},'Democratic': {}}
+        self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
         self.regions = []
@@ -650,6 +651,7 @@ def calcWin2020(filename):
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
     startTime = datetime.today()
+    covidDf.educationLevelState()  # Load Educational data
     covidDf.processing()
     gp = git.cmd.Git('./')
     endTime = datetime.today()
