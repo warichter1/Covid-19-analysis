@@ -25,9 +25,9 @@ Current Date: 10/28/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 4,906,317/29,540/0.60%/50.00%/124	
-	Deaths/total/rate/max: 71,848/80/1.46%/3.94%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 4,884,634/7,857/0.16%/50.00%/123	
+	Deaths/total/rate/max: 71,848/80/1.47%/3.94%	
+	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Colorado-D - Pop: 5,758,736]
 	cases/today/rate/max/per1000: 737,166/3,823/0.52%/75.00%/128	
@@ -323,11 +323,6 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 360/2/0.90%/6.90%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 4,906,317/29,540/0.60%/50.00%/124	
-	Deaths/total/rate/max: 71,848/80/1.46%/3.94%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Alaska-R - Pop: 731,545]
 	cases/today/rate/max/per1000: 137,082/808/0.59%/75.00%/187	
 	Deaths/total/rate/max: 721/5/0.52%/3.11%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [Maine-D - Pop: 1,344,212]
 	cases/today/rate/max/per1000: 103,041/572/0.56%/88.24%/76	
 	Deaths/total/rate/max: 1,160/6/1.12%/4.90%	
+	Increase Case/Death: False/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Guam-D - Pop: 0]
+	cases/today/rate/max/per1000: 18,040/96/0.53%/58.33%/0	
+	Deaths/total/rate/max: 235/3/1.29%/4.30%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 4,906,317/29,540/0.60%/50.00%/124	
-	Deaths/total/rate/max: 71,848/80/1.46%/3.94%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 4,884,634/7,857/0.16%/50.00%/123	
+	Deaths/total/rate/max: 71,848/80/1.47%/3.94%	
+	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
