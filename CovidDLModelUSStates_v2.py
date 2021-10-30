@@ -115,6 +115,8 @@ class CovidCountryRegion:
         self.partyByCounty = {}
         self.partyByCounty['confirmed'] = {'Republican': {},'Democratic': {}}
         self.partyByCounty['deaths'] = {'Republican': {},'Democratic': {}}
+        self.educationLevel = {'noHighSchool': {}, 'highSchool': {}, 
+                               'bachelors': {}, 'grad': {}}
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
