@@ -41,6 +41,11 @@ https://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/
 
 https://covid.cdc.gov/covid-data-tracker/#variant-proportions
 
+https://healthpolicy.usc.edu/evidence-base/individuals-with-low-incomes-less-education-report-higher-perceived-financial-health-threats-from-covid-19/
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8212884/
+
+https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html
 
 Stats:
 https://www.advisory.com/daily-briefing/2020/10/22/long-covid
