@@ -165,9 +165,9 @@ Current Date: 11/1/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New Hampshire-D - Pop: 1,359,711]
-	cases/today/rate/max/per1000: 132,441/0/0.00%/58.82%/97	
-	Deaths/total/rate/max: 1,544/0/1.17%/6.47%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 136,775/4,334/3.17%/58.82%/100	
+	Deaths/total/rate/max: 1,568/24/1.13%/6.47%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New Jersey-D - Pop: 8,882,190]
 	cases/today/rate/max/per1000: 1,199,738/821/0.07%/66.67%/135	
@@ -318,6 +318,11 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
+[New Hampshire-D - Pop: 1,359,711]
+	cases/today/rate/max/per1000: 136,775/4,334/3.17%/58.82%/100	
+	Deaths/total/rate/max: 1,568/24/1.13%/6.47%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Minnesota-D - Pop: 5,639,632]
 	cases/today/rate/max/per1000: 797,984/10,434/1.31%/60.38%/141	
 	Deaths/total/rate/max: 8,818/25/1.10%/7.14%	
@@ -336,11 +341,6 @@ Summary of currentCaseRate Regions
 [New Mexico-D - Pop: 2,096,829]
 	cases/today/rate/max/per1000: 277,835/2,626/0.95%/50.00%/132	
 	Deaths/total/rate/max: 5,061/12/1.82%/4.56%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Michigan-R - Pop: 9,986,857]
-	cases/today/rate/max/per1000: 1,285,518/10,415/0.81%/87.50%/128	
-	Deaths/total/rate/max: 23,730/68/1.84%/9.50%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
