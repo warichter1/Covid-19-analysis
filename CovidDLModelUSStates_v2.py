@@ -11,6 +11,7 @@ Created on Fri Mar 27 18:16:15 2020
 
 import sys
 import os
+import psutil
 from datetime import date
 from datetime import datetime
 from collections import OrderedDict
@@ -115,8 +116,14 @@ class CovidCountryRegion:
         self.partyByCounty = {}
         self.partyByCounty['confirmed'] = {'Republican': {},'Democratic': {}}
         self.partyByCounty['deaths'] = {'Republican': {},'Democratic': {}}
-        self.educationLevel = {'noHighSchool': {}, 'highSchool': {}, 
-                               'bachelors': {}, 'grad': {}}
+        self.dataStore['educationLevel'] = {'noHighSchool': {'confirmed': {},
+                                                            'deaths': {}}, 
+                                            'highSchool': {'confirmed': {},
+                                                                'deaths': {}}, 
+                                            'bachelors': {'confirmed': {},
+                                                                'deaths': {}}, 
+                                            'grad': {'confirmed': {},
+                                                                'deaths': {}}}
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
@@ -203,6 +210,7 @@ class CovidCountryRegion:
         self.stateGov = self.importCsv(self.config['stateGovData'],
                                        index=self.config['stateGovIndex'],
                                        exclude=self.config['stateGovExclude'])
+        self.educationLevelState()  # Load Educational data
 
     def processRegionResults(self, region):
         """Process the results of a region."""
@@ -353,7 +361,6 @@ class CovidCountryRegion:
         else:  # Export new
             print('Create existing county list')
             daysIndex = self.daysIndex
-            # indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         indexJHU = list(dict.fromkeys(self.confirmed.index.values.tolist()))
         targetState = 'NA'
         for day in daysIndex:  # prefill by day to calculate
@@ -649,7 +656,28 @@ def calcWin2020(filename):
                              ignore_index = True)
         outDf.to_csv(filename.replace('/', '/winning_'))
 
+def eduRiskCalc(self, region):
+    levels = list(covidDf.dataStore['educationLevel'].keys())
+    risk = {}
+    try:
+        for level in levels:
+            risk[level] = covidDf.eduRisk[level][region]
+    except:
+        print('Level:', level, 'not found')
+        return 0       
+    confirmed = covidDf.confirmed
+    deaths = covidDf.deaths
+    for day in covidDf.daysIndex:  # prefill by day to calculate   
+        for level in covidDf.dataStore['educationLevel'].keys():
+            if region == self.regions[0]:
+                self.dataStore['educationLevel'][level]['confirmed'][day] += 0
+                self.dataStore['educationLevel'][level]['deaths'][day] += 0
+            confirmed = sum(covidDf.confirmed[region][day] * risk[level])
+            deaths = sum(covidDf.deaths[region][day] * risk[level])
+            self.dataStore['educationLevel'][level]['confirmed'][day] += confirmed*risk[level]
+            self.dataStore['educationLevel'][level]['deaths'][day] += deaths*risk[level]
 
+    
 if __name__ == "__main__":
     covidDf = CovidCountryRegion(config)
     startTime = datetime.today()
