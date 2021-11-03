@@ -656,7 +656,7 @@ def calcWin2020(filename):
                              ignore_index = True)
         outDf.to_csv(filename.replace('/', '/winning_'))
 
-def eduRiskCalc(self, region):
+def eduRiskCalc(region):
     levels = list(covidDf.dataStore['educationLevel'].keys())
     risk = {}
     try:
@@ -664,18 +664,18 @@ def eduRiskCalc(self, region):
             risk[level] = covidDf.eduRisk[level][region]
     except:
         print('Level:', level, 'not found')
-        return 0       
+        return 0  # do not continue if the region does not exist    
     confirmed = covidDf.confirmed
     deaths = covidDf.deaths
     for day in covidDf.daysIndex:  # prefill by day to calculate   
-        for level in covidDf.dataStore['educationLevel'].keys():
-            if region == self.regions[0]:
-                self.dataStore['educationLevel'][level]['confirmed'][day] += 0
-                self.dataStore['educationLevel'][level]['deaths'][day] += 0
-            confirmed = sum(covidDf.confirmed[region][day] * risk[level])
-            deaths = sum(covidDf.deaths[region][day] * risk[level])
-            self.dataStore['educationLevel'][level]['confirmed'][day] += confirmed*risk[level]
-            self.dataStore['educationLevel'][level]['deaths'][day] += deaths*risk[level]
+        for level in levels:            
+            if region == covidDf.regions[0] and day == covidDf.daysIndex[0]:
+                covidDf.dataStore['educationLevel'][level]['confirmed'][day] = 0
+                covidDf.dataStore['educationLevel'][level]['deaths'][day] = 0
+            confirmed = sum(covidDf.confirmed.loc[region][day]) * risk[level]
+            deaths = sum(covidDf.deaths.loc[region][day]) * risk[level]
+            covidDf.dataStore['educationLevel'][level]['confirmed'][day] += confirmed*risk[level]
+            covidDf.dataStore['educationLevel'][level]['deaths'][day] += deaths*risk[level]
 
     
 if __name__ == "__main__":
