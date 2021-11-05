@@ -663,19 +663,28 @@ def eduRiskCalc(region):
         for level in levels:
             risk[level] = covidDf.eduRisk[level][region]
     except:
-        print('Level:', level, 'not found')
+        print('Region:', region, 'not found')
         return 0  # do not continue if the region does not exist    
     confirmed = covidDf.confirmed
     deaths = covidDf.deaths
-    for day in covidDf.daysIndex:  # prefill by day to calculate   
-        for level in levels:            
-            if region == covidDf.regions[0] and day == covidDf.daysIndex[0]:
+    for day in covidDf.daysIndex:   
+        for level in levels:   
+            if region == covidDf.regions[0]:  # prefill by day to calculate 
                 covidDf.dataStore['educationLevel'][level]['confirmed'][day] = 0
                 covidDf.dataStore['educationLevel'][level]['deaths'][day] = 0
             confirmed = sum(covidDf.confirmed.loc[region][day]) * risk[level]
             deaths = sum(covidDf.deaths.loc[region][day]) * risk[level]
             covidDf.dataStore['educationLevel'][level]['confirmed'][day] += confirmed*risk[level]
             covidDf.dataStore['educationLevel'][level]['deaths'][day] += deaths*risk[level]
+    if region == covidDf.regions[-1:][0]:
+        print("Finalize Education Levels")
+        for level in levels:
+            buffer = list(covidDf.dataStore['educationLevel'][level]['confirmed'].values())
+            buffer = [int(i + .5) for i in buffer]
+            covidDf.dataStore['educationLevel'][level]['confirmed'] = buffer
+            buffer = list(covidDf.dataStore['educationLevel'][level]['deaths'].values())
+            buffer = [int(i) for i in buffer]        
+            covidDf.dataStore['educationLevel'][level]['deaths'] = buffer
 
     
 if __name__ == "__main__":
