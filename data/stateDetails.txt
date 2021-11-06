@@ -25,9 +25,9 @@ Current Date: 11/5/21 Processing:
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 4,957,945/8,456/0.17%/50.00%/125	
+	cases/today/rate/max/per1000: 4,957,945/4,010/0.08%/50.00%/125	
 	Deaths/total/rate/max: 72,489/123/1.46%/3.94%	
-	Increase Case/Death: False/False
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Colorado-D - Pop: 5,758,736]
 	cases/today/rate/max/per1000: 760,455/3,308/0.44%/75.00%/132	
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
-	cases/today/rate/max/per1000: 4,957,945/8,456/0.17%/50.00%/125	
+	cases/today/rate/max/per1000: 4,957,945/4,010/0.08%/50.00%/125	
 	Deaths/total/rate/max: 72,489/123/1.46%/3.94%	
-	Increase Case/Death: False/False
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
