@@ -15,7 +15,8 @@ import psutil
 from datetime import date
 from datetime import datetime
 from collections import OrderedDict
-import copy
+# import copy
+from copy import copy
 import operator
 import pandas as pd
 import numpy as np
@@ -222,6 +223,7 @@ class CovidCountryRegion:
                                   'maxDeathRate': 0, 'increasingDeaths': False,
                                   'increasingCases': False}
         previousDay = ""
+        self.eduRiskCalc(region)
         for key in self.trackingList:
             self.dataStore[region][key] = []
         for day in self.daysIndex:
@@ -350,7 +352,7 @@ class CovidCountryRegion:
         dfWin.sort_index(inplace=True)
         dfWin['Party'].replace('REP', 'Republican', regex=True, inplace=True)
         dfWin['Party'].replace('DEM', 'Democratic', regex=True, inplace=True)
-        indexWin = list(dict.fromkeys(dfWin.index.values.tolist()))
+        # indexWin = list(dict.fromkeys(dfWin.index.values.tolist()))
         self.confirmed.reset_index(inplace=True)
         self.confirmed.set_index(['Province_State', 'County'], inplace=True)
         self.deaths.reset_index(inplace=True)
@@ -560,6 +562,41 @@ class CovidCountryRegion:
             result += np.array(self.dataStore[state][keys[index]])
         return result
 
+    def eduRiskCalc(self, region):
+        levels = list(self.dataStore['educationLevel'].keys())
+        risk = {}
+        try:
+            for level in levels:
+                risk[level] = self.eduRisk[level][region]
+        except:
+            print('Region:', region, 'not found')
+            return 0  # do not continue if the region does not exist    
+        confirmed_1 = 0
+        deaths_1 = 0
+        for day in self.daysIndex:
+            confirmed = sum(self.confirmed.loc[region][day])
+            deaths = sum(self.deaths.loc[region][day])
+            for level in levels:   
+                if region == self.regions[0]:  # prefill by day to calculate 
+                    self.dataStore['educationLevel'][level]['confirmed'][day] = 0
+                    self.dataStore['educationLevel'][level]['deaths'][day] = 0
+                else:
+                    today = confirmed - confirmed_1
+                    self.dataStore['educationLevel'][level]['confirmed'][day] += today*risk[level]
+                    today = deaths - deaths_1
+                    self.dataStore['educationLevel'][level]['deaths'][day] += today*risk[level]
+            confirmed_1 = copy(confirmed)
+            deaths_1 = copy(deaths)
+        if region == self.regions[-1:][0]:
+            print("Finalize Education Levels")
+            for level in levels:
+                buffer = list(self.dataStore['educationLevel'][level]['confirmed'].values())
+                buffer = [int(i + .5) for i in buffer]
+                self.dataStore['educationLevel'][level]['confirmed'] = buffer
+                buffer = list(self.dataStore['educationLevel'][level]['deaths'].values())
+                buffer = [int(i) for i in buffer]        
+                self.dataStore['educationLevel'][level]['deaths'] = buffer
+            
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
     result = list(set(li1) - set(li2)) + list(set(li2) - set(li1))
@@ -636,6 +673,38 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     plt.cla()
     plt.close('all')
 
+def eduRiskPlot(data, title, yscale=None, smoothed=False, replace=[], gname="educationRisk"):
+    """Summarize the affect of education on risk."""
+    handles = []
+    font = FontProperties(family='ubuntu',
+                          weight='bold',
+                          style='oblique', size=6.5)
+    for level in data.keys():
+        for key in ['confirmed', 'deaths']:
+            total = sum(data[level][key])
+            print("Processing education level:", level, key)
+            if smoothed is False:
+                vector = data[level][key]
+            else:
+                vector = gs1d(data[level][key], sigma=2)  
+            label, = plt.plot(vector, label="{}-{} Total: {}".format(level, key, fmtNum(total)))
+            handles.append(label)           
+  
+    plt.legend(handles=handles, prop=font)
+    if yscale is not None:
+        plt.yscale(yscale)
+    plt.title(title)
+    plt.ylabel('Educatiion level Risk\nCases/Deaths by Day')
+    plt.xlabel('Days: {}'.format(len(vector)))
+    plt.savefig(plotPath + 'daily_edrisk{}.png'.format(gname.replace(' ', '')),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close('all')
+
+              
 def calcWin2020(filename):
     df = pd.read_csv(filename, index_col=None)
     df.rename(columns={'state': 'Province_State', 'county': 'County'}, inplace=True)
@@ -656,35 +725,7 @@ def calcWin2020(filename):
                              ignore_index = True)
         outDf.to_csv(filename.replace('/', '/winning_'))
 
-def eduRiskCalc(region):
-    levels = list(covidDf.dataStore['educationLevel'].keys())
-    risk = {}
-    try:
-        for level in levels:
-            risk[level] = covidDf.eduRisk[level][region]
-    except:
-        print('Region:', region, 'not found')
-        return 0  # do not continue if the region does not exist    
-    confirmed = covidDf.confirmed
-    deaths = covidDf.deaths
-    for day in covidDf.daysIndex:   
-        for level in levels:   
-            if region == covidDf.regions[0]:  # prefill by day to calculate 
-                covidDf.dataStore['educationLevel'][level]['confirmed'][day] = 0
-                covidDf.dataStore['educationLevel'][level]['deaths'][day] = 0
-            confirmed = sum(covidDf.confirmed.loc[region][day]) * risk[level]
-            deaths = sum(covidDf.deaths.loc[region][day]) * risk[level]
-            covidDf.dataStore['educationLevel'][level]['confirmed'][day] += confirmed*risk[level]
-            covidDf.dataStore['educationLevel'][level]['deaths'][day] += deaths*risk[level]
-    if region == covidDf.regions[-1:][0]:
-        print("Finalize Education Levels")
-        for level in levels:
-            buffer = list(covidDf.dataStore['educationLevel'][level]['confirmed'].values())
-            buffer = [int(i + .5) for i in buffer]
-            covidDf.dataStore['educationLevel'][level]['confirmed'] = buffer
-            buffer = list(covidDf.dataStore['educationLevel'][level]['deaths'].values())
-            buffer = [int(i) for i in buffer]        
-            covidDf.dataStore['educationLevel'][level]['deaths'] = buffer
+
 
     
 if __name__ == "__main__":
@@ -699,6 +740,12 @@ if __name__ == "__main__":
     print('Plot State Government')
     statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
                 smoothed=True)
+    eduRiskPlot(covidDf.dataStore['educationLevel'], 
+                'Covid-19 Pandemic by Education Level', yscale='symlog',
+                smoothed=True)
+    # statGovPlot(covidDf.dataStore['educationLevel'], 
+    #             'Covid-19 Pandemic by Education Level', yscale='symlog',
+    #             smoothed=True)
     print(gp.add('./plots/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
