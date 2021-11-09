@@ -20,8 +20,8 @@ Current Date: 11/8/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
-	cases/today/rate/max/per1000: 516,245/0/0.00%/300.00%/171	
-	Deaths/total/rate/max: 8,497/0/1.65%/2.35%	
+	cases/today/rate/max/per1000: 516,386/141/0.03%/300.00%/171	
+	Deaths/total/rate/max: 8,508/11/1.65%/2.35%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
@@ -415,8 +415,8 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
-	cases/today/rate/max/per1000: 516,245/0/0.00%/300.00%/171	
-	Deaths/total/rate/max: 8,497/0/1.65%/2.35%	
+	cases/today/rate/max/per1000: 516,386/141/0.03%/300.00%/171	
+	Deaths/total/rate/max: 8,508/11/1.65%/2.35%	
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [California-D - Pop: 39,512,223]
