@@ -143,13 +143,16 @@ class CovidData:
                                             'grad': 2.60}
         # Risk adjusted for education
         self.rate['educationRisk'] = {'noHighSchool': 0.396,
-                                            'highSchool': 0.315, 
-                                            'bachelors': 0.171,
-                                            'grad': 0.117}
-        self.rate['eduPartyDR'] = {'highSchool': [.46, .45],
+                                        'highSchool': 0.315, 
+                                        'bachelors': 0.171,
+                                        'grad': 0.117}
+        self.rate['eduPartyDR'] = {'noHighSchool': [46, .54],
+                                   'highSchool': [.46, .54],
                                    'whiteHS': [.59, .33],
+                                   'bachelors': [.51, .47],
                                    'someCollege': [.47, .39],
-                                   'postGrad': [.57, .35]}
+                                   'grad': [.62, .37],
+                                   'postGrad': [.62, .37]}
         self.rate['cognitive'] = {'hs': .4324, 'college': .6508}
         self.curve['daysToPeak'] = 30
         self.curve['declineRate'] = 1.5

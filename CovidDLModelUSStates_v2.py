@@ -125,6 +125,10 @@ class CovidCountryRegion:
                                                                 'deaths': {}}, 
                                             'grad': {'confirmed': {},
                                                                 'deaths': {}}}
+        self.dataStore['educationParty'] = {'confirmed': {'Republican': {},
+                                                          'Democratic': {}},
+                                            'deaths': {'Republican': {},
+                                                       'Democratic': {}}} 
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
@@ -380,7 +384,7 @@ class CovidCountryRegion:
             except:
                 countyWin = control
                 print("County: {} not found, using state default: {}".format(inx[1], countyWin))
-            print("Processing:", inx, countyWin)
+            # print("Processing:", inx, countyWin)
             for day in daysIndex:
                 try:
                     self.partyByCounty['confirmed'][countyWin][day] += self.confirmed.loc[inx][day]
@@ -596,6 +600,11 @@ class CovidCountryRegion:
                 buffer = list(self.dataStore['educationLevel'][level]['deaths'].values())
                 buffer = [int(i) for i in buffer]        
                 self.dataStore['educationLevel'][level]['deaths'] = buffer
+ 
+            # self.dataStore['educationParty'] = {'confirmed': {'Republican': {},
+            #                                                   'Democratic': {}},
+            #                                     'deaths': {'Republican': {},
+            #                                                'Democratic': {}}} 
             
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
