@@ -605,6 +605,13 @@ class CovidCountryRegion:
             #                                                   'Democratic': {}},
             #                                     'deaths': {'Republican': {},
             #                                                'Democratic': {}}} 
+            # self.rate['eduPartyDR'] = {'noHighSchool': [46, .54],
+            #                            'highSchool': [.46, .54],
+            #                            'whiteHS': [.59, .33],
+            #                            'bachelors': [.51, .47],
+            #                            'someCollege': [.47, .39],
+            #                            'grad': [.62, .37],
+            #                            'postGrad': [.62, .37]}
             
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
