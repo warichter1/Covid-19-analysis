@@ -128,7 +128,7 @@ class CovidCountryRegion:
         self.dataStore['educationParty'] = {'confirmed': {'Republican': {},
                                                           'Democratic': {}},
                                             'deaths': {'Republican': {},
-                                                       'Democratic': {}}} 
+                                                        'Democratic': {}}} 
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
@@ -568,6 +568,11 @@ class CovidCountryRegion:
 
     def eduRiskCalc(self, region):
         levels = list(self.dataStore['educationLevel'].keys())
+        self.dataStore[region]['educationParty'] = {'confirmed': {'Republican': {},
+                                                    'Democratic': {}},
+                                                    'deaths': {'Republican': {},
+                                                    'Democratic': {}}}
+        cd = CovidData()
         risk = {}
         try:
             for level in levels:
@@ -586,9 +591,16 @@ class CovidCountryRegion:
                     self.dataStore['educationLevel'][level]['deaths'][day] = 0
                 else:
                     today = confirmed - confirmed_1
-                    self.dataStore['educationLevel'][level]['confirmed'][day] += today*risk[level]
+                    todayRisk = today*risk[level]
+                    party = cd.rate['eduPartyDR'][level]
+                    self.dataStore['educationLevel'][level]['confirmed'][day] += todayRisk   
+                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = todayRisk+party[0]
+                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = todayRisk+party[1]
                     today = deaths - deaths_1
+                    todayRisk = today*risk[level]
                     self.dataStore['educationLevel'][level]['deaths'][day] += today*risk[level]
+                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = todayRisk+party[0]
+                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] = todayRisk+party[1]
             confirmed_1 = copy(confirmed)
             deaths_1 = copy(deaths)
         if region == self.regions[-1:][0]:

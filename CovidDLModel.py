@@ -52,24 +52,6 @@ vaccineExclude = ['total_vaccinations',
                   'people_vaccinated', 'people_vaccinated_per_hundred',
                   'people_fully_vaccinated_per_hundred',
                   'daily_vaccinations_raw', 'share_doses_used']
-# cdcRename = {'doses_allocated_for_week_of_02_01': '02-01-21',
-#              'doses_allocated_for_week_of_02_08': '02-08-21',
-#        'doses_allocated_week_01_04': ,
-#        'doses_allocated_week_12_21', 'doses_allocated_week_12_28',
-#        'doses_allocated_week_of_01_04', 'doses_allocated_week_of_01_10',
-#        'doses_allocated_week_of_01_25', 'doses_allocated_week_of_02_01',
-#        'doses_allocated_week_of_02_08', 'doses_allocated_week_of_12_21',
-#        'doses_allocated_week_of_12_28', 'doses_distribution_week_of_01_18',
-#        'first_doses_12_14', 'hhs_region', 'jurisdiction',
-#        'second_dose_shipment_01_04', 'second_dose_shipment_12_17',
-#        'second_dose_shipment_12_21', 'second_dose_shipment_12_28',
-#        'second_dose_shipment_week_of_01_10',
-#        'second_dose_shipment_week_of_01_18',
-#        'second_dose_shipment_week_of_01_25',
-#        'second_dose_shipment_week_of_02_01',
-#        'second_dose_shipment_week_of_02_08',
-#        'second_dose_shipment_week_of_02_21', 'second_dose_week_of_01_18',
-#       'second_dose_week_of_01_25', 'second_doses_shipment_12_14',}
 dataPath = './COVID-19/csse_covid_19_data/csse_covid_19_time_series/'
 plotPath = './plots/'
 # confirmedCases = 'time_series_covid19_confirmed_US.csv'
