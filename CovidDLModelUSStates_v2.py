@@ -383,7 +383,7 @@ class CovidCountryRegion:
                 countyWin = dfWin.loc[inx]['Party'][0]
             except:
                 countyWin = control
-                print("County: {} not found, using state default: {}".format(inx[1], countyWin))
+                # print("County: {} not found, using state default: {}".format(inx[1], countyWin))
             # print("Processing:", inx, countyWin)
             for day in daysIndex:
                 try:
@@ -589,22 +589,36 @@ class CovidCountryRegion:
                 if region == self.regions[0]:  # prefill by day to calculate 
                     self.dataStore['educationLevel'][level]['confirmed'][day] = 0
                     self.dataStore['educationLevel'][level]['deaths'][day] = 0
+                if level == levels[0]:
+                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = 0
+                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = 0 
+                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = 0
+                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] = 0   
                 else:
                     today = confirmed - confirmed_1
                     todayRisk = today*risk[level]
                     party = cd.rate['eduPartyDR'][level]
                     self.dataStore['educationLevel'][level]['confirmed'][day] += todayRisk   
-                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = todayRisk+party[0]
-                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = todayRisk+party[1]
+                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] += todayRisk+party[0]
+                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] += todayRisk+party[1]
                     today = deaths - deaths_1
                     todayRisk = today*risk[level]
                     self.dataStore['educationLevel'][level]['deaths'][day] += today*risk[level]
-                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = todayRisk+party[0]
-                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] = todayRisk+party[1]
+                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] += todayRisk+party[0]
+                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] += todayRisk+party[1]
             confirmed_1 = copy(confirmed)
             deaths_1 = copy(deaths)
+        for key in ['confirmed', 'deaths']:
+          print('Key:', key)
+          buffer = list(self.dataStore[region]['educationParty'][key]['Democratic'].values())
+          buffer = [int(i + .5) for i in buffer]
+          self.dataStore[region]['educationParty'][key]['Democratic'] = buffer
+          buffer = list(self.dataStore[region]['educationParty'][key]['Republican'].values())
+          buffer = [int(i + .5) for i in buffer]
+          self.dataStore[region]['educationParty'][key]['Republican'] = buffer             
         if region == self.regions[-1:][0]:
             print("Finalize Education Levels")
+       
             for level in levels:
                 buffer = list(self.dataStore['educationLevel'][level]['confirmed'].values())
                 buffer = [int(i + .5) for i in buffer]
