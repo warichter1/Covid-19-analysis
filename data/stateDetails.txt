@@ -215,9 +215,9 @@ Current Date: 11/14/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Pennsylvania-R - Pop: 12,801,989]
-	cases/today/rate/max/per1000: 1,644,501/5,311/0.32%/66.67%/128	
-	Deaths/total/rate/max: 32,395/40/1.97%/7.48%	
-	Increase Case/Death: False/False
+	cases/today/rate/max/per1000: 1,648,285/3,041/0.18%/66.67%/128	
+	Deaths/total/rate/max: 32,395/40/1.96%/7.50%	
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Puerto Rico-D - Pop: 3,193,694]
 	cases/today/rate/max/per1000: 186,977/93/0.05%/64.29%/58	
@@ -323,11 +323,6 @@ Summary of currentCaseRate Regions
 	Deaths/total/rate/max: 393/0/0.88%/6.90%	
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Pennsylvania-R - Pop: 12,801,989]
-	cases/today/rate/max/per1000: 1,644,501/5,311/0.32%/66.67%/128	
-	Deaths/total/rate/max: 32,395/40/1.97%/7.48%	
-	Increase Case/Death: False/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
 	cases/today/rate/max/per1000: 1,214,419/3,086/0.25%/50.00%/166	
 	Deaths/total/rate/max: 21,653/2/1.78%/4.89%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 147,875/342/0.23%/75.00%/151	
 	Deaths/total/rate/max: 2,141/0/1.45%/5.29%	
 	Increase Case/Death: True/True
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Ohio-R - Pop: 11,689,100]
+	cases/today/rate/max/per1000: 1,604,488/3,628/0.23%/58.33%/137	
+	Deaths/total/rate/max: 25,643/0/1.60%/inf%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
