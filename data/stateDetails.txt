@@ -215,9 +215,9 @@ Current Date: 11/15/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Pennsylvania-R - Pop: 12,801,989]
-	cases/today/rate/max/per1000: 1,648,285/0/0.00%/66.67%/128	
-	Deaths/total/rate/max: 32,411/16/1.97%/7.50%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 1,648,285/3,041/0.18%/66.67%/128	
+	Deaths/total/rate/max: 32,411/16/1.97%/7.54%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Puerto Rico-D - Pop: 3,193,694]
 	cases/today/rate/max/per1000: 187,044/67/0.04%/64.29%/58	
