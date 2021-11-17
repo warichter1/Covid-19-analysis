@@ -90,9 +90,9 @@ Current Date: 11/15/21 Processing:
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Indiana-R - Pop: 6,732,219]
-	cases/today/rate/max/per1000: 1,055,571/5,996/0.57%/50.00%/156	
+	cases/today/rate/max/per1000: 1,055,549/1,369/0.13%/50.00%/156	
 	Deaths/total/rate/max: 17,105/17/1.62%/7.89%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Iowa-R - Pop: 3,155,070]
 	cases/today/rate/max/per1000: 503,564/0/0.00%/62.50%/159	
