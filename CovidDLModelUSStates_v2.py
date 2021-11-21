@@ -28,7 +28,7 @@ import json
 from memory_profiler import profile
 from matplotlib.font_manager import FontProperties
 
-from us_state_abbrev import us_state_abbrev
+from us_state_abbrev import us_state_abbrev, eduAttainmentRank
 from CovidData import CovidData
 
 g = git.cmd.Git('./COVID-19')
@@ -305,6 +305,7 @@ class CovidCountryRegion:
         risk = cd.rate['educationRisk']
         eduRisk = self.importCsv(config['educationRisk'], 
                                  index=['Province_State'])
+        self.eduAttainmentRank = dict(map(reversed, dict(eduRisk['Rank']).items()))
         eduRisk['noHighSchool'] = (eduRisk['No graduate'] + risk['noHighSchool'])/2
         eduRisk['highSchool'] = (eduRisk['High School Only'] + risk['highSchool'])/2
         eduRisk['bachelors'] = (eduRisk['Bachelor only'] + risk['bachelors'])/2
@@ -609,12 +610,12 @@ class CovidCountryRegion:
             confirmed_1 = copy(confirmed)
             deaths_1 = copy(deaths)
         for key in ['confirmed', 'deaths']:
-          print('Key:', key)
+          # print('Key:', key)
           buffer = list(self.dataStore[region]['educationParty'][key]['Democratic'].values())
-          buffer = [int(i + .5) for i in buffer]
+          buffer = [abs(int(i + .5)) for i in buffer]
           self.dataStore[region]['educationParty'][key]['Democratic'] = buffer
           buffer = list(self.dataStore[region]['educationParty'][key]['Republican'].values())
-          buffer = [int(i + .5) for i in buffer]
+          buffer = [abs(int(i + .5)) for i in buffer]
           self.dataStore[region]['educationParty'][key]['Republican'] = buffer             
         if region == self.regions[-1:][0]:
             print("Finalize Education Levels")
@@ -715,38 +716,75 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     plt.cla()
     plt.close('all')
 
-def eduRiskPlot(data, title, yscale=None, smoothed=False, replace=[], gname="educationRisk"):
+def eduRiskPlot(data, title, rank=None, rankNum=5, 
+                keys=['confirmed', 'deaths'], yscale=None, smoothed=False, 
+                replace=[], gname="educationRisk"):
     """Summarize the affect of education on risk."""
     handles = []
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
-    for level in data.keys():
+    if not rank is None:
+        topStart = 1
+        topEnd = rankNum + 1
+        bottomStart = (len(rank)+1) - rankNum
+        bottomEnd = len(rank)+1
+    for index in range(topStart, topEnd):
+        region = rank[index]
         for key in ['confirmed', 'deaths']:
-            total = sum(data[level][key])
-            print("Processing education level:", level, key)
-            if smoothed is False:
-                vector = data[level][key]
-            else:
-                vector = gs1d(data[level][key], sigma=2)  
-            label, = plt.plot(vector, label="{}-{} Total: {}".format(level, key, fmtNum(total)))
-            handles.append(label)           
-  
+            vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
+            label, = plt.plot(vector, label='Majority Democratic ' + key)
+            handles.append(label)
+            vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
+            label, = plt.plot(vector, label='minority Republican ' + key)
+            handles.append(label)
+    for index in range(bottomStart, bottomEnd):
+         region = rank[index]
+         for key in ['confirmed', 'deaths']:
+             vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
+             label, = plt.plot(vector, label='Minority Democratic ' + key)
+             handles.append(label)
+             vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
+             label, = plt.plot(vector, label='Majority Republican ' + key)
+             handles.append(label)   
     plt.legend(handles=handles, prop=font)
-    if yscale is not None:
-        plt.yscale(yscale)
-    plt.title(title)
+    yscale='symlog'
+    plt.title(region)
+    plt.yscale(yscale)
     plt.ylabel('Educatiion level Risk\nCases/Deaths by Day')
-    plt.xlabel('Days: {}'.format(len(vector)))
-    plt.savefig(plotPath + 'daily_edrisk{}.png'.format(gname.replace(' ', '')),
-                bbox_inches="tight",
-                pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show(block=False)
-    plt.clf()
-    plt.cla()
-    plt.close('all')
+    plt.xlabel('Days: {}'.format(len(vector))) 
+    plt.show(block=False)    
+    # plt.clf()
+    # plt.cla()
+    # plt.close('all')
+    
+    # for level in data.keys():
+    #     for key in keys:
+    #         total = sum(data[level][key])
+    #         print("Processing education level:", level, key)
+    #         if smoothed is False:
+    #             vector = data[level][key]
+    #         else:
+    #             vector = gs1d(data[level][key], sigma=2)  
+    #         label, = plt.plot(vector, label="{}-{} Total: {}".format(level, key, fmtNum(total)))
+    #         handles.append(label)           
+  
+    # plt.legend(handles=handles, prop=font)
+    # if yscale is not None:
+    #     plt.yscale(yscale)
+    # plt.title(title)
+    # plt.ylabel('Educatiion level Risk\nCases/Deaths by Day')
+    # plt.xlabel('Days: {}'.format(len(vector)))
+    # plt.savefig(plotPath + 'daily_edrisk{}.png'.format(gname.replace(' ', '')),
+    #             bbox_inches="tight",
+    #             pad_inches=0.5 + random.uniform(0.0, 0.25))
+    # plt.show(block=False)
+    # plt.clf()
+    # plt.cla()
+    # plt.close('all')
 
-              
+
+          
 def calcWin2020(filename):
     df = pd.read_csv(filename, index_col=None)
     df.rename(columns={'state': 'Province_State', 'county': 'County'}, inplace=True)
@@ -782,9 +820,9 @@ if __name__ == "__main__":
     print('Plot State Government')
     statGovPlot('Covid-19 Pandemic by State Government', yscale='symlog',
                 smoothed=True)
-    eduRiskPlot(covidDf.dataStore['educationLevel'], 
-                'Covid-19 Pandemic by Education Level', yscale='symlog',
-                smoothed=True)
+    # eduRiskPlot(covidDf.dataStore['educationLevel'], 
+    #             'Covid-19 Pandemic by Education Level', yscale='symlog',
+    #             smoothed=True)
     # statGovPlot(covidDf.dataStore['educationLevel'], 
     #             'Covid-19 Pandemic by Education Level', yscale='symlog',
     #             smoothed=True)
