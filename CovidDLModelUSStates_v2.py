@@ -627,18 +627,7 @@ class CovidCountryRegion:
                 buffer = list(self.dataStore['educationLevel'][level]['deaths'].values())
                 buffer = [int(i) for i in buffer]        
                 self.dataStore['educationLevel'][level]['deaths'] = buffer
- 
-            # self.dataStore['educationParty'] = {'confirmed': {'Republican': {},
-            #                                                   'Democratic': {}},
-            #                                     'deaths': {'Republican': {},
-            #                                                'Democratic': {}}} 
-            # self.rate['eduPartyDR'] = {'noHighSchool': [46, .54],
-            #                            'highSchool': [.46, .54],
-            #                            'whiteHS': [.59, .33],
-            #                            'bachelors': [.51, .47],
-            #                            'someCollege': [.47, .39],
-            #                            'grad': [.62, .37],
-            #                            'postGrad': [.62, .37]}
+   
             
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
@@ -716,47 +705,48 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
     plt.cla()
     plt.close('all')
 
-def eduRiskPlot(data, title, rank=None, rankNum=5, 
+def eduRiskPlot(title, rank=None, rankNum=5, 
                 keys=['confirmed', 'deaths'], yscale=None, smoothed=False, 
                 replace=[], gname="educationRisk"):
     """Summarize the affect of education on risk."""
     handles = []
-    font = FontProperties(family='ubuntu',
-                          weight='bold',
+    font = FontProperties(family='ubuntu', weight='bold',
                           style='oblique', size=6.5)
     if not rank is None:
         topStart = 1
-        topEnd = rankNum + 1
+        topEnd = rankNum
         bottomStart = (len(rank)+1) - rankNum
-        bottomEnd = len(rank)+1
+        bottomEnd = len(rank)
+        print('Top:', topStart, '-', topEnd)
+        print('Bottom:', bottomStart, '-', bottomEnd)
     for index in range(topStart, topEnd):
         region = rank[index]
-        for key in ['confirmed', 'deaths']:
+        for key in keys:
             vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
-            label, = plt.plot(vector, label='Majority Democratic ' + key)
+            label, = plt.plot(vector, label=region.capitalize() + ': Majority Democratic ' + key)
             handles.append(label)
             vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
-            label, = plt.plot(vector, label='minority Republican ' + key)
+            label, = plt.plot(vector, label=region.capitalize() + ': minority Republican ' + key)
             handles.append(label)
     for index in range(bottomStart, bottomEnd):
          region = rank[index]
-         for key in ['confirmed', 'deaths']:
+         for key in keys:
              vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
-             label, = plt.plot(vector, label='Minority Democratic ' + key)
+             label, = plt.plot(vector, label=region.capitalize() + ': Minority Democratic ' + key)
              handles.append(label)
              vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
-             label, = plt.plot(vector, label='Majority Republican ' + key)
+             label, = plt.plot(vector, label=region.capitalize() + ': Majority Republican ' + key)
              handles.append(label)   
     plt.legend(handles=handles, prop=font)
     yscale='symlog'
-    plt.title(region)
+    plt.title(title)
     plt.yscale(yscale)
     plt.ylabel('Educatiion level Risk\nCases/Deaths by Day')
     plt.xlabel('Days: {}'.format(len(vector))) 
     plt.show(block=False)    
-    # plt.clf()
-    # plt.cla()
-    # plt.close('all')
+    plt.clf()
+    plt.cla()
+    plt.close('all')
     
     # for level in data.keys():
     #     for key in keys:
@@ -826,6 +816,8 @@ if __name__ == "__main__":
     # statGovPlot(covidDf.dataStore['educationLevel'], 
     #             'Covid-19 Pandemic by Education Level', yscale='symlog',
     #             smoothed=True)
+    
+    # eduRiskPlot("Education", rank=eduAttainmentRank, keys=['confirmed'], smoothed=True, yscale='symlog', rankNum=2)
     print(gp.add('./plots/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
