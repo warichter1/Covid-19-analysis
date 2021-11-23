@@ -707,7 +707,7 @@ def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
 
 def eduRiskPlot(title, rank=None, rankNum=5, 
                 keys=['confirmed', 'deaths'], yscale=None, smoothed=False, 
-                replace=[], gname="educationRisk"):
+                replace=[], gname="educationRisk", lw=0.5):
     """Summarize the affect of education on risk."""
     handles = []
     font = FontProperties(family='ubuntu', weight='bold',
@@ -723,19 +723,19 @@ def eduRiskPlot(title, rank=None, rankNum=5,
         region = rank[index]
         for key in keys:
             vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
-            label, = plt.plot(vector, label=region.capitalize() + ': Majority Democratic ' + key)
+            label, = plt.plot(vector, label=region.capitalize() + ': Majority Democratic ' + key, lw=lw)
             handles.append(label)
             vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
-            label, = plt.plot(vector, label=region.capitalize() + ': minority Republican ' + key)
+            label, = plt.plot(vector, label=region.capitalize() + ': minority Republican ' + key, lw=lw)
             handles.append(label)
     for index in range(bottomStart, bottomEnd):
          region = rank[index]
          for key in keys:
              vector = covidDf.dataStore[region]['educationParty'][key]['Democratic']
-             label, = plt.plot(vector, label=region.capitalize() + ': Minority Democratic ' + key)
+             label, = plt.plot(vector, label=region.capitalize() + ': Minority Democratic ' + key, lw=lw)
              handles.append(label)
              vector = covidDf.dataStore[region]['educationParty'][key]['Republican']
-             label, = plt.plot(vector, label=region.capitalize() + ': Majority Republican ' + key)
+             label, = plt.plot(vector, label=region.capitalize() + ': Majority Republican ' + key, lw=lw)
              handles.append(label)   
     plt.legend(handles=handles, prop=font)
     yscale='symlog'
