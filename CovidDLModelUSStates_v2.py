@@ -586,29 +586,34 @@ class CovidCountryRegion:
         for day in self.daysIndex:
             confirmed = sum(self.confirmed.loc[region][day])
             deaths = sum(self.deaths.loc[region][day])
+            casesLevels = 0
+            deathsLevels = 0
+            dem = {}
+            gop = {}
             for level in levels:   
                 if region == self.regions[0]:  # prefill by day to calculate 
                     self.dataStore['educationLevel'][level]['confirmed'][day] = 0
                     self.dataStore['educationLevel'][level]['deaths'][day] = 0
-                if level == levels[0]:
-                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = 0
-                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = 0 
-                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = 0
-                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] = 0   
-                else:
-                    today = confirmed - confirmed_1
-                    todayRisk = today*risk[level]
-                    party = cd.rate['eduPartyDR'][level]
-                    self.dataStore['educationLevel'][level]['confirmed'][day] += todayRisk   
-                    self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] += todayRisk+party[0]
-                    self.dataStore[region]['educationParty']['confirmed']['Republican'][day] += todayRisk+party[1]
-                    today = deaths - deaths_1
-                    todayRisk = today*risk[level]
-                    self.dataStore['educationLevel'][level]['deaths'][day] += today*risk[level]
-                    self.dataStore[region]['educationParty']['deaths']['Democratic'][day] += todayRisk+party[0]
-                    self.dataStore[region]['educationParty']['deaths']['Republican'][day] += todayRisk+party[1]
+                # else:
+                today = confirmed - confirmed_1
+                todayRisk = today*risk[level]
+                dem[level] = cd.rate['eduPartyDR'][level][0]
+                gop[level] = cd.rate['eduPartyDR'][level][1]
+                casesLevels += todayRisk
+                today = deaths - deaths_1
+                todayRisk = today*risk[level]
+                deathsLevels += today*risk[level]
             confirmed_1 = copy(confirmed)
             deaths_1 = copy(deaths)
+            # print(dem, gop)
+            demPer = sum(dem.values())/len(levels)
+            gopPer = sum(gop.values())/len(levels)
+            self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = casesLevels * demPer
+            self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = casesLevels * gopPer
+            self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = deathsLevels * demPer
+            self.dataStore[region]['educationParty']['deaths']['Republican'][day] = deathsLevels * gopPer
+        # print(self.dataStore[region]['educationParty']['confirmed']['Democratic'][day], 
+        #       self.dataStore[region]['educationParty']['confirmed']['Republican'][day])
         for key in ['confirmed', 'deaths']:
           # print('Key:', key)
           buffer = list(self.dataStore[region]['educationParty'][key]['Democratic'].values())

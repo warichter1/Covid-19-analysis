@@ -146,7 +146,7 @@ class CovidData:
                                         'highSchool': 0.315, 
                                         'bachelors': 0.171,
                                         'grad': 0.117}
-        self.rate['eduPartyDR'] = {'noHighSchool': [46, .54],
+        self.rate['eduPartyDR'] = {'noHighSchool': [.46, .54],
                                    'highSchool': [.46, .54],
                                    'whiteHS': [.59, .33],
                                    'bachelors': [.51, .47],
