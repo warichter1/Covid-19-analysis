@@ -135,7 +135,7 @@ def calcChange(values, projectType=None):
 
 def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, showTotal=False, yscale='log',
-           inauguration=365, plotType='cases', scenarios=True):
+           inauguration=365, plotType='cases', scenarios=True, lw=0.5):
     """# Ugly I know, just a simple plot."""
     labels = []
     ecBiden270 = 291
@@ -145,6 +145,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     deltaBegin = 443
     deltaDominant = 501
     vaccineMandate = 597
+    omicronBegin = 674
 
     font = FontProperties(family='ubuntu',
                           weight='bold',
@@ -190,22 +191,24 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
-    label = plt.axvline(ecBiden270, color='blue', label='Biden Passes 270: 11/7', linewidth=1)
+    label = plt.axvline(ecBiden270, color='blue', label='Biden Passes 270: 11/7', linewidth=lw)
     labels.append(label)
-    label = plt.axvline(ecSafeHarbor, color='cyan', label='Safe Harbor: 12/8', linewidth=1)
+    label = plt.axvline(ecSafeHarbor, color='cyan', label='Safe Harbor: 12/8', linewidth=lw)
     labels.append(label)
-    label = plt.axvline(ecStateConfirm, color='coral', label='States Confirm Biden: 12/14', linewidth=1)
+    label = plt.axvline(ecStateConfirm, color='coral', label='States Confirm Biden: 12/14', linewidth=lw)
     labels.append(label)
-    label = plt.axvline(ecCongressConfirm, color='crimson', label='Congress Confirms Biden: 1/6', linewidth=1)
+    label = plt.axvline(ecCongressConfirm, color='crimson', label='Congress Confirms Biden: 1/6', linewidth=lw)
     labels.append(label)
     label = plt.axvline(inauguration, color='violet',
-                        label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=1)
+                        label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=lw)
     labels.append(label)
-    label = plt.axvline(deltaBegin, color='purple', label='Delta Identified: 4/24', linewidth=1)
+    label = plt.axvline(deltaBegin, color='purple', label='Delta Identified: 4/24', linewidth=lw)
     labels.append(label)
-    label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=1)
+    label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=lw)
     labels.append(label)
-    label = plt.axvline(vaccineMandate, color='crimson', label='Vaccine Mandate: 9/9', linewidth=1)
+    label = plt.axvline(vaccineMandate, color='crimson', label='Vaccine Mandate: 9/9', linewidth=lw)
+    labels.append(label)
+    label = plt.axvline(omicronBegin, color='Silver', label='Omicron Identified: 11/25', linewidth=lw)
     labels.append(label)
 
     plt.legend(handles=labels, prop=font, loc='upper left')
