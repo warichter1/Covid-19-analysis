@@ -671,8 +671,8 @@ Day: 669 (11/20/21) Cases/today/Infection Rate: 47,700,783/41,493/0.09% - Mortal
 Day: 670 (11/21/21) Cases/today/Infection Rate: 47,738,554/37,771/0.08% - Mortality/Today/Rate: 771,530/113/1.62% 
 Day: 671 (11/22/21) Cases/today/Infection Rate: 47,889,042/150,488/0.32% - Mortality/Today/Rate: 772,762/1,232/1.61% 
 Day: 672 (11/23/21) Cases/today/Infection Rate: 47,981,453/92,411/0.19% - Mortality/Today/Rate: 774,062/1,300/1.61% 
-Day: 673 (11/24/21) Cases/today/Infection Rate: 48,090,903/109,450/0.23% - Mortality/Today/Rate: 775,696/1,634/1.61% 
-Day: 674 (11/25/21) Cases/today/Infection Rate: 48,125,425/34,522/0.07% - Mortality/Today/Rate: 776,090/394/1.61% 
+Day: 673 (11/24/21) Cases/today/Infection Rate: 48,092,823/111,370/0.23% - Mortality/Today/Rate: 775,724/1,662/1.61% 
+Day: 674 (11/25/21) Cases/today/Infection Rate: 48,125,425/32,602/0.07% - Mortality/Today/Rate: 776,090/366/1.61% 
 Day: 675 (11/26/21) Cases/today/Infection Rate: 48,176,523/51,098/0.11% - Mortality/Today/Rate: 776,349/259/1.61% 
 Day: 676 (11/27/21) Cases/today/Infection Rate: 48,201,079/24,556/0.05% - Mortality/Today/Rate: 776,536/187/1.61% 
 Day: 677 (11/28/21) Cases/today/Infection Rate: 48,229,210/28,131/0.06% - Mortality/Today/Rate: 776,639/103/1.61% 
