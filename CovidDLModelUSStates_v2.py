@@ -424,7 +424,7 @@ class CovidCountryRegion:
         diffInx = diff(dataInx, self.daysIndex)
         diffInx.sort(key=lambda date: datetime.strptime(date, '%m/%d/%y'))
         if len(diffInx) > 0:
-            print("County days to process:", diffInx)
+            # print("County days to process:", diffInx)
             self.countyByParty(indexUpdate=diffInx)
             for party in ['Republican', 'Democratic']:
                 for key in ['confirmed', 'deaths']:
@@ -597,63 +597,12 @@ class CovidCountryRegion:
                               caseGop)               
             deathDem = addList([day*riskDem[level] for day in death], deathDem)
             deathGop = addList([day*riskGop[level] for day in death], deathGop)
-        self.dataStore[region]['educationParty']['confirmed']['Democratic'] = caseDem
-        self.dataStore[region]['educationParty']['confirmed']['Republican'] = caseGop
-        self.dataStore[region]['educationParty']['deaths']['Democratic'] = deathDem
-        self.dataStore[region]['educationParty']['deaths']['Republican'] = deathGop 
-        # print(caseDem)
-        # confirmed_1 = 0
-        # deaths_1 = 0
-        # for day in self.daysIndex:
-        #     confirmed = sum(self.confirmed.loc[region][day])
-        #     deaths = sum(self.deaths.loc[region][day])
-        #     casesLevels = 0
-        #     deathsLevels = 0
-        #     dem = {}
-        #     gop = {}
-        #     for level in levels:   
-        #         if region == self.regions[0]:  # prefill by day to calculate 
-        #             self.dataStore['educationLevel'][level]['confirmed'][day] = 0
-        #             self.dataStore['educationLevel'][level]['deaths'][day] = 0
-        #         # else:
-        #         today = confirmed - confirmed_1
-        #         todayRisk = today*risk[level]
-        #         dem[level] = cd.rate['eduPartyDR'][level][0]
-        #         gop[level] = cd.rate['eduPartyDR'][level][1]
-        #         casesLevels += todayRisk
-        #         today = deaths - deaths_1
-        #         todayRisk = today*risk[level]
-        #         deathsLevels += today*risk[level]
-        #     confirmed_1 = copy(confirmed)
-        #     deaths_1 = copy(deaths)
-        #     demPer = sum(dem.values())/len(levels)
-        #     gopPer = sum(gop.values())/len(levels)
-            # self.dataStore[region]['educationParty']['confirmed']['Democratic'][day] = casesLevels * demPer
-            # self.dataStore[region]['educationParty']['confirmed']['Republican'][day] = casesLevels * gopPer
-            # self.dataStore[region]['educationParty']['deaths']['Democratic'][day] = deathsLevels * demPer
-            # self.dataStore[region]['educationParty']['deaths']['Republican'][day] = deathsLevels * gopPer
-        # print(self.dataStore[region]['educationParty']['confirmed']['Democratic'][day], 
-        #       self.dataStore[region]['educationParty']['confirmed']['Republican'][day])
-        # for key in ['confirmed', 'deaths']:
-        #   # print('Key:', key)
-        #   buffer = list(self.dataStore[region]['educationParty'][key]['Democratic'].values())
-        #   buffer = [abs(int(i + .5)) for i in buffer]
-        #   self.dataStore[region]['educationParty'][key]['Democratic'] = buffer
-        #   buffer = list(self.dataStore[region]['educationParty'][key]['Republican'].values())
-        #   buffer = [abs(int(i + .5)) for i in buffer]
-        #   self.dataStore[region]['educationParty'][key]['Republican'] = buffer             
-        # if region == self.regions[-1:][0]:
-        #     print("Finalize Education Levels")
-       
-        #     for level in levels:
-        #         buffer = list(self.dataStore['educationLevel'][level]['confirmed'].values())
-        #         buffer = [int(i + .5) for i in buffer]
-        #         self.dataStore['educationLevel'][level]['confirmed'] = buffer
-        #         buffer = list(self.dataStore['educationLevel'][level]['deaths'].values())
-        #         buffer = [int(i) for i in buffer]        
-        #         self.dataStore['educationLevel'][level]['deaths'] = buffer
-   
-            
+            gs1d(caseDem, sigma=2)
+        self.dataStore[region]['educationParty']['confirmed']['Democratic'] = gs1d(caseDem, sigma=2)
+        self.dataStore[region]['educationParty']['confirmed']['Republican'] = gs1d(caseGop, sigma=2)
+        self.dataStore[region]['educationParty']['deaths']['Democratic'] = gs1d(deathDem, sigma=2)
+        self.dataStore[region]['educationParty']['deaths']['Republican'] = gs1d(deathGop, sigma=2) 
+           
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
     result = list(set(li1) - set(li2)) + list(set(li2) - set(li1))
