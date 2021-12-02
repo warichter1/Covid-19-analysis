@@ -96,6 +96,8 @@ class CovidCountryRegion:
                                                          'deathsCounty': []}}
         self.dataStore['testsPerCapita'] = {}
         self.dataStore['casesPerCapita'] = {}
+        # self.dataStore['educationParty'] = {'Democratic': {},
+        #                                     'Republican': {}}
         self.config = config
 
         self.index = ['Province_State', 'Admin2']
@@ -126,10 +128,8 @@ class CovidCountryRegion:
                                                                 'deaths': {}}, 
                                             'grad': {'confirmed': {},
                                                                 'deaths': {}}}
-        self.dataStore['educationParty'] = {'confirmed': {'Republican': {},
-                                                          'Democratic': {}},
-                                            'deaths': {'Republican': {},
-                                                        'Democratic': {}}} 
+        self.dataStore['educationParty'] = {'confirmed': {},
+                                            'deaths': {}}
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
@@ -158,6 +158,11 @@ class CovidCountryRegion:
         printText = "Current Date: {} Processing:".format(self.daysIndex[-1:][0])
         print(printText)
         self.fileText += (printText + '\n')
+        zeros = [0 for i in range(len(self.confirmed))]
+        self.dataStore['educationParty']['confirmed']['Democratic'] = zeros
+        self.dataStore['educationParty']['confirmed']['Republican'] = zeros
+        self.dataStore['educationParty']['deaths']['Democratic'] = zeros
+        self.dataStore['educationParty']['deaths']['Republican'] = zeros
         for region in self.regions:
             self.processRegionResults(region)
         self.getAggregate()
@@ -591,17 +596,30 @@ class CovidCountryRegion:
         for level in levels:
             riskDem[level] = (risk[level] * cd.rate['eduPartyDR'][level][0])/2
             riskGop[level] = (risk[level] * cd.rate['eduPartyDR'][level][1])/2  
-            caseDem  = addList([day*riskDem[level] for day in confirmed], 
+            caseDem  = addList([int(day*riskDem[level]) for day in confirmed], 
                                 caseDem)
-            caseGop = addList([day*riskGop[level] for day in confirmed], 
+            caseGop = addList([int(day*riskGop[level]) for day in confirmed], 
                               caseGop)               
-            deathDem = addList([day*riskDem[level] for day in death], deathDem)
-            deathGop = addList([day*riskGop[level] for day in death], deathGop)
-            gs1d(caseDem, sigma=2)
-        self.dataStore[region]['educationParty']['confirmed']['Democratic'] = gs1d(caseDem, sigma=2)
-        self.dataStore[region]['educationParty']['confirmed']['Republican'] = gs1d(caseGop, sigma=2)
-        self.dataStore[region]['educationParty']['deaths']['Democratic'] = gs1d(deathDem, sigma=2)
-        self.dataStore[region]['educationParty']['deaths']['Republican'] = gs1d(deathGop, sigma=2) 
+            deathDem = addList([int(day*riskDem[level]) for day in death], deathDem)
+            deathGop = addList([int(day*riskGop[level]) for day in death], deathGop)
+            # gs1d(caseDem, sigma=2)
+        result = gs1d(caseDem, sigma=2)  
+        self.dataStore[region]['educationParty']['confirmed']['Democratic'] = result
+        self.dataStore['educationParty']['confirmed']['Democratic'] = addList(self.dataStore['educationParty']['confirmed']['Democratic'], result)
+        result = gs1d(caseGop, sigma=2)
+        self.dataStore[region]['educationParty']['confirmed']['Republican'] = result
+        self.dataStore['educationParty']['confirmed']['Republican'] = addList(self.dataStore['educationParty']['confirmed']['Republican'], result)
+        result = gs1d(deathDem, sigma=2)
+        self.dataStore[region]['educationParty']['deaths']['Democratic'] = result
+        self.dataStore['educationParty']['deaths']['Democratic'] = addList(self.dataStore['educationParty']['deaths']['Democratic'], result)
+        result = gs1d(deathGop, sigma=2) 
+        self.dataStore[region]['educationParty']['deaths']['Republican'] = result
+        self.dataStore['educationParty']['deaths']['Republican'] = addList(self.dataStore['educationParty']['deaths']['Republican'], result)
+
+        # self.dataStore['educationParty']['confirmed']['Democratic'] = zeros
+        # self.dataStore['educationParty']['confirmed']['Republican'] = zeros
+        # self.dataStore['educationParty']['deaths']['Democratic'] = zeros
+        # self.dataStore['educationParty']['deaths']['Republican'] = zeros
            
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
