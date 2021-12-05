@@ -128,8 +128,8 @@ class CovidCountryRegion:
                                                                 'deaths': {}}, 
                                             'grad': {'confirmed': {},
                                                                 'deaths': {}}}
-        self.dataStore['educationParty'] = {'confirmed': {},
-                                            'deaths': {}}
+        self.dataStore['educationParty'] = {'Democratic': {},
+                                            'Republican': {}}
         self.eduRisk = {}
         self.printStatus = False
         self.daysIndex = []
@@ -159,10 +159,10 @@ class CovidCountryRegion:
         print(printText)
         self.fileText += (printText + '\n')
         zeros = [0 for i in range(len(self.confirmed))]
-        self.dataStore['educationParty']['confirmed']['Democratic'] = zeros
-        self.dataStore['educationParty']['confirmed']['Republican'] = zeros
-        self.dataStore['educationParty']['deaths']['Democratic'] = zeros
-        self.dataStore['educationParty']['deaths']['Republican'] = zeros
+        self.dataStore['educationParty']['Democratic']['confirmed'] = zeros
+        self.dataStore['educationParty']['Republican']['confirmed'] = zeros
+        self.dataStore['educationParty']['Democratic']['deaths'] = zeros
+        self.dataStore['educationParty']['Republican']['deaths'] = zeros
         for region in self.regions:
             self.processRegionResults(region)
         self.getAggregate()
@@ -602,24 +602,20 @@ class CovidCountryRegion:
                               caseGop)               
             deathDem = addList([int(day*riskDem[level]) for day in death], deathDem)
             deathGop = addList([int(day*riskGop[level]) for day in death], deathGop)
-            # gs1d(caseDem, sigma=2)
+            print('Dem:', level, sum(caseDem), sum(deathDem), (risk[level] * cd.rate['eduPartyDR'][level][0])/2)
+            print('GOP:', level, sum(caseGop), sum(deathGop), (risk[level] * cd.rate['eduPartyDR'][level][1])/2)
         result = gs1d(caseDem, sigma=2)  
         self.dataStore[region]['educationParty']['confirmed']['Democratic'] = result
-        self.dataStore['educationParty']['confirmed']['Democratic'] = addList(self.dataStore['educationParty']['confirmed']['Democratic'], result)
+        self.dataStore['educationParty']['Democratic']['confirmed'] = addList(self.dataStore['educationParty']['Democratic']['confirmed'], result)
         result = gs1d(caseGop, sigma=2)
         self.dataStore[region]['educationParty']['confirmed']['Republican'] = result
-        self.dataStore['educationParty']['confirmed']['Republican'] = addList(self.dataStore['educationParty']['confirmed']['Republican'], result)
+        self.dataStore['educationParty']['Republican']['confirmed'] = addList(self.dataStore['educationParty']['Republican']['confirmed'], result)
         result = gs1d(deathDem, sigma=2)
         self.dataStore[region]['educationParty']['deaths']['Democratic'] = result
-        self.dataStore['educationParty']['deaths']['Democratic'] = addList(self.dataStore['educationParty']['deaths']['Democratic'], result)
+        self.dataStore['educationParty']['Democratic']['deaths'] = addList(self.dataStore['educationParty']['Democratic']['deaths'], result)
         result = gs1d(deathGop, sigma=2) 
         self.dataStore[region]['educationParty']['deaths']['Republican'] = result
-        self.dataStore['educationParty']['deaths']['Republican'] = addList(self.dataStore['educationParty']['deaths']['Republican'], result)
-
-        # self.dataStore['educationParty']['confirmed']['Democratic'] = zeros
-        # self.dataStore['educationParty']['confirmed']['Republican'] = zeros
-        # self.dataStore['educationParty']['deaths']['Democratic'] = zeros
-        # self.dataStore['educationParty']['deaths']['Republican'] = zeros
+        self.dataStore['educationParty']['Republican']['deaths'] = addList(self.dataStore['educationParty']['Republican']['deaths'], result)
            
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
@@ -669,21 +665,26 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.cla()
     plt.close('all')
 
-def statGovPlot(title, yscale, smoothed=False, gname='GovControl'):
+def statGovPlot(title, yscale, smoothed=False, dskey='stateControl', 
+                showKey=[], gname='GovControl'):
     """Plot summary by state government."""
     handles = []
+    if len(showKey) > 0:
+        result = showKey
+    else:
+        result = covidDf.dataStore[dskey]['Republican'].keys()
+        
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
     for party in ['Republican', 'Democratic']:
-        for key in ['confirmedNew', 'deathsNew',#]:
-                    'confirmedCounty', 'deathsCounty']:
+        for key in result:
             print('Processing State Party ({}): {}'.format(party, key))
-            total = sum(covidDf.dataStore['stateControl'][party][key])
+            total = sum(covidDf.dataStore[dskey][party][key])
             if smoothed is False:
-                vector = covidDf.dataStore['stateControl'][party][key]
+                vector = covidDf.dataStore[dskey][party][key]
             else:
-                vector = gs1d(covidDf.dataStore['stateControl'][party][key],
+                vector = gs1d(covidDf.dataStore[dskey][party][key],
                               sigma=2)
             label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', ' by State').replace('County', ' by County'), party[:1], fmtNum(total)))
             handles.append(label)
@@ -813,6 +814,11 @@ if __name__ == "__main__":
     #             smoothed=True)
     
     # eduRiskPlot("Education", rank=eduAttainmentRank, keys=['confirmed'], smoothed=True, yscale='symlog', rankNum=2)
+    # statGovPlot('Covid-19 Pandemic by Education Level', yscale='symlog', smoothed=True, gname='educationLevel', dskey='educationParty')
+    print('Dem Education:', sum(covidDf.dataStore['educationParty']['Democratic']['confirmed']), 
+                      sum(covidDf.dataStore['educationParty']['Democratic']['deaths']))
+    print('GOP Education:', sum(covidDf.dataStore['educationParty']['Republican']['confirmed']), 
+                      sum(covidDf.dataStore['educationParty']['Republican']['deaths']))
     print(gp.add('./plots/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
