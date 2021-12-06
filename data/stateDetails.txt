@@ -10,9 +10,9 @@ Current Date: 12/5/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [American Samoa-D - Pop: 0]
-	cases/today/rate/max/per1000: 10/6/60.00%/60.00%/0	
+	cases/today/rate/max/per1000: 10/0/0.00%/60.00%/0	
 	Deaths/total/rate/max: 0/0/0.00%/0.00%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
 	cases/today/rate/max/per1000: 1,292,054/3,820/0.30%/50.00%/177	
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[American Samoa-D - Pop: 0]
-	cases/today/rate/max/per1000: 10/6/60.00%/60.00%/0	
-	Deaths/total/rate/max: 0/0/0.00%/0.00%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Vermont-D - Pop: 623,989]
 	cases/today/rate/max/per1000: 52,889/694/1.31%/60.00%/84	
 	Deaths/total/rate/max: 417/1/0.79%/6.90%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today/rate/max/per1000: 1,731,003/5,334/0.31%/58.33%/148	
 	Deaths/total/rate/max: 26,851/0/1.55%/inf%	
 	Increase Case/Death: False/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[New York-D - Pop: 19,453,561]
+	cases/today/rate/max/per1000: 2,777,942/8,318/0.30%/90.00%/142	
+	Deaths/total/rate/max: 57,757/32/2.08%/8.27%	
+	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of casesPerCapita Regions
