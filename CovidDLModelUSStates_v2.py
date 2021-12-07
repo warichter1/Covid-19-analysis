@@ -581,10 +581,11 @@ class CovidCountryRegion:
                                                     'deaths': {'Republican': {},
                                                     'Democratic': {}}}
         cd = CovidData()
+        normalized = cd.rate['educationRisk']
         risk = {}
         try:
             for level in levels:
-                risk[level] = self.eduRisk[level][region]
+                risk[level] = (self.eduRisk[level][region] + normalized[level])/2
         except:
             print('Region:', region, 'not found')
             return 0  # do not continue if the region does not exist   
@@ -592,18 +593,21 @@ class CovidCountryRegion:
         death = self.dataStore[region]['deathsNew']
         riskDem = {}
         riskGop = {}
+        total = 0
         deathGop = deathDem = caseGop = caseDem = [0 for i in range(len(confirmed))]
         for level in levels:
-            riskDem[level] = (risk[level] * cd.rate['eduPartyDR'][level][0])/2
-            riskGop[level] = (risk[level] * cd.rate['eduPartyDR'][level][1])/2  
+            riskDem[level] = (risk[level] + cd.rate['eduPartyDR'][level][0])/2
+            riskGop[level] = (risk[level] + cd.rate['eduPartyDR'][level][1])/2  
             caseDem  = addList([int(day*riskDem[level]) for day in confirmed], 
                                 caseDem)
             caseGop = addList([int(day*riskGop[level]) for day in confirmed], 
                               caseGop)               
             deathDem = addList([int(day*riskDem[level]) for day in death], deathDem)
             deathGop = addList([int(day*riskGop[level]) for day in death], deathGop)
-            print('Dem:', level, sum(caseDem), sum(deathDem), (risk[level] * cd.rate['eduPartyDR'][level][0])/2)
-            print('GOP:', level, sum(caseGop), sum(deathGop), (risk[level] * cd.rate['eduPartyDR'][level][1])/2)
+            print('Dem:', level, sum(caseDem), sum(deathDem), risk[level], cd.rate['eduPartyDR'][level][0])
+            print('GOP:', level, sum(caseGop), sum(deathGop), risk[level], cd.rate['eduPartyDR'][level][1])
+            total += (risk[level] + cd.rate['eduPartyDR'][level][0])/2 + (risk[level] + cd.rate['eduPartyDR'][level][1])/2
+        print(region, 'total:', total)
         result = gs1d(caseDem, sigma=2)  
         self.dataStore[region]['educationParty']['confirmed']['Democratic'] = result
         self.dataStore['educationParty']['Democratic']['confirmed'] = addList(self.dataStore['educationParty']['Democratic']['confirmed'], result)
@@ -672,8 +676,7 @@ def statGovPlot(title, yscale, smoothed=False, dskey='stateControl',
     if len(showKey) > 0:
         result = showKey
     else:
-        result = covidDf.dataStore[dskey]['Republican'].keys()
-        
+        result = covidDf.dataStore[dskey]['Republican'].keys()      
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
@@ -743,32 +746,6 @@ def eduRiskPlot(title, rank=None, rankNum=5,
     plt.clf()
     plt.cla()
     plt.close('all')
-    
-    # for level in data.keys():
-    #     for key in keys:
-    #         total = sum(data[level][key])
-    #         print("Processing education level:", level, key)
-    #         if smoothed is False:
-    #             vector = data[level][key]
-    #         else:
-    #             vector = gs1d(data[level][key], sigma=2)  
-    #         label, = plt.plot(vector, label="{}-{} Total: {}".format(level, key, fmtNum(total)))
-    #         handles.append(label)           
-  
-    # plt.legend(handles=handles, prop=font)
-    # if yscale is not None:
-    #     plt.yscale(yscale)
-    # plt.title(title)
-    # plt.ylabel('Educatiion level Risk\nCases/Deaths by Day')
-    # plt.xlabel('Days: {}'.format(len(vector)))
-    # plt.savefig(plotPath + 'daily_edrisk{}.png'.format(gname.replace(' ', '')),
-    #             bbox_inches="tight",
-    #             pad_inches=0.5 + random.uniform(0.0, 0.25))
-    # plt.show(block=False)
-    # plt.clf()
-    # plt.cla()
-    # plt.close('all')
-
 
           
 def calcWin2020(filename):
@@ -790,8 +767,6 @@ def calcWin2020(filename):
                               'WinningVotes': winningVotes},
                              ignore_index = True)
         outDf.to_csv(filename.replace('/', '/winning_'))
-
-
 
     
 if __name__ == "__main__":

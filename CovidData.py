@@ -149,9 +149,9 @@ class CovidData:
         self.rate['eduPartyDR'] = {'noHighSchool': [.46, .54],
                                    'highSchool': [.46, .54],
                                    'whiteHS': [.59, .33],
-                                   'bachelors': [.51, .47],
+                                   'bachelors': [.52, .48],
                                    'someCollege': [.47, .39],
-                                   'grad': [.62, .37],
+                                   'grad': [.62, .38],
                                    'postGrad': [.62, .37]}
         self.rate['cognitive'] = {'hs': .4324, 'college': .6508}
         self.curve['daysToPeak'] = 30
