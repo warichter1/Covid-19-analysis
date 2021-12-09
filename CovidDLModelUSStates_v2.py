@@ -596,8 +596,8 @@ class CovidCountryRegion:
         total = 0
         deathGop = deathDem = caseGop = caseDem = [0 for i in range(len(confirmed))]
         for level in levels:
-            riskDem[level] = (risk[level] + cd.rate['eduPartyDR'][level][0])/2
-            riskGop[level] = (risk[level] + cd.rate['eduPartyDR'][level][1])/2  
+            riskDem[level] = risk[level] * cd.rate['eduPartyDR'][level][0]
+            riskGop[level] = risk[level] * cd.rate['eduPartyDR'][level][1]
             caseDem  = addList([int(day*riskDem[level]) for day in confirmed], 
                                 caseDem)
             caseGop = addList([int(day*riskGop[level]) for day in confirmed], 
@@ -620,7 +620,8 @@ class CovidCountryRegion:
         result = gs1d(deathGop, sigma=2) 
         self.dataStore[region]['educationParty']['deaths']['Republican'] = result
         self.dataStore['educationParty']['Republican']['deaths'] = addList(self.dataStore['educationParty']['Republican']['deaths'], result)
-           
+ 
+          
 def diff(li1, li2, exclude=[]):
     """Return the difference of 2 lists, optional exclude unwanted items."""
     result = list(set(li1) - set(li2)) + list(set(li2) - set(li1))
@@ -669,28 +670,39 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
     plt.cla()
     plt.close('all')
 
-def statGovPlot(title, yscale, smoothed=False, dskey='stateControl', 
-                showKey=[], gname='GovControl'):
+def statGovPlot(title, yscale, smoothed=False, dskey=['stateControl'], 
+                showKey=[], gname='GovControl', lw=.75):
     """Plot summary by state government."""
     handles = []
     if len(showKey) > 0:
         result = showKey
     else:
-        result = covidDf.dataStore[dskey]['Republican'].keys()      
+        result = covidDf.dataStore[dskey[0]]['Republican'].keys()      
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
-    for party in ['Republican', 'Democratic']:
-        for key in result:
-            print('Processing State Party ({}): {}'.format(party, key))
-            total = sum(covidDf.dataStore[dskey][party][key])
-            if smoothed is False:
-                vector = covidDf.dataStore[dskey][party][key]
-            else:
-                vector = gs1d(covidDf.dataStore[dskey][party][key],
-                              sigma=2)
-            label, = plt.plot(vector, label="{}-{} Total: {}".format(key.replace('New', ' by State').replace('County', ' by County'), party[:1], fmtNum(total)))
-            handles.append(label)
+    for ds in dskey:
+        if len(showKey) > 0:
+            result = showKey
+        else:
+            result = covidDf.dataStore[ds]['Republican'].keys()      
+        for party in ['Republican', 'Democratic']:
+            for key in result:
+                print('Processing State Party ({}): {}'.format(party, key))
+                total = sum(covidDf.dataStore[ds][party][key])
+                if smoothed is False:
+                    vector = covidDf.dataStore[ds][party][key]
+                else:
+                    vector = gs1d(covidDf.dataStore[ds][party][key],
+                                  sigma=2)
+                key = key.capitalize()
+                desc = key.replace('new', ' by State')
+                desc = desc.replace('county', ' by County')
+                if ds == 'educationParty':
+                    desc = key + ' Education'
+                text = "{}-{} Total: {}".format(desc, party[:1], fmtNum(total))  
+                label, = plt.plot(vector, label=text, lw=lw)
+                handles.append(label)
     plt.legend(handles=handles, prop=font)
     plt.yscale(yscale)
     plt.title(title)
@@ -789,7 +801,7 @@ if __name__ == "__main__":
     #             smoothed=True)
     
     # eduRiskPlot("Education", rank=eduAttainmentRank, keys=['confirmed'], smoothed=True, yscale='symlog', rankNum=2)
-    # statGovPlot('Covid-19 Pandemic by Education Level', yscale='symlog', smoothed=True, gname='educationLevel', dskey='educationParty')
+    # statGovPlot('Covid-19 Pandemic by Education Level', yscale='symlog', smoothed=True, gname='educationLevel', dskey=['stateControl', 'educationParty'])
     print('Dem Education:', sum(covidDf.dataStore['educationParty']['Democratic']['confirmed']), 
                       sum(covidDf.dataStore['educationParty']['Democratic']['deaths']))
     print('GOP Education:', sum(covidDf.dataStore['educationParty']['Republican']['confirmed']), 
