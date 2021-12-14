@@ -411,7 +411,7 @@ if __name__ == "__main__":
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = int(current - yesterday)
-        dailyCases.append(now + (now - dailyCases[-3:][0])*.97)
+        dailyCases.append((now + (now - dailyCases[-3:][0])*.97) if (now + (now - dailyCases[-3:][0])*.97) > 0 else 0)
         for i in range(scenarioNumber):
             total = sum(scenario[i])
             currentScenario = total * (1 + weekRates[i])
@@ -420,7 +420,8 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
-        dailyDeaths.append(int(now * avgDeathRate + (now * avgDeathRate - dailyDeaths[-3:][0])*.95))
+        buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
+        dailyDeaths.append(int(buffer if buffer > 0 else 0))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
         avgDeathRate = abs(avgDeathRate + drate[projDay])
