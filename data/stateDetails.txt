@@ -15,9 +15,9 @@ Current Date: 12/13/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
-	cases/today/rate/max/per1000: 1,316,189/0/0.00%/50.00%/180	
-	Deaths/total/rate/max: 23,036/0/1.75%/4.89%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 1,318,580/2,391/0.18%/50.00%/181	
+	Deaths/total/rate/max: 23,040/4/1.75%/4.89%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
 	cases/today/rate/max/per1000: 538,701/275/0.05%/300.00%/178	
@@ -195,9 +195,9 @@ Current Date: 12/13/21 Processing:
 	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 1,908/394/20.65%/66.67%/0	
-	Deaths/total/rate/max: 6/1/0.26%/18.18%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 1,908/0/0.00%/66.67%/0	
+	Deaths/total/rate/max: 6/0/0.31%/18.18%	
+	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Ohio-R - Pop: 11,689,100]
 	cases/today/rate/max/per1000: 1,787,029/5,618/0.31%/58.33%/152	
@@ -260,9 +260,9 @@ Current Date: 12/13/21 Processing:
 	Increase Case/Death: False/True
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Virgin Islands-N - Pop: 0]
-	cases/today/rate/max/per1000: 9,836/2,231/22.68%/58.82%/0	
-	Deaths/total/rate/max: 88/1/0.88%/8.70%	
-	Increase Case/Death: True/False
+	cases/today/rate/max/per1000: 7,612/7/0.09%/58.82%/0	
+	Deaths/total/rate/max: 88/1/1.14%/8.70%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Virginia-D - Pop: 8,535,519]
 	cases/today/rate/max/per1000: 1,000,694/6,625/0.66%/75.00%/117	
@@ -318,16 +318,6 @@ Summary of currentAggregate Regions
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
 Summary of currentCaseRate Regions
-[Virgin Islands-N - Pop: 0]
-	cases/today/rate/max/per1000: 9,836/2,231/22.68%/58.82%/0	
-	Deaths/total/rate/max: 88/1/0.88%/8.70%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today/rate/max/per1000: 1,908/394/20.65%/66.67%/0	
-	Deaths/total/rate/max: 6/1/0.26%/18.18%	
-	Increase Case/Death: True/False
-	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [New Hampshire-D - Pop: 1,359,711]
 	cases/today/rate/max/per1000: 178,099/3,643/2.05%/58.82%/130	
 	Deaths/total/rate/max: 1,788/7/1.00%/6.47%	
@@ -341,6 +331,16 @@ Summary of currentCaseRate Regions
 [Rhode Island-D - Pop: 1,059,361]
 	cases/today/rate/max/per1000: 203,708/2,433/1.19%/75.00%/192	
 	Deaths/total/rate/max: 2,969/12/1.45%/5.81%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Massachusetts-D - Pop: 6,892,503]
+	cases/today/rate/max/per1000: 981,261/11,672/1.19%/61.11%/142	
+	Deaths/total/rate/max: 19,663/29/2.00%/7.79%	
+	Increase Case/Death: True/False
+	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
+[Michigan-R - Pop: 9,986,857]
+	cases/today/rate/max/per1000: 1,585,297/17,719/1.12%/87.50%/158	
+	Deaths/total/rate/max: 27,080/166/1.70%/9.50%	
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 
@@ -410,9 +410,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arizona-R - Pop: 7,278,717]
-	cases/today/rate/max/per1000: 1,316,189/0/0.00%/50.00%/180	
-	Deaths/total/rate/max: 23,036/0/1.75%/4.89%	
-	Increase Case/Death: False/True
+	cases/today/rate/max/per1000: 1,318,580/2,391/0.18%/50.00%/181	
+	Deaths/total/rate/max: 23,040/4/1.75%/4.89%	
+	Increase Case/Death: False/False
 	Tested/Per1000/Hospitalized/Icu/Recovered: 0/0/0/0/0
 [Arkansas-R - Pop: 3,017,804]
 	cases/today/rate/max/per1000: 538,701/275/0.05%/300.00%/178	
