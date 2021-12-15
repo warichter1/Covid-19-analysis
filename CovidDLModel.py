@@ -227,15 +227,26 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.close()
 
 
-def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', dates=[None, None, None]):
+def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', 
+                dates=[None, None, None], lw=.75, ls=':'):
     """Plot Vaccine deployment."""
+    totalVaccine, VacFullDaily, vacDistributedDaily
     labels = []
     font = FontProperties(family='ubuntu',
                       weight='bold',
                       style='normal', size=6.5)
     for num in range(len(sources)):
+        width = lw
+        style = ls
+        if num == 0:
+            style = 'solid'
+            width = 2
+        elif num == 1:
+            style = 'dashed'
+            width = 1.25
         # print(num, plotLabels)
-        label, = plt.plot(sources[num], label=plotLabels[num])
+        label, = plt.plot(sources[num], label=plotLabels[num], lw=width, 
+                          ls=style)
         labels.append(label)
     # plt.axis.Axis.set_xlim((100))
     plt.xlabel("Time ({} Days)\nVaccine shipments started on day: {}\nBeginning: {}, Current: {}".format(len(sources[0]),dates[0],dates[1],dates[2]))
