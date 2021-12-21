@@ -146,7 +146,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     deltaDominant = 501
     vaccineMandate = 597
     omicronBegin = 674
-
+    deltaDominant = 699
+    
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
@@ -210,7 +211,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     labels.append(label)
     label = plt.axvline(omicronBegin, color='Silver', label='Omicron Identified: 11/25', linewidth=lw)
     labels.append(label)
-
+    label = plt.axvline(omicronBegin, color='Olive', label='Omicron Dominant 12/20', linewidth=lw)
+    labels.append(label)
     plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
