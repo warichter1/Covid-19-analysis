@@ -138,24 +138,26 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
            inauguration=365, plotType='cases', scenarios=True, lw=0.5, pw=0.75):
     """# Ugly I know, just a simple plot."""
     labels = []
-    ecBiden270 = 291
-    ecSafeHarbor = 322
-    ecStateConfirm = 328
-    ecCongressConfirm = 351
-    deltaBegin = 443
-    deltaDominant = 501
-    vaccineMandate = 597
-    omicronBegin = 674
-    deltaDominant = 699
-    
+    legend = {}
     font = FontProperties(family='ubuntu',
                           weight='bold',
                           style='oblique', size=6.5)
-
+    iCases = format(int(dailyCases[inauguration]), ',d')
+    iDeaths = format(int(dailyDeaths[365]), ',d')
+    legend['Forecast: {} Days->'.format(projectionDays)] = (intoday, 'green', 1)
+    legend['Biden Passes 270: 11/7'] = (291, 'blue', lw)
+    legend['Safe Harbor: 12/8'] = (322, 'cyan', lw)
+    legend['States Confirm Biden: 12/14'] = (328, 'coral', lw)
+    legend['Congress Confirms Biden: 1/6'] = (351, 'crimson', lw)
+    legend['Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths)] = (inauguration, 'violet', lw)
+    legend['Delta Identified: 4/24'] = (443, 'purple', lw)
+    legend['Delta Dominant: 6/5'] = (501, 'red', lw)
+    legend['Vaccine Mandate: 9/9'] = (597, 'crimson', lw)
+    legend['Omicron Identified: 11/25'] = (674, 'Silver', lw)
+    legend['Omicron Dominant 12/20'] = (699, 'Olive', lw)
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
         labels.append(label)
-        label, = plt.plot(deathRate, color='blue', label='Mortality')
         label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
     if plotType == 'deaths':
@@ -166,12 +168,10 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(average, color='Red', label='Average',
                           linewidth=1)
         labels.append(label)
-
     else:
         label, = plt.plot(dailyCases, color='magenta',
                           label='Current: {:2.2f}%'.format(100*growthRates[intoday]), lw=pw)
         labels.append(label)
-
         for i in range(scenarioNumber):
             text = None
             if i == scenarioNumber - 1:
@@ -185,34 +185,10 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(average, color='gold',
                           label='7 day Average')
         labels.append(label)
-
-
-    label = plt.axvline(intoday, color='green',
-                        label='Forecast: {} Days->'.format(projectionDays), linewidth=1)
-    labels.append(label)
-    iCases = format(int(dailyCases[inauguration]), ',d')
-    iDeaths = format(int(dailyDeaths[365]), ',d')
-    label = plt.axvline(ecBiden270, color='blue', label='Biden Passes 270: 11/7', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(ecSafeHarbor, color='cyan', label='Safe Harbor: 12/8', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(ecStateConfirm, color='coral', label='States Confirm Biden: 12/14', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(ecCongressConfirm, color='crimson', label='Congress Confirms Biden: 1/6', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(inauguration, color='violet',
-                        label='Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths), linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(deltaBegin, color='purple', label='Delta Identified: 4/24', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(deltaDominant, color='red', label='Delta Dominant: 6/5', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(vaccineMandate, color='crimson', label='Vaccine Mandate: 9/9', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(omicronBegin, color='Silver', label='Omicron Identified: 11/25', linewidth=lw)
-    labels.append(label)
-    label = plt.axvline(omicronBegin, color='Olive', label='Omicron Dominant 12/20', linewidth=lw)
-    labels.append(label)
+    for key in legend:
+        label = plt.axvline(legend[key][0], color=legend[key][1], label=key, 
+                            linewidth=legend[key][2])
+        labels.append(label)
     plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
     plt.title('Covid-19 - "Confirmed" Patient 0: January 21, 2020')
@@ -222,7 +198,6 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    # if plotUiResults is True:
     plt.show(block=False)
     plt.clf()
     plt.cla()
@@ -246,11 +221,9 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
         elif num == 1:
             style = 'dashed'
             width = 1.25
-        # print(num, plotLabels)
         label, = plt.plot(sources[num], label=plotLabels[num], lw=width, 
                           ls=style)
         labels.append(label)
-    # plt.axis.Axis.set_xlim((100))
     plt.xlabel("Time ({} Days)\nVaccine shipments started on day: {}\nBeginning: {}, Current: {}".format(len(sources[0]),dates[0],dates[1],dates[2]))
     plt.ylabel("Covid Vaccine Doses - unfinished")
     plt.legend(handles=labels, prop=font, loc='upper left')
