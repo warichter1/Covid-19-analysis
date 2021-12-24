@@ -180,7 +180,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
                 text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
             if text is not None:
                 label, = plt.plot(scenario[i], label=text, linewidth=pw, 
-                                  ls=':')
+                                  ls='dashed')
                 labels.append(label)
         average = gs1d(scenario[i], sigma=2)
         label, = plt.plot(average, color='gold',
