@@ -179,11 +179,12 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
             elif scenarios is True:
                 text = 'Scenario: {:2.2f}%'.format(100 * weekRates[i])
             if text is not None:
-                label, = plt.plot(scenario[i], label=text, linewidth=1)
+                label, = plt.plot(scenario[i], label=text, linewidth=pw, 
+                                  ls=':')
                 labels.append(label)
         average = gs1d(scenario[i], sigma=2)
         label, = plt.plot(average, color='gold',
-                          label='7 day Average')
+                          label='7 day Average', linewidth=pw)
         labels.append(label)
     for key in legend:
         label = plt.axvline(legend[key][0], color=legend[key][1], label=key, 
