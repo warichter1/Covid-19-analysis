@@ -168,6 +168,11 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(average, color='Red', label='Average',
                           linewidth=1)
         labels.append(label)
+        peak = max(average[:intoday])
+        peaknum = format(int(peak), ',d')
+        label = plt.axhline(peak, color='steelblue', label='Peak average {}'.format(peaknum), 
+                            linewidth=lw)
+        labels.append(label)
     else:
         label, = plt.plot(dailyCases, color='magenta',
                           label='Current: {:2.2f}%'.format(100*growthRates[intoday]), lw=pw)
@@ -186,6 +191,11 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(average, color='gold',
                           label='7 day Average', linewidth=pw)
         labels.append(label)
+        peak = max(average[:intoday])
+        peaknum = format(int(peak), ',d')
+        label = plt.axhline(peak, color='steelblue', label='Peak average {}'.format(peaknum), 
+                            linewidth=lw)
+        labels.append(label)        
     for key in legend:
         label = plt.axvline(legend[key][0], color=legend[key][1], label=key, 
                             linewidth=legend[key][2])
