@@ -170,8 +170,8 @@ Current Date: 12/30/21 Processing:
 	Increase Case/Death: True/False
 
 [New Jersey-D - Pop: 8,882,190]
-	cases/today-1/today/rate/max/per1000: 1,590,453/95,099/26,473/5.98%/66.67%/179	
-	Deaths/today-1/total/rate/max: 29,000/33/50/1.82%/8.79%	
+	cases/today-1/today/rate/max/per1000: 1,530,529/35,175/26,473/2.30%/66.67%/172	
+	Deaths/today-1/total/rate/max: 29,000/33/50/1.89%/8.79%	
 	Increase Case/Death: True/False
 
 [New Mexico-D - Pop: 2,096,829]
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 
 
 Summary of currentCaseRate Regions
-[New Jersey-D - Pop: 8,882,190]
-	cases/today-1/today/rate/max/per1000: 1,590,453/95,099/26,473/5.98%/66.67%/179	
-	Deaths/today-1/total/rate/max: 29,000/33/50/1.82%/8.79%	
-	Increase Case/Death: True/False
-
 [Puerto Rico-D - Pop: 3,193,694]
 	cases/today-1/today/rate/max/per1000: 257,948/14,331/8,203/5.56%/64.29%/80	
 	Deaths/today-1/total/rate/max: 3,298/3/3/1.28%/11.03%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [Hawaii-D - Pop: 1,415,872]
 	cases/today-1/today/rate/max/per1000: 109,642/3,484/1,561/3.18%/66.67%/77	
 	Deaths/today-1/total/rate/max: 1,085/0/3/0.99%/2.74%	
+	Increase Case/Death: True/False
+
+[District of Columbia-D - Pop: 705,749]
+	cases/today-1/today/rate/max/per1000: 94,286/2,241/1,412/2.38%/43.66%/133	
+	Deaths/today-1/total/rate/max: 1,211/1/1/1.28%/5.35%	
 	Increase Case/Death: True/False
 
 
@@ -382,14 +382,14 @@ Summary of currentDeathRate Regions
 	Deaths/today-1/total/rate/max: 10,450/11/19/1.92%/4.73%	
 	Increase Case/Death: True/False
 
+[New Jersey-D - Pop: 8,882,190]
+	cases/today-1/today/rate/max/per1000: 1,530,529/35,175/26,473/2.30%/66.67%/172	
+	Deaths/today-1/total/rate/max: 29,000/33/50/1.89%/8.79%	
+	Increase Case/Death: True/False
+
 [Alabama-R - Pop: 4,903,185]
 	cases/today-1/today/rate/max/per1000: 888,563/8,256/5,975/0.93%/50.00%/181	
 	Deaths/today-1/total/rate/max: 16,455/1/18/1.85%/4.12%	
-	Increase Case/Death: True/False
-
-[New Jersey-D - Pop: 8,882,190]
-	cases/today-1/today/rate/max/per1000: 1,590,453/95,099/26,473/5.98%/66.67%/179	
-	Deaths/today-1/total/rate/max: 29,000/33/50/1.82%/8.79%	
 	Increase Case/Death: True/False
 
 [Pennsylvania-R - Pop: 12,801,989]
