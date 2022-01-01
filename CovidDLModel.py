@@ -27,6 +27,7 @@ from matplotlib.font_manager import FontProperties
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import random
 import git
+from statistics import mean
 
 from CovidData import CovidData
 import globals
@@ -417,7 +418,11 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
-        buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
+        # current = int(dailyDeaths[-1:][0] * (1 + deathRate[-1:][0]))
+        # now = dailyDeaths[-1:][0]
+        # buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
+        buffer = (now*avgDeathRate - dailyDeaths[-3:][0])*.5
+        # buffer = mean(dailyDeaths[-3:])
         dailyDeaths.append(int(buffer if buffer > 0 else 0))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)

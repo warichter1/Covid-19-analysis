@@ -463,21 +463,23 @@ class CovidCountryRegion:
         """Print a summary for the region."""
         control = self.dataStore[region]['control']
         printText = '[{}-{} - Pop: {}]\n'.format(region, control[:1], fmtNum(self.dataStore[region]['population']))
-        printText += "\tcases/today/rate/max/per1000: {}/{}/{:2.2f}%/{:2.2f}%/{}\t\n".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
+        printText += "\tcases/today-1/today/rate/max/per1000: {}/{}/{}/{:2.2f}%/{:2.2f}%/{}\t\n".format(fmtNum(self.dataStore[region]['confirmed'][-1:][0]),
                                                                 fmtNum(self.dataStore[region]['confirmedNew'][-1:][0]),
+                                                                fmtNum(self.dataStore[region]['confirmedNew'][-2:][0]),
                                                                 self.dataStore[region]['caseRate'][-1:][0] * 100,
                                                                 self.dataStore[region]['maxCaseRate'] * 100,
                                                                 int(self.dataStore[region]['casesPerCapita'][-1:][0] * 1000))
-        printText += "\tDeaths/total/rate/max: {}/{}/{:2.2f}%/{:2.2f}%\t\n".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
+        printText += "\tDeaths/today-1/total/rate/max: {}/{}/{}/{:2.2f}%/{:2.2f}%\t\n".format(fmtNum(self.dataStore[region]['deaths'][-1:][0]),
                                                                fmtNum(self.dataStore[region]['deathsNew'][-1:][0]),
+                                                               fmtNum(self.dataStore[region]['deathsNew'][-2:][0]),
                                                                self.dataStore[region]['deathRate'][-1:][0] * 100,
                                                                self.dataStore[region]['maxDeathRate'] * 100)
         printText += "\tIncrease Case/Death: {}/{}\n".format(self.dataStore[region]['increasingCases'], self.dataStore[region]['increasingDeaths'])
-        printText += "\tTested/Per1000/Hospitalized/Icu/Recovered: {}/{}/{}/{}/{}".format(fmtNum(self.dataStore[region]['totalTests'][-1:][0]),
-                                                                        int(self.dataStore[region]['testsPerCapita'] * 1000),
-                                                                        fmtNum(self.dataStore[region]['hospitalizedCumulative'][-1:][0]),
-                                                                        fmtNum(self.dataStore[region]['onVentilatorCumulative'][-1:][0] + self.dataStore[region]['inIcuCumulative'][-1:][0]),
-                                                                        fmtNum(self.dataStore[region]['recovered'][-1:][0]))
+        # printText += "\tTested/Per1000/Hospitalized/Icu/Recovered: {}/{}/{}/{}/{}".format(fmtNum(self.dataStore[region]['totalTests'][-1:][0]),
+        #                                                                 int(self.dataStore[region]['testsPerCapita'] * 1000),
+        #                                                                 fmtNum(self.dataStore[region]['hospitalizedCumulative'][-1:][0]),
+        #                                                                 fmtNum(self.dataStore[region]['onVentilatorCumulative'][-1:][0] + self.dataStore[region]['inIcuCumulative'][-1:][0]),
+        #                                                                 fmtNum(self.dataStore[region]['recovered'][-1:][0]))
         print(printText)
         self.fileText += (printText + '\n')
 
@@ -593,7 +595,9 @@ class CovidCountryRegion:
         death = self.dataStore[region]['deathsNew']
         riskDem = {}
         riskGop = {}
-        total = 0
+        # total = 0
+        totalDem = 0
+        totalGop = 0
         deathGop = deathDem = caseGop = caseDem = [0 for i in range(len(confirmed))]
         for level in levels:
             riskDem[level] = risk[level] * cd.rate['eduPartyDR'][level][0]
@@ -604,10 +608,14 @@ class CovidCountryRegion:
                               caseGop)               
             deathDem = addList([int(day*riskDem[level]) for day in death], deathDem)
             deathGop = addList([int(day*riskGop[level]) for day in death], deathGop)
-            print('Dem:', level, sum(caseDem), sum(deathDem), risk[level], cd.rate['eduPartyDR'][level][0])
-            print('GOP:', level, sum(caseGop), sum(deathGop), risk[level], cd.rate['eduPartyDR'][level][1])
-            total += (risk[level] + cd.rate['eduPartyDR'][level][0])/2 + (risk[level] + cd.rate['eduPartyDR'][level][1])/2
-        print(region, 'total:', total)
+            # print('Dem:', level, sum(caseDem), sum(deathDem), risk[level], cd.rate['eduPartyDR'][level][0])
+            # print('GOP:', level, sum(caseGop), sum(deathGop), risk[level], cd.rate['eduPartyDR'][level][1])
+            # total += (risk[level] + cd.rate['eduPartyDR'][level][0])/2 + (risk[level] + cd.rate['eduPartyDR'][level][1])/2
+            totalDem += (risk[level] + cd.rate['eduPartyDR'][level][1])/2
+            totalGop += (risk[level] + cd.rate['eduPartyDR'][level][0])/2
+            
+        print(region, 'total:', totalDem + totalGop, 'Dem:', totalDem, 'GOP:', 
+              totalGop)
         result = gs1d(caseDem, sigma=2)  
         self.dataStore[region]['educationParty']['confirmed']['Democratic'] = result
         self.dataStore['educationParty']['Democratic']['confirmed'] = addList(self.dataStore['educationParty']['Democratic']['confirmed'], result)
