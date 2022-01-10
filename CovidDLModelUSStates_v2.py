@@ -646,7 +646,8 @@ def fmtNum(num):
     return format(int(num), ',d')
 
 
-def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
+def statePlot(states=[], key='confirmedNew', smoothed=False, name="default", 
+              lw=0.75):
     """Plot data by state."""
     handles = []
     total = None
@@ -664,7 +665,8 @@ def statePlot(states=[], key='confirmedNew', smoothed=False, name="default"):
         else:
             vector = gs1d(covidDf.dataStore[state][key], sigma=2)
         label, = plt.plot(vector, label="{}: {}/{:2.2f}%".format(state, total,
-                                                                 rate * 100))
+                                                                 rate * 100),
+                          lw=lw)
         handles.append(label)
     plt.legend(handles=handles)
     plt.title(key.capitalize().replace('new', ' By Day'))
@@ -827,7 +829,7 @@ if __name__ == "__main__":
                         legendText="Cases Per Capita",
                         filterLabel='-confirmedNew')
     print('Plot Target States')
-    statePlot(['Arizona', 'New Jersey', 'Tennessee', 'South Carolina',
+    statePlot(['Arizona', 'New Jersey', 'Tennessee', 'South Carolina', 'Ohio',
                 'Georgia', 'Pennsylvania', 'Virginia', 'Maryland', 'Michigan'],
               key='confirmedNew', smoothed=True, name='Focused')
     statePlot(['North Dakota', 'South Dakota', 'Iowa', 'Louisiana', 'Utah',

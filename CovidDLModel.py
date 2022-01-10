@@ -406,6 +406,7 @@ if __name__ == "__main__":
         if caseRate + grate[projDay] <= 0:
             grate = calcChange(growthRates[-deathDays:], rateChange)
         caseRate = abs(caseRate + grate[projDay])
+        last = cases[-1:][0]
         current = int(cases[-1:][0] * (1 + caseRate))
         cases.append(current)
         now = int(current - yesterday)
@@ -418,17 +419,21 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
+        avgDeathRate = abs(avgDeathRate + drate[projDay])
         # current = int(dailyDeaths[-1:][0] * (1 + deathRate[-1:][0]))
         # now = dailyDeaths[-1:][0]
         # buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
-        buffer = (now*avgDeathRate - dailyDeaths[-3:][0])*.5
+        # buffer = (now*avgDeathRate - dailyDeaths[-3:][0])*.5
+        buffer = int(mean(dailyDeaths[-3:])*1.006)
+        # print(last, avgDeathRate, last*avgDeathRate, totalDeaths[-1:][0], last*avgDeathRate - totalDeaths[-1:][0])
+        print(last, buffer, mean(dailyDeaths[-3:]))
         # buffer = mean(dailyDeaths[-3:])
         dailyDeaths.append(int(buffer if buffer > 0 else 0))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
-        avgDeathRate = abs(avgDeathRate + drate[projDay])
+        # avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(totalDeaths[-1:][0] / current)
-        totalDeaths.append(totalDeaths[-1:][0] + dailyDeaths[-1:][0])
+        totalDeaths.append(totalDeaths[-1:][0] + buffer)
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
         pdate = datetime.fromtimestamp(timestamp).strftime("%m/%d/%y")
         timestamp += oneDay
