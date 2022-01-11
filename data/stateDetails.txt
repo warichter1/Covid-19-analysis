@@ -15,9 +15,9 @@ Current Date: 1/10/22 Processing:
 	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 1,493,420/31,787/0/2.13%/50.00%/205	
-	Deaths/today-1/total/rate/max: 24,773/69/0/1.65%/4.89%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,491,420/13,937/15,850/0.93%/50.00%/204	
+	Deaths/today-1/total/rate/max: 24,773/0/69/1.66%/4.89%	
+	Increase Case/Death: False/False
 
 [Arkansas-R - Pop: 3,017,804]
 	cases/today-1/today/rate/max/per1000: 622,069/9,055/0/1.46%/300.00%/206	
@@ -145,8 +145,8 @@ Current Date: 1/10/22 Processing:
 	Increase Case/Death: False/False
 
 [Missouri-R - Pop: 6,137,428]
-	cases/today-1/today/rate/max/per1000: 1,114,094/7,542/7,590/0.68%/66.67%/181	
-	Deaths/today-1/total/rate/max: 16,515/6/3/1.48%/6.31%	
+	cases/today-1/today/rate/max/per1000: 1,114,094/7,261/7,674/0.65%/66.67%/181	
+	Deaths/today-1/total/rate/max: 16,515/4/3/1.48%/6.31%	
 	Increase Case/Death: False/False
 
 [Montana-R - Pop: 1,068,778]
@@ -388,9 +388,9 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 1,493,420/31,787/0/2.13%/50.00%/205	
-	Deaths/today-1/total/rate/max: 24,773/69/0/1.65%/4.89%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,491,420/13,937/15,850/0.93%/50.00%/204	
+	Deaths/today-1/total/rate/max: 24,773/0/69/1.66%/4.89%	
+	Increase Case/Death: False/False
 
 [Oklahoma-R - Pop: 3,956,971]
 	cases/today-1/today/rate/max/per1000: 764,651/27,058/0/3.54%/61.36%/193	
@@ -410,9 +410,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 1,493,420/31,787/0/2.13%/50.00%/205	
-	Deaths/today-1/total/rate/max: 24,773/69/0/1.65%/4.89%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,491,420/13,937/15,850/0.93%/50.00%/204	
+	Deaths/today-1/total/rate/max: 24,773/0/69/1.66%/4.89%	
+	Increase Case/Death: False/False
 
 [Arkansas-R - Pop: 3,017,804]
 	cases/today-1/today/rate/max/per1000: 622,069/9,055/0/1.46%/300.00%/206	
