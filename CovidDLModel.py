@@ -162,11 +162,12 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
         label, = plt.plot(growthRates, color='magenta', label='Growth')
         labels.append(label)
     if plotType == 'deaths':
-        label, = plt.plot(dailyDeaths, color='black', label='Daily Deaths',
+        label, = plt.plot(dailyDeaths, color='black', 
+                          label='Daily Deaths {:2.2f}%'.format(100*deathRate[intoday]),
                           linewidth=pw)
         labels.append(label)
         average = gs1d(dailyDeaths, sigma=2)
-        label, = plt.plot(average, color='Red', label='Average',
+        label, = plt.plot(average, color='Red', label='7 Day Average',
                           linewidth=1)
         labels.append(label)
         peak = max(average[:intoday])
@@ -424,9 +425,9 @@ if __name__ == "__main__":
         # now = dailyDeaths[-1:][0]
         # buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
         # buffer = (now*avgDeathRate - dailyDeaths[-3:][0])*.5
-        buffer = int(mean(dailyDeaths[-3:])*1.006)
+        buffer = int(mean(dailyDeaths[-7:])*1.006)
         # print(last, avgDeathRate, last*avgDeathRate, totalDeaths[-1:][0], last*avgDeathRate - totalDeaths[-1:][0])
-        print(last, buffer, mean(dailyDeaths[-3:]))
+        # print(last, buffer, mean(dailyDeaths[-3:]))
         # buffer = mean(dailyDeaths[-3:])
         dailyDeaths.append(int(buffer if buffer > 0 else 0))
         if avgDeathRate + drate[projDay] <= 0:
