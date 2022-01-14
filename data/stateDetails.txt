@@ -140,8 +140,8 @@ Current Date: 1/13/22 Processing:
 	Increase Case/Death: True/False
 
 [Mississippi-R - Pop: 2,976,149]
-	cases/today-1/today/rate/max/per1000: 625,328/16,560/0/2.65%/83.33%/210	
-	Deaths/today-1/total/rate/max: 10,606/43/0/1.69%/4.73%	
+	cases/today-1/today/rate/max/per1000: 625,328/8,356/8,204/1.34%/83.33%/210	
+	Deaths/today-1/total/rate/max: 10,606/17/26/1.69%/4.73%	
 	Increase Case/Death: True/False
 
 [Missouri-R - Pop: 6,137,428]
@@ -323,11 +323,6 @@ Summary of currentCaseRate Regions
 	Deaths/today-1/total/rate/max: 3,446/25/28/0.89%/11.03%	
 	Increase Case/Death: True/False
 
-[Mississippi-R - Pop: 2,976,149]
-	cases/today-1/today/rate/max/per1000: 625,328/16,560/0/2.65%/83.33%/210	
-	Deaths/today-1/total/rate/max: 10,606/43/0/1.69%/4.73%	
-	Increase Case/Death: True/False
-
 [Vermont-D - Pop: 623,989]
 	cases/today-1/today/rate/max/per1000: 83,994/2,007/5,314/2.39%/60.00%/134	
 	Deaths/today-1/total/rate/max: 490/0/7/0.58%/6.90%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today-1/today/rate/max/per1000: 13,401/291/157/2.17%/58.82%/0	
 	Deaths/today-1/total/rate/max: 91/1/0/0.67%/8.70%	
 	Increase Case/Death: True/False
+
+[Hawaii-D - Pop: 1,415,872]
+	cases/today-1/today/rate/max/per1000: 156,932/3,392/3,512/2.16%/66.67%/110	
+	Deaths/today-1/total/rate/max: 1,114/4/5/0.71%/2.74%	
+	Increase Case/Death: False/False
 
 
 Summary of casesPerCapita Regions
@@ -378,8 +378,8 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: False/False
 
 [Mississippi-R - Pop: 2,976,149]
-	cases/today-1/today/rate/max/per1000: 625,328/16,560/0/2.65%/83.33%/210	
-	Deaths/today-1/total/rate/max: 10,606/43/0/1.69%/4.73%	
+	cases/today-1/today/rate/max/per1000: 625,328/8,356/8,204/1.34%/83.33%/210	
+	Deaths/today-1/total/rate/max: 10,606/17/26/1.69%/4.73%	
 	Increase Case/Death: True/False
 
 [Alabama-R - Pop: 4,903,185]
