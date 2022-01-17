@@ -75,9 +75,9 @@ Current Date: 1/16/22 Processing:
 	Increase Case/Death: True/False
 
 [Hawaii-D - Pop: 1,415,872]
-	cases/today-1/today/rate/max/per1000: 165,958/50/5,977/0.03%/66.67%/117	
-	Deaths/today-1/total/rate/max: 1,123/0/6/0.68%/2.74%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 169,886/3,878/5,977/2.28%/66.67%/119	
+	Deaths/today-1/total/rate/max: 1,126/3/6/0.66%/2.74%	
+	Increase Case/Death: False/False
 
 [Idaho-R - Pop: 1,787,065]
 	cases/today-1/today/rate/max/per1000: 340,857/0/1,167/0.00%/60.87%/190	
@@ -328,6 +328,11 @@ Summary of currentCaseRate Regions
 	Deaths/today-1/total/rate/max: 497/0/4/0.55%/6.90%	
 	Increase Case/Death: True/False
 
+[Hawaii-D - Pop: 1,415,872]
+	cases/today-1/today/rate/max/per1000: 169,886/3,878/5,977/2.28%/66.67%/119	
+	Deaths/today-1/total/rate/max: 1,126/3/6/0.66%/2.74%	
+	Increase Case/Death: False/False
+
 [Northern Mariana Islands-R - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 3,946/78/66/1.98%/66.67%/0	
 	Deaths/today-1/total/rate/max: 21/0/1/0.53%/18.18%	
@@ -336,11 +341,6 @@ Summary of currentCaseRate Regions
 [Virgin Islands-N - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 13,760/239/0/1.74%/58.82%/0	
 	Deaths/today-1/total/rate/max: 91/0/0/0.66%/8.70%	
-	Increase Case/Death: True/False
-
-[Pennsylvania-R - Pop: 12,801,989]
-	cases/today-1/today/rate/max/per1000: 2,458,722/33,266/22,403/1.35%/66.67%/192	
-	Deaths/today-1/total/rate/max: 38,619/8/185/1.57%/7.54%	
 	Increase Case/Death: True/False
 
 
