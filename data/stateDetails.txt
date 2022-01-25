@@ -20,9 +20,9 @@ Current Date: 1/24/22 Processing:
 	Increase Case/Death: False/False
 
 [Arkansas-R - Pop: 3,017,804]
-	cases/today-1/today/rate/max/per1000: 738,638/0/3,804/0.00%/300.00%/244	
-	Deaths/today-1/total/rate/max: 9,511/1/12/1.29%/2.35%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 741,881/3,243/3,804/0.44%/300.00%/245	
+	Deaths/today-1/total/rate/max: 9,532/22/12/1.28%/2.35%	
+	Increase Case/Death: False/False
 
 [California-D - Pop: 39,512,223]
 	cases/today-1/today/rate/max/per1000: 7,907,630/215,700/27,562/2.73%/50.00%/200	
@@ -415,9 +415,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/False
 
 [Arkansas-R - Pop: 3,017,804]
-	cases/today-1/today/rate/max/per1000: 738,638/0/3,804/0.00%/300.00%/244	
-	Deaths/today-1/total/rate/max: 9,511/1/12/1.29%/2.35%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 741,881/3,243/3,804/0.44%/300.00%/245	
+	Deaths/today-1/total/rate/max: 9,532/22/12/1.28%/2.35%	
+	Increase Case/Death: False/False
 
 [California-D - Pop: 39,512,223]
 	cases/today-1/today/rate/max/per1000: 7,907,630/215,700/27,562/2.73%/50.00%/200	
