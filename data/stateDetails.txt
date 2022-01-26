@@ -1,8 +1,8 @@
 Current Date: 1/25/22 Processing:
 [Alabama-R - Pop: 4,903,185]
-	cases/today-1/today/rate/max/per1000: 1,153,149/0/5,955/0.00%/50.00%/235	
-	Deaths/today-1/total/rate/max: 16,826/0/0/1.46%/4.12%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 1,238,957/85,808/5,955/6.93%/50.00%/252	
+	Deaths/today-1/total/rate/max: 16,914/88/0/1.36%/4.12%	
+	Increase Case/Death: True/False
 
 [Alaska-R - Pop: 731,545]
 	cases/today-1/today/rate/max/per1000: 201,016/0/5,671/0.00%/75.00%/274	
@@ -318,6 +318,11 @@ Summary of currentAggregate Regions
 
 
 Summary of currentCaseRate Regions
+[Alabama-R - Pop: 4,903,185]
+	cases/today-1/today/rate/max/per1000: 1,238,957/85,808/5,955/6.93%/50.00%/252	
+	Deaths/today-1/total/rate/max: 16,914/88/0/1.36%/4.12%	
+	Increase Case/Death: True/False
+
 [Minnesota-D - Pop: 5,639,632]
 	cases/today-1/today/rate/max/per1000: 1,264,935/35,491/12,710/2.81%/60.38%/224	
 	Deaths/today-1/total/rate/max: 11,370/37/42/0.90%/7.14%	
@@ -336,11 +341,6 @@ Summary of currentCaseRate Regions
 [Iowa-R - Pop: 3,155,070]
 	cases/today-1/today/rate/max/per1000: 693,914/11,551/0/1.66%/62.50%/219	
 	Deaths/today-1/total/rate/max: 8,317/0/0/1.20%/2.77%	
-	Increase Case/Death: True/False
-
-[North Dakota-R - Pop: 762,062]
-	cases/today-1/today/rate/max/per1000: 214,459/3,419/0/1.59%/68.42%/281	
-	Deaths/today-1/total/rate/max: 2,125/9/0/0.99%/2.52%	
 	Increase Case/Death: True/False
 
 
@@ -392,17 +392,17 @@ Summary of currentDeathRate Regions
 	Deaths/today-1/total/rate/max: 30,950/151/40/1.48%/8.79%	
 	Increase Case/Death: True/False
 
-[Alabama-R - Pop: 4,903,185]
-	cases/today-1/today/rate/max/per1000: 1,153,149/0/5,955/0.00%/50.00%/235	
-	Deaths/today-1/total/rate/max: 16,826/0/0/1.46%/4.12%	
-	Increase Case/Death: False/False
+[Michigan-R - Pop: 9,986,857]
+	cases/today-1/today/rate/max/per1000: 2,168,367/0/44,142/0.00%/87.50%/217	
+	Deaths/today-1/total/rate/max: 31,539/0/37/1.45%/9.50%	
+	Increase Case/Death: False/True
 
 
 Summary of testsPerCapita Regions
 [Alabama-R - Pop: 4,903,185]
-	cases/today-1/today/rate/max/per1000: 1,153,149/0/5,955/0.00%/50.00%/235	
-	Deaths/today-1/total/rate/max: 16,826/0/0/1.46%/4.12%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 1,238,957/85,808/5,955/6.93%/50.00%/252	
+	Deaths/today-1/total/rate/max: 16,914/88/0/1.36%/4.12%	
+	Increase Case/Death: True/False
 
 [Alaska-R - Pop: 731,545]
 	cases/today-1/today/rate/max/per1000: 201,016/0/5,671/0.00%/75.00%/274	
