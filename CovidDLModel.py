@@ -156,6 +156,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     legend['Vaccine Mandate: 9/9'] = (597, 'crimson', lw)
     legend['Omicron Identified: 11/25'] = (674, 'Silver', lw)
     legend['Omicron Dominant 12/20'] = (699, 'Olive', lw)
+    legend['Omicron Ba.2 Identified 1/21'] = (731, 'orange', lw)
+    
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
         labels.append(label)
