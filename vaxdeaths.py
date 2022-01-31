@@ -68,8 +68,9 @@ def extend(end, data):
     arr = np.array(data[-(last - begin):])
     npIndex = 0
     # loop here
-    buffer = [day] + list(arr.mean(axis=0)[1:])
+    buffer = [day] + list(arr[npIndex].mean(axis=0)[1:])
     np.append(arr, buffer)
+    npIndex += 1
 
 
 
