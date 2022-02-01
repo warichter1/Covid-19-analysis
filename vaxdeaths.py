@@ -20,7 +20,7 @@ class Expander:
         self.expanded = []
         # self.expand(infile, outfile, endDay=None)
 
-    def fillin(self, line, last):
+    def fill(self, line, last):
         """Fill in the blanks for missing days."""
         gap = int(line[0] - last[0])
         padded = []
@@ -51,7 +51,7 @@ class Expander:
                     row[0] = int(row[0])
                     if row[0] - last[0] > 1:
                         print(last[0], row[0])
-                        row1 = self.fillin(row, last)
+                        row1 = self.fill(row, last)
                         self.expanded += row1
                     else:
                         print(row)
@@ -92,5 +92,5 @@ class Expander:
 
 if __name__ == "__main__":
     norm = Expander()
-    result = norm.expand(inputfile, outputfile, endDay=741)
+    result = norm.expand(inputfile, outputfile, endDay=742)
     print(result)
