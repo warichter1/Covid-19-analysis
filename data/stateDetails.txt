@@ -25,9 +25,9 @@ Current Date: 1/31/22 Processing:
 	Increase Case/Death: True/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 8,417,539/124,804/17,362/1.48%/50.00%/213	
+	cases/today-1/today/rate/max/per1000: 8,427,782/43,743/112,542/0.52%/50.00%/213	
 	Deaths/today-1/total/rate/max: 80,044/243/37/0.95%/3.94%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 
 [Colorado-D - Pop: 5,758,736]
 	cases/today-1/today/rate/max/per1000: 1,253,042/12,681/0/1.01%/75.00%/217	
@@ -201,7 +201,7 @@ Current Date: 1/31/22 Processing:
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,580,405/4,160/5,224/0.16%/58.33%/220	
-	Deaths/today-1/total/rate/max: 33,071/0/0/1.28%/inf%	
+	Deaths/today-1/total/rate/max: 33,537/0/0/1.30%/inf%	
 	Increase Case/Death: False/False
 
 [Oklahoma-R - Pop: 3,956,971]
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 8,417,539/124,804/17,362/1.48%/50.00%/213	
+	cases/today-1/today/rate/max/per1000: 8,427,782/43,743/112,542/0.52%/50.00%/213	
 	Deaths/today-1/total/rate/max: 80,044/243/37/0.95%/3.94%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 
