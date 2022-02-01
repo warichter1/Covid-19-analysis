@@ -56,10 +56,11 @@ def expand(infile, outfile, endDay=None):
                 header = True
                 expanded += [row]
                 print(row)
+    expanded += extend(expanded, endDay)
     writeCsv(outfile, expanded)
     return expanded
 
-def extend(end, data):
+def extend(data, end):
     """Use Past data to forecast data."""
     begin = 572
     last = len(data) - 1
@@ -67,10 +68,14 @@ def extend(end, data):
     day = data[last][0] + 1
     arr = np.array(data[-(last - begin):])
     npIndex = 0
+    count = end - day
     # loop here
-    buffer = [day] + list(arr[npIndex].mean(axis=0)[1:])
-    np.append(arr, buffer)
-    npIndex += 1
+    for index in range(count):
+        buffer = [day] + list(arr[index:, 1:].mean(axis=0))
+        np.append(arr, buffer)
+        extended.append(buffer)
+        day += 1
+    return extended
 
 
 
@@ -81,5 +86,5 @@ def writeCsv(outfile, file):
         for row in file:
             writer.writerow(row)
 
-result = expand(inputfile, outputfile, endDay=859)
+result = expand(inputfile, outputfile, endDay=741)
 print(result)
