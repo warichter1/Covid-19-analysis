@@ -90,7 +90,15 @@ class Expander:
             for row in self.expanded:
                 writer.writerow(row)
 
+    def processData(self, data):
+        self.source = np.array(data)
+        transpose = list(zip(*self.expanded[1:]))
+        self.vaxStatus = np.array(transpose)
+
+
+
 if __name__ == "__main__":
-    norm = Expander()
-    result = norm.expand(inputfile, outputfile, endDay=742)
+    vax = Expander()
+    result = vax.expand(inputfile, outputfile, endDay=today)
+    vax.processData(deaths)
     print(result)
