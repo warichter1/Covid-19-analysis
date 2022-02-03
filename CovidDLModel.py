@@ -29,6 +29,7 @@ import random
 import git
 from statistics import mean
 
+from vaxdeaths import Expander
 from CovidData import CovidData
 import globals
 
@@ -464,6 +465,9 @@ if __name__ == "__main__":
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
     cd.writeData('DailyDetailsProjection.txt', printText)
+    vax = Expander()
+    result = vax.expand(endDay=len(deaths)+1)
+    vaxStatusDeaths = vax.processData(deaths)
     # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
     # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
     print(gp.add('./data/*'))

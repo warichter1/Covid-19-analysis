@@ -37,7 +37,7 @@ class Expander:
                           last[2] + boost*entry])
         return padded
 
-    def expand(self, infile, outfile, endDay=None):
+    def expand(self, endDay=None):
         """Expand the set to complete missing days."""
         # expanded = []
         header = False
@@ -50,18 +50,18 @@ class Expander:
                     row = [float(ele) for ele in row]
                     row[0] = int(row[0])
                     if row[0] - last[0] > 1:
-                        print(last[0], row[0])
+                        #print(last[0], row[0])
                         row1 = self.fill(row, last)
                         self.expanded += row1
                     else:
-                        print(row)
+                        # print(row)
                         if row[0] - last[0] == 1:
                             self.expanded += [row]
                     last = row
                 else:
                     header = True
                     self.expanded += [row]
-                    print(row)
+                    #print(row)
         self.expanded += self.extend(endDay)
         self.writeCsv()
         return self.expanded
@@ -91,14 +91,18 @@ class Expander:
                 writer.writerow(row)
 
     def processData(self, data):
-        self.source = np.array(data)
+        self.sourceVector = np.array(data)
         transpose = list(zip(*self.expanded[1:]))
-        self.vaxStatus = np.array(transpose)
+        del transpose[0]
+        self.statusMatrix = np.array(transpose)
+        result = np.multiply(self.statusMatrix,
+                             self.sourceVector[:, np.newaxis, np.newaxis])
+        return result
 
 
 
 if __name__ == "__main__":
     vax = Expander()
-    result = vax.expand(inputfile, outputfile, endDay=today)
+    result = vax.expand(endDay=today)
     vax.processData(deaths)
     print(result)
