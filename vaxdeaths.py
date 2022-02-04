@@ -95,8 +95,9 @@ class Expander:
         transpose = list(zip(*self.expanded[1:]))
         del transpose[0]
         self.statusMatrix = np.array(transpose)
-        result = np.multiply(self.statusMatrix,
-                             self.sourceVector[:, np.newaxis, np.newaxis])
+        result = []
+        for row in self.statusMatrix:
+            result.append(np.multiply(row, self.sourceVector))
         return result
 
 

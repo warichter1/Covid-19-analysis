@@ -253,6 +253,35 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
     plt.cla()
     plt.close()
 
+def generalPlot(title, plotType, axisLabel, sources=[], plotLabels=[], yscale='log',
+                lw=.75, ls='solid'):
+    """Plot generalized data."""
+    labels = []
+    font = FontProperties(family='ubuntu', weight='bold',
+                          style='normal', size=6.5)
+    for row in sources.keys():
+        # width = lw
+        # style = ls
+        # if num == 0:
+        #     style = 'solid'
+        #     width = 2
+        # elif num == 1:
+        #     style = 'dashed'
+        #     width = 1.25
+        label, = plt.plot(sources[row], label=row, lw=lw, ls=ls)
+        labels.append(label)
+    plt.xlabel(axisLabel['x'])
+    plt.ylabel(axisLabel['y'])
+    plt.legend(handles=labels, prop=font, loc='upper left')
+    plt.yscale(yscale)
+    plt.title(title)
+    plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
+                bbox_inches="tight",
+                pad_inches=0.5 + random.uniform(0.0, 0.25))
+    plt.show(block=False)
+    plt.clf()
+    plt.cla()
+    plt.close()
 
 def fmtInt(num):
     """Format an integer to thousands."""
@@ -340,9 +369,6 @@ if __name__ == "__main__":
                 vaxDay = len(dailyCases)
             vaxLast = cdate
             vacAllUS = vacUS.loc[[padDate]]
-            # vacAllUS = vacAllUS.loc[vacAllUS['location']=='United States']
-            # distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
-            # fullToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].people_fully_vaccinated
             try:
                 vacToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].daily_vaccinations
                 distToday1 = vacAllUS.loc[vacAllUS['location']=='United States'].total_distributed
@@ -353,8 +379,6 @@ if __name__ == "__main__":
                 vacToday = vacUS.loc[[padDate]].daily_vaccinations
                 distToday = vacUS.loc[[padDate]].total_distributed
                 fullToday = vacUS.loc[[padDate]].people_fully_vaccinated
-
-                # print(padDate, vacToday.values, distToday.values)
                 if len(vacToday) == 1:
                     vacToday = int(vacToday[0])
                 else:
@@ -424,18 +448,10 @@ if __name__ == "__main__":
         growthRates.append(current / yesterday - 1)
         yesterday = current
         avgDeathRate = abs(avgDeathRate + drate[projDay])
-        # current = int(dailyDeaths[-1:][0] * (1 + deathRate[-1:][0]))
-        # now = dailyDeaths[-1:][0]
-        # buffer = now*avgDeathRate + (now*avgDeathRate - dailyDeaths[-3:][0])*.95
-        # buffer = (now*avgDeathRate - dailyDeaths[-3:][0])*.5
         buffer = int(mean(dailyDeaths[-7:])*1.006)
-        # print(last, avgDeathRate, last*avgDeathRate, totalDeaths[-1:][0], last*avgDeathRate - totalDeaths[-1:][0])
-        # print(last, buffer, mean(dailyDeaths[-3:]))
-        # buffer = mean(dailyDeaths[-3:])
         dailyDeaths.append(int(buffer if buffer > 0 else 0))
         if avgDeathRate + drate[projDay] <= 0:
             drate = calcChange(deathRate[-deathDays:], rateChange)
-        # avgDeathRate = abs(avgDeathRate + drate[projDay])
         deathRate.append(totalDeaths[-1:][0] / current)
         totalDeaths.append(totalDeaths[-1:][0] + buffer)
         projDay = 0 if projDay >= deathDays - 2 else projDay + 1
@@ -465,13 +481,11 @@ if __name__ == "__main__":
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
     cd.writeData('DailyDetailsProjection.txt', printText)
+    plotLabel = ['Unvaxxed', 'Vaxxed', 'Boosted']
+    xyLabel = {'x': 'Vax Status', 'y': 'Deaths by Status'}
     vax = Expander()
-    result = vax.expand(endDay=len(deaths)+1)
-    vaxStatusDeaths = vax.processData(deaths)
-    # cd.summary(today, cases[today - 1], totalDeaths[today - 1], dataType="Current")
-    # cd.summary(day, int(cases[len(cases) -1]), int(totalDeaths[len(totalDeaths) - 1]), dataType="Forecast")
+    result = vax.expand(endDay=len(dailyDeaths)+1)
+    vaxStatusDeaths = dict(zip(plotLabel, vax.processData(dailyDeaths)))
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
-
-# cvb = importVaccineDose("", renameKeys=['doses_allocated_week_of_', 'doses_distribution_week_of_', 'doses_allocated_for_week_'], inexcludes=['second_dose_shipment_', 'second_doses_shipment_', 'first_doses_'])
