@@ -201,7 +201,7 @@ Current Date: 2/3/22 Processing:
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,601,241/5,737/8,601/0.22%/58.33%/222	
-	Deaths/today-1/total/rate/max: 33,537/0/0/1.29%/inf%	
+	Deaths/today-1/total/rate/max: 34,217/0/0/1.32%/inf%	
 	Increase Case/Death: False/False
 
 [Oklahoma-R - Pop: 3,956,971]
@@ -285,7 +285,7 @@ Current Date: 2/3/22 Processing:
 	Increase Case/Death: False/True
 
 [Wyoming-R - Pop: 578,759]
-	cases/today-1/today/rate/max/per1000: 148,382/0/1,077/0.00%/81.82%/256	
+	cases/today-1/today/rate/max/per1000: 149,126/744/1,077/0.50%/81.82%/257	
 	Deaths/today-1/total/rate/max: 1,650/0/0/1.11%/1.86%	
 	Increase Case/Death: False/False
 
