@@ -218,6 +218,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.clf()
     plt.cla()
     plt.close()
+    return legend
 
 
 def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log', 
@@ -253,13 +254,14 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
     plt.cla()
     plt.close()
 
-def generalPlot(title, plotType, axisLabel, sources=[], plotLabels=[], yscale='log',
-                lw=.75, ls='solid'):
+
+def generalPlot(title, plotType, axisLabel, sources, yscale='log',
+                average=True, lw=.75, ls='solid', legend=None):
     """Plot generalized data."""
     labels = []
     font = FontProperties(family='ubuntu', weight='bold',
                           style='normal', size=6.5)
-    for row in sources.keys():
+    for key in sources.keys():
         # width = lw
         # style = ls
         # if num == 0:
@@ -268,8 +270,16 @@ def generalPlot(title, plotType, axisLabel, sources=[], plotLabels=[], yscale='l
         # elif num == 1:
         #     style = 'dashed'
         #     width = 1.25
-        label, = plt.plot(sources[row], label=row, lw=lw, ls=ls)
+        row = sources[key]
+        if average is True:
+            row = gs1d(row, sigma=2)
+        label, = plt.plot(row, label=key, lw=lw, ls=ls)
         labels.append(label)
+    if not legend is None:
+        for key in legend:
+            label = plt.axvline(legend[key][0], color=legend[key][1],
+                                label=key, linewidth=legend[key][2])
+            labels.append(label)
     plt.xlabel(axisLabel['x'])
     plt.ylabel(axisLabel['y'])
     plt.legend(handles=labels, prop=font, loc='upper left')
@@ -278,10 +288,12 @@ def generalPlot(title, plotType, axisLabel, sources=[], plotLabels=[], yscale='l
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
+    # plt.set_ylim(ymin=0)
     plt.show(block=False)
     plt.clf()
     plt.cla()
     plt.close()
+
 
 def fmtInt(num):
     """Format an integer to thousands."""
@@ -464,8 +476,9 @@ if __name__ == "__main__":
         printText += (text + '\n')
     plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
            deaths, dailyDeaths, deathRate, yscale='linear', scenarios=False)
-    plotUS(day, today, cdate, currentDate, cases, caseRate, growthRates,
-           deaths, dailyDeaths, deathRate, yscale='linear', plotType='deaths')
+    legend = plotUS(day, today, cdate, currentDate, cases, caseRate,
+                    growthRates, deaths, dailyDeaths, deathRate,
+                    yscale='linear', plotType='deaths')
     vaccinePlot("Covid-19 Vaccine Deployment", "Vaccine",
                 [totalVaccine, VacFullDaily, vacDistributedDaily],
                 ["Total Vaccinations ({})".format(fmtInt(sum(totalVaccine))),
@@ -482,10 +495,13 @@ if __name__ == "__main__":
     cd.summary(days, totalCases, totalDead)
     cd.writeData('DailyDetailsProjection.txt', printText)
     plotLabel = ['Unvaxxed', 'Vaxxed', 'Boosted']
-    xyLabel = {'x': 'Vax Status', 'y': 'Deaths by Status'}
+    axisLabel = {'x': 'Vax Status', 'y': 'Deaths by Status'}
     vax = Expander()
     result = vax.expand(endDay=len(dailyDeaths)+1)
     vaxStatusDeaths = dict(zip(plotLabel, vax.processData(dailyDeaths)))
+    generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
+                vaxStatusDeaths, yscale='linear', legend=legend)
+
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
