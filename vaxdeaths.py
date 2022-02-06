@@ -8,6 +8,7 @@ Created on Fri Jan 28 21:36:54 2022
 
 import csv
 import numpy as np
+from statistics import mean
 
 inputfile = "deaths-by-vaccination-status.csv"
 outputfile = "full-deaths-by-vaccination-status.csv"
@@ -18,13 +19,21 @@ class Expander:
         self.infile = "deaths-by-vaccination-status.csv"
         self.outfile = "full-deaths-by-vaccination-status.csv"
         self.expanded = []
-        # self.expand(infile, outfile, endDay=None)
+        self.party = {'raw': {}, 'vaxxed': {}, 'unvaxxed': {}}
+        self.party['raw']['democratic'] = 0.92
+        self.party['raw']['republican'] = 0.68
+        self.party['raw']['independent'] = 0.58
+        self.partyStatus = {}
+        total = sum(self.party['raw'].values())
+        for key in self.party['raw'].keys():
+            self.party['vaxxed'][key] = self.party['raw'][key] / total
+            self.party['unvaxxed'][key] = 1 - self.party['vaxxed'][key]
+        self.processed = False
 
     def fill(self, line, last):
         """Fill in the blanks for missing days."""
         gap = int(line[0] - last[0])
         padded = []
-        #print('Gap:', gap)
         if gap < 2:
             print("Nothing to do")
             return [line]
@@ -39,7 +48,7 @@ class Expander:
 
     def expand(self, endDay=None):
         """Expand the set to complete missing days."""
-        # expanded = []
+        expanded = []
         header = False
         last = [0, 0, 0, 0]
         with open(self.infile, newline='') as csvfile:
@@ -50,18 +59,15 @@ class Expander:
                     row = [float(ele) for ele in row]
                     row[0] = int(row[0])
                     if row[0] - last[0] > 1:
-                        #print(last[0], row[0])
                         row1 = self.fill(row, last)
                         self.expanded += row1
                     else:
-                        # print(row)
                         if row[0] - last[0] == 1:
                             self.expanded += [row]
                     last = row
                 else:
                     header = True
                     self.expanded += [row]
-                    #print(row)
         self.expanded += self.extend(endDay)
         self.writeCsv()
         return self.expanded
@@ -75,7 +81,6 @@ class Expander:
         day = data[last][0] + 1
         arr = np.array(data[-(last - begin):])
         count = end - day
-        # loop here
         for index in range(count):
             buffer = [day] + list(arr[index:, 1:].mean(axis=0))
             np.append(arr, buffer)
@@ -91,6 +96,7 @@ class Expander:
                 writer.writerow(row)
 
     def processData(self, data):
+        labels = ['unvaxxed', 'vaxxed', 'boosted']
         self.sourceVector = np.array(data)
         transpose = list(zip(*self.expanded[1:]))
         del transpose[0]
@@ -98,12 +104,29 @@ class Expander:
         result = []
         for row in self.statusMatrix:
             result.append(np.multiply(row, self.sourceVector))
-        return result
+        self.status = dict(zip(labels, result))
+        self.processed = True
+        return self.status
+
+    def getParties(self):
+        """Break vax/unvaxxed down by party affiliation."""
+        if self.processed is False:
+            print('Process Data First')
+            return None
+        status = {'unvaxxed': self.status['unvaxxed']}
+        status['vaxxed'] = np.add(self.status['vaxxed'],
+                                  self.status['boosted'])
+        for key in status.keys():
+            self.partyStatus[key] = {}
+            for party in self.party[key].keys():
+                self.partyStatus[key][party] = status[key]*self.party[key][party]
+        return self.partyStatus
+
 
 
 
 if __name__ == "__main__":
     vax = Expander()
-    result = vax.expand(endDay=today)
+    result = vax.expand(endDay=700)
     vax.processData(deaths)
     print(result)

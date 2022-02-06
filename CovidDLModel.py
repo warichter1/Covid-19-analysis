@@ -494,14 +494,14 @@ if __name__ == "__main__":
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
     cd.writeData('DailyDetailsProjection.txt', printText)
-    plotLabel = ['Unvaxxed', 'Vaxxed', 'Boosted']
+    # plotLabel = ['Unvaxxed', 'Vaxxed', 'Boosted']
     axisLabel = {'x': 'Vax Status', 'y': 'Deaths by Status'}
     vax = Expander()
-    result = vax.expand(endDay=len(dailyDeaths)+1)
-    vaxStatusDeaths = dict(zip(plotLabel, vax.processData(dailyDeaths)))
+    results = vax.expand(endDay=len(dailyDeaths)+1)
+    vaxStatusDeaths = vax.processData(dailyDeaths)
+    party = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
                 vaxStatusDeaths, yscale='linear', legend=legend)
-
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
