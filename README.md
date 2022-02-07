@@ -53,6 +53,7 @@ https://www.advisory.com/daily-briefing/2020/10/22/long-covid
 
 Vaccine:
 Vaccinations (first and second dose): https://ourworldindata.org/coronavirus
+Vaccination by US party: https://www.brookings.edu/blog/fixgov/2021/10/01/for-covid-19-vaccinations-party-affiliation-matters-more-than-race-and-ethnicity/
 
 Vaccine Distribution:
 https://data.cdc.gov/resource/saz5-9hgg.json

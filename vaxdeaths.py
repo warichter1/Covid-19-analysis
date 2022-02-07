@@ -21,13 +21,16 @@ class Expander:
         self.expanded = []
         self.party = {'raw': {}, 'vaxxed': {}, 'unvaxxed': {}}
         self.party['raw']['democratic'] = 0.92
-        self.party['raw']['republican'] = 0.68
-        self.party['raw']['independent'] = 0.58
+        self.party['raw']['democraticunvax'] = 0.08
+        self.party['raw']['republican'] = 0.58
+        self.party['raw']['republicanunvax'] = 0.42
+        self.party['raw']['independent'] = 0.68
+        self.party['raw']['independentunvax'] = 0.32
         self.partyStatus = {}
         total = sum(self.party['raw'].values())
-        for key in self.party['raw'].keys():
+        for key in ['democratic', 'republican', 'independent']:
             self.party['vaxxed'][key] = self.party['raw'][key] / total
-            self.party['unvaxxed'][key] = 1 - self.party['vaxxed'][key]
+            self.party['unvaxxed'][key] = self.party['raw'][key + 'unvax'] / total
         self.processed = False
 
     def fill(self, line, last):
@@ -116,10 +119,13 @@ class Expander:
         status = {'unvaxxed': self.status['unvaxxed']}
         status['vaxxed'] = np.add(self.status['vaxxed'],
                                   self.status['boosted'])
+        self.percent = {'unvaxxed': {}, 'vaxxed': {}}
         for key in status.keys():
             self.partyStatus[key] = {}
             for party in self.party[key].keys():
                 self.partyStatus[key][party] = status[key]*self.party[key][party]
+                self.percent[key][party] = '%.2f' % (self.party[key][party]*100)
+                self.percent[key][party] += '%'
         return self.partyStatus
 
 

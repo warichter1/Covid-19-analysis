@@ -254,13 +254,22 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
     plt.cla()
     plt.close()
 
+def plotRow(row, average, labels, lw, ls, legendLabel=None):
+    if average is True:
+        row = gs1d(row, sigma=2)
+    label, = plt.plot(row, label=legendLabel.title(), lw=lw, ls=ls)
+    labels.append(label)
+
 
 def generalPlot(title, plotType, axisLabel, sources, yscale='log',
-                average=True, lw=.75, ls='solid', legend=None):
+                average=True, lw=.75, ls='solid', legend=None,
+                levels=1, labelAppend=None):
     """Plot generalized data."""
     labels = []
     font = FontProperties(family='ubuntu', weight='bold',
                           style='normal', size=6.5)
+    print('Source Levels:', levels)
+    print("Label Appender:", labelAppend)
     for key in sources.keys():
         # width = lw
         # style = ls
@@ -270,11 +279,27 @@ def generalPlot(title, plotType, axisLabel, sources, yscale='log',
         # elif num == 1:
         #     style = 'dashed'
         #     width = 1.25
-        row = sources[key]
-        if average is True:
-            row = gs1d(row, sigma=2)
-        label, = plt.plot(row, label=key, lw=lw, ls=ls)
-        labels.append(label)
+        if levels == 1:
+            legendLabel = '{}'.format(key)
+            if not labelAppend is None:
+                legendLabel += '({}):'.format(labelAppend[key])
+            else:
+                legendLabel += ':'
+            plotRow(sources[key], average, labels, lw, ls,
+                    legendLabel=legendLabel)
+        elif levels == 2:
+            for key2 in sources[key].keys():
+                legendLabel = '{} {}'.format(key, key2)
+                if labelAppend is not None:
+                    legendLabel += '({}):'.format(labelAppend[key][key2])
+                else:
+                    legendLabel += ':'
+                plotRow(sources[key][key2], average, labels,
+                        lw, ls, legendLabel=legendLabel)
+        # if average is True:
+        #     row = gs1d(row, sigma=2)
+        # label, = plt.plot(row, label=key, lw=lw, ls=ls)
+        # labels.append(label)
     if not legend is None:
         for key in legend:
             label = plt.axvline(legend[key][0], color=legend[key][1],
@@ -494,14 +519,16 @@ if __name__ == "__main__":
                  'Forecast': int(totalDeaths[len(totalDeaths) - 1])}
     cd.summary(days, totalCases, totalDead)
     cd.writeData('DailyDetailsProjection.txt', printText)
-    # plotLabel = ['Unvaxxed', 'Vaxxed', 'Boosted']
     axisLabel = {'x': 'Vax Status', 'y': 'Deaths by Status'}
     vax = Expander()
     results = vax.expand(endDay=len(dailyDeaths)+1)
     vaxStatusDeaths = vax.processData(dailyDeaths)
     party = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
-                vaxStatusDeaths, yscale='linear', legend=legend)
+                vax.processData(dailyDeaths), yscale='linear', legend=legend)
+    generalPlot('Deaths by Vax Status and Party', 'vaxStatus', axisLabel,
+               party, yscale='linear', legend=legend, levels=2,
+               labelAppend=vax.percent)
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
