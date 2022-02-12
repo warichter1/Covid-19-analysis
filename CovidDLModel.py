@@ -523,12 +523,17 @@ if __name__ == "__main__":
     vax = Expander()
     results = vax.expand(endDay=len(dailyDeaths)+1)
     vaxStatusDeaths = vax.processData(dailyDeaths)
-    party = vax.getParties()
+    mparty = vax.getParties()
+    # vaxStatusCases = vax.processData(dailyCases)
+    # cparty = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
                 vax.processData(dailyDeaths), yscale='linear', legend=legend)
     generalPlot('Deaths by Vax Status and Party', 'vaxStatus', axisLabel,
-               party, yscale='linear', legend=legend, levels=2,
+               mparty, yscale='linear', legend=legend, levels=2,
                labelAppend=vax.percent)
+    # generalPlot('Cases by Vax Status and Party', 'vaxStatus', axisLabel,
+    #            cparty, yscale='linear', legend=legend, levels=2,
+    #            labelAppend=vax.percent)
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
