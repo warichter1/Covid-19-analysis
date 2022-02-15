@@ -201,7 +201,7 @@ Current Date: 2/14/22 Processing:
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,633,648/1,312/1,490/0.05%/58.33%/225	
-	Deaths/today-1/total/rate/max: 35,005/0/0/1.33%/inf%	
+	Deaths/today-1/total/rate/max: 35,372/0/0/1.34%/inf%	
 	Increase Case/Death: False/False
 
 [Oklahoma-R - Pop: 3,956,971]
