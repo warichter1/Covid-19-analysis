@@ -25,9 +25,9 @@ Current Date: 2/14/22 Processing:
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 8,837,366/28,137/4,812/0.32%/50.00%/223	
+	cases/today-1/today/rate/max/per1000: 8,844,213/12,490/29,057/0.14%/50.00%/223	
 	Deaths/today-1/total/rate/max: 82,932/374/56/0.93%/3.94%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 
 [Colorado-D - Pop: 5,758,736]
 	cases/today-1/today/rate/max/per1000: 1,293,094/4,494/0/0.35%/75.00%/224	
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 8,837,366/28,137/4,812/0.32%/50.00%/223	
+	cases/today-1/today/rate/max/per1000: 8,844,213/12,490/29,057/0.14%/50.00%/223	
 	Deaths/today-1/total/rate/max: 82,932/374/56/0.93%/3.94%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 
