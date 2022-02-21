@@ -155,8 +155,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     legend['Delta Identified: 4/24'] = (443, 'purple', lw)
     legend['Delta Dominant: 6/5'] = (501, 'red', lw)
     legend['Vaccine Mandate: 9/9'] = (597, 'crimson', lw)
-    legend['Omicron Identified: 11/25'] = (674, 'Silver', lw)
-    legend['Omicron Dominant 12/20'] = (699, 'Olive', lw)
+    legend['Omicron Ba.1 Identified: 11/25'] = (674, 'Silver', lw)
+    legend['Omicron Ba.1 Dominant 12/20'] = (699, 'Olive', lw)
     legend['Omicron Ba.2 Identified 1/21'] = (731, 'orange', lw)
     
     if showTotal is True:
@@ -510,7 +510,6 @@ if __name__ == "__main__":
                  "Fully Vacinated ({})".format(fmtInt(totalVacFull[-1:][0])),
                  "Vaccine Distributed ({})".format(fmtInt(vacDistributed[-1:][0]))],
                 dates=[vaxDay, vaxBegin, vaxLast])
-    print(gp.add('./plots/*'))
     cd = CovidData()
     days = {cdate: today, pdate: len(cases)}
     totalCases = {'Current': cases[today - 1],
@@ -528,12 +527,13 @@ if __name__ == "__main__":
     # cparty = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
                 vax.processData(dailyDeaths), yscale='linear', legend=legend)
-    generalPlot('Deaths by Vax Status and Party', 'vaxStatus', axisLabel,
+    generalPlot('Deaths by Vax Status and Party', 'vaxStatusParty', axisLabel,
                mparty, yscale='linear', legend=legend, levels=2,
                labelAppend=vax.percent)
     # generalPlot('Cases by Vax Status and Party', 'vaxStatus', axisLabel,
     #            cparty, yscale='linear', legend=legend, levels=2,
     #            labelAppend=vax.percent)
+    print(gp.add('./plots/*'))
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))
     print(gp.push())
