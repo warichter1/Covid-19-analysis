@@ -10,9 +10,9 @@ Current Date: 2/23/22 Processing:
 	Increase Case/Death: True/False
 
 [American Samoa-D - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 18/0/0/0.00%/60.00%/0	
+	cases/today-1/today/rate/max/per1000: 72/12/3/16.67%/66.67%/0	
 	Deaths/today-1/total/rate/max: 0/0/0/0.00%/0.00%	
-	Increase Case/Death: False/False
+	Increase Case/Death: True/False
 
 [Arizona-R - Pop: 7,278,717]
 	cases/today-1/today/rate/max/per1000: 1,971,678/1,236/2,738/0.06%/50.00%/270	
@@ -318,6 +318,11 @@ Summary of currentAggregate Regions
 
 
 Summary of currentCaseRate Regions
+[American Samoa-D - Pop: 0]
+	cases/today-1/today/rate/max/per1000: 72/12/3/16.67%/66.67%/0	
+	Deaths/today-1/total/rate/max: 0/0/0/0.00%/0.00%	
+	Increase Case/Death: True/False
+
 [Northern Mariana Islands-R - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 9,108/226/171/2.48%/66.67%/0	
 	Deaths/today-1/total/rate/max: 27/0/1/0.30%/18.18%	
@@ -337,11 +342,6 @@ Summary of currentCaseRate Regions
 	cases/today-1/today/rate/max/per1000: 222,925/1,519/2,609/0.68%/88.24%/165	
 	Deaths/today-1/total/rate/max: 1,971/11/0/0.88%/4.90%	
 	Increase Case/Death: False/False
-
-[New Hampshire-D - Pop: 1,359,711]
-	cases/today-1/today/rate/max/per1000: 295,701/2,004/0/0.68%/58.82%/217	
-	Deaths/today-1/total/rate/max: 2,368/35/0/0.79%/6.47%	
-	Increase Case/Death: True/False
 
 
 Summary of casesPerCapita Regions
