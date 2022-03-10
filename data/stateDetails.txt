@@ -241,7 +241,7 @@ Current Date: 3/9/22 Processing:
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,013,948/539/1,337/0.03%/66.67%/294	
-	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.17%	
+	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.13%	
 	Increase Case/Death: False/True
 
 [Texas-R - Pop: 28,995,881]
@@ -308,7 +308,7 @@ Summary of currentAggregate Regions
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,013,948/539/1,337/0.03%/66.67%/294	
-	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.17%	
+	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.13%	
 	Increase Case/Death: False/True
 
 [Utah-R - Pop: 3,205,958]
@@ -362,7 +362,7 @@ Summary of casesPerCapita Regions
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,013,948/539/1,337/0.03%/66.67%/294	
-	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.17%	
+	Deaths/today-1/total/rate/max: 24,732/19/29/1.23%/2.13%	
 	Increase Case/Death: False/True
 
 [Utah-R - Pop: 3,205,958]
