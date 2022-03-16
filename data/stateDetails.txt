@@ -11,8 +11,8 @@ Current Date: 3/15/22 Processing:
 
 [American Samoa-D - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 588/33/112/5.61%/66.67%/0	
-	Deaths/today-1/total/rate/max: 0/0/0/0.00%/8.80%	
-	Increase Case/Death: False/True
+	Deaths/today-1/total/rate/max: 0/0/0/0.00%/0.00%	
+	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
 	cases/today-1/today/rate/max/per1000: 1,987,318/0/0/0.00%/50.00%/273	
@@ -25,7 +25,7 @@ Current Date: 3/15/22 Processing:
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,047,972/1,568/8,900/0.02%/50.00%/228	
+	cases/today-1/today/rate/max/per1000: 9,047,972/2,676/4,618/0.03%/50.00%/228	
 	Deaths/today-1/total/rate/max: 87,607/41/297/0.97%/3.94%	
 	Increase Case/Death: False/True
 
@@ -320,8 +320,8 @@ Summary of currentAggregate Regions
 Summary of currentCaseRate Regions
 [American Samoa-D - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 588/33/112/5.61%/66.67%/0	
-	Deaths/today-1/total/rate/max: 0/0/0/0.00%/8.80%	
-	Increase Case/Death: False/True
+	Deaths/today-1/total/rate/max: 0/0/0/0.00%/0.00%	
+	Increase Case/Death: False/False
 
 [Northern Mariana Islands-R - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 10,535/63/93/0.60%/66.67%/0	
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,047,972/1,568/8,900/0.02%/50.00%/228	
+	cases/today-1/today/rate/max/per1000: 9,047,972/2,676/4,618/0.03%/50.00%/228	
 	Deaths/today-1/total/rate/max: 87,607/41/297/0.97%/3.94%	
 	Increase Case/Death: False/True
 
