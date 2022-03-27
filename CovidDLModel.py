@@ -18,10 +18,6 @@ from math import pi
 import pandas as pd
 import numpy as np
 import matplotlib
-# import tornado
-# import tkinter
-# matplotlib.use('TkAgg')
-# matplotlib.use('webAgg')
 import matplotlib.pyplot as plt
 from matplotlib.font_manager import FontProperties
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
@@ -394,7 +390,7 @@ if __name__ == "__main__":
         dailyCases.append(now)
         yesterday = (us[cdate])
         yesterdayDeaths = int(deaths[cdate])
-        dailyDeaths.append(nowDeaths)
+        dailyDeaths.append(nowDeaths if nowDeaths > 0 else 0)
         totalDeaths.append(int(deaths[cdate]))
         vacToday = 0
         distToday = 0
@@ -523,6 +519,7 @@ if __name__ == "__main__":
     results = vax.expand(endDay=len(dailyDeaths)+1)
     vaxStatusDeaths = vax.processData(dailyDeaths)
     mparty = vax.getParties()
+    # buf = mparty['vaxxed']['democratic']
     # vaxStatusCases = vax.processData(dailyCases)
     # cparty = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,

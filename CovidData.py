@@ -32,6 +32,7 @@ class CovidData:
         self.infectionByLength = {}
         self.curve = {}
         self.human = {}
+        self.appended = []
         self.severity = {'asymptomatic': 0.42, 'hospitalized': 0.2}
         self.severity['symtomatic'] = 1 - self.severity['asymptomatic']
         self.severity['symtomatic'] -= self.severity['hospitalized']
@@ -51,6 +52,9 @@ class CovidData:
         self.infectionLength()
         if summary is True:
             self.summary()
+
+    def append(self, records):
+        self.appended.append(records)
 
     def infectionLength(self):
         """Length of illness, inclusing Long Haulers"""
@@ -235,12 +239,29 @@ class CovidData:
                          'Death Rate by Age Range')
         self.formatPrint(deathTotals, self.raceDeathRate, 'Death Rate by Race')
         self.formatPrint(deathTotals, self.deathsBySex, 'Death Rate by Sex')
+        if len(self.appended) > 0:
+            print("Append additional records")
+            for record in self.appended:
+                self.rawPrint(record)
         self.writeData('DailySummary.txt', self.summaryText)
 
     def writeData(self, filename, text):
         print('Writing:', os.path.join(self.textPath, filename))
         with open(os.path.join(self.textPath, filename), "w") as writeToFile:
             writeToFile.writelines(text)
+
+    def rawPrint(self, record):
+        print('Print Record')
+        table = PrettyTable()
+        table.border = True
+        table.header = True
+        title = record['title']
+        template = list(record.field.keys())
+        table.field_names = [title] + list(template.keys()) + ['Total']
+
+        data = table.get_string() + '\n'
+        self.summaryText += data
+        print(table)
 
     def formatPrint(self, dayTotals, template, title):
         """Create a formatted string from a list, display as a table."""
