@@ -25,7 +25,7 @@ Current Date: 3/31/22 Processing:
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,105,480/5,943/2,944/0.07%/50.00%/230	
+	cases/today-1/today/rate/max/per1000: 9,101,621/2,141/1,802/0.02%/50.00%/230	
 	Deaths/today-1/total/rate/max: 88,950/71/121/0.98%/3.94%	
 	Increase Case/Death: True/True
 
@@ -50,9 +50,9 @@ Current Date: 3/31/22 Processing:
 	Increase Case/Death: False/False
 
 [District of Columbia-D - Pop: 705,749]
-	cases/today-1/today/rate/max/per1000: 134,623/0/0/0.00%/43.66%/190	
-	Deaths/today-1/total/rate/max: 1,319/0/0/0.98%/5.35%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 136,886/288/0/0.21%/43.66%/193	
+	Deaths/today-1/total/rate/max: 1,333/2/0/0.97%/5.35%	
+	Increase Case/Death: True/False
 
 [Florida-R - Pop: 21,477,737]
 	cases/today-1/today/rate/max/per1000: 5,885,004/0/0/0.00%/57.14%/274	
@@ -201,7 +201,7 @@ Current Date: 3/31/22 Processing:
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,672,801/3,103/0/0.12%/58.33%/228	
-	Deaths/today-1/total/rate/max: 38,042/249/0/1.41%/inf%	
+	Deaths/today-1/total/rate/max: 38,042/0/0/1.42%/inf%	
 	Increase Case/Death: True/False
 
 [Oklahoma-R - Pop: 3,956,971]
@@ -328,6 +328,11 @@ Summary of currentCaseRate Regions
 	Deaths/today-1/total/rate/max: 29,268/0/385/1.46%/4.89%	
 	Increase Case/Death: True/True
 
+[District of Columbia-D - Pop: 705,749]
+	cases/today-1/today/rate/max/per1000: 136,886/288/0/0.21%/43.66%/193	
+	Deaths/today-1/total/rate/max: 1,333/2/0/0.97%/5.35%	
+	Increase Case/Death: True/False
+
 [Oklahoma-R - Pop: 3,956,971]
 	cases/today-1/today/rate/max/per1000: 1,033,258/1,810/0/0.18%/61.36%/261	
 	Deaths/today-1/total/rate/max: 15,520/137/0/1.49%/5.99%	
@@ -337,11 +342,6 @@ Summary of currentCaseRate Regions
 	cases/today-1/today/rate/max/per1000: 116,639/174/219/0.15%/60.00%/186	
 	Deaths/today-1/total/rate/max: 617/0/0/0.53%/6.90%	
 	Increase Case/Death: False/False
-
-[Georgia-R - Pop: 10,617,423]
-	cases/today-1/today/rate/max/per1000: 2,499,431/2,928/9,039/0.12%/50.00%/235	
-	Deaths/today-1/total/rate/max: 36,987/64/55/1.48%/4.34%	
-	Increase Case/Death: False/True
 
 
 Summary of casesPerCapita Regions
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/True
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,105,480/5,943/2,944/0.07%/50.00%/230	
+	cases/today-1/today/rate/max/per1000: 9,101,621/2,141/1,802/0.02%/50.00%/230	
 	Deaths/today-1/total/rate/max: 88,950/71/121/0.98%/3.94%	
 	Increase Case/Death: True/True
 
