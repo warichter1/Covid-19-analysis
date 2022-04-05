@@ -91,7 +91,7 @@ Current Date: 4/4/22 Processing:
 
 [Indiana-R - Pop: 6,732,219]
 	cases/today-1/today/rate/max/per1000: 1,691,874/404/0/0.02%/50.00%/251	
-	Deaths/today-1/total/rate/max: 23,438/914/0/1.44%/7.89%	
+	Deaths/today-1/total/rate/max: 23,438/7/0/1.38%/7.89%	
 	Increase Case/Death: True/False
 
 [Iowa-R - Pop: 3,155,070]
@@ -105,8 +105,8 @@ Current Date: 4/4/22 Processing:
 	Increase Case/Death: True/False
 
 [Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 2,632,710/1,317,037/0/50.03%/75.00%/589	
-	Deaths/today-1/total/rate/max: 30,056/15,068/0/0.57%/5.66%	
+	cases/today-1/today/rate/max/per1000: 1,316,355/682/0/0.05%/75.00%/294	
+	Deaths/today-1/total/rate/max: 15,028/40/0/1.14%/5.66%	
 	Increase Case/Death: True/False
 
 [Louisiana-R - Pop: 4,648,794]
@@ -191,7 +191,7 @@ Current Date: 4/4/22 Processing:
 
 [North Dakota-R - Pop: 762,062]
 	cases/today-1/today/rate/max/per1000: 239,863/0/0/0.00%/68.42%/314	
-	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.52%	
+	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.50%	
 	Increase Case/Death: False/False
 
 [Northern Mariana Islands-R - Pop: 0]
@@ -291,11 +291,6 @@ Current Date: 4/4/22 Processing:
 
 
 Summary of currentAggregate Regions
-[Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 2,632,710/1,317,037/0/50.03%/75.00%/589	
-	Deaths/today-1/total/rate/max: 30,056/15,068/0/0.57%/5.66%	
-	Increase Case/Death: True/False
-
 [Rhode Island-D - Pop: 1,059,361]
 	cases/today-1/today/rate/max/per1000: 362,000/492/0/0.14%/75.00%/341	
 	Deaths/today-1/total/rate/max: 3,522/0/0/0.97%/5.81%	
@@ -308,7 +303,7 @@ Summary of currentAggregate Regions
 
 [North Dakota-R - Pop: 762,062]
 	cases/today-1/today/rate/max/per1000: 239,863/0/0/0.00%/68.42%/314	
-	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.52%	
+	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.50%	
 	Increase Case/Death: False/False
 
 [Tennessee-R - Pop: 6,829,174]
@@ -316,13 +311,13 @@ Summary of currentAggregate Regions
 	Deaths/today-1/total/rate/max: 25,623/0/0/1.27%/2.13%	
 	Increase Case/Death: False/False
 
-
-Summary of currentCaseRate Regions
 [Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 2,632,710/1,317,037/0/50.03%/75.00%/589	
-	Deaths/today-1/total/rate/max: 30,056/15,068/0/0.57%/5.66%	
+	cases/today-1/today/rate/max/per1000: 1,316,355/682/0/0.05%/75.00%/294	
+	Deaths/today-1/total/rate/max: 15,028/40/0/1.14%/5.66%	
 	Increase Case/Death: True/False
 
+
+Summary of currentCaseRate Regions
 [American Samoa-D - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 4,535/718/0/15.83%/66.67%/0	
 	Deaths/today-1/total/rate/max: 7/3/0/0.09%/0.10%	
@@ -343,13 +338,13 @@ Summary of currentCaseRate Regions
 	Deaths/today-1/total/rate/max: 10,779/0/0/1.46%/9.33%	
 	Increase Case/Death: True/False
 
-
-Summary of casesPerCapita Regions
-[Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 2,632,710/1,317,037/0/50.03%/75.00%/589	
-	Deaths/today-1/total/rate/max: 30,056/15,068/0/0.57%/5.66%	
+[Washington-D - Pop: 7,614,893]
+	cases/today-1/today/rate/max/per1000: 1,458,424/2,160/0/0.15%/85.71%/191	
+	Deaths/today-1/total/rate/max: 12,515/5/0/0.86%/22.22%	
 	Increase Case/Death: True/False
 
+
+Summary of casesPerCapita Regions
 [Rhode Island-D - Pop: 1,059,361]
 	cases/today-1/today/rate/max/per1000: 362,000/492/0/0.14%/75.00%/341	
 	Deaths/today-1/total/rate/max: 3,522/0/0/0.97%/5.81%	
@@ -362,13 +357,18 @@ Summary of casesPerCapita Regions
 
 [North Dakota-R - Pop: 762,062]
 	cases/today-1/today/rate/max/per1000: 239,863/0/0/0.00%/68.42%/314	
-	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.52%	
+	Deaths/today-1/total/rate/max: 2,232/0/0/0.93%/2.50%	
 	Increase Case/Death: False/False
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,020,993/0/0/0.00%/66.67%/295	
 	Deaths/today-1/total/rate/max: 25,623/0/0/1.27%/2.13%	
 	Increase Case/Death: False/False
+
+[Kentucky-R - Pop: 4,467,673]
+	cases/today-1/today/rate/max/per1000: 1,316,355/682/0/0.05%/75.00%/294	
+	Deaths/today-1/total/rate/max: 15,028/40/0/1.14%/5.66%	
+	Increase Case/Death: True/False
 
 
 Summary of currentDeathRate Regions
