@@ -25,7 +25,7 @@ Current Date: 4/24/22 Processing:
 	Increase Case/Death: False/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,192,666/0/0/0.00%/50.00%/232	
+	cases/today-1/today/rate/max/per1000: 9,190,572/0/0/0.00%/50.00%/232	
 	Deaths/today-1/total/rate/max: 90,014/0/0/0.98%/3.94%	
 	Increase Case/Death: False/False
 
@@ -100,8 +100,8 @@ Current Date: 4/24/22 Processing:
 	Increase Case/Death: False/False
 
 [Kansas-R - Pop: 2,913,314]
-	cases/today-1/today/rate/max/per1000: 772,667/0/0/0.00%/75.00%/265	
-	Deaths/today-1/total/rate/max: 8,524/0/0/1.10%/12.50%	
+	cases/today-1/today/rate/max/per1000: 774,061/0/0/0.00%/75.00%/265	
+	Deaths/today-1/total/rate/max: 8,596/0/0/1.11%/12.50%	
 	Increase Case/Death: False/False
 
 [Kentucky-R - Pop: 4,467,673]
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 9,192,666/0/0/0.00%/50.00%/232	
+	cases/today-1/today/rate/max/per1000: 9,190,572/0/0/0.00%/50.00%/232	
 	Deaths/today-1/total/rate/max: 90,014/0/0/0.98%/3.94%	
 	Increase Case/Death: False/False
 
