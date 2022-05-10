@@ -246,7 +246,7 @@ Current Date: 5/9/22 Processing:
 
 [Texas-R - Pop: 28,995,881]
 	cases/today-1/today/rate/max/per1000: 6,850,868/2,499/1,520/0.04%/50.00%/236	
-	Deaths/today-1/total/rate/max: 88,478/302/1/1.29%/4.08%	
+	Deaths/today-1/total/rate/max: 88,178/2/1/1.29%/4.08%	
 	Increase Case/Death: True/False
 
 [Utah-R - Pop: 3,205,958]
