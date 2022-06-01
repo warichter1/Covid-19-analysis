@@ -85,8 +85,8 @@ Current Date: 5/31/22 Processing:
 	Increase Case/Death: False/False
 
 [Illinois-D - Pop: 12,671,821]
-	cases/today-1/today/rate/max/per1000: 3,302,416/16,039/0/0.49%/52.00%/260	
-	Deaths/today-1/total/rate/max: 38,135/1,896/0/1.10%/4.86%	
+	cases/today-1/today/rate/max/per1000: 3,302,423/16,042/0/0.49%/52.00%/260	
+	Deaths/today-1/total/rate/max: 38,135/8/0/1.15%/4.86%	
 	Increase Case/Death: True/False
 
 [Indiana-R - Pop: 6,732,219]
@@ -334,8 +334,8 @@ Summary of currentCaseRate Regions
 	Increase Case/Death: True/False
 
 [Illinois-D - Pop: 12,671,821]
-	cases/today-1/today/rate/max/per1000: 3,302,416/16,039/0/0.49%/52.00%/260	
-	Deaths/today-1/total/rate/max: 38,135/1,896/0/1.10%/4.86%	
+	cases/today-1/today/rate/max/per1000: 3,302,423/16,042/0/0.49%/52.00%/260	
+	Deaths/today-1/total/rate/max: 38,135/8/0/1.15%/4.86%	
 	Increase Case/Death: True/False
 
 [California-D - Pop: 39,512,223]
