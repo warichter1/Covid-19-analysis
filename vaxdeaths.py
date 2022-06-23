@@ -71,13 +71,14 @@ class Expander:
                 else:
                     header = True
                     self.expanded += [row]
+        self.inlist = self.expanded.copy()
         self.expanded += self.extend(endDay)
         self.writeCsv()
         return self.expanded
 
     def extend(self, end):
         """Use Past data to forecast data."""
-        data = self.expanded
+        data = self.inlist
         begin = 572
         last = len(data) - 1
         extended = []
@@ -85,9 +86,13 @@ class Expander:
         arr = np.array(data[-(last - begin):])
         count = end - day
         for index in range(count):
-            buffer = [day] + list(arr[index:, 1:].mean(axis=0))
-            np.append(arr, buffer)
-            extended.append(buffer)
+            # buffer = np.array([day] + list(arr[index:, 1:].mean(axis=0)))
+            buffer = np.array([day] + list(arr[index:, 1:].mean(axis=0)))
+            print('line:', index, list(buffer))
+            # arr = np.append(arr, buffer)
+            arr = np.vstack([arr, buffer])
+            extended.append([day] + list(buffer[1:]))
+            # print('Buffer:', day, buffer)
             day += 1
         return extended
 
