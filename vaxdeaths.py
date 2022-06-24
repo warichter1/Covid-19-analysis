@@ -8,7 +8,8 @@ Created on Fri Jan 28 21:36:54 2022
 
 import csv
 import numpy as np
-from statistics import mean
+from statistics import mean, median, mode
+from scipy import stats
 
 inputfile = "deaths-by-vaccination-status.csv"
 outputfile = "full-deaths-by-vaccination-status.csv"
@@ -87,8 +88,11 @@ class Expander:
         count = end - day
         for index in range(count):
             # buffer = np.array([day] + list(arr[index:, 1:].mean(axis=0)))
-            buffer = np.array([day] + list(arr[index:, 1:].mean(axis=0)))
-            print('line:', index, list(buffer))
+            # buffer = np.array([day] + list(stats.mode(arr[index:, 1:])[0][0]))
+            # buffer = np.array([day] + list(np.median(arr[1:, 1:], axis=0)))
+            # buffer = np.array([day] + list(np.std(arr[1:, 1:], axis=0)))
+            buffer = np.array([day] + list(np.amax(arr[1:, 1:], axis=0)))
+            # print('line:', index, list(buffer))
             # arr = np.append(arr, buffer)
             arr = np.vstack([arr, buffer])
             extended.append([day] + list(buffer[1:]))
