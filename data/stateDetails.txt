@@ -110,8 +110,8 @@ Current Date: 6/29/22 Processing:
 	Increase Case/Death: True/False
 
 [Louisiana-R - Pop: 4,648,794]
-	cases/today-1/today/rate/max/per1000: 1,228,799/2,383/1,913/0.19%/73.68%/264	
-	Deaths/today-1/total/rate/max: 17,409/5/5/1.42%/7.31%	
+	cases/today-1/today/rate/max/per1000: 1,305,552/3,022/2,405/0.23%/73.68%/280	
+	Deaths/today-1/total/rate/max: 17,409/5/5/1.33%/7.31%	
 	Increase Case/Death: True/False
 
 [Maine-D - Pop: 1,344,212]
