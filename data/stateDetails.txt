@@ -1,46 +1,46 @@
-Current Date: 6/30/22 Processing:
+Current Date: 7/1/22 Processing:
 [Alabama-R - Pop: 4,903,185]
-	cases/today-1/today/rate/max/per1000: 1,357,266/1,926/2,425/0.14%/50.00%/276	
-	Deaths/today-1/total/rate/max: 19,755/15/1/1.45%/4.12%	
+	cases/today-1/today/rate/max/per1000: 1,359,051/1,785/1,926/0.13%/50.00%/277	
+	Deaths/today-1/total/rate/max: 19,759/4/15/1.45%/4.12%	
 	Increase Case/Death: False/False
 
 [Alaska-R - Pop: 731,545]
-	cases/today-1/today/rate/max/per1000: 272,415/0/3,104/0.00%/75.00%/372	
+	cases/today-1/today/rate/max/per1000: 272,415/0/0/0.00%/75.00%/372	
 	Deaths/today-1/total/rate/max: 1,285/0/0/0.47%/3.11%	
 	Increase Case/Death: False/False
 
 [American Samoa-D - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 6,414/0/0/0.00%/66.67%/0	
+	cases/today-1/today/rate/max/per1000: 6,505/91/0/1.40%/66.67%/0	
 	Deaths/today-1/total/rate/max: 31/0/0/0.48%/0.51%	
-	Increase Case/Death: False/False
+	Increase Case/Death: True/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 2,125,567/0/16,514/0.00%/50.00%/292	
-	Deaths/today-1/total/rate/max: 30,515/0/63/1.44%/4.89%	
-	Increase Case/Death: False/True
-
-[Arkansas-R - Pop: 3,017,804]
-	cases/today-1/today/rate/max/per1000: 865,592/1,437/1,332/0.17%/300.00%/286	
-	Deaths/today-1/total/rate/max: 11,581/1/6/1.34%/2.35%	
-	Increase Case/Death: True/False
-
-[California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 10,101,831/5,700/6,885/0.06%/50.00%/255	
-	Deaths/today-1/total/rate/max: 92,249/14/28/0.91%/3.94%	
+	cases/today-1/today/rate/max/per1000: 2,125,567/0/0/0.00%/50.00%/292	
+	Deaths/today-1/total/rate/max: 30,515/0/0/1.44%/4.89%	
 	Increase Case/Death: False/False
 
-[Colorado-D - Pop: 5,758,736]
-	cases/today-1/today/rate/max/per1000: 1,535,804/2,603/2,494/0.17%/75.00%/266	
-	Deaths/today-1/total/rate/max: 12,771/5/13/0.83%/5.60%	
+[Arkansas-R - Pop: 3,017,804]
+	cases/today-1/today/rate/max/per1000: 866,816/1,224/1,437/0.14%/300.00%/287	
+	Deaths/today-1/total/rate/max: 11,585/4/1/1.34%/2.35%	
+	Increase Case/Death: False/False
+
+[California-D - Pop: 39,512,223]
+	cases/today-1/today/rate/max/per1000: 10,157,114/55,283/5,700/0.54%/50.00%/257	
+	Deaths/today-1/total/rate/max: 92,386/137/14/0.91%/3.94%	
 	Increase Case/Death: True/False
 
+[Colorado-D - Pop: 5,758,736]
+	cases/today-1/today/rate/max/per1000: 1,538,051/2,247/2,603/0.15%/75.00%/267	
+	Deaths/today-1/total/rate/max: 12,773/2/5/0.83%/5.60%	
+	Increase Case/Death: False/False
+
 [Connecticut-D - Pop: 3,565,287]
-	cases/today-1/today/rate/max/per1000: 828,968/705/648/0.09%/66.67%/232	
+	cases/today-1/today/rate/max/per1000: 831,880/2,912/705/0.35%/66.67%/233	
 	Deaths/today-1/total/rate/max: 11,045/0/0/1.33%/9.33%	
 	Increase Case/Death: True/False
 
 [Delaware-D - Pop: 973,764]
-	cases/today-1/today/rate/max/per1000: 285,046/313/272/0.11%/75.00%/292	
+	cases/today-1/today/rate/max/per1000: 285,403/357/313/0.13%/75.00%/293	
 	Deaths/today-1/total/rate/max: 2,984/0/0/1.05%/5.29%	
 	Increase Case/Death: True/False
 
@@ -50,19 +50,19 @@ Current Date: 6/30/22 Processing:
 	Increase Case/Death: False/False
 
 [District of Columbia-D - Pop: 705,749]
-	cases/today-1/today/rate/max/per1000: 156,802/245/740/0.16%/43.66%/222	
-	Deaths/today-1/total/rate/max: 1,349/0/0/0.86%/5.35%	
+	cases/today-1/today/rate/max/per1000: 157,041/239/245/0.15%/43.66%/222	
+	Deaths/today-1/total/rate/max: 1,351/2/0/0.86%/5.35%	
 	Increase Case/Death: False/False
 
 [Florida-R - Pop: 21,477,737]
-	cases/today-1/today/rate/max/per1000: 6,482,295/12,755/22,440/0.20%/57.14%/301	
-	Deaths/today-1/total/rate/max: 75,800/62/67/1.17%/15.38%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 6,537,512/55,217/12,755/0.84%/57.14%/304	
+	Deaths/today-1/total/rate/max: 75,891/91/62/1.16%/15.38%	
+	Increase Case/Death: True/False
 
 [Georgia-R - Pop: 10,617,423]
-	cases/today-1/today/rate/max/per1000: 2,647,568/0/20,971/0.00%/50.00%/249	
-	Deaths/today-1/total/rate/max: 38,579/0/132/1.46%/4.34%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 2,647,568/0/0/0.00%/50.00%/249	
+	Deaths/today-1/total/rate/max: 38,579/0/0/1.46%/4.34%	
+	Increase Case/Death: False/False
 
 [Grand Princess-N - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 103/0/0/0.00%/72.82%/0	
@@ -70,64 +70,64 @@ Current Date: 6/30/22 Processing:
 	Increase Case/Death: False/False
 
 [Guam-D - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 51,898/129/181/0.25%/58.33%/0	
-	Deaths/today-1/total/rate/max: 372/1/0/0.71%/4.30%	
-	Increase Case/Death: False/False
-
-[Hawaii-D - Pop: 1,415,872]
-	cases/today-1/today/rate/max/per1000: 308,695/0/5,362/0.00%/66.67%/218	
-	Deaths/today-1/total/rate/max: 1,504/0/15/0.49%/2.74%	
-	Increase Case/Death: False/True
-
-[Idaho-R - Pop: 1,787,065]
-	cases/today-1/today/rate/max/per1000: 462,978/0/1,352/0.00%/60.87%/259	
-	Deaths/today-1/total/rate/max: 4,973/0/6/1.07%/3.11%	
-	Increase Case/Death: False/True
-
-[Illinois-D - Pop: 12,671,821]
-	cases/today-1/today/rate/max/per1000: 3,430,843/4,864/4,645/0.14%/52.00%/270	
-	Deaths/today-1/total/rate/max: 38,588/19/10/1.12%/4.86%	
+	cases/today-1/today/rate/max/per1000: 52,067/169/129/0.32%/58.33%/0	
+	Deaths/today-1/total/rate/max: 372/0/1/0.71%/4.30%	
 	Increase Case/Death: True/False
 
+[Hawaii-D - Pop: 1,415,872]
+	cases/today-1/today/rate/max/per1000: 308,695/0/0/0.00%/66.67%/218	
+	Deaths/today-1/total/rate/max: 1,504/0/0/0.49%/2.74%	
+	Increase Case/Death: False/False
+
+[Idaho-R - Pop: 1,787,065]
+	cases/today-1/today/rate/max/per1000: 464,094/1,116/0/0.24%/60.87%/259	
+	Deaths/today-1/total/rate/max: 4,981/8/0/1.07%/3.11%	
+	Increase Case/Death: True/False
+
+[Illinois-D - Pop: 12,671,821]
+	cases/today-1/today/rate/max/per1000: 3,435,405/4,562/4,864/0.13%/52.00%/271	
+	Deaths/today-1/total/rate/max: 38,601/13/19/1.12%/4.86%	
+	Increase Case/Death: False/False
+
 [Indiana-R - Pop: 6,732,219]
-	cases/today-1/today/rate/max/per1000: 1,772,183/0/3,168/0.00%/50.00%/263	
-	Deaths/today-1/total/rate/max: 23,877/0/21/1.35%/7.89%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 1,775,886/3,703/0/0.21%/50.00%/263	
+	Deaths/today-1/total/rate/max: 23,882/5/0/1.34%/7.89%	
+	Increase Case/Death: True/False
 
 [Iowa-R - Pop: 3,155,070]
-	cases/today-1/today/rate/max/per1000: 796,611/415/3,988/0.05%/62.50%/252	
-	Deaths/today-1/total/rate/max: 9,688/0/9/1.22%/2.77%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 796,611/0/415/0.00%/62.50%/252	
+	Deaths/today-1/total/rate/max: 9,688/0/0/1.22%/2.77%	
+	Increase Case/Death: False/False
 
 [Kansas-R - Pop: 2,913,314]
-	cases/today-1/today/rate/max/per1000: 807,628/0/4,936/0.00%/75.00%/277	
-	Deaths/today-1/total/rate/max: 8,952/0/7/1.11%/12.50%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 807,628/0/0/0.00%/75.00%/277	
+	Deaths/today-1/total/rate/max: 8,952/0/0/1.11%/12.50%	
+	Increase Case/Death: False/False
 
 [Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 1,403,534/1,870/2,959/0.13%/75.00%/314	
-	Deaths/today-1/total/rate/max: 16,164/8/5/1.15%/5.66%	
+	cases/today-1/today/rate/max/per1000: 1,405,062/1,528/1,870/0.11%/75.00%/314	
+	Deaths/today-1/total/rate/max: 16,172/8/8/1.15%/5.66%	
 	Increase Case/Death: False/False
 
 [Louisiana-R - Pop: 4,648,794]
-	cases/today-1/today/rate/max/per1000: 1,308,592/3,040/3,022/0.23%/73.68%/281	
-	Deaths/today-1/total/rate/max: 17,412/3/5/1.33%/7.31%	
-	Increase Case/Death: True/False
-
-[Maine-D - Pop: 1,344,212]
-	cases/today-1/today/rate/max/per1000: 269,926/246/372/0.09%/88.24%/200	
-	Deaths/today-1/total/rate/max: 2,415/2/0/0.89%/4.90%	
+	cases/today-1/today/rate/max/per1000: 1,310,829/2,237/3,040/0.17%/73.68%/281	
+	Deaths/today-1/total/rate/max: 17,418/6/3/1.33%/7.31%	
 	Increase Case/Death: False/False
 
+[Maine-D - Pop: 1,344,212]
+	cases/today-1/today/rate/max/per1000: 270,123/197/246/0.07%/88.24%/200	
+	Deaths/today-1/total/rate/max: 2,418/3/2/0.89%/4.90%	
+	Increase Case/Death: False/True
+
 [Maryland-D - Pop: 6,045,680]
-	cases/today-1/today/rate/max/per1000: 1,134,521/1,716/1,434/0.15%/42.86%/187	
-	Deaths/today-1/total/rate/max: 14,789/5/6/1.30%/5.05%	
+	cases/today-1/today/rate/max/per1000: 1,136,317/1,796/1,716/0.16%/42.86%/187	
+	Deaths/today-1/total/rate/max: 14,794/5/5/1.30%/5.05%	
 	Increase Case/Death: True/False
 
 [Massachusetts-D - Pop: 6,892,503]
-	cases/today-1/today/rate/max/per1000: 1,924,702/2,055/1,678/0.11%/61.11%/279	
-	Deaths/today-1/total/rate/max: 20,944/12/22/1.09%/7.79%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,926,543/1,841/2,055/0.10%/61.11%/279	
+	Deaths/today-1/total/rate/max: 20,953/9/12/1.09%/7.79%	
+	Increase Case/Death: False/False
 
 [Michigan-R - Pop: 9,986,857]
 	cases/today-1/today/rate/max/per1000: 2,606,431/0/0/0.00%/87.50%/260	
@@ -135,99 +135,99 @@ Current Date: 6/30/22 Processing:
 	Increase Case/Death: False/False
 
 [Minnesota-D - Pop: 5,639,632]
-	cases/today-1/today/rate/max/per1000: 1,552,840/0/1,281/0.00%/60.38%/275	
-	Deaths/today-1/total/rate/max: 13,127/0/14/0.85%/7.14%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 1,552,840/0/0/0.00%/60.38%/275	
+	Deaths/today-1/total/rate/max: 13,127/0/0/0.85%/7.14%	
+	Increase Case/Death: False/False
 
 [Mississippi-R - Pop: 2,976,149]
-	cases/today-1/today/rate/max/per1000: 835,120/2,908/0/0.35%/83.33%/280	
-	Deaths/today-1/total/rate/max: 12,525/9/0/1.50%/4.73%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 836,757/1,637/2,908/0.20%/83.33%/281	
+	Deaths/today-1/total/rate/max: 12,526/1/9/1.50%/4.73%	
+	Increase Case/Death: False/False
 
 [Missouri-R - Pop: 6,137,428]
-	cases/today-1/today/rate/max/per1000: 1,506,514/547/514/0.04%/66.67%/245	
-	Deaths/today-1/total/rate/max: 20,905/2/2/1.39%/6.31%	
+	cases/today-1/today/rate/max/per1000: 1,516,865/10,351/547/0.68%/66.67%/247	
+	Deaths/today-1/total/rate/max: 20,947/42/2/1.38%/6.31%	
 	Increase Case/Death: True/False
 
 [Montana-R - Pop: 1,068,778]
-	cases/today-1/today/rate/max/per1000: 285,017/0/0/0.00%/80.00%/266	
-	Deaths/today-1/total/rate/max: 3,444/0/0/1.21%/3.53%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 287,145/2,128/0/0.74%/80.00%/268	
+	Deaths/today-1/total/rate/max: 3,445/1/0/1.20%/3.53%	
+	Increase Case/Death: True/False
 
 [Nebraska-R - Pop: 1,934,408]
-	cases/today-1/today/rate/max/per1000: 500,056/2,956/0/0.59%/66.67%/258	
-	Deaths/today-1/total/rate/max: 4,340/3/0/0.87%/2.22%	
-	Increase Case/Death: True/False
-
-[Nevada-D - Pop: 3,080,156]
-	cases/today-1/today/rate/max/per1000: 766,702/0/8,125/0.00%/55.56%/248	
-	Deaths/today-1/total/rate/max: 11,039/0/33/1.44%/5.13%	
-	Increase Case/Death: False/True
-
-[New Hampshire-D - Pop: 1,359,711]
-	cases/today-1/today/rate/max/per1000: 332,120/237/263/0.07%/58.82%/244	
-	Deaths/today-1/total/rate/max: 2,585/3/3/0.78%/6.47%	
-	Increase Case/Death: False/True
-
-[New Jersey-D - Pop: 8,882,190]
-	cases/today-1/today/rate/max/per1000: 2,488,751/3,911/3,144/0.16%/66.67%/280	
-	Deaths/today-1/total/rate/max: 34,049/13/13/1.37%/8.79%	
-	Increase Case/Death: True/False
-
-[New Mexico-D - Pop: 2,096,829]
-	cases/today-1/today/rate/max/per1000: 563,848/1,057/1,126/0.19%/50.00%/268	
-	Deaths/today-1/total/rate/max: 7,941/13/4/1.41%/4.56%	
+	cases/today-1/today/rate/max/per1000: 500,574/518/2,956/0.10%/66.67%/258	
+	Deaths/today-1/total/rate/max: 4,342/2/3/0.87%/2.22%	
 	Increase Case/Death: False/False
 
+[Nevada-D - Pop: 3,080,156]
+	cases/today-1/today/rate/max/per1000: 766,702/0/0/0.00%/55.56%/248	
+	Deaths/today-1/total/rate/max: 11,039/0/0/1.44%/5.13%	
+	Increase Case/Death: False/False
+
+[New Hampshire-D - Pop: 1,359,711]
+	cases/today-1/today/rate/max/per1000: 332,364/244/237/0.07%/58.82%/244	
+	Deaths/today-1/total/rate/max: 2,586/1/3/0.78%/6.47%	
+	Increase Case/Death: True/True
+
+[New Jersey-D - Pop: 8,882,190]
+	cases/today-1/today/rate/max/per1000: 2,492,366/3,615/3,911/0.15%/66.67%/280	
+	Deaths/today-1/total/rate/max: 34,057/8/13/1.37%/8.79%	
+	Increase Case/Death: False/False
+
+[New Mexico-D - Pop: 2,096,829]
+	cases/today-1/today/rate/max/per1000: 564,678/830/1,057/0.15%/50.00%/269	
+	Deaths/today-1/total/rate/max: 7,946/5/13/1.41%/4.56%	
+	Increase Case/Death: False/True
+
 [New York-D - Pop: 19,453,561]
-	cases/today-1/today/rate/max/per1000: 5,611,093/7,321/7,623/0.13%/90.00%/288	
-	Deaths/today-1/total/rate/max: 69,667/22/24/1.24%/8.27%	
+	cases/today-1/today/rate/max/per1000: 5,614,976/3,883/7,321/0.07%/90.00%/288	
+	Deaths/today-1/total/rate/max: 69,690/23/22/1.24%/8.27%	
 	Increase Case/Death: False/False
 
 [North Carolina-R - Pop: 10,488,084]
-	cases/today-1/today/rate/max/per1000: 2,867,218/0/24,141/0.00%/71.43%/273	
-	Deaths/today-1/total/rate/max: 25,209/0/58/0.88%/3.62%	
-	Increase Case/Death: False/True
-
-[North Dakota-R - Pop: 762,062]
-	cases/today-1/today/rate/max/per1000: 249,770/248/561/0.10%/68.42%/327	
-	Deaths/today-1/total/rate/max: 2,296/0/1/0.92%/2.50%	
+	cases/today-1/today/rate/max/per1000: 2,867,218/0/0/0.00%/71.43%/273	
+	Deaths/today-1/total/rate/max: 25,209/0/0/0.88%/3.62%	
 	Increase Case/Death: False/False
 
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 11,829/70/0/0.59%/66.67%/0	
-	Deaths/today-1/total/rate/max: 35/0/0/0.30%/18.18%	
+[North Dakota-R - Pop: 762,062]
+	cases/today-1/today/rate/max/per1000: 250,319/549/248/0.22%/68.42%/328	
+	Deaths/today-1/total/rate/max: 2,296/0/0/0.92%/2.50%	
 	Increase Case/Death: True/False
+
+[Northern Mariana Islands-R - Pop: 0]
+	cases/today-1/today/rate/max/per1000: 11,829/0/70/0.00%/66.67%/0	
+	Deaths/today-1/total/rate/max: 35/0/0/0.30%/18.18%	
+	Increase Case/Death: False/False
 
 [Ohio-R - Pop: 11,689,100]
-	cases/today-1/today/rate/max/per1000: 2,848,453/17,225/0/0.60%/58.33%/243	
-	Deaths/today-1/total/rate/max: 38,852/74/0/1.36%/inf%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 2,848,453/0/17,225/0.00%/58.33%/243	
+	Deaths/today-1/total/rate/max: 38,852/0/74/1.36%/inf%	
+	Increase Case/Death: False/True
 
 [Oklahoma-R - Pop: 3,956,971]
-	cases/today-1/today/rate/max/per1000: 1,076,350/5,615/0/0.52%/61.36%/272	
-	Deaths/today-1/total/rate/max: 15,441/704/0/1.50%/5.99%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,076,350/0/5,615/0.00%/61.36%/272	
+	Deaths/today-1/total/rate/max: 15,441/0/704/1.43%/5.99%	
+	Increase Case/Death: False/False
 
 [Oregon-D - Pop: 4,217,737]
-	cases/today-1/today/rate/max/per1000: 811,692/1,865/1,938/0.23%/66.67%/192	
-	Deaths/today-1/total/rate/max: 7,813/6/3/0.96%/4.07%	
+	cases/today-1/today/rate/max/per1000: 813,050/1,358/1,865/0.17%/66.67%/192	
+	Deaths/today-1/total/rate/max: 7,818/5/6/0.96%/4.07%	
 	Increase Case/Death: False/False
 
 [Pennsylvania-R - Pop: 12,801,989]
-	cases/today-1/today/rate/max/per1000: 3,006,257/17,499/0/0.58%/66.67%/234	
-	Deaths/today-1/total/rate/max: 45,766/109/0/1.52%/7.54%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 3,006,257/0/17,499/0.00%/66.67%/234	
+	Deaths/today-1/total/rate/max: 45,766/0/109/1.52%/7.54%	
+	Increase Case/Death: False/True
 
 [Puerto Rico-D - Pop: 3,193,694]
-	cases/today-1/today/rate/max/per1000: 773,649/4,911/3,481/0.63%/64.29%/242	
-	Deaths/today-1/total/rate/max: 4,571/10/17/0.59%/11.03%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 777,267/3,618/4,911/0.47%/64.29%/243	
+	Deaths/today-1/total/rate/max: 4,579/8/10/0.59%/11.03%	
+	Increase Case/Death: False/False
 
 [Rhode Island-D - Pop: 1,059,361]
-	cases/today-1/today/rate/max/per1000: 402,769/398/347/0.10%/75.00%/380	
-	Deaths/today-1/total/rate/max: 3,609/0/0/0.90%/5.81%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 403,052/283/398/0.07%/75.00%/380	
+	Deaths/today-1/total/rate/max: 3,611/2/0/0.90%/5.81%	
+	Increase Case/Death: False/False
 
 [South Carolina-R - Pop: 5,148,714]
 	cases/today-1/today/rate/max/per1000: 1,546,406/0/0/0.00%/57.89%/300	
@@ -235,53 +235,53 @@ Current Date: 6/30/22 Processing:
 	Increase Case/Death: False/False
 
 [South Dakota-R - Pop: 884,659]
-	cases/today-1/today/rate/max/per1000: 244,523/0/1,254/0.00%/33.33%/276	
-	Deaths/today-1/total/rate/max: 2,938/0/2/1.20%/14.29%	
-	Increase Case/Death: False/True
-
-[Tennessee-R - Pop: 6,829,174]
-	cases/today-1/today/rate/max/per1000: 2,120,962/3,098/7,735/0.15%/66.67%/310	
-	Deaths/today-1/total/rate/max: 26,670/11/24/1.26%/2.48%	
+	cases/today-1/today/rate/max/per1000: 244,523/0/0/0.00%/33.33%/276	
+	Deaths/today-1/total/rate/max: 2,938/0/0/1.20%/14.29%	
 	Increase Case/Death: False/False
 
-[Texas-R - Pop: 28,995,881]
-	cases/today-1/today/rate/max/per1000: 7,189,812/13,511/10,718/0.19%/50.00%/247	
-	Deaths/today-1/total/rate/max: 88,712/26/26/1.23%/4.08%	
+[Tennessee-R - Pop: 6,829,174]
+	cases/today-1/today/rate/max/per1000: 2,124,120/3,158/3,098/0.15%/66.67%/311	
+	Deaths/today-1/total/rate/max: 26,714/44/11/1.26%/2.48%	
 	Increase Case/Death: True/False
+
+[Texas-R - Pop: 28,995,881]
+	cases/today-1/today/rate/max/per1000: 7,202,665/12,853/13,511/0.18%/50.00%/248	
+	Deaths/today-1/total/rate/max: 88,735/23/26/1.23%/4.08%	
+	Increase Case/Death: False/False
 
 [Utah-R - Pop: 3,205,958]
-	cases/today-1/today/rate/max/per1000: 982,895/7,388/0/0.75%/66.67%/306	
-	Deaths/today-1/total/rate/max: 4,834/18/0/0.49%/1.18%	
-	Increase Case/Death: True/False
-
-[Vermont-D - Pop: 623,989]
-	cases/today-1/today/rate/max/per1000: 135,668/0/638/0.00%/60.00%/217	
-	Deaths/today-1/total/rate/max: 683/0/1/0.50%/6.90%	
+	cases/today-1/today/rate/max/per1000: 982,895/0/7,388/0.00%/66.67%/306	
+	Deaths/today-1/total/rate/max: 4,834/0/18/0.49%/1.18%	
 	Increase Case/Death: False/True
 
+[Vermont-D - Pop: 623,989]
+	cases/today-1/today/rate/max/per1000: 135,668/0/0/0.00%/60.00%/217	
+	Deaths/today-1/total/rate/max: 683/0/0/0.50%/6.90%	
+	Increase Case/Death: False/False
+
 [Virgin Islands-N - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 20,928/50/0/0.24%/58.82%/0	
+	cases/today-1/today/rate/max/per1000: 20,928/0/50/0.00%/58.82%/0	
 	Deaths/today-1/total/rate/max: 118/0/0/0.56%/8.70%	
-	Increase Case/Death: True/False
+	Increase Case/Death: False/False
 
 [Virginia-D - Pop: 8,535,519]
-	cases/today-1/today/rate/max/per1000: 1,869,231/3,314/3,258/0.18%/75.00%/218	
-	Deaths/today-1/total/rate/max: 20,598/27/13/1.10%/3.50%	
+	cases/today-1/today/rate/max/per1000: 1,872,624/3,393/3,314/0.18%/75.00%/219	
+	Deaths/today-1/total/rate/max: 20,630/32/27/1.10%/3.50%	
 	Increase Case/Death: True/False
 
 [Washington-D - Pop: 7,614,893]
-	cases/today-1/today/rate/max/per1000: 1,659,152/0/4,707/0.00%/85.71%/217	
-	Deaths/today-1/total/rate/max: 13,239/0/40/0.80%/22.22%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 1,666,301/7,149/0/0.43%/85.71%/218	
+	Deaths/today-1/total/rate/max: 13,275/36/0/0.79%/22.22%	
+	Increase Case/Death: True/False
 
 [West Virginia-R - Pop: 1,792,147]
-	cases/today-1/today/rate/max/per1000: 532,503/660/667/0.12%/75.00%/297	
-	Deaths/today-1/total/rate/max: 7,064/5/2/1.33%/4.53%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 533,213/710/660/0.13%/75.00%/297	
+	Deaths/today-1/total/rate/max: 7,064/0/5/1.32%/4.53%	
+	Increase Case/Death: True/False
 
 [Wisconsin-R - Pop: 5,822,434]
-	cases/today-1/today/rate/max/per1000: 1,726,640/1,863/2,045/0.11%/57.89%/296	
-	Deaths/today-1/total/rate/max: 14,797/5/14/0.86%/5.73%	
+	cases/today-1/today/rate/max/per1000: 1,728,344/1,704/1,863/0.10%/57.89%/296	
+	Deaths/today-1/total/rate/max: 14,807/10/5/0.86%/5.73%	
 	Increase Case/Death: False/False
 
 [Wyoming-R - Pop: 578,759]
@@ -292,83 +292,83 @@ Current Date: 6/30/22 Processing:
 
 Summary of currentAggregate Regions
 [Rhode Island-D - Pop: 1,059,361]
-	cases/today-1/today/rate/max/per1000: 402,769/398/347/0.10%/75.00%/380	
-	Deaths/today-1/total/rate/max: 3,609/0/0/0.90%/5.81%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 403,052/283/398/0.07%/75.00%/380	
+	Deaths/today-1/total/rate/max: 3,611/2/0/0.90%/5.81%	
+	Increase Case/Death: False/False
 
 [Alaska-R - Pop: 731,545]
-	cases/today-1/today/rate/max/per1000: 272,415/0/3,104/0.00%/75.00%/372	
+	cases/today-1/today/rate/max/per1000: 272,415/0/0/0.00%/75.00%/372	
 	Deaths/today-1/total/rate/max: 1,285/0/0/0.47%/3.11%	
 	Increase Case/Death: False/False
 
 [North Dakota-R - Pop: 762,062]
-	cases/today-1/today/rate/max/per1000: 249,770/248/561/0.10%/68.42%/327	
-	Deaths/today-1/total/rate/max: 2,296/0/1/0.92%/2.50%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 250,319/549/248/0.22%/68.42%/328	
+	Deaths/today-1/total/rate/max: 2,296/0/0/0.92%/2.50%	
+	Increase Case/Death: True/False
 
 [Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 1,403,534/1,870/2,959/0.13%/75.00%/314	
-	Deaths/today-1/total/rate/max: 16,164/8/5/1.15%/5.66%	
+	cases/today-1/today/rate/max/per1000: 1,405,062/1,528/1,870/0.11%/75.00%/314	
+	Deaths/today-1/total/rate/max: 16,172/8/8/1.15%/5.66%	
 	Increase Case/Death: False/False
 
 [Tennessee-R - Pop: 6,829,174]
-	cases/today-1/today/rate/max/per1000: 2,120,962/3,098/7,735/0.15%/66.67%/310	
-	Deaths/today-1/total/rate/max: 26,670/11/24/1.26%/2.48%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 2,124,120/3,158/3,098/0.15%/66.67%/311	
+	Deaths/today-1/total/rate/max: 26,714/44/11/1.26%/2.48%	
+	Increase Case/Death: True/False
 
 
 Summary of currentCaseRate Regions
-[Utah-R - Pop: 3,205,958]
-	cases/today-1/today/rate/max/per1000: 982,895/7,388/0/0.75%/66.67%/306	
-	Deaths/today-1/total/rate/max: 4,834/18/0/0.49%/1.18%	
+[American Samoa-D - Pop: 0]
+	cases/today-1/today/rate/max/per1000: 6,505/91/0/1.40%/66.67%/0	
+	Deaths/today-1/total/rate/max: 31/0/0/0.48%/0.51%	
 	Increase Case/Death: True/False
 
-[Puerto Rico-D - Pop: 3,193,694]
-	cases/today-1/today/rate/max/per1000: 773,649/4,911/3,481/0.63%/64.29%/242	
-	Deaths/today-1/total/rate/max: 4,571/10/17/0.59%/11.03%	
+[Florida-R - Pop: 21,477,737]
+	cases/today-1/today/rate/max/per1000: 6,537,512/55,217/12,755/0.84%/57.14%/304	
+	Deaths/today-1/total/rate/max: 75,891/91/62/1.16%/15.38%	
 	Increase Case/Death: True/False
 
-[Ohio-R - Pop: 11,689,100]
-	cases/today-1/today/rate/max/per1000: 2,848,453/17,225/0/0.60%/58.33%/243	
-	Deaths/today-1/total/rate/max: 38,852/74/0/1.36%/inf%	
+[Montana-R - Pop: 1,068,778]
+	cases/today-1/today/rate/max/per1000: 287,145/2,128/0/0.74%/80.00%/268	
+	Deaths/today-1/total/rate/max: 3,445/1/0/1.20%/3.53%	
 	Increase Case/Death: True/False
 
-[Northern Mariana Islands-R - Pop: 0]
-	cases/today-1/today/rate/max/per1000: 11,829/70/0/0.59%/66.67%/0	
-	Deaths/today-1/total/rate/max: 35/0/0/0.30%/18.18%	
+[Missouri-R - Pop: 6,137,428]
+	cases/today-1/today/rate/max/per1000: 1,516,865/10,351/547/0.68%/66.67%/247	
+	Deaths/today-1/total/rate/max: 20,947/42/2/1.38%/6.31%	
 	Increase Case/Death: True/False
 
-[Nebraska-R - Pop: 1,934,408]
-	cases/today-1/today/rate/max/per1000: 500,056/2,956/0/0.59%/66.67%/258	
-	Deaths/today-1/total/rate/max: 4,340/3/0/0.87%/2.22%	
+[California-D - Pop: 39,512,223]
+	cases/today-1/today/rate/max/per1000: 10,157,114/55,283/5,700/0.54%/50.00%/257	
+	Deaths/today-1/total/rate/max: 92,386/137/14/0.91%/3.94%	
 	Increase Case/Death: True/False
 
 
 Summary of casesPerCapita Regions
 [Rhode Island-D - Pop: 1,059,361]
-	cases/today-1/today/rate/max/per1000: 402,769/398/347/0.10%/75.00%/380	
-	Deaths/today-1/total/rate/max: 3,609/0/0/0.90%/5.81%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 403,052/283/398/0.07%/75.00%/380	
+	Deaths/today-1/total/rate/max: 3,611/2/0/0.90%/5.81%	
+	Increase Case/Death: False/False
 
 [Alaska-R - Pop: 731,545]
-	cases/today-1/today/rate/max/per1000: 272,415/0/3,104/0.00%/75.00%/372	
+	cases/today-1/today/rate/max/per1000: 272,415/0/0/0.00%/75.00%/372	
 	Deaths/today-1/total/rate/max: 1,285/0/0/0.47%/3.11%	
 	Increase Case/Death: False/False
 
 [North Dakota-R - Pop: 762,062]
-	cases/today-1/today/rate/max/per1000: 249,770/248/561/0.10%/68.42%/327	
-	Deaths/today-1/total/rate/max: 2,296/0/1/0.92%/2.50%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 250,319/549/248/0.22%/68.42%/328	
+	Deaths/today-1/total/rate/max: 2,296/0/0/0.92%/2.50%	
+	Increase Case/Death: True/False
 
 [Kentucky-R - Pop: 4,467,673]
-	cases/today-1/today/rate/max/per1000: 1,403,534/1,870/2,959/0.13%/75.00%/314	
-	Deaths/today-1/total/rate/max: 16,164/8/5/1.15%/5.66%	
+	cases/today-1/today/rate/max/per1000: 1,405,062/1,528/1,870/0.11%/75.00%/314	
+	Deaths/today-1/total/rate/max: 16,172/8/8/1.15%/5.66%	
 	Increase Case/Death: False/False
 
 [Tennessee-R - Pop: 6,829,174]
-	cases/today-1/today/rate/max/per1000: 2,120,962/3,098/7,735/0.15%/66.67%/310	
-	Deaths/today-1/total/rate/max: 26,670/11/24/1.26%/2.48%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 2,124,120/3,158/3,098/0.15%/66.67%/311	
+	Deaths/today-1/total/rate/max: 26,714/44/11/1.26%/2.48%	
+	Increase Case/Death: True/False
 
 
 Summary of currentDeathRate Regions
@@ -378,49 +378,49 @@ Summary of currentDeathRate Regions
 	Increase Case/Death: False/False
 
 [Pennsylvania-R - Pop: 12,801,989]
-	cases/today-1/today/rate/max/per1000: 3,006,257/17,499/0/0.58%/66.67%/234	
-	Deaths/today-1/total/rate/max: 45,766/109/0/1.52%/7.54%	
-	Increase Case/Death: True/False
-
-[Oklahoma-R - Pop: 3,956,971]
-	cases/today-1/today/rate/max/per1000: 1,076,350/5,615/0/0.52%/61.36%/272	
-	Deaths/today-1/total/rate/max: 15,441/704/0/1.50%/5.99%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 3,006,257/0/17,499/0.00%/66.67%/234	
+	Deaths/today-1/total/rate/max: 45,766/0/109/1.52%/7.54%	
+	Increase Case/Death: False/True
 
 [Mississippi-R - Pop: 2,976,149]
-	cases/today-1/today/rate/max/per1000: 835,120/2,908/0/0.35%/83.33%/280	
-	Deaths/today-1/total/rate/max: 12,525/9/0/1.50%/4.73%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 836,757/1,637/2,908/0.20%/83.33%/281	
+	Deaths/today-1/total/rate/max: 12,526/1/9/1.50%/4.73%	
+	Increase Case/Death: False/False
 
 [Georgia-R - Pop: 10,617,423]
-	cases/today-1/today/rate/max/per1000: 2,647,568/0/20,971/0.00%/50.00%/249	
-	Deaths/today-1/total/rate/max: 38,579/0/132/1.46%/4.34%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 2,647,568/0/0/0.00%/50.00%/249	
+	Deaths/today-1/total/rate/max: 38,579/0/0/1.46%/4.34%	
+	Increase Case/Death: False/False
+
+[Alabama-R - Pop: 4,903,185]
+	cases/today-1/today/rate/max/per1000: 1,359,051/1,785/1,926/0.13%/50.00%/277	
+	Deaths/today-1/total/rate/max: 19,759/4/15/1.45%/4.12%	
+	Increase Case/Death: False/False
 
 
 Summary of testsPerCapita Regions
 [Alabama-R - Pop: 4,903,185]
-	cases/today-1/today/rate/max/per1000: 1,357,266/1,926/2,425/0.14%/50.00%/276	
-	Deaths/today-1/total/rate/max: 19,755/15/1/1.45%/4.12%	
+	cases/today-1/today/rate/max/per1000: 1,359,051/1,785/1,926/0.13%/50.00%/277	
+	Deaths/today-1/total/rate/max: 19,759/4/15/1.45%/4.12%	
 	Increase Case/Death: False/False
 
 [Alaska-R - Pop: 731,545]
-	cases/today-1/today/rate/max/per1000: 272,415/0/3,104/0.00%/75.00%/372	
+	cases/today-1/today/rate/max/per1000: 272,415/0/0/0.00%/75.00%/372	
 	Deaths/today-1/total/rate/max: 1,285/0/0/0.47%/3.11%	
 	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 2,125,567/0/16,514/0.00%/50.00%/292	
-	Deaths/today-1/total/rate/max: 30,515/0/63/1.44%/4.89%	
-	Increase Case/Death: False/True
+	cases/today-1/today/rate/max/per1000: 2,125,567/0/0/0.00%/50.00%/292	
+	Deaths/today-1/total/rate/max: 30,515/0/0/1.44%/4.89%	
+	Increase Case/Death: False/False
 
 [Arkansas-R - Pop: 3,017,804]
-	cases/today-1/today/rate/max/per1000: 865,592/1,437/1,332/0.17%/300.00%/286	
-	Deaths/today-1/total/rate/max: 11,581/1/6/1.34%/2.35%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 866,816/1,224/1,437/0.14%/300.00%/287	
+	Deaths/today-1/total/rate/max: 11,585/4/1/1.34%/2.35%	
+	Increase Case/Death: False/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 10,101,831/5,700/6,885/0.06%/50.00%/255	
-	Deaths/today-1/total/rate/max: 92,249/14/28/0.91%/3.94%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 10,157,114/55,283/5,700/0.54%/50.00%/257	
+	Deaths/today-1/total/rate/max: 92,386/137/14/0.91%/3.94%	
+	Increase Case/Death: True/False
 
