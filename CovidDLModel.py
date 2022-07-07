@@ -155,6 +155,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     legend['Omicron Ba.2 Dominant 3/29'] = (798, 'violet', lw)
     legend['Omicron Ba.2.12.1 Dominant 4/24'] = (824, 'lime', lw)
     legend['Omicron Ba.4 - Ba.5 Identified 4/30'] = (830, 'salmon', lw)
+    legend['Omicron Ba.5 Dominant 7/5'] = (896, 'cyan', lw)
     
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
@@ -481,6 +482,7 @@ if __name__ == "__main__":
         growthRates.append(caseRate)
         growthRates.append(current / yesterday - 1)
         yesterday = current
+        # Forecast deaths
         avgDeathRate = abs(avgDeathRate + drate[projDay])
         buffer = int(mean(dailyDeaths[-7:])*1.006)
         dailyDeaths.append(int(buffer if buffer > 0 else 0))
