@@ -201,7 +201,7 @@ Current Date: 7/7/22 Processing:
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,867,291/18,838/0/0.66%/58.33%/245	
-	Deaths/today-1/total/rate/max: 38,920/68/0/1.36%/inf%	
+	Deaths/today-1/total/rate/max: 38,920/0/0/1.36%/inf%	
 	Increase Case/Death: True/False
 
 [Oklahoma-R - Pop: 3,956,971]
@@ -241,7 +241,7 @@ Current Date: 7/7/22 Processing:
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,136,213/2,331/1,172/0.11%/66.67%/312	
-	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.48%	
+	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.13%	
 	Increase Case/Death: True/False
 
 [Texas-R - Pop: 28,995,881]
@@ -313,7 +313,7 @@ Summary of currentAggregate Regions
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,136,213/2,331/1,172/0.11%/66.67%/312	
-	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.48%	
+	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.13%	
 	Increase Case/Death: True/False
 
 
@@ -325,7 +325,7 @@ Summary of currentCaseRate Regions
 
 [Ohio-R - Pop: 11,689,100]
 	cases/today-1/today/rate/max/per1000: 2,867,291/18,838/0/0.66%/58.33%/245	
-	Deaths/today-1/total/rate/max: 38,920/68/0/1.36%/inf%	
+	Deaths/today-1/total/rate/max: 38,920/0/0/1.36%/inf%	
 	Increase Case/Death: True/False
 
 [Nebraska-R - Pop: 1,934,408]
@@ -367,7 +367,7 @@ Summary of casesPerCapita Regions
 
 [Tennessee-R - Pop: 6,829,174]
 	cases/today-1/today/rate/max/per1000: 2,136,213/2,331/1,172/0.11%/66.67%/312	
-	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.48%	
+	Deaths/today-1/total/rate/max: 26,739/15/2/1.25%/2.13%	
 	Increase Case/Death: True/False
 
 
