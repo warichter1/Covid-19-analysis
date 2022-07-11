@@ -143,7 +143,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     iCases = format(int(dailyCases[inauguration]), ',d')
     iDeaths = format(int(dailyDeaths[365]), ',d')
     legend['Forecast: {} Days->'.format(projectionDays)] = (intoday, 'green', 1)
-    legend['Biden Passes 270: 11/7'] = (291, 'blue', lw)
+    # legend['Biden Passes 270: 11/7'] = (291, 'blue', lw)
     legend['States Confirm Biden: 12/14'] = (328, 'coral', lw)
     legend['Congress Confirms Biden: 1/6'] = (351, 'crimson', lw)
     legend['Inauguration Day 2021\nCases: {}, Deaths: {}'.format(iCases, iDeaths)] = (inauguration, 'violet', lw)
@@ -156,6 +156,7 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     legend['Omicron Ba.2.12.1 Dominant 4/24'] = (824, 'lime', lw)
     legend['Omicron Ba.4 - Ba.5 Identified 4/30'] = (830, 'salmon', lw)
     legend['Omicron Ba.5 Dominant 7/5'] = (896, 'cyan', lw)
+    legend['Omicron Ba.2.75 Identified 7/8'] = (899, 'orchid', lw)
     
     if showTotal is True:
         label, = plt.plot(cases,  color='red', label='Cases')
