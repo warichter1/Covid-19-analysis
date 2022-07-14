@@ -270,8 +270,8 @@ Current Date: 7/13/22 Processing:
 	Increase Case/Death: True/False
 
 [Washington-D - Pop: 7,614,893]
-	cases/today-1/today/rate/max/per1000: 1,768,210/76,206/0/4.31%/85.71%/232	
-	Deaths/today-1/total/rate/max: 14,199/837/0/0.76%/22.22%	
+	cases/today-1/today/rate/max/per1000: 1,695,915/3,911/0/0.23%/85.71%/222	
+	Deaths/today-1/total/rate/max: 14,199/837/0/0.79%/22.22%	
 	Increase Case/Death: True/False
 
 [West Virginia-R - Pop: 1,792,147]
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 
 
 Summary of currentCaseRate Regions
-[Washington-D - Pop: 7,614,893]
-	cases/today-1/today/rate/max/per1000: 1,768,210/76,206/0/4.31%/85.71%/232	
-	Deaths/today-1/total/rate/max: 14,199/837/0/0.76%/22.22%	
-	Increase Case/Death: True/False
-
 [Northern Mariana Islands-R - Pop: 0]
 	cases/today-1/today/rate/max/per1000: 12,193/364/0/2.99%/66.67%/0	
 	Deaths/today-1/total/rate/max: 35/0/0/0.29%/18.18%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [Georgia-R - Pop: 10,617,423]
 	cases/today-1/today/rate/max/per1000: 2,694,160/26,603/0/0.99%/50.00%/253	
 	Deaths/today-1/total/rate/max: 38,821/136/0/1.44%/4.34%	
+	Increase Case/Death: True/False
+
+[Nevada-D - Pop: 3,080,156]
+	cases/today-1/today/rate/max/per1000: 782,548/7,703/0/0.98%/55.56%/254	
+	Deaths/today-1/total/rate/max: 11,141/67/0/1.42%/5.13%	
 	Increase Case/Death: True/False
 
 
