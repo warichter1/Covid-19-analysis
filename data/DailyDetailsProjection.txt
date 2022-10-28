@@ -1005,8 +1005,8 @@ Day: 1003 (10/20/22) Cases/today/Infection Rate: 97,144,406/57,103/0.06% - Morta
 Day: 1004 (10/21/22) Cases/today/Infection Rate: 97,190,195/45,789/0.05% - Mortality/Today/Rate: 1,067,797/571/1.10% 
 Day: 1005 (10/22/22) Cases/today/Infection Rate: 97,195,511/5,316/0.01% - Mortality/Today/Rate: 1,067,809/12/1.10% 
 Day: 1006 (10/23/22) Cases/today/Infection Rate: 97,203,611/8,100/0.01% - Mortality/Today/Rate: 1,067,810/1/1.10% 
-Day: 1007 (10/24/22) Cases/today/Infection Rate: 97,244,450/40,839/0.04% - Mortality/Today/Rate: 1,068,006/196/1.10% 
-Day: 1008 (10/25/22) Cases/today/Infection Rate: 97,283,206/38,756/0.04% - Mortality/Today/Rate: 1,068,421/415/1.10% 
+Day: 1007 (10/24/22) Cases/today/Infection Rate: 97,241,252/37,641/0.04% - Mortality/Today/Rate: 1,068,006/196/1.10% 
+Day: 1008 (10/25/22) Cases/today/Infection Rate: 97,283,206/41,954/0.04% - Mortality/Today/Rate: 1,068,421/415/1.10% 
 Day: 1009 (10/26/22) Cases/today/Infection Rate: 97,353,103/69,897/0.07% - Mortality/Today/Rate: 1,069,516/1,095/1.10% 
 Day: 1010 (10/27/22) Cases/today/Infection Rate: 97,409,772/56,669/0.06% - Mortality/Today/Rate: 1,070,055/539/1.10% 
 
