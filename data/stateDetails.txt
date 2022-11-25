@@ -25,7 +25,7 @@ Current Date: 11/24/22 Processing:
 	Increase Case/Death: True/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 11,485,817/24,639/3,184/0.21%/50.00%/290	
+	cases/today-1/today/rate/max/per1000: 11,485,958/5,275/3,184/0.05%/50.00%/290	
 	Deaths/today-1/total/rate/max: 97,416/61/38/0.85%/3.94%	
 	Increase Case/Death: True/False
 
@@ -323,11 +323,6 @@ Summary of currentCaseRate Regions
 	Deaths/today-1/total/rate/max: 17,254/53/0/1.41%/5.99%	
 	Increase Case/Death: True/False
 
-[California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 11,485,817/24,639/3,184/0.21%/50.00%/290	
-	Deaths/today-1/total/rate/max: 97,416/61/38/0.85%/3.94%	
-	Increase Case/Death: True/False
-
 [Puerto Rico-D - Pop: 3,193,694]
 	cases/today-1/today/rate/max/per1000: 1,006,068/1,395/1,006/0.14%/64.29%/315	
 	Deaths/today-1/total/rate/max: 5,350/13/7/0.53%/11.03%	
@@ -342,6 +337,11 @@ Summary of currentCaseRate Regions
 	cases/today-1/today/rate/max/per1000: 923,912/636/1,117/0.07%/66.67%/259	
 	Deaths/today-1/total/rate/max: 11,572/0/0/1.25%/9.33%	
 	Increase Case/Death: False/False
+
+[Arkansas-R - Pop: 3,017,804]
+	cases/today-1/today/rate/max/per1000: 966,797/451/337/0.05%/300.00%/320	
+	Deaths/today-1/total/rate/max: 12,550/5/5/1.30%/2.35%	
+	Increase Case/Death: True/False
 
 
 Summary of casesPerCapita Regions
@@ -420,7 +420,7 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: True/False
 
 [California-D - Pop: 39,512,223]
-	cases/today-1/today/rate/max/per1000: 11,485,817/24,639/3,184/0.21%/50.00%/290	
+	cases/today-1/today/rate/max/per1000: 11,485,958/5,275/3,184/0.05%/50.00%/290	
 	Deaths/today-1/total/rate/max: 97,416/61/38/0.85%/3.94%	
 	Increase Case/Death: True/False
 
