@@ -19,6 +19,8 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+# from IPython import qt
+# from docutils.nodes import inline
 from matplotlib.font_manager import FontProperties
 from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import random
@@ -28,6 +30,9 @@ from statistics import mean
 from vaxdeaths import Expander
 from CovidData import CovidData
 import globals
+
+# %matplotlib inline
+# %matplotlib qt
 
 globals.initializeStore()
 
@@ -213,7 +218,8 @@ def plotUS(inday, intoday, cdate, currentDate, cases, caseRate, growthRates,
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show(block=False)
+    plt.interactive(False)
+    plt.show(block=True)
     plt.clf()
     plt.cla()
     plt.close()
@@ -240,7 +246,7 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
         label, = plt.plot(sources[num], label=plotLabels[num], lw=width, 
                           ls=style)
         labels.append(label)
-    plt.xlabel("Time ({} Days)\nVaccine shipments started on day: {}\nBeginning: {}, Current: {}".format(len(sources[0]),dates[0],dates[1],dates[2]))
+    plt.xlabel(f"Time ({len(sources[0])} Days)\nVaccine shipments started on day: {dates[0]}\nBeginning: {dates[1]}, Current: {dates[2]}")
     plt.ylabel("Covid Vaccine Doses - unfinished")
     plt.legend(handles=labels, prop=font, loc='upper left')
     plt.yscale(yscale)
@@ -248,7 +254,8 @@ def vaccinePlot(title, plotType, sources=[], plotLabels=[], yscale='log',
     plt.savefig(plotPath + 'daily_{}.png'.format(plotType),
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
-    plt.show(block=False)
+    plt.interactive(False)
+    plt.show(block=True)
     plt.clf()
     plt.cla()
     plt.close()
@@ -313,7 +320,9 @@ def generalPlot(title, plotType, axisLabel, sources, yscale='log',
                 bbox_inches="tight",
                 pad_inches=0.5 + random.uniform(0.0, 0.25))
     # plt.set_ylim(ymin=0)
-    plt.show(block=False)
+    plt.interactive(False)
+    plt.show(block=True)
+    
     plt.clf()
     plt.cla()
     plt.close()
@@ -383,6 +392,7 @@ if __name__ == "__main__":
     # rateChange = 'avgDiff'
     vaxDates = list(set(list(vacUS.index)))  # Remove dupes
     rateChange = 'today'
+    startTime = str(datetime.now())
     for cdate in us.keys():
         caseRate = us[cdate] / lastDay - 1
         growthRates.append(caseRate)
@@ -523,17 +533,13 @@ if __name__ == "__main__":
     results = vax.expand(endDay=len(dailyDeaths)+1)
     vaxStatusDeaths = vax.processData(dailyDeaths)
     mparty = vax.getParties()
-    # buf = mparty['vaxxed']['democratic']
-    # vaxStatusCases = vax.processData(dailyCases)
-    # cparty = vax.getParties()
     generalPlot('Deaths by Vax Status', 'vaxStatus', axisLabel,
                 vax.processData(dailyDeaths), yscale='linear', legend=legend)
     generalPlot('Deaths by Vax Status and Party', 'vaxStatusParty', axisLabel,
                mparty, yscale='linear', legend=legend, levels=2,
                labelAppend=vax.percent)
-    # generalPlot('Cases by Vax Status and Party', 'vaxStatus', axisLabel,
-    #            cparty, yscale='linear', legend=legend, levels=2,
-    #            labelAppend=vax.percent)
+    print(f'Start Time: {startTime}')
+    print(f'End Time: {str(datetime.now())}')
     print(gp.add('./plots/*'))
     print(gp.add('./data/*'))
     print(gp.commit('-m', "Upload Daily"))

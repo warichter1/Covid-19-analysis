@@ -26,7 +26,7 @@ from scipy.ndimage.filters import gaussian_filter1d as gs1d
 import git
 import random
 import json
-from memory_profiler import profile
+# from memory_profiler import profile
 from matplotlib.font_manager import FontProperties
 
 from us_state_abbrev import us_state_abbrev, eduAttainmentRank
@@ -212,8 +212,8 @@ class CovidCountryRegion:
                                      index=['Province_State'],
                                      rename={'Admin2': 'County'})
         self.deaths.fillna(0, inplace=True)
-        self.tracking = self.downloadJson(self.config['medUrl'],
-                                          self.config['medIndex'])
+        # self.tracking = self.downloadJson(self.config['medUrl'],
+        #                                  self.config['medIndex'])
         self.censusPop = self.importCsv(self.config['censusData'],
                                         index=self.config['censusIndex'],
                                         exclude=self.config['censusExclude'])
