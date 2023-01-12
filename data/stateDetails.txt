@@ -15,9 +15,9 @@ Current Date: 1/11/23 Processing:
 	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 2,384,521/0/0/0.00%/50.00%/327	
-	Deaths/today-1/total/rate/max: 32,311/0/0/1.36%/4.89%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 2,391,895/7,374/0/0.31%/50.00%/328	
+	Deaths/today-1/total/rate/max: 32,503/192/0/1.35%/4.89%	
+	Increase Case/Death: True/False
 
 [Arkansas-R - Pop: 3,017,804]
 	cases/today-1/today/rate/max/per1000: 990,426/573/577/0.06%/300.00%/328	
@@ -410,9 +410,9 @@ Summary of testsPerCapita Regions
 	Increase Case/Death: False/False
 
 [Arizona-R - Pop: 7,278,717]
-	cases/today-1/today/rate/max/per1000: 2,384,521/0/0/0.00%/50.00%/327	
-	Deaths/today-1/total/rate/max: 32,311/0/0/1.36%/4.89%	
-	Increase Case/Death: False/False
+	cases/today-1/today/rate/max/per1000: 2,391,895/7,374/0/0.31%/50.00%/328	
+	Deaths/today-1/total/rate/max: 32,503/192/0/1.35%/4.89%	
+	Increase Case/Death: True/False
 
 [Arkansas-R - Pop: 3,017,804]
 	cases/today-1/today/rate/max/per1000: 990,426/573/577/0.06%/300.00%/328	
