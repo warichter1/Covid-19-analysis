@@ -230,9 +230,9 @@ Current Date: 2/22/23 Processing:
 	Increase Case/Death: False/False
 
 [South Carolina-R - Pop: 5,148,714]
-	cases/today-1/today/rate/max/per1000: 1,843,891/20,478/0/1.11%/57.89%/358	
-	Deaths/today-1/total/rate/max: 19,393/0/0/1.05%/4.42%	
-	Increase Case/Death: True/False
+	cases/today-1/today/rate/max/per1000: 1,827,620/0/4,207/0.00%/57.89%/354	
+	Deaths/today-1/total/rate/max: 19,490/0/97/1.07%/4.42%	
+	Increase Case/Death: False/True
 
 [South Dakota-R - Pop: 884,659]
 	cases/today-1/today/rate/max/per1000: 277,651/996/0/0.36%/33.33%/313	
@@ -318,11 +318,6 @@ Summary of currentAggregate Regions
 
 
 Summary of currentCaseRate Regions
-[South Carolina-R - Pop: 5,148,714]
-	cases/today-1/today/rate/max/per1000: 1,843,891/20,478/0/1.11%/57.89%/358	
-	Deaths/today-1/total/rate/max: 19,393/0/0/1.05%/4.42%	
-	Increase Case/Death: True/False
-
 [Arizona-R - Pop: 7,278,717]
 	cases/today-1/today/rate/max/per1000: 2,434,631/26,866/0/1.10%/50.00%/334	
 	Deaths/today-1/total/rate/max: 33,042/39/0/1.36%/4.89%	
@@ -341,6 +336,11 @@ Summary of currentCaseRate Regions
 [South Dakota-R - Pop: 884,659]
 	cases/today-1/today/rate/max/per1000: 277,651/996/0/0.36%/33.33%/313	
 	Deaths/today-1/total/rate/max: 3,175/8/0/1.14%/14.29%	
+	Increase Case/Death: True/False
+
+[Louisiana-R - Pop: 4,648,794]
+	cases/today-1/today/rate/max/per1000: 1,566,105/5,478/0/0.35%/73.68%/336	
+	Deaths/today-1/total/rate/max: 18,706/40/0/1.19%/7.31%	
 	Increase Case/Death: True/False
 
 
